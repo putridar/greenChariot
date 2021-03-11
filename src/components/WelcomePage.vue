@@ -34,6 +34,8 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    @import url('https://fonts.googleapis.com/css?family=Inter');
+
     .bg {
         background-color: #9AD5FF;
         padding: 0px;
