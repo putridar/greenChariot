@@ -6,6 +6,8 @@ import Challenges from './components/Challenges.vue'
 import SocialMedia from './components/SocialMedia.vue'
 import SocialMediaChallenge from './components/SocialMediaChallenge.vue'
 import Submission from './components/LinkSubmission.vue'
+import Verify from './components/VerifyPhoto.vue'
+import Success from './components/SubmissionSuccess.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -16,4 +18,6 @@ export default [
   { path: '/socialmedia', component: SocialMedia, name: "socialmedia", props: true },
   { path: '/socialmediachallenge', component: SocialMediaChallenge, name: "socialmediachallenge", props: true },
   { path: '/submission', component: Submission, name: "submission", props: true },
+  { path: '/verify', component: Verify, name: "verify", props: true },
+  { path: '/success', component: Success, name: "success", props: true },
 ]

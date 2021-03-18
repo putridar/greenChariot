@@ -1,19 +1,14 @@
 <template>
     <div class = "bg">
         <Head v-bind:id="id"></Head>
-        <div class = "center">
-            <img class = "image" alt="socialmedia" v-bind:src="this.pic">
-        </div>
+        <img class = "image" alt="socialmedia" src="../assets/successful.png">
         <div class = "content">
-            <p class = "title"> Put Your Post's Screenshots! </p>
-            <p class = "item"> {{this.item}} </p><br>
-            <label for="choose">Social Media Platform:</label>
-            <select name="choose" id="choose" v-model="platform">
-                <option value="ig">Instagram</option>
-                <option value="fb">Facebook</option>
-                <option value="twitter">Twitter</option>
-            </select>
-            <button class = "btn" v-on:click="submit()">Next</button>
+            <p class = "item"> 
+                Horray! Your have successfuly submitted our social media challenge!<br><br>
+                Your points: {{points}}<br>
+
+            </p>
+            <button class = "btn" v-on:click ="back()">Back</button>
         </div>
     </div>
 </template>
@@ -28,16 +23,13 @@ export default {
     },
     data() {
         return {
-            platform: "",
             id: this.$route.query.id,
-            pic: this.$route.query.pic,
-            item: this.$route.query.item,
-            hash: this.$route.query.hash
+            points: this.$route.query.points,
         }
     },
     methods: {
-        submit: function() {
-            this.$router.push({ name: 'verify', query: {id: this.id, platform: this.platform, hash:this.hash}})
+        back: function() {
+            this.$router.push({ name: 'socialmediachallenge', query: {id: this.id}})
         },
     }
 }
@@ -53,26 +45,18 @@ export default {
         min-height: 100vh;
     }
     .image {
-        width: 100%;
-        margin-top: 10%;
-        margin-bottom: 10%;
-    }
-    .center {
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        height: 100%;
         float: left;
-        width: 35%;
-        margin-left: -15%;
+        width: 40%;
+        justify-content: center;
+        margin-left: -23%;
+        margin-top: 2%;
     }
     .content {
-        background-color: #FFFFFF;
         margin-top: 7%;
         margin-left: 55%;
         margin-right: 10%;
-        min-height: 50vh;
-        width: 35%;
+        min-height: 70vh;
+        width: 40%;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -84,7 +68,6 @@ export default {
         font-style: normal;
         font-weight: bold;
         font-size: 36px;
-        line-height: 44px;
         margin: 10px;
         padding:10px
     }
@@ -92,10 +75,10 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 30px;
-        line-height: 44px;
+        font-size: 50px;
         margin: 10px;
-        padding:10px
+        margin-top: 20px;
+        padding:20px
     }
     input {
         font-family: Montserrat;
