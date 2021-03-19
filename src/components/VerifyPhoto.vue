@@ -3,22 +3,22 @@
         <Head v-bind:id="id"></Head>
         <label for = "imageLoader" class="ins">Screenshots (Make sure that your caption is visible)</label>
         <input type="file" id ="imageLoader" @change="updateCanvasImage"><br>
-        <label for = "image" class = "ins">Upload Photo (the one that you post)</label>
-        <input type="file" id = "image" @change="imageClassifier" />
+        <!--<label for = "image" class = "ins">Upload Photo (the one that you post)</label>
+        <input type="file" id = "image" @change="imageClassifier" />-->
         <div class ="left">
             <p class="ins">Screenshot:</p>
             <canvas id="imageCanvas" ref="imageCanvas"></canvas><br>
-            <p class="ins">Original Photo:</p>
-            <img v-show="uploadedImage" class="preview" :src="uploadedImage"/>
+            <!--<p class="ins">Original Photo:</p>
+            <img v-show="uploadedImage" class="preview" :src="uploadedImage"/>-->
         </div>
         <div class = "content">
             <p class= "title"> {{status}} </p>
             <p class= "title"> Caption: </p>
             <p class= "txt">{{result}}</p>
-            <p class= "title"> Label: </p>
+            <p class= "title" v-show="this.label.length!==0"> Label: </p>
             <p class= "txt" v-show="this.label.length!==0">{{label}}</p>
-            <p class= "title"> Class: </p>
-            <p class= "txt">{{classify}}</p>
+            <!--<p class= "title"> Class: </p>
+            <p class= "txt">{{classify}}</p>-->
             <button class = "btn" v-on:click="check()">Check</button>
             <button class = "btn" v-on:click="cancel()">Cancel</button>
         </div>
@@ -42,6 +42,7 @@ export default {
             dataUrl: '',
             status: '',
             hash: this.$route.query.hash,
+            act: this.$route.query.act,
             result: '',
             captions: [],
             label: [],
@@ -49,6 +50,11 @@ export default {
             loading: false,
             classify: null,
             uploadedImage: '',
+            screenshot: '',
+            plant: ['potted plant', 'vase', 'person', 'flower', 'plant', 'tree'],
+            recycle: ['person','trash', 'bottle', 'book', 'paper','umbrella', 'cell phone','laptop','keyboard','tablet','cup','stop sign','toilet','wine glass','vase','oven','scissors','bed','bowl','knife','spoon','fork','plate','refrigerator'],
+            transport: ['bus','train','person','chair'],
+            eat: ['person','bowl','banana','carrot','apple','cup','broccoli','orange','bottle','pizza','sandwich','knife','beef','cow','chicken','pork','cake','suitcase','spoon','egg']
         }
     },
     methods: {
@@ -65,22 +71,27 @@ export default {
             this.$router.push({ name: 'socialmediachallenge', query: {id: this.id}})
         },
         check: function() {
-            var invalidCaption = this.isValidCaption()
-            var invalidUser = this.isValidUser()
+            var validCaption = this.isValidCaption()
+            var validUser = this.isValidUser()
             var isMultiple = this.isMultipleSubmission()
             var invalid = false
-            if (invalidCaption) {
+            var validPhoto = this.isValidPhoto()
+            if (!validCaption) {
                 alert("Your post is invalid. Make sure you use the correct hashtag!")
                 invalid = true;
             } 
-            if (invalidUser) {
+            if (!validUser) {
                 alert("Please post your photo using the same social media account when you registered!")
                 invalid = true;
             }
             if (isMultiple) {
                 alert("Make sure you do not submit the same file more than once and please use a different caption from your previous submission!")
                 invalid = true;
-            } 
+            }
+            if (!validPhoto) {
+                alert("Please post the correct photo based on the category you choose!")
+                invalid = true;
+            }
             if (!invalid) {
                 this.points += 10;
                 this.captions.push(this.result);
@@ -89,24 +100,24 @@ export default {
             
         },
         isValidCaption: function() {
-            var invalid = false;
+            var valid = true;
             for (let x = 0; x < this.hash.length; x++) {
                 if(this.result.search(this.hash[x]) === -1) {
-                    invalid = true
+                    valid = false
                     break;
                 }
             }
-            return invalid
+            return valid
         },
         isValidUser: function() {
-            var invalid = false;
+            var valid = true;
             if (this.username[this.platform] === "") {
                 return true;
             }
             if(this.result.search(this.username[this.platform]) === -1) {
-                invalid = true;      
+                valid = false;      
             }
-            return invalid
+            return valid
         },
         isMultipleSubmission: function() {
             var invalid = false;
@@ -116,6 +127,33 @@ export default {
                 }
             }
             return invalid
+        },
+        isValidPhoto: function() {
+            var found = false
+            if (this.label.length === 0) {
+                return true
+            }
+            for (let x = 0; x < this.label.length; x++) {
+                var item = this.label[x]
+                if (this.act === "plant") {
+                    if (item in this.plant) {
+                        found = true
+                    }
+                } else if (this.act === "recycle") {
+                    if (item in this.recycle) {
+                        found = true
+                    }
+                } else if (this.act === "transport") {
+                    if (item in this.transport) {
+                        found = true
+                    }
+                } else {
+                    if (item in this.eat) {
+                        found = true
+                    }
+                }
+            }
+            return found
         },
         updatePoints: function() {
             db.firestore().collection('users').doc(this.id).update({
@@ -138,6 +176,7 @@ export default {
                     self.drawCanvasImage(img)
                 }
                 img.src = event.target.result;
+                this.screenshot = event.target.result;
             };  
             reader.readAsDataURL(files[0]);       
         },
@@ -206,7 +245,7 @@ export default {
             this.createImage(files[0]);
             
         },
-            // Show uploaded images
+
         createImage: function(file) {
             const mobilenet = require('@tensorflow-models/mobilenet');
             this.classify = []
@@ -217,14 +256,24 @@ export default {
                 this.uploadedImage = e.target.result;
                 img.src = e.target.result;
                 mobilenet.load().then(response => {
-                response.classify(img).then(result => {
-                this.loading = false
-                this.classify = result
-            })
+                    response.classify(img).then(result => {
+                        this.loading = false
+                        this.classify = result
+                    })
                 })
             }
             reader.readAsDataURL(file);
+            this.match()
         },
+        match: function() {
+            var Jimp = require('jimp');
+            Jimp.read("../assets/eat.png").then(image => {
+                Jimp.read("../assets/plant.png").then(img => {
+                    var diff = Jimp.diff(image, img, 0.1);
+                    console.log(diff.percent);
+                })
+            })
+        }
     },
     created() {
       this.fetchItems()    
@@ -335,7 +384,7 @@ export default {
         cursor: pointer;
     }
     canvas {
-        width: 100%;
+        width: 80%;
         height: 70%;
         justify-content: center;
         margin-left: 9%;

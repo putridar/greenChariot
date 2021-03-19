@@ -32,12 +32,13 @@ export default {
             id: this.$route.query.id,
             pic: this.$route.query.pic,
             item: this.$route.query.item,
-            hash: this.$route.query.hash
+            hash: this.$route.query.hash,
+            act: this.$route.query.act,
         }
     },
     methods: {
         submit: function() {
-            this.$router.push({ name: 'verify', query: {id: this.id, platform: this.platform, hash:this.hash}})
+            this.$router.push({ name: 'verify', query: {id: this.id, platform: this.platform, hash:this.hash, act:this.act}})
         },
     }
 }
