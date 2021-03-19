@@ -75,29 +75,34 @@ export default {
             var item
             var pic
             var hash
+            var act
             switch(id) {
                 case 1:
                     item = "Plant one/more trees";
                     pic = this.plantUrl;
                     hash = this.plantHash;
+                    act = "plant";
                     break;
                 case 2:
                     item = "Recycle!";
                     pic = this.recycleUrl;
                     hash = this.recycleHash;
+                    act = "recycle"
                     break;
                 case 3:
                     item = "Use Public Transport to Your Office/School";
                     pic = this.transportUrl;
                     hash = this.transportHash;
+                    act = "transport"
                     break;
                 case 4:
                     item = "Eat Organic Foods";
                     pic = this.eatUrl;
-                    hash = this.eatHash
+                    hash = this.eatHash;
+                    act = "eat"
                     break;
             }
-            this.$router.push({ name: 'submission', query: {id: this.id, pic: pic, item: item, hash: hash}})
+            this.$router.push({ name: 'submission', query: {id: this.id, pic: pic, item: item, hash: hash, act: act}})
         },
         edit: function() {
             this.$router.push({ name: 'socialmedia', query: {id: this.id}})
