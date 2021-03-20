@@ -65,7 +65,7 @@ export default {
         height: 100%;
         float: left;
         width: 35%;
-        margin-left: -15%;
+        margin-left: -20%;
     }
     .content {
         background-color: #FFFFFF;
@@ -119,7 +119,7 @@ export default {
         margin: 8px;
         margin-left:8%;
         margin-right:8%;
-        font-size: 24px;
+        font-size: 22px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%;

@@ -81,9 +81,9 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 44px;
-        margin-top: 30px;
+        margin-top: 17px;
         margin-left: 50px;
         text-align: left
     }
@@ -91,7 +91,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 44px;
     }
     ul {
@@ -117,10 +117,10 @@ export default {
     }
     p {
         font-family: Montserrat;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 17px;
         text-align: center;
-        height: 17%
+        height: 17%;
+        padding: 10px
     }
     .btn {
         background: #2D8F8A;
@@ -146,8 +146,5 @@ export default {
     }
     .pic2 {
         width: 60%;
-    }
-    p {
-        padding:15px
     }
 </style>

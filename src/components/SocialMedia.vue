@@ -99,7 +99,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 44px;
         margin: 10px;
         padding:10px
@@ -108,10 +108,10 @@ export default {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
-        margin: 8px;
+        margin: 6px;
         margin-left:8%;
         margin-right:8%;
-        font-size: 24px;
+        font-size: 20px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%;
