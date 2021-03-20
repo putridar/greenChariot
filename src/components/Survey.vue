@@ -40,6 +40,7 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    @import url('https://fonts.googleapis.com/css?family=Inter');
     .bg {
         background-color: #9AD5FF;
         padding: 0px;
@@ -85,17 +86,19 @@ export default {
     }
     img {
         float: left;
-        width: 40%;
+        width: 45%;
+        height: 80%;
         justify-content: center;
-        margin-left: 50px
+        margin-left: -40%;
+        margin-top: 2%;
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 7%;
-        margin-left: 55%;
+        margin-top: 4%;
+        margin-left: 45%;
         margin-right: 10%;
         height: 60%;
-        width: 30%;
+        width: 50%;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -106,7 +109,7 @@ export default {
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 40px;
+        font-size: 25px;
         line-height: 58px;
         text-align: center;
         color: #1C746F;
@@ -130,10 +133,10 @@ export default {
     }
     input {
         font-family: Montserrat;
-        padding: 8px;
+        padding: 5px;
         width: 90%;
-        margin: 2%;
-        font-size: 24px;
+        margin: 1%;
+        font-size: 16px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%
@@ -145,7 +148,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 44px;
         text-align: center;
         color: #FFFFFF;
@@ -158,7 +161,7 @@ export default {
         font-family: Montserrat;
         color: #1C746F;
         text-align: center;
-        font-size: 24px;
+        font-size: 16px;
         margin: 10px;
         cursor: pointer;
     }
@@ -166,7 +169,7 @@ export default {
         font-family: Montserrat;
         color: #1C746F;
         text-align: left;
-        font-size: 30px;
+        font-size: 16px;
         margin: 7px;
         margin-left: 4%;
         cursor: pointer;
