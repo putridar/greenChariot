@@ -91,7 +91,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 44px;
     }
     ul {
@@ -128,7 +128,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 24px;
         align-items: center;
         text-align: center;

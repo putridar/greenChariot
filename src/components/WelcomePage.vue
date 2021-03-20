@@ -68,7 +68,7 @@ export default {
     .greentitle {
         font-family: Inter;
         font-weight: bold;
-        font-size: 110px;
+        font-size: 100px;
         line-height: 103px;
         color: #1C746F;
         text-align: center;
@@ -82,7 +82,7 @@ export default {
     .whitetitle {
         font-family: Inter;
         font-weight: bold;
-        font-size: 110px;
+        font-size: 100px;
         line-height: 103px;
         color: #FFFFFF;
         text-align: center;
@@ -112,7 +112,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: normal;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 34px;
         text-align: center;
         padding: 8px;
@@ -124,13 +124,13 @@ export default {
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 30px;
         display: flex;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
         float: left;
-        height: 70px;
+        height: 65px;
         padding: 15px;
         border: #2D8F8A;
         cursor: pointer;
@@ -141,12 +141,12 @@ export default {
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 30px;
         display: flex;
         align-items: center;
         text-align: center;
         color: #2D8F8A;
-        height: 70px;
+        height: 65px;
         padding: 15px;
         border: #FFFFFF;
         cursor: pointer;

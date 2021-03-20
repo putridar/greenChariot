@@ -124,7 +124,7 @@ export default {
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 48px;
+        font-size: 44px;
         line-height: 58px;
         text-align: center;
         color: #1C746F;
@@ -135,7 +135,7 @@ export default {
         padding: 8px;
         width: 80%;
         margin: 3%;
-        font-size: 24px;
+        font-size: 22px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%
@@ -147,7 +147,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 44px;
         text-align: center;
         color: #FFFFFF;

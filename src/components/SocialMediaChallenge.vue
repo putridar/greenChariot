@@ -182,7 +182,7 @@ export default {
     }
     p {
         font-family: Montserrat;
-        font-size: 18px;
+        font-size: 16px;
         text-align: center;
     }
     .btn {
