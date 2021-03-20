@@ -2,6 +2,7 @@ import WelcomePage from './components/WelcomePage.vue'
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
 import Survey from './components/Survey.vue'
+import Survey1 from './components/Survey1.vue'
 import Challenges from './components/Challenges.vue'
 import SocialMedia from './components/SocialMedia.vue'
 import SocialMediaChallenge from './components/SocialMediaChallenge.vue'
@@ -14,6 +15,7 @@ export default [
   { path: '/signup', component: SignUp, name: "signup" },
   { path: '/signin', component: SignIn, name: "signin" },
   { path: '/survey', component: Survey, name: "survey", props: true},
+  { path: '/survey1', component: Survey1, name: "survey1", props: true},
   { path: '/challenges', component: Challenges, name: "challenges", props: true},
   { path: '/socialmedia', component: SocialMedia, name: "socialmedia", props: true },
   { path: '/socialmediachallenge', component: SocialMediaChallenge, name: "socialmediachallenge", props: true },

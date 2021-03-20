@@ -5,25 +5,16 @@
         <div class = "content">
             <p class = "title">Monthly Consumption survey</p>
             <div class ="Consumption1">
-                <p class = "txt2">Utilities Expenditure ($)</p>
-                <p class = "txt1">Electricity</p>
-                <input type="number" placeholder="Prorated Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
-                <p class = "txt1">Water</p>
-                <input type="number" placeholder="Prorated Household Water bill " min=0 id="water" v-model="water" required><br>
-                <p class = "txt1">Gas</p>
-                <input type="number" placeholder="Prorated Household Gas bill " min=0 id="gas" v-model="gas" required><br>
+                <p class = "txt2">Food Proportion</p>
+                <p class = "txt1">Vegetable, Rice, Wheat, Bread</p>
+                <input type="number" placeholder="Percentage Proportion" min=0 id="veg" v-model="veg" required><br>
+                <p class = "txt1">Chicken, Fish, white meat</p>
+                <input type="number" placeholder="Percentage Proportion " min=0 id="chick" v-model="chick" required><br>
+                <p class = "txt1">Beef, Red Meat</p>
+                <input type="number" placeholder="Percentage Proportion " min=0 id="beef" v-model="beef" required><br>
             </div>
-            <div class ="Consumption1">
-                <p class = "txt2">Transport Duration (Hours)</p>
-                <p class = "txt1"> MRT Public Transport</p>
-                <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
-                <p class = "txt1"> Bus Public Transport</p>
-                <input type="number" placeholder="Approx Duration Bus" min=0 id="bus" v-model="bus" required><br>
-                <p class = "txt1">Drive or Ride Car</p>
-                <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 id="car" v-model="car" required><br>
-            </div>
-            <button class = "create" v-on:click="SurveySubmit1()">Next</button>
-            <p class = "txt"> Page 1 / 4 </p>
+            <button class = "create" v-on:click="SurveySubmit2()">Next</button>
+            <p class = "txt"> Page 2 / 4 </p>
             <p class = "txt"> Accurate data helps us predict better :) </p>
         </div>
     </div>
@@ -40,13 +31,9 @@ export default {
     data() {
         return {
             id: this.$route.query.id,
-            electricity:"",
-            water:"",
-            gas:"",
-            mrt:"",
-            bus:"",
-            car:""
-
+            veg:"",
+            chick:"",
+            beef:""
         }
     },
     methods: {
@@ -56,16 +43,13 @@ export default {
         SurveySubmit1 : function() {
             db.firestore().collection('users').doc(this.id).update({
                 Survey: {
-                    electricity: this.electricity,
-                    water: this.water,
-                    gas: this.gas,
-                    mrt: this.mrt,
-                    bus: this.bus,
-                    car: this.car
+                    veg: this.veg,
+                    chick: this.chick,
+                    beef:this.beef
                 }
             }).then(() => {
-                alert("Submitted 1/4 successfully");
-                this.$router.push({ name: 'survey1', query: {id: this.id}})
+                alert("Submitted 2/4 successfuly");
+                this.$router.push({ name: 'socialmediachallenge', query: {id: this.id}})
             })
         }     
     }
