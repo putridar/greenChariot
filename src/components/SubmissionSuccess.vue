@@ -48,7 +48,7 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: -23%;
+        margin-left: -21%;
         margin-top: 2%;
     }
     .content {
@@ -67,7 +67,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         margin: 10px;
         padding:10px
     }
@@ -75,7 +75,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 50px;
+        font-size: 37px;
         margin: 10px;
         margin-top: 20px;
         padding:20px

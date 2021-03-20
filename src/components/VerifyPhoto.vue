@@ -6,7 +6,6 @@
         <!--<label for = "image" class = "ins">Upload Photo (the one that you post)</label>
         <input type="file" id = "image" @change="imageClassifier" />-->
         <div class ="left">
-            <p class="ins">Screenshot:</p>
             <canvas id="imageCanvas" ref="imageCanvas"></canvas><br>
             <!--<p class="ins">Original Photo:</p>
             <img v-show="uploadedImage" class="preview" :src="uploadedImage"/>-->
@@ -322,14 +321,14 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 44px;
         margin: 10px;
         padding:10px
     }
     .txt {
         font-family: Montserrat;
-        font-size: 24px;
+        font-size: 20px;
         margin: 10px;
         padding:10px
     }
@@ -358,7 +357,7 @@ export default {
     }
     .ins {
         font-family: Montserrat;
-        font-size: 24px;
+        font-size: 20px;
         display: flex;
         align-items: center;
         margin: 8px;
@@ -387,7 +386,7 @@ export default {
         width: 80%;
         height: 70%;
         justify-content: center;
-        margin-left: 9%;
+        margin-left: 20%;
         margin-top: 2%;
     }
     .preview {

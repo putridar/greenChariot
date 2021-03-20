@@ -8,7 +8,7 @@
         <ul>
             <li>
                 <img alt= "plant" v-bind:src="plantUrl">
-                <h1 class = "title">Plant one/more trees</h1><br>
+                <h1 class = "title">Plant one/more trees</h1>
                 <p>
                     Tell us your story in the caption!<br>
                     Please use these hashtags:<br>
@@ -18,7 +18,7 @@
             </li>
             <li>
                 <img alt= "recycle" v-bind:src="recycleUrl">
-                <h1 class = "title">Recycle!</h1><br>
+                <h1 class = "title">Recycle!</h1>
                 <p>
                     Tell us your story in the caption!<br>
                     Please use these hashtags:<br>
@@ -28,7 +28,7 @@
             </li>
             <li>
                 <img alt= "transport" v-bind:src="transportUrl">
-                <h1 class = "title">Use Public Transport to Your Office/School</h1><br>
+                <h1 class = "title">Use Public Transport to Your Office/School</h1>
                 <p>
                     Tell us your story in the caption!<br>
                     Please use these hashtags:<br>
@@ -38,7 +38,7 @@
             </li>
             <li>
                 <img alt= "eat organic foods" v-bind:src="eatUrl">
-                <h1 class = "title">Eat Organic Foods</h1><br>
+                <h1 class = "title">Eat Organic Foods</h1>
                 <p>
                     Tell us your story in the caption!<br>
                     Please use these hashtags:<br>
@@ -123,16 +123,15 @@ export default {
     .content {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 36px;
-        margin-top: 30px;
-        margin-left: -30%;
-
+        font-size: 30px;
+        margin-top: 17px;
+        margin-left: -40%;
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         height: 30%;
         margin-top: 5%;
     }
@@ -147,7 +146,7 @@ export default {
         border-radius: 8px;
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 24px;
         align-items: center;
         text-align: center;
@@ -169,20 +168,21 @@ export default {
     }
     li {
         flex-grow: 1;
-        flex-basis: 700px;
+        flex-basis: 450px;
         text-align: center;
         padding: 10px;
         margin: 10px;
-        border-radius: 20px;
+        border-radius: 18px;
         background-color: #FFFFFF;
     }
     img {
         float:left;
-        width:37%;
+        width:38%;
+        margin-top:3%
     }
     p {
         font-family: Montserrat;
-        font-size: 20px;
+        font-size: 18px;
         text-align: center;
     }
     .btn {
@@ -191,7 +191,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 24px;
         align-items: center;
         text-align: center;
