@@ -48,7 +48,7 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: -21%;
+        margin-left: -23%;
         margin-top: 2%;
     }
     .content {

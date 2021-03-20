@@ -51,7 +51,7 @@ export default {
     .greenlogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 60px;
+        font-size: 64px;
         line-height: 103px;
         color: #1C746F;
         text-align: left;
@@ -62,7 +62,7 @@ export default {
     .whitelogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 60px;
+        font-size: 64px;
         line-height: 103px;
         color: #FFFFFF;
         text-align: left;
@@ -80,13 +80,12 @@ export default {
     }
     li {
         flex-grow: 1;
-        flex-basis: 100px;
+        flex-basis: 70px;
         text-align: center;
         margin: 3px;
     }
     .txt {
-        margin-top: 50px;
-        font-size: 16px;
+        margin-top: 50px
     }
     a {
         color: #1C746F;

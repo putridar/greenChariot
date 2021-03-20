@@ -65,7 +65,7 @@ export default {
         height: 100%;
         float: left;
         width: 35%;
-        margin-left: -20%;
+        margin-left: -27%;
     }
     .content {
         background-color: #FFFFFF;
@@ -84,7 +84,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 44px;
         margin: 10px;
         padding:10px
@@ -102,7 +102,7 @@ export default {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
-        margin: 8px;
+        margin: 2%;
         margin-left:8%;
         margin-right:8%;
         font-size: 24px;
@@ -131,7 +131,7 @@ export default {
         font-size: 24px;
         display: flex;
         align-items: center;
-        margin: 8px;
+        margin: 1%;
         margin-left:8%;
         margin-right:8%;
         width: 80%;

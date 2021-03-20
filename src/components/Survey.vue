@@ -89,7 +89,7 @@ export default {
         width: 45%;
         height: 80%;
         justify-content: center;
-        margin-left: -35%;
+        margin-left: -40%;
         margin-top: 2%;
     }
     .content {

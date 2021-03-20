@@ -79,7 +79,7 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: -23%;
+        margin-left: -30%;
         margin-top: 5%;
     }
     .content {
@@ -99,8 +99,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 32px;
-        line-height: 44px;
+        font-size: 30px;
         margin: 10px;
         padding:10px
     }
@@ -108,7 +107,7 @@ export default {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
-        margin: 6px;
+        margin: 2%;
         margin-left:8%;
         margin-right:8%;
         font-size: 20px;
@@ -120,10 +119,10 @@ export default {
     }
     label {
         font-family: Montserrat;
-        font-size: 24px;
+        font-size: 22px;
         display: flex;
         align-items: center;
-        margin: 8px;
+        margin: 1%;
         margin-left:8%;
         margin-right:8%;
         width: 80%;
