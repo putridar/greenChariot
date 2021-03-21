@@ -316,6 +316,18 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+        animation: slide 1.5s
+    }
+    @keyframes slide {
+        from {
+            transform: translateX(30%);
+            opacity: 0
+        }
+
+        to {
+            transform: translateX(0%);
+            opacity: 1
+        }
     }
     .title {
         font-family: Montserrat;

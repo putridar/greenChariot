@@ -134,7 +134,12 @@ export default {
         align-items: center;
         text-align: center;
         border-radius: 8px;
-        padding: 10px
+        padding: 10px;
+        animation: zoomIn ease 0.5s
+    }
+    @keyframes zoomIn {
+        0% {transform: scale(0.2,0.2)}
+        100% {transform: scale(1,1)}
     }
     .title {
         font-family: Inter;

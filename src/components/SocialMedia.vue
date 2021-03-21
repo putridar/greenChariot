@@ -81,10 +81,22 @@ export default {
         justify-content: center;
         margin-left: -30%;
         margin-top: 5%;
+        animation: zoomIn 1s
+    }
+    @keyframes zoomIn {
+        from {
+            transform: translate3d(0,30px,0);
+            opacity: 0
+        }
+
+        to {
+            transform: translate3d(0,0,0);
+            opacity: 1
+        }
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 40px;
+        margin-top: 20px;
         margin-left: 55%;
         margin-right: 10%;
         min-height: 70vh;
@@ -94,6 +106,7 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+        animation: zoomIn 1s
     }
     .title {
         font-family: Montserrat;

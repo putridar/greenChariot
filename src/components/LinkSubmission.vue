@@ -57,6 +57,7 @@ export default {
         width: 100%;
         margin-top: 10%;
         margin-bottom: 10%;
+        animation: zoomIn 1s
     }
     .center {
         display: flex;
@@ -79,6 +80,18 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+        animation: zoomIn 1s
+    }
+    @keyframes zoomIn {
+        from {
+            transform: translate3d(0,30px,0);
+            opacity: 0
+        }
+
+        to {
+            transform: translate3d(0,0,0);
+            opacity: 1
+        }
     }
     .title {
         font-family: Montserrat;
