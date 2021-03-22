@@ -183,6 +183,4 @@ export default {
         margin-bottom: 1.5%;
         margin-left: 4%;
     }
-    
-    
 </style>
