@@ -3,10 +3,10 @@
         <Head v-bind:id="id"></Head>
         <img alt="greenChariot" src="../assets/survey.png">
         <div class = "content">
-            <p class = "title">Ecommerce Behaviour</p>
+            <p class = "title">Monthly Ecommerce Behaviour</p>
             <p class = "txt1">Number of items Bought</p>
             <input class="ins" type="number" placeholder="Estimated per month" min=0 id="numofitem" v-model="numofitem" required><br>
-            <p class = "txt1">Predominant Category of Purchases</p>
+            <p class = "txt1">Predominant Category of Purchases (Optional)</p>
             <br>
             <input type="checkbox" id="Fashion" value="Fashion" v-model="ecommerce">
             <label for="Fashion">Fashion</label>
@@ -16,8 +16,6 @@
             <label for="Groceries">Groceries</label>
             <input type="checkbox" id="Food_Delivery" value="Food Delivery" v-model="ecommerce">
             <label for="Food_Delivery">Food Delivery</label>
-            <br>
-            <span>Checked names: {{ ecommerce | json }}</span>
             <button class = "next" v-on:click="SurveySubmit2()">Next</button>
             <p class = "txt"> Page 3 / 4 </p>
             <p class = "txt"> Accurate data helps us predict better :) </p>
@@ -90,6 +88,7 @@ export default {
         border-radius: 8px;
         padding: 10px
     }
+    
     .title {
         font-family: Inter;
         font-style: normal;
@@ -111,49 +110,39 @@ export default {
         height: 10%;
     }
     input[type="checkbox"]{
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 22px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    .ranger {
         -webkit-appearance: none;
-        width: 90%;
-        height: 25px;
-        background: #e4e2e2;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-        border-radius: 12px;
-    }
-    .ranger:hover {
-        opacity: 1;
-    }
-    .ranger::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background:#2D8F8A;
-        cursor: pointer;
-    }
-    .food{
-        font-family: Montserrat;
-        padding: 5px;
-        width: 25%;
-        margin: 1%;
-        margin-right: 5%;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #E5E5E5;
-        height: 10%;
+        background-color: #fafafa;
+        border: 1px solid #cacece;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+        padding: 9px;
+        border-radius: 3px;
         display: inline-block;
+        position: relative;
+        cursor: pointer;
+
+    }
+    input[type="checkbox"]:active, input[type="checkbox"]:checked:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+    input[type="checkbox"]:checked {
+        background-color:#2D8F8A;
+        border: 1px solid #ffffff;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+        color: #99a1a7;
+    }
+    input[type="checkbox"]:checked:after {
+        content: '\2714';
+        font-size: 14px;
+        position: absolute;
+        top: 0px;
+        left: 3px;
+        color: #ffffff;
+    }
+    label{
+        font-family: Montserrat;
+        margin: 3%;
+        color: #1C746F;
+        font-weight: 600;
     }
     ::placeholder {
         color: rgb(0, 0, 0);
@@ -174,6 +163,7 @@ export default {
         width: 80%;
         height: 60px;
         margin: 3%;
+        margin-top: 5%;
         cursor: pointer;
     }
     .txt {
@@ -189,7 +179,8 @@ export default {
         text-align: left;
         font-size: 16px;
         font-weight: 500;
-        margin-top: 1%;
+        margin-top: 2%;
+        margin-bottom: 1.5%;
         margin-left: 4%;
     }
     
