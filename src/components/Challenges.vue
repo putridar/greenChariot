@@ -10,7 +10,7 @@
                 <h1 class = "title">Quiz</h1><br>
                 <p>
                     Confident about your knowledge in carbon footprint?<br>
-                    Test your understanding by doing this quiz!<br><br>
+                    Test your understanding by doing this quiz!<br>
                     +5 Points/correct answer
                 </p>
                 <button class = "btn">Start</button>
@@ -21,7 +21,7 @@
                 </div>
                 <h1 class = "title">Social Media Challenge</h1><br>
                 <p>
-                    Prove that you have contributed to reduce the carbon emissions!<br><br>
+                    Prove that you have contributed to reduce the carbon emissions!<br>
                     +10 Points/post
                 </p>
                 <button class = "btn" v-on:click="isLinked()">See Challenges</button>
@@ -81,18 +81,18 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
-        line-height: 44px;
-        margin-top: 30px;
+        font-size: 30px;
+        margin-top: 17px;
         margin-left: 50px;
-        text-align: left
+        text-align: left;
+        margin-bottom: 0px;
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
-        line-height: 44px;
+        font-size: 30px;
+        height: 10%
     }
     ul {
         display: flex;
@@ -110,17 +110,18 @@ export default {
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 70vh;
+        min-height: 80vh;
     }
     img {
         width: 70%;
     }
     p {
         font-family: Montserrat;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 16px;
         text-align: center;
-        height: 17%
+        height: 17%;
+        padding: 2%;
+        margin:2%
     }
     .btn {
         background: #2D8F8A;
@@ -128,15 +129,14 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 24px;
-        line-height: 24px;
+        font-size: 20px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
         width: 50%;
         height: 50px;
         text-align: center;
-        margin: 20px;
+        margin: 2%;
         cursor: pointer;
     }
     .pic {
@@ -146,8 +146,5 @@ export default {
     }
     .pic2 {
         width: 60%;
-    }
-    p {
-        padding:15px
     }
 </style>

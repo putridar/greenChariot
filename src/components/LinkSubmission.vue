@@ -57,6 +57,7 @@ export default {
         width: 100%;
         margin-top: 10%;
         margin-bottom: 10%;
+        animation: zoomIn 1s
     }
     .center {
         display: flex;
@@ -65,7 +66,7 @@ export default {
         height: 100%;
         float: left;
         width: 35%;
-        margin-left: -15%;
+        margin-left: -27%;
     }
     .content {
         background-color: #FFFFFF;
@@ -79,12 +80,24 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+        animation: zoomIn 1s
+    }
+    @keyframes zoomIn {
+        from {
+            transform: translate3d(0,30px,0);
+            opacity: 0
+        }
+
+        to {
+            transform: translate3d(0,0,0);
+            opacity: 1
+        }
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 44px;
         margin: 10px;
         padding:10px
@@ -102,7 +115,7 @@ export default {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
-        margin: 8px;
+        margin: 2%;
         margin-left:8%;
         margin-right:8%;
         font-size: 24px;
@@ -119,7 +132,7 @@ export default {
         margin: 8px;
         margin-left:8%;
         margin-right:8%;
-        font-size: 24px;
+        font-size: 22px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%;
@@ -131,7 +144,7 @@ export default {
         font-size: 24px;
         display: flex;
         align-items: center;
-        margin: 8px;
+        margin: 1%;
         margin-left:8%;
         margin-right:8%;
         width: 80%;

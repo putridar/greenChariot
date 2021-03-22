@@ -3,10 +3,12 @@
         <Head v-bind:id="id"></Head>
         <img class = "image" alt="socialmedia" src="../assets/successful.png">
         <div class = "content">
+            <p class = "zoom">
+                Horray!
+            </p>
             <p class = "item"> 
-                Horray! Your have successfuly submitted our social media challenge!<br><br>
+                Your have successfuly submitted our social media challenge!<br><br>
                 Your points: {{points}}<br>
-
             </p>
             <button class = "btn" v-on:click ="back()">Back</button>
         </div>
@@ -50,6 +52,13 @@ export default {
         justify-content: center;
         margin-left: -23%;
         margin-top: 2%;
+        animation: zoomIn ease 1s
+    }
+    @keyframes zoomIn {
+        0% {
+            transform: scale(0.2,0.2)
+        }
+        100% {transform: scale(1,1)}
     }
     .content {
         margin-top: 7%;
@@ -67,7 +76,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 30px;
         margin: 10px;
         padding:10px
     }
@@ -75,10 +84,26 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 50px;
+        font-size: 32px;
         margin: 10px;
         margin-top: 20px;
-        padding:20px
+        padding:20px;
+    }
+    .zoom {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 64px;
+        margin: 10px;
+        margin-bottom: 0px;
+        margin-top: 20px;
+        animation: large ease 1s
+    }
+    @keyframes large {
+        0% {
+            transform: scale(0.5,0.5);
+        }
+        100% {transform: scale(1,1)}
     }
     input {
         font-family: Montserrat;

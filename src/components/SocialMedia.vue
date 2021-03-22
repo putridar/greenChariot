@@ -7,7 +7,7 @@
             <label for = "ig">Instagram</label>
             <input type="text" placeholder="Username" id ="ig" v-model="ig"><br>
             <label for = "fb">Facebook</label>
-            <input type="text" placeholder="Username" id="fb" v-model="fb"><br>
+            <input type="text" placeholder="Profile name" id="fb" v-model="fb"><br>
             <label for = "twitter">Twitter</label>
             <input type="text" placeholder="Username" id="twitter" v-model="twitter"><br>
             <button class = "btn" v-on:click="link()">Connect</button>
@@ -79,12 +79,24 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: -23%;
+        margin-left: -30%;
         margin-top: 5%;
+        animation: zoomIn 1s
+    }
+    @keyframes zoomIn {
+        from {
+            transform: translate3d(0,30px,0);
+            opacity: 0
+        }
+
+        to {
+            transform: translate3d(0,0,0);
+            opacity: 1
+        }
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 40px;
+        margin-top: 20px;
         margin-left: 55%;
         margin-right: 10%;
         min-height: 70vh;
@@ -94,13 +106,13 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+        animation: zoomIn 1s
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
-        line-height: 44px;
+        font-size: 30px;
         margin: 10px;
         padding:10px
     }
@@ -108,10 +120,10 @@ export default {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
-        margin: 8px;
+        margin: 2%;
         margin-left:8%;
         margin-right:8%;
-        font-size: 24px;
+        font-size: 20px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%;
@@ -120,10 +132,10 @@ export default {
     }
     label {
         font-family: Montserrat;
-        font-size: 24px;
+        font-size: 22px;
         display: flex;
         align-items: center;
-        margin: 8px;
+        margin: 1%;
         margin-left:8%;
         margin-right:8%;
         width: 80%;

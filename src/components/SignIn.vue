@@ -82,7 +82,7 @@ export default {
     .greenlogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 64px;
+        font-size: 60px;
         line-height: 103px;
         color: #1C746F;
         text-align: left;
@@ -93,7 +93,7 @@ export default {
     .whitelogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 64px;
+        font-size: 60px;
         line-height: 103px;
         color: #FFFFFF;
         text-align: left;
@@ -118,13 +118,18 @@ export default {
         align-items: center;
         text-align: center;
         border-radius: 8px;
-        padding: 10px
+        padding: 10px;
+        animation: zoomIn ease 0.5s
+    }
+    @keyframes zoomIn {
+        0% {transform: scale(0.2,0.2)}
+        100% {transform: scale(1,1)}
     }
     .title {
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 48px;
+        font-size: 44px;
         line-height: 58px;
         text-align: center;
         color: #1C746F;
@@ -135,7 +140,7 @@ export default {
         padding: 8px;
         width: 80%;
         margin: 3%;
-        font-size: 24px;
+        font-size: 22px;
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%
@@ -147,7 +152,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 44px;
         text-align: center;
         color: #FFFFFF;
@@ -160,7 +165,7 @@ export default {
         font-family: Montserrat;
         color: #1C746F;
         text-align: center;
-        font-size: 24px;
+        font-size: 20px;
         margin: 10px;
         cursor: pointer;
     }
