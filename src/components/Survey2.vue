@@ -3,14 +3,23 @@
         <Head v-bind:id="id"></Head>
         <img alt="greenChariot" src="../assets/survey.png">
         <div class = "content">
-            <p class = "title">Food Intake Proportion</p>
-            <div class="slider" v-for="option, index in Sliders" :key="index">
-                <p class="txt1">{{name[index]}}</p>
-                <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
-                <input class="ranger" type="range" :id="'slider'+index" :min=0 :max=100 v-model.number="Sliders[index]"  @input="changeSlider(index)" step="0.01">
-            </div>
+            <p class = "title">Ecommerce Behaviour</p>
+            <p class = "txt1">Number of items Bought</p>
+            <input class="ins" type="number" placeholder="Estimated per month" min=0 id="numofitem" v-model="numofitem" required><br>
+            <p class = "txt1">Predominant Category of Purchases</p>
+            <br>
+            <input type="checkbox" id="Fashion" value="Fashion" v-model="ecommerce">
+            <label for="Fashion">Fashion</label>
+            <input type="checkbox" id="Gadgets" value="Gadgets" v-model="ecommerce">
+            <label for="Gadgets">Gadgets</label>
+            <input type="checkbox" id="Groceries" value="Groceries" v-model="ecommerce">
+            <label for="Groceries">Groceries</label>
+            <input type="checkbox" id="Food_Delivery" value="Food Delivery" v-model="ecommerce">
+            <label for="Food_Delivery">Food Delivery</label>
+            <br>
+            <span>Checked names: {{ ecommerce | json }}</span>
             <button class = "next" v-on:click="SurveySubmit2()">Next</button>
-            <p class = "txt"> Page 2 / 4 </p>
+            <p class = "txt"> Page 3 / 4 </p>
             <p class = "txt"> Accurate data helps us predict better :) </p>
         </div>
     </div>
@@ -28,9 +37,8 @@ export default {
     data() {
         return {
             id: this.$route.query.id,
-            selectedAnswer:[],
-            name:["Vegetables, Rice, Bread, Wheat","Chicken, Fish, White Meat","Beef, Red Meat"],
-            Sliders :[33,33,33]
+            ecommerce: [],
+            numofitem:""
         }
     },
     methods: {
@@ -39,56 +47,14 @@ export default {
         },
         SurveySubmit2 : function() {
             db.firestore().collection('users').doc(this.id).update({
-                Survey1: {
-                    veg: this.Sliders[0],
-                    chick: this.Sliders[1],
-                    beef: this.Sliders[2]
+                Survey2: {
+                    ecommerce: this.ecommerce,
+                    amount: this.numofitem
                 }
             }).then(() => {
-                alert("Submitted 2/4 successfuly");
-                this.$router.push({ name: 'survey2', query: {id: this.id}})
+                alert("Submitted 3/4 successfuly");
+                this.$router.push({ name: 'Dashboard', query: {id: this.id}})
             })
-        },
-        changeSlider(slider){
-            const sum = this.Sliders.reduce((sum, val) => sum + val, 0);
-            const diff = sum - 100;
-            let remainder = 0
-            let arr=[];
-            for(let i in this.Sliders){
-                if(i != slider){ //don't modify the slider which is being dragged
-                    let val = this.Sliders[i] - diff / (this.Sliders.length - 1)
-                    if(val < 0){
-                        remainder += val;
-                        val = 0;
-                    }
-                    this.$set(this.Sliders, i, val)
-                }
-            }
-            if(remainder){
-                const filteredLength = this.Sliders.filter((val, key) => val > 0 && key != slider).length
-                for(let i in this.Sliders){
-                    if(i != slider && this.Sliders[i] > 0){
-                        this.$set(this.Sliders, i, this.Sliders[i] + remainder / filteredLength)
-                    }
-                }
-            }
-            this.$emit('input', this.Sliders)
-            //convert to rounded values
-            for(let i in this.Sliders){
-                arr.push(Math.round(this.Sliders[i]))
-                this.selectedAnswer=arr;
-            }
-        },
-        changeBox(slider,value, e){
-            if(e.target.value.length>3){
-                e.target.value= ""
-            }
-            if(e.target.value==isNaN || e.target.value > 100 || e.target.value < 0){
-                e.target.value= ""
-            }else{
-                this.Sliders[slider] = Math.round(e.target.value);
-                this.changeSlider(slider)
-            }
         }
     }
 }
@@ -133,6 +99,26 @@ export default {
         text-align: center;
         color: #1C746F;
         margin: 0px;
+    }
+    .ins{
+        font-family: Montserrat;
+        padding: 5px;
+        width: 90%;
+        margin: 1%;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #E5E5E5;
+        height: 10%;
+    }
+    input[type="checkbox"]{
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     .ranger {
         -webkit-appearance: none;
@@ -205,9 +191,7 @@ export default {
         font-weight: 500;
         margin-top: 1%;
         margin-left: 4%;
-        margin-right: 20%;
-        width: 40%;
-        display: inline-block;
     }
+    
     
 </style>

@@ -82,42 +82,6 @@ export default {
         width: 100%;
         min-height: 100vh;
     }
-    .greenlogo {
-        font-family: Inter;
-        font-weight: bold;
-        font-size: 64px;
-        line-height: 103px;
-        color: #1C746F;
-        text-align: left;
-        margin: 50px;
-        display: inline;
-        margin-right: 0px;
-    }
-    .whitelogo {
-        font-family: Inter;
-        font-weight: bold;
-        font-size: 64px;
-        line-height: 103px;
-        color: #FFFFFF;
-        text-align: left;
-        margin: 50px;
-        display: inline;
-        margin-left: 0px;
-    }
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        flex-grow: 1;
-        flex-basis: 300px;
-        text-align: center;
-        padding: 10px;
-        margin: 10px;
-        color: #1C746F;
-    }
     img {
         float: left;
         width: 45%;
@@ -127,7 +91,7 @@ export default {
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 4%;
+        margin-top: 7%;
         margin-left: 45%;
         margin-right: 10%;
         height: 60%;
