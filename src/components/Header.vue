@@ -91,6 +91,7 @@ export default {
         color: #1C746F;
         text-decoration: none;
         font-family: Montserrat;
+        font-size: 16px;
     }
     img {
         width: 30%;
