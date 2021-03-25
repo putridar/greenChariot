@@ -49,6 +49,9 @@ export default {
     methods: {
         register: function() {
             this.$router.push({ name: 'registershop', query: {id: this.id}})
+        },
+        isclick:function(){
+                this.$router.push({name:'scoopcode',query:{id:this.id}})
         }
     }
 }
