@@ -34,8 +34,23 @@
     export default{
         components:{
             Head
+        },
+        data(){
+            return{
+                id:this.$route.query.id
+            }
+        },
+        methods:{
+            isclick:function(){
+                this.$router.push({name:'scoopcode',query:{id:this.id}})
+            }
+                
+                
+            }
+
+
         }
-    }
+    
 </script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');

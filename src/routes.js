@@ -11,6 +11,8 @@ import SocialMediaChallenge from './components/SocialMediaChallenge.vue'
 import Submission from './components/LinkSubmission.vue'
 import Verify from './components/VerifyPhoto.vue'
 import Success from './components/SubmissionSuccess.vue'
+import GreenShops from './components/greenshops.vue'
+import Scoopcode from './components/Scoopcode.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -26,4 +28,6 @@ export default [
   { path: '/submission', component: Submission, name: "submission", props: true },
   { path: '/verify', component: Verify, name: "verify", props: true },
   { path: '/success', component: Success, name: "success", props: true },
+  {path: '/greenshops',component:GreenShops,name:"greenshops"},
+  {path: '/scoopcode',component:Scoopcode,name:"scoopcode"},
 ]
