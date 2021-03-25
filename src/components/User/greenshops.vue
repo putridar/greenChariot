@@ -62,6 +62,7 @@ export default {
                 })
                 this.imagename="../../assets/wholefoods.png"
                 this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+                
         },
         isclick2:function(){
             db.firestore().collection('users').doc(this.id).update({
@@ -71,6 +72,7 @@ export default {
 
                 })
                 this.imagename="../../assets/greencollective.png"
+
                 this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
         },
         isclick3:function(){
