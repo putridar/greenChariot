@@ -20,7 +20,7 @@
                 <img alt="green collection" src="../assets/greencollective.png">
                 </div>
                 <h1 class="title">The Green Collective SG</h1><br>
-            <button class="btn" v-on:click="isclick()">Shop</button>
+            <button class="btn" v-on:click="isclick2()">Shop</button>
             </li>
             <li>
                 <div class="pic">
@@ -52,6 +52,9 @@ export default {
         },
         isclick:function(){
                 this.$router.push({name:'scoopcode',query:{id:this.id}})
+        },
+        isclick2:function(){
+            this.$router.push({name:'greencollectivecode',query:{id:this.id}})
         }
     }
 }

@@ -16,6 +16,7 @@ import Scoopcode from './components/Scoopcode.vue'
 import registershop from './components/RegisterShop.vue'
 import DashboardShop from './components/DashboardShop.vue'
 import SignInShop from './components/SignInShop.vue'
+import GreenCollectiveCode from './components/greencollectivecode.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -36,4 +37,5 @@ export default [
   { path: '/registershop', component: registershop, name: "registershop", props: true },
   { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
   { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
+  {path:'/greencollectivecode',component:GreenCollectiveCode,name:'greencollectivecode'}
 ]
