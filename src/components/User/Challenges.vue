@@ -5,7 +5,7 @@
         <ul>
             <li>
                 <div class = "pic">
-                    <img alt= "quiz" src="../assets/quiz.png">
+                    <img alt= "quiz" src="../../assets/quiz.png">
                 </div>
                 <h1 class = "title">Quiz</h1><br>
                 <p>
@@ -17,7 +17,7 @@
             </li>
             <li>
                 <div class = "pic">
-                    <img alt= "social media" src="../assets/socialmedia.png">
+                    <img alt= "social media" src="../../assets/socialmedia.png">
                 </div>
                 <h1 class = "title">Social Media Challenge</h1><br>
                 <p>
@@ -28,7 +28,7 @@
             </li>
             <li>
                 <div class = "pic">
-                    <img class = "pic2" alt= "shop" src="../assets/shop.png">
+                    <img class = "pic2" alt= "shop" src="../../assets/shop.png">
                 </div>
                 <h1 class = "title">Shop at Our Green Shops!</h1><br>
                 <p>
@@ -42,7 +42,7 @@
 
 <script>
 import Head from './Header.vue'
-import db from "../firebase.js"
+import db from "../../firebase.js"
 export default {
     name: 'Challenges',
     components :{

@@ -9,7 +9,7 @@
         <ul>
             <li>
                 <div class="pic">
-                <img alt="scoop" src="../assets/wholefoods.png">
+                <img alt="scoop" src="../../assets/wholefoods.png">
                 </div>
                 <h1 class="title">Scoop Wholefoods</h1><br>
                 <button class="btn" v-on:click="isclick()">Shop</button>
@@ -17,14 +17,14 @@
             </li>
             <li>
                 <div class="pic">
-                <img alt="green collection" src="../assets/greencollective.png">
+                <img alt="green collection" src="../../assets/greencollective.png">
                 </div>
                 <h1 class="title">The Green Collective SG</h1><br>
             <button class="btn" v-on:click="isclick2()">Shop</button>
             </li>
             <li>
                 <div class="pic">
-                <img alt="eco.le" src="../assets/eco.le.png">
+                <img alt="eco.le" src="../../assets/eco.le.png">
                 </div>
                 <h1 class="title">Eco.Le</h1><br>
                 <button class="btn" v-on:click="isclick()">Shop</button>

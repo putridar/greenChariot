@@ -1,7 +1,7 @@
 <template>
     <div class = "bg">
         <Head v-bind:id="id"></Head>
-        <img alt="greenChariot" src="../assets/survey.png">
+        <img alt="greenChariot" src="../../assets/survey.png">
         <div class = "content">
             <p class = "title">Monthly Consumption survey</p>
             <div class ="Consumption1">
@@ -31,7 +31,7 @@
 
 <script>
 import Head from './Header.vue'
-import db from "../firebase.js"
+import db from "../../firebase.js"
 export default {
     name: 'Header',
     components :{

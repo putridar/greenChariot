@@ -2,7 +2,7 @@
   <div class = "bg">
       <p class="greenlogo">green</p>
       <p class="whitelogo">Chariot</p><br>
-      <img alt="greenChariot" src="../assets/welcome.png">
+      <img alt="greenChariot" src="../../assets/welcome.png">
       <div class = "content">
         <div class = "float">
             <p class="greentitle">green</p>

@@ -1,7 +1,7 @@
 <template>
     <div class = "bg">
         <Head v-bind:id="id"></Head>
-        <img class = "image" alt="socialmedia" src="../assets/successful.png">
+        <img class = "image" alt="socialmedia" src="../../assets/successful.png">
         <div class = "content">
             <p class = "zoom">
                 Horray!

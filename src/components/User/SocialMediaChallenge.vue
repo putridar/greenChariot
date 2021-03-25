@@ -59,10 +59,10 @@ export default {
     },
     data() {
         return {
-            plantUrl: require("../assets/plant.png"),
-            recycleUrl: require("../assets/recycle.png"),
-            transportUrl: require("../assets/transport.png"),
-            eatUrl: require("../assets/eat.png"),
+            plantUrl: require("../../assets/plant.png"),
+            recycleUrl: require("../../assets/recycle.png"),
+            transportUrl: require("../../assets/transport.png"),
+            eatUrl: require("../../assets/eat.png"),
             id: this.$route.query.id,
             plantHash: ["#planttrees", "#greenchariot", "#reducecarbon"],
             recycleHash: ["#recycle", "#greenchariot", "#reducecarbon"],
