@@ -6,31 +6,30 @@
                 <img alt="scoop" src="../assets/wholefoods.png">
                </div>
             <p class="title">Insert this code to get points!</p><br>
-            <input type="text" placeholder="code" v-model="code" required><br>
+            <input type="text" placeholder="Code" v-model="code" required><br>
             <button class="btn" v-on:click="direct()">OK</button>
         </div>
     </div>
 </template>
 <script>
- import Head from './Header.vue'
- import db from '../firebase.js'
- export default{
- components:{
-     Head
-
- },
- data(){
-     return{
-         id:this.$route.query.id
-     }
- },
- methods:{
-     direct:function(){
-       this.$router.push({name:'scooprewards',query:{id:this.id}})
-     }
- }
+import Head from './Header.vue'
+export default{
+    components:{
+        Head
+    },
+    data(){
+        return{
+            id:this.$route.query.id
+        }
+    },
+    methods:{
+        direct:function(){
+        this.$router.push({name:'scooprewards',query:{id:this.id}})
+        }
+    }
 }
 </script>
+
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
     .background {
@@ -42,8 +41,8 @@
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 2%;
-        margin-left: 55%;
+        margin-top: -37%;
+        margin-left: 37%;
         margin-right: 10%;
         height: 60%;
         width: 30%;
@@ -82,5 +81,15 @@
         text-align: center;
         margin: 2%;
         cursor: pointer;
+    }
+    input {
+        font-family: Montserrat;
+        padding: 8px;
+        width: 80%;
+        margin: 3%;
+        font-size: 22px;
+        border-radius: 8px;
+        border: 1px solid #E5E5E5;
+        height: 10%
     }
 </style>
