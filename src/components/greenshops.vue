@@ -1,41 +1,57 @@
 <template>
  <div class="background">
     <Head v-bind:id="id"></Head>
-    <p class="Content">Our Green Shop Partners:</p>
-    <ul>
-        <li>
-            <div class="pic">
-             <img alt="scoop" src="../assets/wholefoods.png">
-            </div>
-            <h1 class="title">Scoop Wholefoods</h1><br>
-            <button class="btn" v-on:click="isclick()">Shop</button>
+    <div class = "top">
+        <p class="content">Our Green Shop Partners:</p>
+        <button class = "btn" v-on:click="register()"> Want to be our partner? Register now! </button>
+    </div>
+    <div class = "shops">
+        <ul>
+            <li>
+                <div class="pic">
+                <img alt="scoop" src="../assets/wholefoods.png">
+                </div>
+                <h1 class="title">Scoop Wholefoods</h1><br>
+                <button class="btn" v-on:click="isclick()">Shop</button>
 
-        </li>
-        <li>
-            <div class="pic">
-             <img alt="green collection" src="../assets/greencollective.png">
-            </div>
-            <h1 class="title">The Green Collective SG</h1><br>
-          <button class="btn" v-on:click="isclick()">Shop</button>
-        </li>
-        <li>
-            <div class="pic">
-             <img alt="eco.le" src="../assets/eco.le.png">
-            </div>
-            <h1 class="title">Eco.Le</h1><br>
+            </li>
+            <li>
+                <div class="pic">
+                <img alt="green collection" src="../assets/greencollective.png">
+                </div>
+                <h1 class="title">The Green Collective SG</h1><br>
             <button class="btn" v-on:click="isclick()">Shop</button>
+            </li>
+            <li>
+                <div class="pic">
+                <img alt="eco.le" src="../assets/eco.le.png">
+                </div>
+                <h1 class="title">Eco.Le</h1><br>
+                <button class="btn" v-on:click="isclick()">Shop</button>
 
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
     </div>
 </template>
 <script>
-    import Head from './Header.vue'
-    export default{
-        components:{
-            Head
+import Head from './Header.vue'
+export default {
+    name: 'Greenshops',
+    components :{
+        Head
+    },
+    data() {
+        return {
+            id: this.$route.query.id
+        }
+    },
+    methods: {
+        register: function() {
+            this.$router.push({ name: 'registershop', query: {id: this.id}})
         }
     }
+}
 </script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
@@ -62,14 +78,15 @@
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 80vh;
+        min-height: 60vh;
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
         font-size: 30px;
-        height: 10%
+        height: 10%;
+        margin-top: 10px
     }
     .btn {
         background: #2D8F8A;
@@ -81,16 +98,31 @@
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 50%;
+        width: 35%;
         height: 50px;
         text-align: center;
-        margin: 2%;
         cursor: pointer;
+    
     }
     .pic {
-        height: 45%;
+        height: 50%;
         margin-top:5%;
         margin-bottom: 2%
+    }
+    .top {
+        justify-content: space-between;
+        display: flex;
+        margin-right: 100px;
+        margin-top: -40%;
+    }
+    .content {
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 30px;
+        margin-left: 50px;
+    }
+    .shops {
+        margin-top: 10px;
     }
 </style>
 

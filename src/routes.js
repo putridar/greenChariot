@@ -11,6 +11,10 @@ import SocialMediaChallenge from './components/SocialMediaChallenge.vue'
 import Submission from './components/LinkSubmission.vue'
 import Verify from './components/VerifyPhoto.vue'
 import Success from './components/SubmissionSuccess.vue'
+import greenshops from './components/greenshops.vue'
+import registershop from './components/RegisterShop.vue'
+import DashboardShop from './components/DashboardShop.vue'
+import SignInShop from './components/SignInShop.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -26,4 +30,8 @@ export default [
   { path: '/submission', component: Submission, name: "submission", props: true },
   { path: '/verify', component: Verify, name: "verify", props: true },
   { path: '/success', component: Success, name: "success", props: true },
+  { path: '/greenshops', component: greenshops, name: "greenshops", props: true },
+  { path: '/registershop', component: registershop, name: "registershop", props: true },
+  { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
+  { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
 ]

@@ -82,7 +82,7 @@ export default {
         font-style: normal;
         font-weight: bold;
         font-size: 30px;
-        margin-top: 17px;
+        margin-top: 7px;
         margin-left: 50px;
         text-align: left;
         margin-bottom: 0px;

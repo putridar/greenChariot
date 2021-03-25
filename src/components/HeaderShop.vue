@@ -6,12 +6,9 @@
         </div>
         <div class = "navi">
             <ul>
-                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Dashboard</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'survey', query: {id: this.id} }" exact>Survey</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Information</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'challenges', query: {id: this.id} }" exact>Quiz & Challenges</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'greenshops', query: {id: this.id} }" exact>Green Shops</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Rewards</router-link></li>
+                <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
+                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
+                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>QR Code</router-link></li>
                 <li><router-link :to="{ name: 'signin', query: {id: this.id} }" exact><img src="../assets/user.png"/></router-link></li>
             </ul>
         </div>
@@ -75,7 +72,7 @@ export default {
         flex-wrap: wrap;
         list-style-type: none;
         padding: 0;
-        margin-left: 40%
+        margin-left: 60%
        
     }
     li {
