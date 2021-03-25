@@ -1,7 +1,7 @@
 <template>
     <div class = "bg">
         <Head v-bind:id="id"></Head>
-        <img class = "image" alt="socialmedia" src="../assets/socialmedia.png">
+        <img class = "image" alt="socialmedia" src="../../assets/socialmedia.png">
         <div class = "content">
             <p class = "title"> Connect Your Social Media </p><br>
             <label for = "ig">Instagram</label>
@@ -17,7 +17,7 @@
 
 <script>
 import Head from './Header.vue'
-import db from "../firebase.js"
+import db from "../../firebase.js"
 export default {
     name: 'SocialMedia',
     components :{

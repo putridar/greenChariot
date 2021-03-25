@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Head from './HeaderShop.vue'
-import db from "../firebase.js"
+import Head from '../Shop/HeaderShop.vue'
+import db from "../../firebase.js"
 export default {
     name: 'Header',
     components :{
