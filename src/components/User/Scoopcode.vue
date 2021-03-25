@@ -3,7 +3,7 @@
         <Head v-bind:id="id"></Head>
         <div class="content">
             <div class="pic">
-                <img alt="scoop" src="../../assets/wholefoods.png">
+                <img alt="scoop" src=this.imagename>
                </div>
             <p class="title">Insert this code stated to get points!</p><br>
             <input type="text" placeholder="Code" v-model="code" required><br>
@@ -14,12 +14,13 @@
 <script>
 import Head from './Header.vue'
 export default{
+    props:['imagename'],
     components:{
         Head
     },
     data(){
         return{
-            id:this.$route.query.id
+            id:this.$route.query.id,
         }
     },
     methods:{

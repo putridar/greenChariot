@@ -1,23 +1,23 @@
 
-import WelcomePage from './components/WelcomePage.vue'
-import SignUp from './components/SignUp.vue'
-import SignIn from './components/SignIn.vue'
-import Survey from './components/Survey.vue'
-import Survey1 from './components/Survey1.vue'
-import Survey2 from './components/Survey2.vue'
-import Dashboard from './components/Dashboard.vue'
-import Challenges from './components/Challenges.vue'
-import SocialMedia from './components/SocialMedia.vue'
-import SocialMediaChallenge from './components/SocialMediaChallenge.vue'
-import Submission from './components/LinkSubmission.vue'
-import Verify from './components/VerifyPhoto.vue'
-import Success from './components/SubmissionSuccess.vue'
-import GreenShops from './components/greenshops.vue'
-import Scoopcode from './components/Scoopcode.vue'
-import registershop from './components/RegisterShop.vue'
-import DashboardShop from './components/DashboardShop.vue'
-import SignInShop from './components/SignInShop.vue'
-import GreenCollectiveCode from './components/greencollectivecode.vue'
+import WelcomePage from './components/User/WelcomePage.vue'
+import SignUp from './components/User/SignUp.vue'
+import SignIn from './components/User/SignIn.vue'
+import Survey from './components/User/Survey.vue'
+import Survey1 from './components/User/Survey1.vue'
+import Survey2 from './components/User/Survey2.vue'
+import Dashboard from './components/User/Dashboard.vue'
+import Challenges from './components/User/Challenges.vue'
+import SocialMedia from './components/User/SocialMedia.vue'
+import SocialMediaChallenge from './components/User/SocialMediaChallenge.vue'
+import Submission from './components/User/LinkSubmission.vue'
+import Verify from './components/User/VerifyPhoto.vue'
+import Success from './components/User/SubmissionSuccess.vue'
+import GreenShops from './components/User/greenshops.vue'
+import Scoopcode from './components/User/Scoopcode.vue'
+import registershop from './components/User/RegisterShop.vue'
+import DashboardShop from './components/Shop/DashboardShop.vue'
+import SignInShop from './components/User/SignInShop.vue'
+
 
 
 export default [
@@ -39,5 +39,4 @@ export default [
   { path: '/registershop', component: registershop, name: "registershop", props: true },
   { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
   { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
-  {path:'/greencollectivecode',component:GreenCollectiveCode,name:'greencollectivecode'}
 ]
