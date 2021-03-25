@@ -13,6 +13,9 @@ import Verify from './components/VerifyPhoto.vue'
 import Success from './components/SubmissionSuccess.vue'
 import GreenShops from './components/greenshops.vue'
 import Scoopcode from './components/Scoopcode.vue'
+import registershop from './components/RegisterShop.vue'
+import DashboardShop from './components/DashboardShop.vue'
+import SignInShop from './components/SignInShop.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -30,4 +33,7 @@ export default [
   { path: '/success', component: Success, name: "success", props: true },
   {path: '/greenshops',component:GreenShops,name:"greenshops"},
   {path: '/scoopcode',component:Scoopcode,name:"scoopcode"},
+  { path: '/registershop', component: registershop, name: "registershop", props: true },
+  { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
+  { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
 ]

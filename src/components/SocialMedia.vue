@@ -5,11 +5,11 @@
         <div class = "content">
             <p class = "title"> Connect Your Social Media </p><br>
             <label for = "ig">Instagram</label>
-            <input type="text" placeholder="Username" id ="ig" v-model="ig"><br>
+            <input type="text" placeholder="Username (without @)" id ="ig" v-model="ig"><br>
             <label for = "fb">Facebook</label>
             <input type="text" placeholder="Profile name" id="fb" v-model="fb"><br>
             <label for = "twitter">Twitter</label>
-            <input type="text" placeholder="Username" id="twitter" v-model="twitter"><br>
+            <input type="text" placeholder="Username (without @)" id="twitter" v-model="twitter"><br>
             <button class = "btn" v-on:click="link()">Connect</button>
         </div>
     </div>

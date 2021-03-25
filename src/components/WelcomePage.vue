@@ -4,8 +4,10 @@
       <p class="whitelogo">Chariot</p><br>
       <img alt="greenChariot" src="../assets/welcome.png">
       <div class = "content">
-        <p class="greentitle">green</p>
-        <p class="whitetitle">Chariot</p><br>
+        <div class = "float">
+            <p class="greentitle">green</p>
+            <p class="whitetitle">Chariot</p><br>
+        </div>
         <p class = "desc">
             Help us to reduce global carbon emissions
             by tracking your carbon footprint!
@@ -92,6 +94,20 @@ export default {
         margin-left: 0px;
         text-align: center;
     }
+    .float {
+        animation: floating 5s ease-in-out infinite;
+    }
+    @keyframes floating {
+	0% {	
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
     img {
         float: left;
         width: 40%;

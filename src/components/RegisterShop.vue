@@ -1,86 +1,99 @@
 <template>
   <div class = "bg">
-        <p class="greenlogo">green</p>
-        <p class="whitelogo">Chariot</p><br>
-        <img alt="greenChariot" src="../assets/welcome.png">
+        <Head v-bind:id="id"></Head>
+        <img alt="greenChariot" src="../assets/shop.png">
         <div class = "content">
-            <p class = "title"> Sign Up </p>
-            <input type="text" placeholder="Name" v-model="name" required><br>
-            <input type="text" placeholder="Username" v-model="username" required><br>
-            <input type="email" placeholder="Email" v-model="email" required><br>
+            <p class = "title"> Register Your Shop! </p>
+            <input type="text" placeholder="Shop Name" v-model="name" required><br>
             <input type="password" placeholder="Password" v-model="password" required><br>
-            <button class = "create" v-on:click="create()">Create Account</button>
-            <p class = "txt" v-on:click="signin()">Already have an account? Sign In now!</p>
+            <button class = "create" v-on:click="create()">Register</button>
+            <p class="txt" v-on:click="signIn()"> Already own a shop account? Sign In now!</p>
         </div>
   </div>
 </template>
 
 <script>
 import db from "../firebase.js"
-
+import Head from './Header.vue'
 export default {
-    name: 'SignUp',
+    name: 'Register',
+    components :{
+        Head
+    },
     data() {
         return {
             name: "",
             username :"",
             email: "",
             password: "",
-            id: ""
+            id: this.$route.query.id,
+            shops: []
         }
     },
     methods: {
+        fetchItems: function() {
+             db.firestore().collection('shops').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var user = [doc.id, doc.data()]
+                    this.shops.push(user)
+                });
+            }).catch(error => {console.log(error)
+                alert(error)})
+        },
         create : function() {
-            if (this.name == "" || this.username == "" || this.email == "" || this.password == "") {
+            if (this.name == "" || this.password == "") {
                 alert("Please fill in the required input");
             } else {
                 this.signup();
-                this.navigate();
             }
         },
         signup: function() {
             var success = true;
-            db.auth()
-            .createUserWithEmailAndPassword(this.email, this.password)
-            .catch(error => {
-                success = false;
-                console.log(error)
-                alert(error)})
-            .then(() => {
-                db.auth().currentUser.updateProfile({displayName: this.name})
-                if (success){
-                    db.firestore().collection('users').add({
-                        name: this.name,
-                        email: this.email,
-                        username: this.username,
-                        points: 0
-                    })
-                    .then((docRef) => {
-                        this.id = docRef.id
-                        this.name = ""
-                        this.username = ""
-                        this.email = ""
-                        this.password = "" 
-                        alert("Sign up successful!")
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        alert(error)
-                    })
-                }
-            })
-            .catch(error => {
-                success = false;
-                console.log(error)})
+            var email
+            var currId
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                    email = snapshot.data().email
+                    console.log(email)
+                    currId = this.shops.filter(item => item[1].email === email);
+                    console.log(currId)
+                    if (currId[0] !== undefined) {
+                        alert("You already have a shop that registered with this email")
+                    } else {
+                        db.auth()
+                            .signInWithEmailAndPassword(email, this.password)
+                            .catch(error => {console.log(error)
+                                alert(error)
+                                success = false;})
+                            .then(() => {
+                                if (success) {
+                                    db.firestore().collection('shops').add({
+                                        name: this.name,
+                                        email: email,
+                                        image: null
+                                    }).then((docRef) => {
+                                        var id = docRef.id
+                                        this.navigate(id) 
+                                    }) 
+                                }
+                            })
+                            .catch(error => {console.log(error)})
+                    }
+                }).catch(error => {console.log(error)
+                    alert(error)})
         },
-        signin: function() {
-            this.$router.push({ name: 'signin'})
+        navigate: function(id) {
+            this.$router.push({ name: 'dashboardShop', query : {
+                id: id,
+            }})
         },
-        navigate: function() {
-            this.$router.push({ name: 'survey', params : {
+        signIn: function() {
+            this.$router.push({ name: 'signinShop', query : {
                 id: this.id,
             }})
         }
+    },
+    created() {
+        this.fetchItems();
     }
 }
 </script>
@@ -121,15 +134,15 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: 50px
+        margin-left: -30%
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 2%;
+        margin-top: 5%;
         margin-left: 55%;
         margin-right: 10%;
         height: 60%;
-        width: 30%;
+        width: 35%;
         justify-content: center;
         align-items: center;
         text-align: center;
