@@ -20,14 +20,14 @@
                 <img alt="green collection" src="../../assets/greencollective.png">
                 </div>
                 <h1 class="title">The Green Collective SG</h1><br>
-            <button class="btn" v-on:click="isclick()">Shop</button>
+            <button class="btn" v-on:click="isclick2()">Shop</button>
             </li>
             <li>
                 <div class="pic">
                 <img alt="eco.le" src="../../assets/eco.le.png">
                 </div>
                 <h1 class="title">Eco.Le</h1><br>
-                <button class="btn" v-on:click="isclick()">Shop</button>
+                <button class="btn" v-on:click="isclick3()">Shop</button>
 
             </li>
         </ul>
@@ -36,6 +36,7 @@
 </template>
 <script>
 import Head from './Header.vue'
+import db from '../../firebase.js'
 export default {
     name: 'Greenshops',
     components :{
@@ -43,7 +44,9 @@ export default {
     },
     data() {
         return {
-            id: this.$route.query.id
+            id: this.$route.query.id,
+            imagename:'',
+            code:''
         }
     },
     methods: {
@@ -51,8 +54,38 @@ export default {
             this.$router.push({ name: 'registershop', query: {id: this.id}})
         },
         isclick:function(){
-                this.$router.push({name:'scoopcode',query:{id:this.id}})
+            db.firestore().collection('users').doc(this.id).update({
+                    greenshops:{
+                        imagename:"../../assets/wholefoods.png"
+                    }
+
+                })
+                this.imagename="../../assets/wholefoods.png"
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+                
+        },
+        isclick2:function(){
+            db.firestore().collection('users').doc(this.id).update({
+                    greenshops:{
+                        imagename:"../../assets/greencollective.png"
+                    }
+
+                })
+                this.imagename="../../assets/greencollective.png"
+
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+        },
+        isclick3:function(){
+            db.firestore().collection('users').doc(this.id).update({
+                    greenshops:{
+                        imagename:"../../assets/eco.le.png"
+                    }
+
+                })
+                this.imagename="../../assets/eco.le.png"
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
         }
+
     }
 }
 </script>

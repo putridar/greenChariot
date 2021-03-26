@@ -1,3 +1,4 @@
+
 import WelcomePage from './components/User/WelcomePage.vue'
 import SignUp from './components/User/SignUp.vue'
 import SignIn from './components/User/SignIn.vue'
@@ -16,6 +17,8 @@ import Scoopcode from './components/User/Scoopcode.vue'
 import registershop from './components/User/RegisterShop.vue'
 import DashboardShop from './components/Shop/DashboardShop.vue'
 import SignInShop from './components/User/SignInShop.vue'
+
+
 
 export default [
   { path: '/', component: WelcomePage },
