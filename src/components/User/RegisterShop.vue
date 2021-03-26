@@ -26,6 +26,7 @@ export default {
             username :"",
             email: "",
             password: "",
+            code:"",
             id: this.$route.query.id,
             shops: []
         }

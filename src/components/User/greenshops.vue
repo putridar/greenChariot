@@ -45,10 +45,10 @@ export default {
         },
         register: function() {
             this.$router.push({ name: 'registershop', query: {id: this.id}})
-        },
+        },  
         isclick:function(image, name){
             this.imagename = image
-            this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename, name:name}})
+            this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename,name:name}})
                 
         },
     },

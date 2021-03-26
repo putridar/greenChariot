@@ -6,7 +6,7 @@
                 <img alt="scoop" v-bind:src="this.imagename">
             </div>
             <p class="title">Insert this code stated to get points!</p><br>
-            <input type="text" placeholder="Code" v-model="code" required><br>
+            <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
             <button class="btn" v-on:click="direct()">OK</button>
         </div>
     </div>
@@ -20,14 +20,20 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename
+            imagename:this.$route.query.imagename,
+            name:this.$route.query.name
         }
     },
     methods:{
         direct:function(){
-        this.$router.push({name:'scooprewards',query:{id:this.id}})
+            if (document.getElementById("codes").value.length==0){
+                alert("You need to input a code!")
+            }
+        else{
+         this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
         }
     }
+}
 }
 </script>
 
