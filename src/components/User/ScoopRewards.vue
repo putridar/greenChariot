@@ -33,7 +33,7 @@
  </div>
 </template>
 <script>
- import Head from './header.vue'
+ import Head from './Header.vue'
  import db from '../../firebase.js'
  export default{
      components:{
