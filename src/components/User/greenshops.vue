@@ -36,7 +36,7 @@
 </template>
 <script>
 import Head from './Header.vue'
-import db from '../firebase.js'
+import db from '../../firebase.js'
 export default {
     name: 'Greenshops',
     components :{
@@ -46,7 +46,8 @@ export default {
         return {
             id: this.$route.query.id,
             imagename:'',
-            code:''
+            codeid:'',
+            shopname:''
         }
     },
     methods: {
@@ -56,34 +57,42 @@ export default {
         isclick:function(){
             db.firestore().collection('users').doc(this.id).update({
                     greenshops:{
-                        imagename:"../../assets/wholefoods.png"
+                        imagename:"../../assets/wholefoods.png",
+                        codeid:'XXX111'
                     }
 
                 })
                 this.imagename="../../assets/wholefoods.png"
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+                this.codeid="XXX111"
+                this.shopname="Scoop Wholefoods"
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename,codeid:this.codeid,shopname:this.shopname}})
                 
         },
         isclick2:function(){
             db.firestore().collection('users').doc(this.id).update({
                     greenshops:{
-                        imagename:"../../assets/greencollective.png"
+                        imagename:"../../assets/greencollective.png",
+                        codeid:"YYY111"
                     }
 
                 })
                 this.imagename="../../assets/greencollective.png"
-
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+                this.codeid="YYY111"
+                this.shopname="The Green Collective SG"
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename,codeid:this.codeid,shopname:this.shopname}})
         },
         isclick3:function(){
             db.firestore().collection('users').doc(this.id).update({
                     greenshops:{
-                        imagename:"../../assets/eco.le.png"
+                        imagename:"../../assets/eco.le.png",
+                        codeid:"ZZZ111"
                     }
 
                 })
                 this.imagename="../../assets/eco.le.png"
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+                this.codeid="ZZZ111"
+                this.shopname="Eco Le"
+                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename,codeid:this.codeid,shopname:this.shopname}})
         }
 
     }
