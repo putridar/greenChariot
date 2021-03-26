@@ -7,28 +7,12 @@
     </div>
     <div class = "shops">
         <ul>
-            <li>
+            <li v-for="(item,index) in shops" :key="index">
                 <div class="pic">
-                <img alt="scoop" src="../../assets/wholefoods.png">
+                    <img alt="logo" v-bind:src="item.imagename">
                 </div>
-                <h1 class="title">Scoop Wholefoods</h1><br>
-                <button class="btn" v-on:click="isclick()">Shop</button>
-
-            </li>
-            <li>
-                <div class="pic">
-                <img alt="green collection" src="../../assets/greencollective.png">
-                </div>
-                <h1 class="title">The Green Collective SG</h1><br>
-            <button class="btn" v-on:click="isclick2()">Shop</button>
-            </li>
-            <li>
-                <div class="pic">
-                <img alt="eco.le" src="../../assets/eco.le.png">
-                </div>
-                <h1 class="title">Eco.Le</h1><br>
-                <button class="btn" v-on:click="isclick3()">Shop</button>
-
+                <h1 class="title">{{item.name}}</h1><br>
+                <button class="btn" v-on:click="isclick(item.imagename, item.name)">Shop</button>
             </li>
         </ul>
     </div>
@@ -46,46 +30,30 @@ export default {
         return {
             id: this.$route.query.id,
             imagename:'',
-            code:''
+            code:'',
+            shops: []
         }
     },
     methods: {
+        fetchItems: function() {
+            db.firestore().collection('shops').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    this.shops.push(doc.data())
+                });
+            }).catch(error => {console.log(error)
+                alert(error)})
+        },
         register: function() {
             this.$router.push({ name: 'registershop', query: {id: this.id}})
         },
-        isclick:function(){
-            db.firestore().collection('users').doc(this.id).update({
-                    greenshops:{
-                        imagename:"../../assets/wholefoods.png"
-                    }
-
-                })
-                this.imagename="../../assets/wholefoods.png"
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
+        isclick:function(image, name){
+            this.imagename = image
+            this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename, name:name}})
                 
         },
-        isclick2:function(){
-            db.firestore().collection('users').doc(this.id).update({
-                    greenshops:{
-                        imagename:"../../assets/greencollective.png"
-                    }
-
-                })
-                this.imagename="../../assets/greencollective.png"
-
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
-        },
-        isclick3:function(){
-            db.firestore().collection('users').doc(this.id).update({
-                    greenshops:{
-                        imagename:"../../assets/eco.le.png"
-                    }
-
-                })
-                this.imagename="../../assets/eco.le.png"
-                this.$router.push({name:'scoopcode',query:{id:this.id,imagename:this.imagename}})
-        }
-
+    },
+    created() {
+        this.fetchItems()
     }
 }
 </script>
@@ -103,25 +71,25 @@ export default {
         flex-wrap: wrap;
         list-style-type: none;
         padding: 0;
-        margin-left: 30px;
-        margin-right: 30px;
+        justify-content: center;
+        align-items: center;
     }
     li {
-        flex-grow: 1;
-        flex-basis: 300px;
+        flex-shrink: 1;
+        flex-basis: 20%;
         text-align: center;
         padding: 10px;
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 60vh;
+        min-height: 63vh;
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 30px;
-        height: 10%;
+        font-size: 26px;
+        height: 70px;
         margin-top: 10px
     }
     .btn {
@@ -134,31 +102,44 @@ export default {
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 35%;
+        width: 37%;
         height: 50px;
         text-align: center;
         cursor: pointer;
     
     }
     .pic {
-        height: 50%;
+        height: 230px;
         margin-top:5%;
-        margin-bottom: 2%
+        margin-bottom: 2%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    img {
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        margin-top: 10%;
+        margin-bottom: 20%
     }
     .top {
         justify-content: space-between;
         display: flex;
         margin-right: 100px;
         margin-top: -40%;
+        margin-bottom: 2%
     }
     .content {
         font-family: Montserrat;
         font-weight: bold;
         font-size: 30px;
-        margin-left: 50px;
+        margin-left: 5%;
     }
     .shops {
         margin-top: 10px;
+        align-items: center;
+        display: flex;
     }
 </style>
 

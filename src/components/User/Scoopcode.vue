@@ -3,8 +3,8 @@
         <Head v-bind:id="id"></Head>
         <div class="content">
             <div class="pic">
-                <img alt="scoop" src=this.imagename>
-               </div>
+                <img alt="scoop" v-bind:src="this.imagename">
+            </div>
             <p class="title">Insert this code stated to get points!</p><br>
             <input type="text" placeholder="Code" v-model="code" required><br>
             <button class="btn" v-on:click="direct()">OK</button>
@@ -43,7 +43,7 @@ export default{
     .content {
         background-color: #FFFFFF;
         margin-top: -37%;
-        margin-left: 37%;
+        margin-left: 33%;
         margin-right: 10%;
         height: 60%;
         width: 30%;

@@ -69,7 +69,7 @@ export default {
                                     db.firestore().collection('shops').add({
                                         name: this.name,
                                         email: email,
-                                        image: null
+                                        imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png"
                                     }).then((docRef) => {
                                         var id = docRef.id
                                         this.navigate(id) 

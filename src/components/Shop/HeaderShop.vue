@@ -8,7 +8,7 @@
             <ul>
                 <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>QR Code</router-link></li>
+                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Edit Information</router-link></li>
                 <li><router-link :to="{ name: 'signin', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
             </ul>
         </div>
