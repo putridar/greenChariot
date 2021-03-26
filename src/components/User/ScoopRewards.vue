@@ -9,21 +9,21 @@
         <ul>
           <div class="pic">
            <img alt="scoop" src="this.imagename">
-           <p class="title">$5 {{this.shopname}} Voucher</p><br>
+           <p class="title">$5 {{this.name}} Voucher</p><br>
            <p class="title2">500 points</p>
           </div>
         </ul>
         <ul>
           <div class="pic">
             <img alt="scoop" src="this.imagename">
-            <p class="title">$10 {{this.shopname}} Voucher</p><br>
+            <p class="title">$10 {{this.name}} Voucher</p><br>
             <p class="title2">1000 points</p>
           </div>
         </ul>
         <ul>
          <div class="pic">
             <img alt="scoop" src="this.imagename">
-            <p class="title">$15 {{this.shopname}} Voucher</p><br>
+            <p class="title">$15 {{this.name}} Voucher</p><br>
             <p class="title2">2000 points</p>
             
          </div>
@@ -43,8 +43,7 @@
          return{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
-            codeid:this.$route.query.codeid,
-            shopname:this.$route.query.shopname,
+            name:this.$route.query.name,
 
          }
      },
