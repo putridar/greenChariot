@@ -36,7 +36,7 @@
 </template>
 <script>
 import Head from './Header.vue'
-import db from '../firebase.js'
+import db from '../../firebase.js'
 export default {
     name: 'Greenshops',
     components :{
