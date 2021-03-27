@@ -6,7 +6,7 @@
         </div>
         <div class="rewards">
             <div class="pic">
-            <img alt="successful" v-bind:src="../../successful.png">
+            <img alt="successful" src="../../successful.png">
         </div>
         <div class="text">
             <p class="title">Hooray!</p><br><br>
@@ -18,18 +18,21 @@
 </template>
 
 <script>
- import Head from './Header.vue'
- import db from '../../firebase.js'
- export default{
-     data(){
-         return{
+import Head from './Header.vue'
+import db from '../../firebase.js'
+export default{
+    components: {
+        Head
+    },
+    data(){
+        return{
              id:this.$route.query.id,
              imagename:this.$route.query.imagename,
              name:this.$route.query.name,
              add_points:500
          }
-     },
-     methods:{
+    },
+    methods:{
          updatedpoints:function(){
              db.firestore().collection('users').doc(this.id).update({
                  points: this.retrieve+add_points
@@ -40,8 +43,8 @@
          direct:function(){
              this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,name:this.name}})
          }
-     }
- }
+    }
+}
 </script>
 
 <style scoped>
