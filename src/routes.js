@@ -17,6 +17,8 @@ import Scoopcode from './components/User/Scoopcode.vue'
 import registershop from './components/User/RegisterShop.vue'
 import DashboardShop from './components/Shop/DashboardShop.vue'
 import SignInShop from './components/User/SignInShop.vue'
+import ScoopRewards from './components/User/ScoopRewards.vue'
+import CongratPage from './components/User/congratpage.vue'
 
 
 
@@ -39,4 +41,6 @@ export default [
   { path: '/registershop', component: registershop, name: "registershop", props: true },
   { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
   { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
+  {path:'/scooprewards',component:ScoopRewards, name:'scooprewards',props:true},
+  {path:'/congratpage',component:CongratPage,name:'congratpage',props:true},
 ]
