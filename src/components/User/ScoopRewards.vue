@@ -2,7 +2,7 @@
  <div class="background">
      <Head v-bind:id="id"></Head>
      <div class="top">
-         Your points:{{retrieve()}}
+         <p class="content">Your points:{{retrieve()}}</p>
      </div>
      <div class="rewards">
        <ul>
@@ -48,9 +48,10 @@
             else{
             db.firestore().collection('users').doc(this.id).update({
                 points:this.retrieve()-item.point,
+                }).then(() => {
+                    this.currentvoucher.push(item)
+                    this.vouchers.splice(index,1)
                 })
-            this.currentvoucher.push(item)
-            vouchers.splice(index,1)
             }
         }
         
@@ -132,4 +133,14 @@
         cursor: pointer;
     
     }
+    .content {
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 35px;
+        margin-left: 5%;
+    }
+    .text{
+        float:right
+    }
+    
 </style>
