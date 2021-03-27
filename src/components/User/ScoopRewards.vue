@@ -5,30 +5,16 @@
          Your points:{{retrieve()}}
      </div>
      <div class="rewards">
-      <li>
-        <ul>
-          <div class="pic">
-           <img alt="scoop" src="this.imagename">
-           <p class="title">$5 {{this.name}} Voucher</p><br>
-           <p class="title2">500 points</p>
-          </div>
-        </ul>
-        <ul>
-          <div class="pic">
-            <img alt="scoop" src="this.imagename">
-            <p class="title">$10 {{this.name}} Voucher</p><br>
-            <p class="title2">1000 points</p>
-          </div>
-        </ul>
-        <ul>
-         <div class="pic">
-            <img alt="scoop" src="this.imagename">
-            <p class="title">$15 {{this.name}} Voucher</p><br>
-            <p class="title2">2000 points</p>
-            
-         </div>
-        </ul>
-      </li>
+       <ul>
+      <li v-for="(item,index) in vouchers" :key="index">
+              <div class="pic">
+            <img alt="shoplogo" src="this.imagename">
+            </div>
+            <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
+            <p class="title2">{{item.point}} points</p>
+            <button class="btn" v-on:click="onclick()"></button>
+          </li>
+      </ui>
      </div>
  </div>
 </template>
@@ -44,6 +30,8 @@
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
+            vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
+            currentvoucher:[]
 
          }
      },
@@ -52,7 +40,22 @@
              db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
                  return snapshot.data().points
          })
-     }
+     },
+        onclick:function(){
+            if (item.point<this.retrieve()){
+                alert("Insufficient points to exchange for voucher")
+            }
+            else{
+            db.firestore().collection('users').doc(this.id).update({
+                points:this.retrieve()-item.point,
+                })
+            this.currentvoucher.push(item)
+            vouchers.splice(index,1)
+            }
+        }
+        
+
+         
  }
 }
 </script>
@@ -112,5 +115,21 @@
         height: 45%;
         margin-top:5%;
         margin-bottom: 2%;
+    }
+    .btn {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 37%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
     }
 </style>
