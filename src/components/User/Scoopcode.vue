@@ -30,7 +30,7 @@ export default{
                 alert("You need to input a code!")
             }
         else{
-         this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
+         this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
         }
     }
 }

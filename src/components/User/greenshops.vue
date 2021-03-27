@@ -133,7 +133,7 @@ export default {
     .content {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 30px;
+        font-size: 35px;
         margin-left: 5%;
     }
     .shops {
