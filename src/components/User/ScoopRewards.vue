@@ -14,7 +14,7 @@
             <p class="title2">{{item.point}} points</p>
             <button class="btn" v-on:click="onclick()"></button>
           </li>
-      </ui>
+      </ul>
      </div>
  </div>
 </template>
