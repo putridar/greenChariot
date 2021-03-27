@@ -6,7 +6,7 @@
         </div>
         <div class="rewards">
             <div class="pic">
-            <img alt="successful" src="../../successful.png">
+            <img alt="successful" src="../../assets/successful.png">
         </div>
         <div class="text">
             <p class="title">Hooray!</p><br><br>
@@ -35,7 +35,7 @@ export default{
     methods:{
          updatedpoints:function(){
              db.firestore().collection('users').doc(this.id).update({
-                 points: this.retrieve+add_points
+                 points: this.retrieve + this.add_points
              }).get().then(snapshot => {
                  return snapshot.data().points
              })

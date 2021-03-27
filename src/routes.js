@@ -41,8 +41,8 @@ export default [
   { path: '/registershop', component: registershop, name: "registershop", props: true },
   { path: '/dashboardShop', component: DashboardShop, name: "dashboardShop", props: true },
   { path: '/signinShop', component: SignInShop, name: "signinShop", props: true },
-  {path:'/scooprewards',component:ScoopRewards, name:'scooprewards',props:true},
-  {path:'/congratpage',component:CongratPage,name:'congratpage',props:true},
+  { path:'/scooprewards',component:ScoopRewards, name:'scooprewards',props:true},
+  { path:'/congratpage',component:CongratPage,name:'congratpage',props:true},
   { path: '/shopinfo', component: ShopInfo, name: "shopinfo", props: true },
   { path: '/editinfo', component: EditInfo, name: "editinfo", props: true },
 ]

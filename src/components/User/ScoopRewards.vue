@@ -12,7 +12,7 @@
             </div>
             <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
             <p class="title2">{{item.point}} points</p>
-            <button class="btn" v-on:click="onclick()"></button>
+            <button class="btn" v-on:click="onclick(item,index)"></button>
           </li>
       </ul>
      </div>
@@ -41,7 +41,7 @@
                  return snapshot.data().points
          })
      },
-        onclick:function(){
+        onclick:function(item,index){
             if (item.point<this.retrieve()){
                 alert("Insufficient points to exchange for voucher")
             }

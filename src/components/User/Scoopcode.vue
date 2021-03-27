@@ -99,4 +99,7 @@ export default{
         border: 1px solid #E5E5E5;
         height: 10%
     }
+    img {
+        width:50%
+    }
 </style>
