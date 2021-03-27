@@ -3,6 +3,7 @@
         <Head v-bind:id="id"></Head>
         <label for = "imageLoader" class="ins">Screenshots (Make sure that your caption is visible)</label>
         <input type="file" id ="imageLoader" @change="updateCanvasImage"><br>
+        <p class = "ins"> If the page is unresponsive, please wait, do not refresh!</p>
         <!--<label for = "image" class = "ins">Upload Photo (the one that you post)</label>
         <input type="file" id = "image" @change="imageClassifier" />-->
         <div class ="left">
@@ -190,6 +191,39 @@ export default {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
             this.dataUrl = canvas.toDataURL();
             this.status = 'Loading, please wait!'
+            cocoSsd.load().then(model => {
+                this.model = model
+                model.detect(img).then((predictions) => {
+                    const font = "18px sans-serif";
+                    ctx.font = font;
+                    ctx.textBaseline = "top";
+                    var res = []
+                    predictions.forEach(prediction => {
+                        const x = prediction.bbox[0];
+                        const y = prediction.bbox[1];
+                        const width = prediction.bbox[2];
+                        const height = prediction.bbox[3];
+                        ctx.strokeStyle = "#00FFFF";
+                        ctx.lineWidth = 4;
+                        ctx.strokeRect(x, y, width, height);
+                        ctx.fillStyle = "#00FFFF";
+                        const textWidth = ctx.measureText(prediction.class).width;
+                        const textHeight = parseInt(font, 10);
+                        ctx.fillRect(x, y, textWidth + 4, textHeight + 4);
+                    });
+
+                    predictions.forEach(prediction => {
+                        const x = prediction.bbox[0];
+                        const y = prediction.bbox[1];
+                        ctx.fillStyle = "#000000";
+                        ctx.fillText(prediction.class, x, y);
+                        res.push(prediction.class)
+                    });
+                    console.log('Predictions: ');
+                    console.log(predictions);
+                    this.label = res;
+                })
+            });
             Tesseract.recognize(this.dataUrl, 'eng', {
                 logger: log => {
                 console.log(log);
@@ -200,43 +234,6 @@ export default {
                 this.status = ''
             })
             .catch(error => console.log(error))
-
-            cocoSsd.load().then(model => {
-                this.model = model
-                model.detect(img).then((predictions) => {
-                    const font = "16px sans-serif";
-                    ctx.font = font;
-                    ctx.textBaseline = "top";
-                    var res = []
-                    predictions.forEach(prediction => {
-                        const x = prediction.bbox[0];
-                        const y = prediction.bbox[1];
-                        const width = prediction.bbox[2];
-                        const height = prediction.bbox[3];
-                        // Draw the bounding box.
-                        ctx.strokeStyle = "#00FFFF";
-                        ctx.lineWidth = 4;
-                        ctx.strokeRect(x, y, width, height);
-                        // Draw the label background.
-                        ctx.fillStyle = "#00FFFF";
-                        const textWidth = ctx.measureText(prediction.class).width;
-                        const textHeight = parseInt(font, 10); // base 10
-                        ctx.fillRect(x, y, textWidth + 4, textHeight + 4);
-                    });
-
-                    predictions.forEach(prediction => {
-                        const x = prediction.bbox[0];
-                        const y = prediction.bbox[1];
-                        // Draw the text last to ensure it's on top.
-                        ctx.fillStyle = "#000000";
-                        ctx.fillText(prediction.class, x, y);
-                        res.push(prediction.class)
-                    });
-                    console.log('Predictions: ');
-                    console.log(predictions);
-                    this.label = res;
-                })
-            });
         },
         imageClassifier: function(e) {
             this.loading = true
@@ -277,14 +274,7 @@ export default {
     created() {
       this.fetchItems()    
     },
-    mounted() {
-        let externalScript = document.createElement('script')
-        externalScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js')
-        externalScript.setAttribute('src', 'https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js')
-        externalScript.setAttribute('src', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet')
-        externalScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/tensorflow/1.2.10/tf.min.js')
-        document.head.appendChild(externalScript)
-    },
+    
 }
 </script>
 
