@@ -19,8 +19,8 @@
 
 <script>
 import Head from './Header.vue'
-import db from "../firebase.js"
-import PieChart from './Charts/PieChart.vue'
+import db from "../../firebase.js"
+import PieChart from '../Charts/PieChart.vue'
 
 
 export default {
