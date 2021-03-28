@@ -1,10 +1,16 @@
 <template>
     <div class = "bg">
         <Head v-bind:id="id"></Head>
-        <img alt="greenChariot" src="../assets/survey.png">
+        <div class="piechart" >
+            <div class="col">
+                <PieChart class="piechart"></PieChart>
+            </div>
+            <div class="col" >
+                <p class="txt">Highest emission is Food </p>
+            </div>
+        </div>
         <div class = "content">
             <p class = "title">Dashboard</p>
-            <button class = "next" v-on:click="SurveySubmit2()">Next</button>
             <p class = "txt"> Page 3 / 4 </p>
             <p class = "txt"> Accurate data helps us predict better :) </p>
         </div>
@@ -14,11 +20,13 @@
 <script>
 import Head from './Header.vue'
 import db from "../firebase.js"
+import PieChart from './Charts/PieChart.vue'
+
 
 export default {
     name: 'Header',
     components :{
-        Head
+        Head, PieChart
     },
     data() {
         return {
@@ -55,13 +63,6 @@ export default {
         width: 100%;
         min-height: 110vh;
     }
-    img {
-        float: left;
-        width: 45%;
-        justify-content: center;
-        margin-left: -40%;
-        margin-top: 5%;
-    }
     .content {
         background-color: #FFFFFF;
         margin-top: 7%;
@@ -85,82 +86,6 @@ export default {
         color: #1C746F;
         margin: 0px;
     }
-    .ins{
-        font-family: Montserrat;
-        padding: 5px;
-        width: 90%;
-        margin: 1%;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #E5E5E5;
-        height: 10%;
-    }
-    input[type="checkbox"]{
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 22px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    .ranger {
-        -webkit-appearance: none;
-        width: 90%;
-        height: 25px;
-        background: #e4e2e2;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-        border-radius: 12px;
-    }
-    .ranger:hover {
-        opacity: 1;
-    }
-    .ranger::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background:#2D8F8A;
-        cursor: pointer;
-    }
-    .food{
-        font-family: Montserrat;
-        padding: 5px;
-        width: 25%;
-        margin: 1%;
-        margin-right: 5%;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #E5E5E5;
-        height: 10%;
-        display: inline-block;
-    }
-    ::placeholder {
-        color: rgb(0, 0, 0);
-        opacity: 0.45;
-        font-size: 14px;
-    }
-    .next {
-        background: #2D8F8A;
-        border-radius: 8px;
-        border: #2D8F8A;
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 30px;
-        line-height: 44px;
-        text-align: center;
-        color: #FFFFFF;
-        width: 80%;
-        height: 60px;
-        margin: 3%;
-        cursor: pointer;
-    }
     .txt {
         font-family: Montserrat;
         color: #1C746F;
@@ -168,15 +93,23 @@ export default {
         font-size: 16px;
         margin: 5px;
     }
-    .txt1 {
-        font-family: Montserrat;
-        color: #1C746F;
-        text-align: left;
-        font-size: 16px;
-        font-weight: 500;
-        margin-top: 1%;
-        margin-left: 4%;
+    .piechart {
+        background-color: #FFFFFF;
+        display: flex;
+        margin-top: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+        height: 100%;
+        width: 45%;
+        align-items: center;
+        border-radius: 8px;
+        padding: 10px
     }
-    
-    
+    .col {
+        flex: 50%;
+        padding: 10px;
+        height: auto; 
+        align-items: center;
+    }
+
 </style>
