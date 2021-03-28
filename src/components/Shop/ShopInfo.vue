@@ -3,18 +3,22 @@
         <Head v-bind:id="id"></Head>
         <div class="content">
             <div class="pic">
-                <img alt="scoop" v-bind:src="this.image">
-                <p class = "title">{{this.name}}</p>
+                <div class="hg">
+                    <img alt="scoop" v-bind:src="this.image">
+                    <p class = "title">{{this.name}}</p>
+                </div>
                 <button class="btn" v-on:click="editimage()">Edit Image</button>
             </div>
             <div class = "txt">
-                <p class="title">Description</p>
-                <p class="item">{{this.desc}}</p><br>
-                <p class="title">Address</p>
-                <p class="item">{{this.address}}</p><br>
-                <p class="title">Shop's Unique Code</p>
-                <p class="item">{{this.code}}</p><br>
-                <button class="btn" v-on:click="edit()">Edit</button>
+                <div class="hg1">
+                    <p class="title">Description</p>
+                    <p class="item">{{this.desc}}</p><br>
+                    <p class="title">Address</p>
+                    <p class="item">{{this.address}}</p><br>
+                    <p class="title">Shop's Unique Code</p>
+                    <p class="item">{{this.code}}</p><br>
+                </div>
+                <button class="btn" v-on:click="edit()">Edit Info</button>
             </div>
         </div>
     </div>
@@ -114,7 +118,8 @@ export default {
         width: 40%;
         height: 50px;
         text-align: center;
-        margin: 2%;
+        margin-left: 25%;
+        margin-right: 25%;
         cursor: pointer;
     }
     .pic {
@@ -128,6 +133,15 @@ export default {
     .txt {
         margin-top:7%;
         margin-bottom: 2%;
-        height: 60%
+        height: 60%;
+        margin-left: 40%;
+    }
+    .hg {
+        height:120%;
+    }
+    .hg1 {
+        height: 100%;
+        align-items: center;
+        margin-top:15%
     }
 </style>

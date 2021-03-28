@@ -126,7 +126,8 @@ export default {
         width: 20%;
         height: 50px;
         text-align: center;
-        margin: 3%;
+        margin-left: 15%;
+        margin-right: 15%;
         margin-top: 2%;
         cursor: pointer;
     }
