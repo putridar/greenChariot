@@ -13,6 +13,7 @@
 </template>
 <script>
 import Head from './Header.vue'
+import db from '../../firebase.js'
 export default{
     components:{
         Head
@@ -21,19 +22,31 @@ export default{
         return{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
-            name:this.$route.query.name
+            name:this.$route.query.name,
+            storecode:''
         }
     },
     methods:{
+        fetchCode: function() {
+            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
+                this.storecode=snapshot.data().code
+            }).catch(error => {console.log(error)
+                alert(error)})
+        },
         direct:function(){
             if (document.getElementById("codes").value.length==0){
                 alert("You need to input a code!")
+            } else if (document.getElementById("codes").value!==this.storecode){
+                alert("Code is invalid!")
             }
-        else{
-         this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
-        }
+            else{
+                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname,code:this.storecode}})
+            }
+        }   
+    },
+    created() {
+        this.fetchCode()
     }
-}
 }
 </script>
 

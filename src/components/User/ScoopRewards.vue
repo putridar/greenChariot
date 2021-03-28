@@ -7,8 +7,8 @@
      <div class="rewards">
        <ul>
       <li v-for="(item,index) in vouchers" :key="index">
-              <div class="pic">
-            <img alt="shoplogo" src="this.imagename">
+            <div class="pic">
+                <img alt="shoplogo" src="this.imagename">
             </div>
             <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
             <p class="title2">{{item.point}} points</p>
