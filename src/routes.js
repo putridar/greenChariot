@@ -21,6 +21,7 @@ import ScoopRewards from './components/User/ScoopRewards.vue'
 import CongratPage from './components/User/congratpage.vue'
 import ShopInfo from './components/Shop/ShopInfo.vue'
 import EditInfo from './components/Shop/EditInfo.vue'
+import EditImage from './components/Shop/EditImage.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -45,4 +46,5 @@ export default [
   { path:'/congratpage',component:CongratPage,name:'congratpage',props:true},
   { path: '/shopinfo', component: ShopInfo, name: "shopinfo", props: true },
   { path: '/editinfo', component: EditInfo, name: "editinfo", props: true },
+  { path: '/editimage', component: EditImage, name: "editimage", props: true },
 ]
