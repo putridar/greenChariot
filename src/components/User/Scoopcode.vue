@@ -23,7 +23,8 @@ export default{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
-            storecode:''
+            storecode:'',
+            redeemed:[]        
         }
     },
     methods:{
@@ -33,18 +34,34 @@ export default{
             }).catch(error => {console.log(error)
                 alert(error)})
         },
+        fetchRedeemed: function() {
+            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
+                this.redeemed.push(snapshot.data().redeemed)
+            }).catch(error => {console.log(error)
+                alert(error)})
+        },
+        updateRedeemed: function() {
+            db.firestore().collection('codes').doc(this.name).update({
+                redeemed: this.redeemed,
+            })
+        },
         direct:function(){
             if (document.getElementById("codes").value.length==0){
                 alert("You need to input a code!")
             } else if (document.getElementById("codes").value!==this.storecode){
                 alert("Code is invalid!")
-            } else{
-                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname,code:this.storecode}})
+            } else if (this.redeemed.includes(this.id)){
+                alert("You have already redeemed this code!")
+            } else {
+                this.redeemed.push(this.id)
+                this.updateRedeemed();
+                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
             }
         }   
     },
     created() {
-        this.fetchCode()
+        this.fetchCode();
+        this.fetchRedeemed();
     }
 }
 </script>

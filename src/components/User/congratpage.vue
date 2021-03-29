@@ -2,7 +2,7 @@
     <div class="background">
         <Head v-bind:id="id"></Head>
         <div class="top">
-            <p class="content">Your points:{{updatedpoints()}}</p>
+            <p class="content">Your points:{{this.new_points}}</p>
         </div>
         <div class="rewards">
             <div class="pic">
@@ -29,20 +29,28 @@ export default{
              id:this.$route.query.id,
              imagename:this.$route.query.imagename,
              name:this.$route.query.name,
-             add_points:500
+             new_points:500+this.old_points,
+             old_points:0
          }
     },
     methods:{
-         updatedpoints:function(){
+        fetchPoints() {
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                this.old_points=snapshot.data().points
+            })             
+        },
+        updatedpoints:function(){
              db.firestore().collection('users').doc(this.id).update({
-                 points: this.retrieve + this.add_points
-             }).get().then(snapshot => {
-                 return snapshot.data().points
+                 points: this.new_points,
              })
-         },
-         direct:function(){
+        },
+        direct:function(){
              this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,name:this.name}})
          }
+    },
+    created() {
+        this.fetchPoints();
+        this.updatepoints()
     }
 }
 </script>
