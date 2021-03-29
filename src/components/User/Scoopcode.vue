@@ -28,7 +28,7 @@ export default{
     },
     methods:{
         fetchCode: function() {
-            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
+            db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
                 this.storecode=snapshot.data().code
             }).catch(error => {console.log(error)
                 alert(error)})
@@ -38,8 +38,7 @@ export default{
                 alert("You need to input a code!")
             } else if (document.getElementById("codes").value!==this.storecode){
                 alert("Code is invalid!")
-            }
-            else{
+            } else{
                 this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname,code:this.storecode}})
             }
         }   

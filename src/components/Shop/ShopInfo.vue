@@ -3,15 +3,22 @@
         <Head v-bind:id="id"></Head>
         <div class="content">
             <div class="pic">
-                <img alt="scoop" v-bind:src="this.image">
-                <p class = "title">{{this.name}}</p>
+                <div class="hg">
+                    <img alt="scoop" v-bind:src="this.image">
+                    <p class = "title">{{this.name}}</p>
+                </div>
+                <button class="btn" v-on:click="editimage()">Edit Image</button>
             </div>
             <div class = "txt">
-                <p class="title">Description</p><br>
-                <p class="item">{{this.desc}}</p><br>
-                <p class="title">Shop's Unique Code</p><br>
-                <p class="item">{{this.code}}</p><br>
-                <button class="btn" v-on:click="edit()">Edit</button>
+                <div class="hg1">
+                    <p class="title">Description</p>
+                    <p class="item">{{this.desc}}</p><br>
+                    <p class="title">Address</p>
+                    <p class="item">{{this.address}}</p><br>
+                    <p class="title">Shop's Unique Code</p>
+                    <p class="item">{{this.code}}</p><br>
+                </div>
+                <button class="btn" v-on:click="edit()">Edit Info</button>
             </div>
         </div>
     </div>
@@ -31,21 +38,30 @@ export default {
             image: null,
             desc: '',
             name: '',
-            code: ''
+            code: '',
+            address: ''
         }
     },
     methods: {
         fetchItems: function() {
             db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
                 var item = snapshot.data()
-                this.image = item.imagename
-                this.desc = item.desc == undefined ? "No Description" : item.desc
-                this.name = item.name
-                this.code = item.code == undefined ? "No code specified" : item.code.slice(0,4) + 'x'.repeat(item.code.length - 4)
+                this.update(item)
             })
+        },
+        update: function(item) {
+            this.image = item.imagename
+            this.desc = item.desc == undefined ? "No Description" : item.desc
+            this.name = item.name
+            this.address = item.address == undefined ? "No Address" : item.address
+            this.code = item.code == undefined ? "No code specified" : item.code.slice(0,4) + 'x'.repeat(item.code.length - 4)
+            console.log(item.code)
         },
         edit: function(){
             this.$router.push({ name: 'editinfo', query: {id: this.id}})
+        },
+        editimage: function(){
+            this.$router.push({ name: 'editimage', query: {id: this.id}})
         }
     },
     created() {
@@ -61,7 +77,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 120vh;
     }
     .content {
         font-family: Montserrat;
@@ -72,19 +88,20 @@ export default {
         width: 70%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 550px;
+        height: 600px;
         padding: 3px
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 30px;
+        font-size: 28px;
     }
     .item {
         font-family: Montserrat;
         font-size: 22px;
         text-align: left;
+        width: 90%
     }
     img {
         width: 70%;
@@ -101,7 +118,8 @@ export default {
         width: 40%;
         height: 50px;
         text-align: center;
-        margin: 2%;
+        margin-left: 25%;
+        margin-right: 25%;
         cursor: pointer;
     }
     .pic {
@@ -115,6 +133,15 @@ export default {
     .txt {
         margin-top:7%;
         margin-bottom: 2%;
-        height: 60%
+        height: 60%;
+        margin-left: 40%;
+    }
+    .hg {
+        height:120%;
+    }
+    .hg1 {
+        height: 100%;
+        align-items: center;
+        margin-top:15%
     }
 </style>
