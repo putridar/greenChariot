@@ -1,39 +1,38 @@
 <template>
  <div class="background">
-     <Head v-bind:id="id"></Head>
-     <div class="top">
-         <p class="content">Your points:{{retrieve()}}</p>
-     </div>
-     <div class="rewards">
-       <ul>
-      <li v-for="(item,index) in vouchers" :key="index">
+    <Head v-bind:id="id"></Head>
+    <div class="top">
+        <p class="content">Your points:{{retrieve()}}</p>
+    </div>
+    <div class="rewards">
+        <ul>
+        <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">
-                <img alt="shoplogo" src="this.imagename">
+                <img src="this.imagename">
             </div>
-            <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
-            <p class="title2">{{item.point}} points</p>
+            <p class="title">{{item.price}} Voucher</p><br>
+            <p class="title2">{{item.point}} points </p>
             <button class="btn" v-on:click="onclick(item,index)"></button>
-          </li>
-      </ul>
-     </div>
- </div>
+        </li>
+    </ul>
+    </div>
+</div>
 </template>
 <script>
- import Head from './Header.vue'
- import db from '../../firebase.js'
+import Head from './Header.vue'
+import db from '../../firebase.js'
  export default{
      components:{
-         Head
+        Head
      },
-     data(){
-         return{
+    data(){
+        return{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
             currentvoucher:[]
-
-         }
+        }
      },
      methods:{
          retrieve:function(){
@@ -53,11 +52,8 @@
                     this.vouchers.splice(index,1)
                 })
             }
-        }
-        
-
-         
- }
+        }  
+    }
 }
 </script>
 <style scoped>

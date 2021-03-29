@@ -6,7 +6,7 @@
                 <img alt="scoop" v-bind:src="this.imagename">
             </div>
             <p class="title">Insert this code stated to get points!</p><br>
-            <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
+            <input type="text" id="codes" placeholder="Code"  ><br>
             <button class="btn" v-on:click="direct()">OK</button>
         </div>
     </div>
@@ -25,19 +25,14 @@ export default{
             name:this.$route.query.name,
             storecode:'',
             redeemed:[],
-            points:0
+            oldpoints:0,
         }
     },
     methods:{
         fetchPoints: function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                this.points=snapshot.data().points
-            })
-            this.points=this.points+500     
-        },
-        updatedpoints:function(){
-            db.firestore().collection('users').doc(this.id).update({
-                points: this.points,
+                this.oldpoints=snapshot.data().points
+                this.newpoints=snapshot.data().points+500 
             })
         },
         fetchItems: function() {
@@ -45,6 +40,7 @@ export default{
                 this.storecode=snapshot.data().code
                 this.redeemed=snapshot.data().redeemed
             })
+            this.fetchPoints();
         },
         updateRedeemed: function() {
             db.firestore().collection('codes').doc(this.name).update({
@@ -61,15 +57,13 @@ export default{
             } else {
                 this.redeemed.push(this.id)
                 this.updateRedeemed();
-                this.fetchPoints();
-                this.updatedpoints();
-                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname,points:this.points}})
+                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,name:this.name,oldpoints:this.oldpoints}})
             }
         }   
     },
     created() {
         this.fetchItems();
-    }
+    },
 }
 </script>
 
