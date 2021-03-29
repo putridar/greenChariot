@@ -28,7 +28,7 @@ export default{
     },
     methods:{
         fetchCode: function() {
-            db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
+            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
                 this.storecode=snapshot.data().code
             }).catch(error => {console.log(error)
                 alert(error)})
