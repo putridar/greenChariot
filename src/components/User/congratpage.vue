@@ -2,7 +2,7 @@
     <div class="background">
         <Head v-bind:id="id"></Head>
         <div class="top">
-            <p class="content">Your points:{{this.new_points}}</p>
+            <p class="content">Your points: {{this.points}}</p>
         </div>
         <div class="rewards">
             <div class="pic">
@@ -19,37 +19,25 @@
 
 <script>
 import Head from './Header.vue'
-import db from '../../firebase.js'
+
 export default{
     components: {
         Head
     },
     data(){
         return{
-             id:this.$route.query.id,
-             imagename:this.$route.query.imagename,
-             name:this.$route.query.name,
-             new_points:500+this.old_points,
-             old_points:0
+            id:this.$route.query.id,
+            imagename:this.$route.query.imagename,
+            name:this.$route.query.name,
+            points:this.$route.query.points,
          }
     },
     methods:{
-        fetchPoints() {
-            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                this.old_points=snapshot.data().points
-            })             
-        },
-        updatedpoints:function(){
-             db.firestore().collection('users').doc(this.id).update({
-                 points: this.new_points,
-             })
-        },
         direct:function(){
-             this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,name:this.name}})
+            this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,name:this.name}})
          }
     },
     created() {
-        this.fetchPoints();
         this.updatepoints()
     }
 }

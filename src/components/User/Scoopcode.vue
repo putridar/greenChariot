@@ -24,21 +24,27 @@ export default{
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             storecode:'',
-            redeemed:[]        
+            redeemed:[],
+            points:0
         }
     },
     methods:{
-        fetchCode: function() {
+        fetchPoints: function() {
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                this.points=snapshot.data().points
+            })
+            this.points=this.points+500     
+        },
+        updatedpoints:function(){
+            db.firestore().collection('users').doc(this.id).update({
+                points: this.points,
+            })
+        },
+        fetchItems: function() {
             db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
                 this.storecode=snapshot.data().code
-            }).catch(error => {console.log(error)
-                alert(error)})
-        },
-        fetchRedeemed: function() {
-            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
-                this.redeemed.push(snapshot.data().redeemed)
-            }).catch(error => {console.log(error)
-                alert(error)})
+                this.redeemed=snapshot.data().redeemed
+            })
         },
         updateRedeemed: function() {
             db.firestore().collection('codes').doc(this.name).update({
@@ -55,13 +61,14 @@ export default{
             } else {
                 this.redeemed.push(this.id)
                 this.updateRedeemed();
-                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname}})
+                this.fetchPoints();
+                this.updatedpoints();
+                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,shopname:this.shopname,points:this.points}})
             }
         }   
     },
     created() {
-        this.fetchCode();
-        this.fetchRedeemed();
+        this.fetchItems();
     }
 }
 </script>
