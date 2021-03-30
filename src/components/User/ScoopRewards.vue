@@ -41,7 +41,7 @@ import db from '../../firebase.js'
          })
      },
         onclick:function(item,index){
-            if (item.point<this.retrieve()){
+            if (item.point>this.retrieve()){
                 alert("Insufficient points to exchange for voucher")
             }
             else{
