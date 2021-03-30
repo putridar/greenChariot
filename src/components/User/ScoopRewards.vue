@@ -2,17 +2,17 @@
  <div class="background">
     <Head v-bind:id="id"></Head>
     <div class="top">
-        <p class="content">Your points:{{retrieve()}}</p>
+        <p class="content">Your points:{{this.retrieve()}}</p>
     </div>
     <div class="rewards">
         <ul>
         <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">
-                <img alt = "shoplogo" src="this.imagename">
+                <img alt = "shoplogo" v-bind:src="this.imagename">
             </div>
             <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
             <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item,index)"></button>
+            <button class="btn" v-on:click="onclick(item,index)">Redeem</button>
         </li>
     </ul>
     </div>
@@ -21,7 +21,7 @@
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
- export default{
+export default{
      components:{
         Head
      },
@@ -31,7 +31,7 @@ import db from '../../firebase.js'
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
-            currentvoucher:[]
+            currentvoucher:{},
         }
      },
      methods:{
@@ -48,11 +48,13 @@ import db from '../../firebase.js'
             db.firestore().collection('users').doc(this.id).update({
                 points:this.retrieve()-item.point,
                 }).then(() => {
-                    this.currentvoucher.push(item)
+                    item["name"]=this.name
+                    this.currentvoucher=item
                     this.vouchers.splice(index,1)
+                    this.$router.push({name:"voucherverify",query:{id:this.id,imagename:this.imagename,name:this.name,currentvoucher:this.currentvoucher}})
                 })
             }
-        }  
+        }, 
     }
 }
 </script>

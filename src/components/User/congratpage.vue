@@ -9,6 +9,9 @@
             <div class="pic">
             <img alt="successful" src="../../assets/successful.png">
         </div>
+        <br>
+        <br>
+        <br><br>
         <div class="text">
             <p class="title">Hooray!</p><br><br>
             <p class="title2">You get 500 points!</p><br><br><br>
@@ -70,7 +73,7 @@ export default{
     .top {
         justify-content: space-between;
         display: flex;
-        margin-right: 100px;
+        margin-right: 50px;
         margin-top: -40%;
     }
     .rewards {
@@ -84,17 +87,18 @@ export default{
     }
     .text{
         float:right;
+        margin-right:55px
     }
     .title {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 45px;
+        font-size: 60px;
         margin-left: 5%;
     }
     .title2 {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 35px;
+        font-size: 40px;
         margin-left: 5%;
     }
     .btn {
