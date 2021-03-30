@@ -1,23 +1,6 @@
 <template>
     <div class="background">
         <Head v-bind:id="id"></Head>
-<<<<<<< HEAD
-        <div class="top">
-            <p class="content">Your new points: {{this.newpoints}}</p>
-            <p class="content">Your old points: {{this.oldpoints}}</p>
-        </div>
-        <div class="rewards">
-            <div class="pic">
-            <img alt="successful" src="../../assets/successful.png">
-        </div>
-        <br>
-        <br>
-        <br><br>
-        <div class="text">
-            <p class="title">Hooray!</p><br><br>
-            <p class="title2">You get 500 points!</p><br><br><br>
-            <button class="btn" v-on:click="direct()">Rewards</button>
-=======
         <div class = "item">
             <div class="rewards">
                 <img alt="successful" src="../../assets/successful.png">
@@ -29,7 +12,6 @@
                 <p class="txt">Your old points: {{this.oldpoints}}</p>
                 <button class="btn" v-on:click="direct()">Rewards</button>
             </div>
->>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
         </div>
     </div>
 </template>
@@ -75,48 +57,24 @@ export default{
         float:left;
         animation: zoomIn ease 1s
     }
-<<<<<<< HEAD
-    .top {
-        justify-content: space-between;
-        display: flex;
-        margin-right: 50px;
-        margin-top: -40%;
-    }
-    .rewards {
-        margin-top: 10px;
-=======
     @keyframes zoomIn {
         0% {
             transform: scale(0.2,0.2)
         }
         100% {transform: scale(1,1)}
->>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .title {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-<<<<<<< HEAD
-        font-size: 35px;
-        margin-left: 5%;
-    }
-    .text{
-        float:right;
-        margin-right:55px
-=======
         font-size: 30px;
         margin: 10px;
         padding:10px
->>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .zoom {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-<<<<<<< HEAD
-        font-size: 60px;
-        margin-left: 5%;
-=======
         font-size: 64px;
         margin: 10px;
         margin-bottom: 0px;
@@ -141,22 +99,16 @@ export default{
         text-align: center;
         border-radius: 8px;
         padding: 10px;
->>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .title2 {
         font-family: Montserrat;
         font-weight: bold;
-<<<<<<< HEAD
-        font-size: 40px;
-        margin-left: 5%;
-=======
         font-size: 48px;
     }
     .txt {
         font-family: Montserrat;
         font-size: 30px;
         margin-top: 20px;
->>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .btn {
         background: #2D8F8A;
