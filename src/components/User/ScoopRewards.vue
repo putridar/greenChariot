@@ -2,7 +2,7 @@
  <div class="background">
     <Head v-bind:id="id"></Head>
     <div class="top">
-        <p class="content">Your points:{{this.retrieve()}}</p>
+        <p class="content">Your points: {{this.score}}</p>
     </div>
     <div class="rewards">
         <ul>
@@ -32,7 +32,8 @@ export default{
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
             currentvoucher:[],
             imagename: null,
-            shopId: this.$route.query.shopId
+            shopId: this.$route.query.shopId,
+            score:0
         }
      },
     methods:{
@@ -44,25 +45,26 @@ export default{
         },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
-                 return snapshot.data().points      
+                 this.score=snapshot.data().points      
             })
         
      },
         onclick:function(item,index){
-            if (item.point>this.retrieve()){
+            if (item.point>this.score){
                 alert("Insufficient points to exchange for voucher")
             }
             else{
             db.firestore().collection('users').doc(this.id).update({
-                points:this.retrieve()-item.point,
+                points:this.score-item.point
                 }).then(() => {
-                    item["name"]=this.name
-                    this.currentvoucher=item
                     this.vouchers.splice(index,1)
                     this.$router.push({name:"voucherverify",query:{id:this.id,imagename:this.imagename,name:this.name,currentvoucher:this.currentvoucher}})
                 })
             }
         }  
+    },
+    created(){
+        this.retrieve()
     },
     mounted() {
         this.fetchItems()

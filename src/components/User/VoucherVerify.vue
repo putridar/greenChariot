@@ -33,17 +33,21 @@ export default{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
             name:this.$route.query.name,
-            currentvoucher:this.$route.query.currentvoucher
+            currentvoucher:this.$route.query.currentvoucher,
+            score:0
         }
 
     },
     methods:{
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                return snapshot.data().points
+                this.score=snapshot.data().points
             })
         },
         
+    },
+    created(){
+        this.retrieve()
     }
 }
 </script>
