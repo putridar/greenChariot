@@ -28,7 +28,6 @@ import db from '../../firebase.js'
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
             currentvoucher:[]

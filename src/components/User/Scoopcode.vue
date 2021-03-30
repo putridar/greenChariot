@@ -6,7 +6,7 @@
                 <img alt="scoop" v-bind:src="this.imagename">
             </div>
             <p class="title">Insert this code stated to get points!</p><br>
-            <input type="text" id="codes" placeholder="Code"  ><br>
+            <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
             <button class="btn" v-on:click="direct()">OK</button>
         </div>
     </div>
@@ -21,43 +21,65 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename,
+            imagename:null,
             name:this.$route.query.name,
             storecode:'',
             redeemed:[],
             oldpoints:0,
+            vouchers: [],
+            code: '',
+            shops: [],
+            shopId: ''
         }
     },
     methods:{
         fetchPoints: function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                this.oldpoints=snapshot.data().points
-                this.newpoints=snapshot.data().points+500 
+                this.oldpoints = snapshot.data().points
             })
         },
         fetchItems: function() {
-            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
-                this.storecode=snapshot.data().code
-                this.redeemed=snapshot.data().redeemed
+            db.firestore().collection('shops').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var item = doc.data()
+                    if (item.name == this.name) {
+                        this.shopId = doc.id
+                        db.firestore().collection('shops').doc(doc.id).get().then(snapshot => {
+                            var item = snapshot.data()
+                            this.redeemed = item.redeemed == undefined ? [] : item.redeemed
+                            this.storecode = item.code
+                            this.imagename = item.imagename
+                        })
+                    }
+                });
             })
             this.fetchPoints();
         },
-        updateRedeemed: function() {
-            db.firestore().collection('codes').doc(this.name).update({
-                redeemed: this.redeemed,
+        updateRedeemed: function(id, redeemed) {
+            db.firestore().collection('shops').doc(id).update({
+                redeemed: redeemed,
+            })
+            db.firestore().collection('users').doc(this.id).update({
+                points: this.oldpoints + 500,
             })
         },
         direct:function(){
-            if (document.getElementById("codes").value.length==0){
+            var d = new Date();
+            if (d.getDay() == 0) {
+                this.redeemed = []
+            }
+            console.log(this.storecode)
+            console.log(this.code)
+            if (this.code.length == 0){
                 alert("You need to input a code!")
-            } else if (document.getElementById("codes").value!==this.storecode){
+            } else if (this.code !== this.storecode){
                 alert("Code is invalid!")
             } else if (this.redeemed.includes(this.id)){
                 alert("You have already redeemed this code!")
             } else {
                 this.redeemed.push(this.id)
-                this.updateRedeemed();
-                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,name:this.name,oldpoints:this.oldpoints}})
+                this.updateRedeemed(this.shopId, this.redeemed);
+                this.$router.push({name:'congratpage',query:{id:this.id,name:this.name,oldpoints:this.oldpoints}})
             }
         }   
     },
@@ -74,11 +96,11 @@ export default{
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 120vh;
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: -37%;
+        margin-top: -48%;
         margin-left: 33%;
         margin-right: 10%;
         height: 60%;

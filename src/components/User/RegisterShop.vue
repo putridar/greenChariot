@@ -81,7 +81,9 @@ export default {
                                         imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png",
                                         address: this.address,
                                         code: this.code,
-                                        desc: this.desc
+                                        desc: this.desc,
+                                        vouchers: [],
+                                        redeemed: []
                                     }).then((docRef) => {
                                         var id = docRef.id
                                         this.navigate(id) 
