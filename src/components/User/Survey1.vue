@@ -5,7 +5,7 @@
         <div class = "content">
             <p class = "title">Food Intake Proportion</p>
             <div class="slider" v-for="option, index in Sliders" :key="index">
-                <p class="txt1">{{name[index]}}</p>
+                <p class="txt1">{{name[index]}} %</p>
                 <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
                 <input class="ranger" type="range" :id="'slider'+index" :min=0 :max=100 v-model.number="Sliders[index]"  @input="changeSlider(index)" step="0.01">
             </div>
@@ -206,7 +206,7 @@ export default {
         margin-top: 1%;
         margin-left: 4%;
         margin-right: 20%;
-        width: 40%;
+        width: 43%;
         display: inline-block;
     }
     
