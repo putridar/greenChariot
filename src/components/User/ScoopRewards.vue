@@ -8,9 +8,9 @@
         <ul>
         <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">
-                <img src="this.imagename">
+                <img alt = "shoplogo" src="this.imagename">
             </div>
-            <p class="title">{{item.price}} Voucher</p><br>
+            <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
             <p class="title2">{{item.point}} points </p>
             <button class="btn" v-on:click="onclick(item,index)"></button>
         </li>
