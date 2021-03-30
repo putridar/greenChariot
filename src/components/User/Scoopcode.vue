@@ -49,6 +49,7 @@ export default{
                             this.redeemed = item.redeemed == undefined ? [] : item.redeemed
                             this.storecode = item.code
                             this.imagename = item.imagename
+                            this.day = item.day == undefined ? null : item.day
                         })
                     }
                 });
@@ -65,11 +66,9 @@ export default{
         },
         direct:function(){
             var d = new Date();
-            if (d.getDay() == 0) {
+            if (d.getDay() != this.day || this.day == null) {
                 this.redeemed = []
             }
-            console.log(this.storecode)
-            console.log(this.code)
             if (this.code.length == 0){
                 alert("You need to input a code!")
             } else if (this.code !== this.storecode){
@@ -79,11 +78,11 @@ export default{
             } else {
                 this.redeemed.push(this.id)
                 this.updateRedeemed(this.shopId, this.redeemed);
-                this.$router.push({name:'congratpage',query:{id:this.id,name:this.name,oldpoints:this.oldpoints}})
+                this.$router.push({name:'congratpage',query:{id:this.id,name:this.name,oldpoints:this.oldpoints,shopId: this.shopId}})
             }
         }   
     },
-    created() {
+    mounted() {
         this.fetchItems();
     },
 }

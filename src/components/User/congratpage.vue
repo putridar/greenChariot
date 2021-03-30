@@ -28,12 +28,13 @@ export default{
             id:this.$route.query.id,
             name:this.$route.query.name,
             oldpoints:this.$route.query.oldpoints,
-            newpoints:this.$route.query.oldpoints + 500,
+            newpoints:Number(this.$route.query.oldpoints) + 500,
+            shopId: this.$route.query.shopId
         }
     },
     methods:{
         direct:function(){
-            this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name}})
+            this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
         }
     },
 }

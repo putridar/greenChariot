@@ -11,6 +11,8 @@
                     <p class = "txt"> {{this.desc}}</p>
                     <p class = "txt2">Address</p>
                     <p class = "txt"> {{this.address}}</p>
+                    <p class = "txt2">Today's Code</p>
+                    <p class = "txt"> {{this.code}}</p>
                     <button class="btn" v-on:click="edit()"> Edit Info</button>
                 </div>
             </div>
@@ -36,7 +38,9 @@ export default {
             image: null,
             name: '',
             desc: '',
-            address: ''
+            address: '',
+            day: null,
+            code: ''
         }
     },
     methods: {
@@ -47,11 +51,34 @@ export default {
                 this.name = item.name
                 this.desc = item.desc
                 this.address = item.address
+                this.day = item.day == undefined ? null : item.day
+                this.randomCode(item.code, item.day)
             })
         },
         edit: function() {
             this.$router.push({ name: 'shopinfo', query: {id: this.id}})
-        }  
+        }  ,
+        randomCode: function(code, currday) {
+            var d = new Date();
+            var day = d.getDay();
+            if (currday == null || day != currday) {
+                var result = '';
+                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                for (let x = 0; x < 8; x++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                this.code = result
+                this.day = day
+                db.firestore().collection('shops').doc(this.id).update({
+                    code: this.code,
+                    day: this.day
+                }).then(() => {
+                    console.log(this.code)
+                })
+            } else {
+                this.code = code
+            }
+        }
     },
     created() {
         this.fetchItems();
@@ -77,7 +104,7 @@ export default {
         width: 38%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 650px;
+        height: 700px;
         padding: 3px;
         float:left
     }
@@ -90,7 +117,7 @@ export default {
         width: 38%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 650px;
+        height: 700px;
         padding: 3px;
     }
     .title {
@@ -139,7 +166,7 @@ export default {
         margin-left: 2%;
     }
     .txt1 {
-        margin-top:7%;
+        margin-top:4%;
         margin-bottom: 2%;
         height: 60%;
         margin-left: 2%;
