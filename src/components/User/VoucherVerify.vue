@@ -2,13 +2,13 @@
     <div class="background">
         <Head v-bind:id="id"></Head>
         <div class="top">
-            <p class="content">Your points:{{retrieve()}}</p>
+            <p class="content">Your points: {{this.score}}</p>
         </div>
         <div class="rewards">
             <div class="outside">
             <div class="inside">
             <div class="pic">
-                <img alt="shoplogo" src="this.imagename">
+                <img alt="shoplogo" v-bind:src="this.imagename">
             </div>
             <p class="title">${{this.currentvoucher.price}} {{this.name}} Voucher</p><br><br>
             <p class="title2">{{this.currentvoucher.point}} points</p><br><br>
