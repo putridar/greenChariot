@@ -183,7 +183,7 @@ export default {
     
         drawCanvasImage: function(img) {
             const Tesseract = require('tesseract.js');
-            const cocoSsd = require('@tensorflow-models/coco-ssd');
+            const cocoSsd = require("@tensorflow-models/coco-ssd");
             var canvas = this.$refs.imageCanvas;
             canvas.width = img.width;
             canvas.height = img.height;
@@ -273,6 +273,14 @@ export default {
     },
     created() {
       this.fetchItems()    
+    },
+    mounted() {
+        let externalScript = document.createElement('script')
+        externalScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js')
+        externalScript.setAttribute('src', 'https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js')
+        externalScript.setAttribute('src', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet')
+        externalScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/tensorflow/1.2.10/tf.min.js')
+        document.head.appendChild(externalScript)
     },
     
 }
