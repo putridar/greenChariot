@@ -6,13 +6,14 @@
                 <img alt="scoop" v-bind:src="this.imagename">
             </div>
             <p class="title">Insert this code stated to get points!</p><br>
-            <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
+            <input type="text" id="codes" placeholder="Code"  ><br>
             <button class="btn" v-on:click="direct()">OK</button>
         </div>
     </div>
 </template>
 <script>
 import Head from './Header.vue'
+import db from '../../firebase.js'
 export default{
     components:{
         Head
@@ -21,19 +22,48 @@ export default{
         return{
             id:this.$route.query.id,
             imagename:this.$route.query.imagename,
-            name:this.$route.query.name
+            name:this.$route.query.name,
+            storecode:'',
+            redeemed:[],
+            oldpoints:0,
         }
     },
     methods:{
+        fetchPoints: function() {
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                this.oldpoints=snapshot.data().points
+                this.newpoints=snapshot.data().points+500 
+            })
+        },
+        fetchItems: function() {
+            db.firestore().collection('codes').doc(this.name).get().then(snapshot => {
+                this.storecode=snapshot.data().code
+                this.redeemed=snapshot.data().redeemed
+            })
+            this.fetchPoints();
+        },
+        updateRedeemed: function() {
+            db.firestore().collection('codes').doc(this.name).update({
+                redeemed: this.redeemed,
+            })
+        },
         direct:function(){
             if (document.getElementById("codes").value.length==0){
                 alert("You need to input a code!")
+            } else if (document.getElementById("codes").value!==this.storecode){
+                alert("Code is invalid!")
+            } else if (this.redeemed.includes(this.id)){
+                alert("You have already redeemed this code!")
+            } else {
+                this.redeemed.push(this.id)
+                this.updateRedeemed();
+                this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,name:this.name,oldpoints:this.oldpoints}})
             }
-        else{
-         this.$router.push({name:'congratpage',query:{id:this.id,imagename:this.imagename,name:this.name}})
-        }
-    }
-}
+        }   
+    },
+    created() {
+        this.fetchItems();
+    },
 }
 </script>
 
