@@ -90,7 +90,7 @@ export default {
                 this.email = "";
                 this.password = ""; 
                 //shd be dashboard
-                this.$router.push({ name: 'survey', query : {
+                this.$router.push({ name: 'Dashboard', query : {
                     id: currId[0][0]
                 }})
             } else {

@@ -9,11 +9,6 @@
                 <p class="txt">Highest emission is Food </p>
             </div>
         </div>
-        <div class = "content">
-            <p class = "title">Dashboard</p>
-            <p class = "txt"> Page 3 / 4 </p>
-            <p class = "txt"> Accurate data helps us predict better :) </p>
-        </div>
     </div>
 </template>
 
