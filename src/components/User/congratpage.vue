@@ -1,6 +1,7 @@
 <template>
     <div class="background">
         <Head v-bind:id="id"></Head>
+<<<<<<< HEAD
         <div class="top">
             <p class="content">Your new points: {{this.newpoints}}</p>
             <p class="content">Your old points: {{this.oldpoints}}</p>
@@ -16,14 +17,25 @@
             <p class="title">Hooray!</p><br><br>
             <p class="title2">You get 500 points!</p><br><br><br>
             <button class="btn" v-on:click="direct()">Rewards</button>
+=======
+        <div class = "item">
+            <div class="rewards">
+                <img alt="successful" src="../../assets/successful.png">
+            </div>
+            <div class="content">
+                <p class="zoom">Hooray!</p>
+                <p class="title2">You get 500 points!</p>
+                <p class="txt">Your new points: {{this.newpoints}}</p>
+                <p class="txt">Your old points: {{this.oldpoints}}</p>
+                <button class="btn" v-on:click="direct()">Rewards</button>
+            </div>
+>>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
         </div>
-    </div>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-import db from '../../firebase.js'
 
 export default{
     components: {
@@ -32,26 +44,17 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             oldpoints:this.$route.query.oldpoints,
-            newpoints:0
+            newpoints:Number(this.$route.query.oldpoints) + 500,
+            shopId: this.$route.query.shopId
         }
     },
     methods:{
-        updatedpoints:function(){
-            this.newpoints=Number(this.oldpoints)+500
-            db.firestore().collection('users').doc(this.id).update({
-                points: this.newpoints,
-            })
-        },
         direct:function(){
-            this.$router.push({name:'scooprewards',query:{id:this.id,imagename:this.imagename,name:this.name}})
+            this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
         }
     },
-    created() {
-        this.updatedpoints()
-    }
 }
 </script>
 
@@ -64,12 +67,15 @@ export default{
         width: 100%;
         min-height: 100vh;
     }
-    .pic {
-        height: 45%;
-        margin-top:5%;
-        margin-bottom: 2%;
-        float:left
+    img {
+        float: left;
+        width: 40%;
+        justify-content: center;
+        margin-left: 7%;
+        float:left;
+        animation: zoomIn ease 1s
     }
+<<<<<<< HEAD
     .top {
         justify-content: space-between;
         display: flex;
@@ -78,28 +84,79 @@ export default{
     }
     .rewards {
         margin-top: 10px;
+=======
+    @keyframes zoomIn {
+        0% {
+            transform: scale(0.2,0.2)
+        }
+        100% {transform: scale(1,1)}
+>>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
-    .content {
+    .title {
         font-family: Montserrat;
+        font-style: normal;
         font-weight: bold;
+<<<<<<< HEAD
         font-size: 35px;
         margin-left: 5%;
     }
     .text{
         float:right;
         margin-right:55px
+=======
+        font-size: 30px;
+        margin: 10px;
+        padding:10px
+>>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
-    .title {
+    .zoom {
         font-family: Montserrat;
+        font-style: normal;
         font-weight: bold;
+<<<<<<< HEAD
         font-size: 60px;
         margin-left: 5%;
+=======
+        font-size: 64px;
+        margin: 10px;
+        margin-bottom: 0px;
+        margin-top: 50px;
+        animation: large ease 1s
+    }
+    @keyframes large {
+        0% {
+            transform: scale(0.5,0.5);
+        }
+        100% {transform: scale(1,1)}
+    }
+    .rewards {
+        margin-top: 10px;
+    }
+    .content {
+        margin-left: 55%;
+        margin-right: 10%;
+        width: 40%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
+>>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .title2 {
         font-family: Montserrat;
         font-weight: bold;
+<<<<<<< HEAD
         font-size: 40px;
         margin-left: 5%;
+=======
+        font-size: 48px;
+    }
+    .txt {
+        font-family: Montserrat;
+        font-size: 30px;
+        margin-top: 20px;
+>>>>>>> 5f7ae30a11f51ec48da8a6b92de87eefe181c738
     }
     .btn {
         background: #2D8F8A;
@@ -108,13 +165,15 @@ export default{
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
-        align-items: center;
+        line-height: 24px;
         text-align: center;
         color: #FFFFFF;
-        width: 37%;
+        width: 30%;
         height: 50px;
-        text-align: center;
+        margin: 20px;
         cursor: pointer;
-    
+    }
+    .item {
+        margin-top: -42%
     }
 </style>

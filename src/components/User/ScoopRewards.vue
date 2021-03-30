@@ -8,11 +8,11 @@
         <ul>
         <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">
-                <img alt = "shoplogo" v-bind:src="this.imagename">
+                <img alt = "shoplogo" v-bind:src="imagename">
             </div>
-            <p class="title">{{item.price}} {{this.name}} Voucher</p><br>
+            <p class="title">{{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item,index)">Redeem</button>
+            <button class="btn" v-on:click="onclick(item,index)"> Redeem </button>
         </li>
     </ul>
     </div>
@@ -28,17 +28,25 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename,
             name:this.$route.query.name,
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
-            currentvoucher:{},
+            currentvoucher:[],
+            imagename: null,
+            shopId: this.$route.query.shopId
         }
      },
-     methods:{
-         retrieve:function(){
-             db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
-                 return snapshot.data().points
-         })
+    methods:{
+        fetchItems: function() {
+            console.log(this.id)
+            db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
+                 this.imagename = snapshot.data().imagename
+            })
+        },
+        retrieve:function(){
+            db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
+                 return snapshot.data().points      
+            })
+        
      },
         onclick:function(item,index){
             if (item.point>this.retrieve()){
@@ -54,7 +62,10 @@ export default{
                     this.$router.push({name:"voucherverify",query:{id:this.id,imagename:this.imagename,name:this.name,currentvoucher:this.currentvoucher}})
                 })
             }
-        }, 
+        }  
+    },
+    mounted() {
+        this.fetchItems()
     }
 }
 </script>
@@ -80,7 +91,6 @@ export default{
         font-family: Montserrat;
         font-size: 25px;
         text-align: center;
-        height: 17%;
         padding: 2%;
         margin:2%
     }
@@ -88,7 +98,6 @@ export default{
         font-family: Montserrat;
         font-size: 16px;
         text-align: center;
-        height: 17%;
         padding: 2%;
         margin:2%
     }
@@ -140,5 +149,7 @@ export default{
     .text{
         float:right
     }
-    
+    img {
+        width:40%
+    }
 </style>
