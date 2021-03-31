@@ -30,7 +30,8 @@ export default{
             id:this.$route.query.id,
             name:this.$route.query.name,
             vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
-            currentvoucher:[],
+            price:'',
+            point:'',
             imagename: null,
             shopId: this.$route.query.shopId,
             score:0
@@ -56,9 +57,11 @@ export default{
             else{
             db.firestore().collection('users').doc(this.id).update({
                 points:this.score-item.point
-                }).then(() => {
+            }).then(() => {
                     this.vouchers.splice(index,1)
-                    this.$router.push({name:"voucherverify",query:{id:this.id,imagename:this.imagename,name:this.name,currentvoucher:this.currentvoucher}})
+                    this.price=item.price
+                    this.point=item.point
+                    this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,price:this.price,point:this.point}})
                 })
             }
         }  
