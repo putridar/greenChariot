@@ -23,6 +23,7 @@ import CongratPage from './components/User/congratpage.vue'
 import ShopInfo from './components/Shop/ShopInfo.vue'
 import EditInfo from './components/Shop/EditInfo.vue'
 import EditImage from './components/Shop/EditImage.vue'
+import VoucherVerify from './components/User/VoucherVerify.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -49,4 +50,5 @@ export default [
   { path: '/shopinfo', component: ShopInfo, name: "shopinfo", props: true },
   { path: '/editinfo', component: EditInfo, name: "editinfo", props: true },
   { path: '/editimage', component: EditImage, name: "editimage", props: true },
+  { path:'/voucherverify', component:VoucherVerify, name:"voucherverify", props:true}
 ]

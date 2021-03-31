@@ -8,17 +8,19 @@
             <div class="outside">
             <div class="inside">
             <div class="pic">
-                <img alt="shoplogo" v-bind:src="this.imagename">
+                <img alt="shoplogo" v-bind:src="imagename">
             </div>
-            <p class="title">${{this.currentvoucher.price}} {{this.name}} Voucher</p><br><br>
-            <p class="title2">{{this.currentvoucher.point}} points</p><br><br>
-            <p class="title3">Are you sure you want to exchange this?</p><br><br>
-            <button id="btn" v-on:click="proceed()">Yes</button>
-            <button id="btn1" v-on:click="backwards()">No</button>
-
+            <p class="title">{{this.price}} {{this.name}} Voucher</p>
+            <p class="title2">{{this.point}} points</p>
         </div>
+        <div class="title3">
+            <p class="title3">Are you sure you want to exchange this?</p>
         </div>
-    </div>
+            <button class="btn" v-on:click="proceed()">Yes</button>
+            <button class="btn" v-on:click="backwards()">No</button>
+          </div>
+         </div>
+        </div>
 </template>
 
 <script>
@@ -31,14 +33,22 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:this.$route.query.imagename,
+            imagename:null,
             name:this.$route.query.name,
             currentvoucher:this.$route.query.currentvoucher,
+            price:this.$route.query.price,
+            point:this.$route.query.point,
+            shopId:this.$route.query.shopId,
             score:0
         }
-
     },
     methods:{
+        fetchItems: function() {
+            console.log(this.id)
+            db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
+                 this.imagename = snapshot.data().imagename
+            })
+        },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                 this.score=snapshot.data().points
@@ -47,7 +57,11 @@ export default{
         
     },
     created(){
-        this.retrieve()
+        this.retrieve(),
+        this.fetchItems()
+    },
+    mounted(){
+        this.fetchItems()
     }
 }
 </script>
@@ -60,6 +74,12 @@ export default{
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .content{
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 35px;
+        margin-left: 5%;
     }
     .top {
         justify-content: space-between;
@@ -80,10 +100,10 @@ export default{
     }
     .title2{
         font-family: Montserrat;
-        font-size: 16px;
+        font-size: 20px;
         text-align: center;
         height: 17%;
-        padding: 2%;
+        padding: 1%;
         margin:2%
     }
     .outside{
@@ -104,9 +124,33 @@ export default{
         min-height: 60vh;
     }
     .pic {
-        height: 45%;
+        height: 35%;
         margin-top:5%;
         margin-bottom: 2%;
     }
-
+    .btn {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 37%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        margin-left:100px;
+    
+    }
+    .title3{
+        font-family: Montserrat;
+        font-size: 35px;
+        text-align: center;
+        padding: 2%;
+        margin-left:100px;
+        font-weight:bold;
+    }
 </style>
