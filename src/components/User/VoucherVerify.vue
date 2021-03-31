@@ -10,8 +10,8 @@
             <div class="pic">
                 <img alt="shoplogo" v-bind:src="imagename">
             </div><br><br><br><br><br><br><br><br><br><br><br><br>
-            <p class="title">{{this.price}} {{this.name}} Voucher</p><br>
-            <p class="title2">{{this.point}} points</p>
+            <p class="title">{{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
+            <p class="title2">{{this.currentvoucher.point}} points</p>
         </div>
         <div class="title3">
             <p class="title3">Are you sure you want to exchange this?</p>
@@ -35,11 +35,12 @@ export default{
             id:this.$route.query.id,
             imagename:null,
             name:this.$route.query.name,
-            currentvoucher:this.$route.query.currentvoucher,
+            currentvoucher:{},
             price:this.$route.query.price,
             point:this.$route.query.point,
             shopId:this.$route.query.shopId,
-            score:0
+            score:0,
+            currvoucher:[]
         }
     },
     methods:{
@@ -49,16 +50,29 @@ export default{
                  this.imagename = snapshot.data().imagename
             })
         },
+        fetchvoucher:function(){
+            this.currentvoucher.price=this.price
+            this.currentvoucher.point=this.point
+            this.currentvoucher.name=this.name
+        },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                 this.score=snapshot.data().points
+                this.currvoucher=snapshot.data().currvoucher
             })
         },
+        proceed:function(){
+            this.currvoucher.push(this.currentvoucher)
+            db.firestore().collection('users').doc(this.id).update({
+                currvoucher:this.currvoucher
+            })
+        }
+            
         
     },
     created(){
         this.retrieve(),
-        this.fetchItems()
+        this.fetchvoucher()
     },
     mounted(){
         this.fetchItems()
