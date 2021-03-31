@@ -9,8 +9,8 @@
             <div class="inside">
             <div class="pic">
                 <img alt="shoplogo" v-bind:src="imagename">
-            </div>
-            <p class="title">{{this.price}} {{this.name}} Voucher</p>
+            </div><br><br><br><br><br><br><br><br><br><br><br><br>
+            <p class="title">{{this.price}} {{this.name}} Voucher</p><br>
             <p class="title2">{{this.point}} points</p>
         </div>
         <div class="title3">
@@ -88,23 +88,22 @@ export default{
         margin-top: -40%;
     }
     .rewards {
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .title{
         font-family: Montserrat;
-        font-size: 25px;
+        font-size: 50px;
         text-align: center;
-        height: 17%;
         padding: 2%;
         margin:2%
     }
     .title2{
         font-family: Montserrat;
-        font-size: 20px;
+        font-size: 35px;
         text-align: center;
-        height: 17%;
+        height: 20%;
         padding: 1%;
-        margin:2%
+        margin:1%
     }
     .outside{
         display: flex;
@@ -115,17 +114,20 @@ export default{
         margin-right: 30px;
     }
     .inside{
-        flex-grow: 1;
+        flex-grow:0.8;
+        flex-basis:400px;
         text-align: center;
         padding: 10px;
-        margin: 10px;
+        margin-left:110px;
+        margin-bottom:100px;
         border-radius: 20px;
         background-color: #FFFFFF;
         min-height: 60vh;
+        height:125vh
     }
     .pic {
         height: 35%;
-        margin-top:5%;
+        margin-top:3%;
         margin-bottom: 2%;
     }
     .btn {
@@ -152,5 +154,13 @@ export default{
         padding: 2%;
         margin-left:100px;
         font-weight:bold;
+    }
+    .content {
+        width: 40%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
     }
 </style>

@@ -61,7 +61,7 @@ export default{
                     this.vouchers.splice(index,1)
                     this.price=item.price
                     this.point=item.point
-                    this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,currentvoucher:this.currentvoucher,price:this.price,point:this.point}})
+                    this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,price:this.price,point:this.point}})
                 })
             }
         }  
