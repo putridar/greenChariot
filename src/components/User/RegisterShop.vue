@@ -83,7 +83,16 @@ export default {
                                         code: this.code,
                                         desc: this.desc,
                                         vouchers: [],
-                                        redeemed: []
+                                        redeemed: [],
+                                        custlist: {
+                                            0:[],
+                                            1:[],
+                                            2:[],
+                                            3:[],
+                                            4:[],
+                                            5:[],
+                                            6:[]
+                                        }
                                     }).then((docRef) => {
                                         var id = docRef.id
                                         this.navigate(id) 
