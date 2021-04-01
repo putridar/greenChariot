@@ -28,6 +28,7 @@ import VoucherLists from './components/Shop/VoucherLists.vue'
 import AddEditVoucher from './components/Shop/AddEditVoucher.vue'
 import Quiz from './components/User/Quiz.vue'
 import Question from './components/User/Question.vue'
+import Score from './components/User/Score.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -58,5 +59,6 @@ export default [
   { path:'/voucherlists', component:VoucherLists, name:"voucherlists", props:true},
   { path:'/addeditvoucher', component:AddEditVoucher, name:"addeditvoucher", props:true},
   { path:'/quiz', component:Quiz, name:"quiz", props:true},
-  { path:'/question', component:Question, name:"question", props:true}
+  { path:'/question', component:Question, name:"question", props:true},
+  { path:'/score', component:Score, name:"score", props:true}
 ]

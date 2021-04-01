@@ -18,7 +18,7 @@ export default {
     },
     data() {
         return {
-            id: this.$route.query.id
+            id: this.$route.query.id,
         }
     },
     methods: {
