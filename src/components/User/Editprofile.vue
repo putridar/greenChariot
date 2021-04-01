@@ -2,14 +2,16 @@
     <div class="background">
         <Head v-bind:id="id"></Head>
         <div class="top">
-            <p class="content">Your points:{{this.points}}</p>
+            <p class="content">Your points: {{this.points}}</p>
         </div>
+        <img alt="logo" src="../../assets/welcome.png">
         <div class="profile">
-            <p class="title">Edit profile</p>
+            <p class="title">Edit Your Profile!</p>
             <input type="text" placeholder="Name" v-model='name' required><br>
             <input type="text" placeholder="username" v-model="username" required><br>
             <input type="text" placeholder="email" v-model="email" required><br>
-            <button class="btn" v-on:click="confirm()">Confirm</button>
+            <p><button class="btn" v-on:click="confirm()">Confirm</button>
+            <button class="btn" v-on:click="signout()">Sign out</button></p>
               
         </div>
     </div>
@@ -39,6 +41,23 @@ export default{
                 this.username=snapshot.data().username
                 this.email=snapshot.data().email
             })
+        },
+        confirm:function(){
+            if (this.name=='' || this.username=='' || this.email==''){
+                alert('You need to fill in all the inputs!')
+            }else{
+            db.firestore().collection('users').doc(this.id).update({
+                name:this.name,
+                username:this.username,
+                email:this.email
+            }).then(() => {
+                alert("Profile updated successfully!")
+            })
+        }
+    },
+        signout:function(){
+            alert('You have successfully signed out!')
+            this.$router.push({name:'signin',query:{id:this.id}})
         }
     },
     created(){
@@ -61,9 +80,7 @@ export default{
         font-weight: bold;
         font-size: 35px;
         margin-left: 2%;
-    }
-    .profile {
-        margin-top: 8px;
+        margin-top:10px
     }
     .top {
         margin-right: 100px;
@@ -120,7 +137,18 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
+        margin:7px
     
     }
+    .picture{
+        height:10%
+    }
+    img {
+        float: left;
+        width: 35%;
+        justify-content: center;
+        margin-left: 75px
+    }
+
 
 </style>
