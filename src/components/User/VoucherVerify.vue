@@ -6,21 +6,19 @@
         </div>
         <div class="rewards">
             <div class="outside">
-            <div class="inside">
-            <div class="pic">
-                <img alt="shoplogo" v-bind:src="imagename">
-            </div><br><br><br><br><br><br><br><br><br><br><br><br>
-            <p class="title">{{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
-            <p class="title2">{{this.currentvoucher.point}} points</p>
+                <div class="inside">
+                    <div class="pic">
+                        <img alt="shoplogo" v-bind:src="imagename">
+                        <p class="title">{{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
+                        <p class="title2">{{this.currentvoucher.point}} points</p>
+                        <p class="title3">Are you sure you want to exchange this?</p>
+                        <button class="btn" v-on:click="proceed()">Yes</button>
+                        <button class="btn" v-on:click="backwards()">No</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="title3">
-            <p class="title3">Are you sure you want to exchange this?</p>
-        </div>
-            <button class="btn" v-on:click="proceed()">Yes</button>
-            <button class="btn" v-on:click="backwards()">No</button>
-          </div>
-         </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -36,8 +34,7 @@ export default{
             imagename:null,
             name:this.$route.query.name,
             currentvoucher:{},
-            price:this.$route.query.price,
-            point:this.$route.query.point,
+            voucher:this.$route.query.voucher,
             shopId:this.$route.query.shopId,
             score:0,
             currvoucher:[]
@@ -51,20 +48,25 @@ export default{
             })
         },
         fetchvoucher:function(){
-            this.currentvoucher.price=this.price
-            this.currentvoucher.point=this.point
+            this.currentvoucher.price=this.voucher.price
+            this.currentvoucher.point=this.voucher.point
             this.currentvoucher.name=this.name
         },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                this.score=snapshot.data().points
-                this.currvoucher=snapshot.data().currvoucher
+                var item = snapshot.data()
+                this.score= item.points
+                this.currvoucher= item.currvoucher == undefined ? [] : item.currvoucher
             })
         },
         proceed:function(){
             this.currvoucher.push(this.currentvoucher)
             db.firestore().collection('users').doc(this.id).update({
-                currvoucher:this.currvoucher
+                currvoucher:this.currvoucher,
+                points: this.score - this.currentvoucher.point
+            }).then(() => {
+                alert("You have successfully exchange your points")
+                this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
             })
         }
             
@@ -93,31 +95,31 @@ export default{
         font-family: Montserrat;
         font-weight: bold;
         font-size: 35px;
-        margin-left: 5%;
+        margin-left: 2%;
     }
     .top {
-        justify-content: space-between;
-        display: flex;
         margin-right: 100px;
-        margin-top: -40%;
+        margin-top: -42%;
+        margin-bottom: 2%;
+        margin-left:-7%;
+        display:flex
     }
     .rewards {
         margin-top: 8px;
     }
     .title{
         font-family: Montserrat;
-        font-size: 50px;
+        font-size: 36px;
         text-align: center;
         padding: 2%;
-        margin:2%
+        margin-top:2%;
+        font-weight:bold
     }
     .title2{
         font-family: Montserrat;
-        font-size: 35px;
+        font-size: 24px;
         text-align: center;
-        height: 20%;
         padding: 1%;
-        margin:1%
     }
     .outside{
         display: flex;
@@ -128,16 +130,15 @@ export default{
         margin-right: 30px;
     }
     .inside{
-        flex-grow:0.8;
-        flex-basis:400px;
+        width:50%;
         text-align: center;
         padding: 10px;
-        margin-left:110px;
-        margin-bottom:100px;
+        margin-left:25%;
+        margin-right:25%;
+        margin-bottom:2%;
         border-radius: 20px;
         background-color: #FFFFFF;
         min-height: 60vh;
-        height:125vh
     }
     .pic {
         height: 35%;
@@ -154,19 +155,18 @@ export default{
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 37%;
+        width: 20%;
         height: 50px;
         text-align: center;
         cursor: pointer;
-        margin-left:100px;
+        margin: 2%
     
     }
     .title3{
         font-family: Montserrat;
-        font-size: 35px;
+        font-size: 24px;
         text-align: center;
         padding: 2%;
-        margin-left:100px;
         font-weight:bold;
     }
     .content {
@@ -176,5 +176,8 @@ export default{
         text-align: center;
         border-radius: 8px;
         padding: 10px;
+    }
+    img {
+        width:30%
     }
 </style>

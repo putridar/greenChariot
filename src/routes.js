@@ -24,6 +24,8 @@ import ShopInfo from './components/Shop/ShopInfo.vue'
 import EditInfo from './components/Shop/EditInfo.vue'
 import EditImage from './components/Shop/EditImage.vue'
 import VoucherVerify from './components/User/VoucherVerify.vue'
+import VoucherLists from './components/Shop/VoucherLists.vue'
+import AddEditVoucher from './components/Shop/AddEditVoucher.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -50,5 +52,7 @@ export default [
   { path: '/shopinfo', component: ShopInfo, name: "shopinfo", props: true },
   { path: '/editinfo', component: EditInfo, name: "editinfo", props: true },
   { path: '/editimage', component: EditImage, name: "editimage", props: true },
-  { path:'/voucherverify', component:VoucherVerify, name:"voucherverify", props:true}
+  { path:'/voucherverify', component:VoucherVerify, name:"voucherverify", props:true},
+  { path:'/voucherlists', component:VoucherLists, name:"voucherlists", props:true},
+  { path:'/addeditvoucher', component:AddEditVoucher, name:"addeditvoucher", props:true}
 ]
