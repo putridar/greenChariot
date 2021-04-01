@@ -9,7 +9,7 @@
                 <div class="inside">
                     <div class="pic">
                         <img alt="shoplogo" v-bind:src="imagename">
-                        <p class="title">{{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
+                        <p class="title">${{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
                         <p class="title2">{{this.currentvoucher.point}} points</p>
                         <p class="title3">Are you sure you want to exchange this?</p>
                         <button class="btn" v-on:click="proceed()">Yes</button>
@@ -68,6 +68,9 @@ export default{
                 alert("You have successfully exchange your points")
                 this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
             })
+        },
+        backwards:function(){
+            this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name,shopId:this.shopId}})
         }
             
         
