@@ -12,7 +12,7 @@
             </div>
             <p class="title">${{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item,index)"> Redeem </button>
+            <button class="btn" v-on:click="onclick(item)"> Redeem </button>
         </li>
     </ul>
     </div>
@@ -34,10 +34,16 @@ export default{
             point:'',
             imagename: null,
             shopId: this.$route.query.shopId,
-            score:0
+            score:0,
+            currvoucher:[]
         }
      },
     methods:{
+        fetchvoucher:function(){
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                this.currvoucher=snapshot.data().currvoucher
+            })
+        },
         fetchItems: function() {
             console.log(this.id)
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
@@ -52,10 +58,15 @@ export default{
         
      },
         onclick:function(item){
+            for (var x of this.currvoucher){
+                if (item.price==x.price && item.point==x.point && this.name==x.name){
+                    alert("You already have this voucher in your possession!")
+                    return
+                }
+            }
             if (item.point>this.score){
                 alert("Insufficient points to exchange for voucher")
-            }
-            else{
+            }else{
                 this.price=item.price
                 this.point=item.point
                 this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item}})
@@ -63,7 +74,8 @@ export default{
         }  
     },
     created(){
-        this.retrieve()
+        this.retrieve(),
+        this.fetchvoucher()
     },
     mounted() {
         this.fetchItems()
