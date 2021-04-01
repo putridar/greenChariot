@@ -10,7 +10,7 @@
             <div class="pic">
                 <img alt = "shoplogo" v-bind:src="imagename">
             </div>
-            <p class="title">{{item.price}} {{name}} Voucher</p>
+            <p class="title">${{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
             <button class="btn" v-on:click="onclick(item,index)"> Redeem </button>
         </li>
@@ -29,7 +29,7 @@ export default{
         return{
             id:this.$route.query.id,
             name:this.$route.query.name,
-            vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
+            vouchers:[],
             price:'',
             point:'',
             imagename: null,
@@ -42,6 +42,7 @@ export default{
             console.log(this.id)
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
                  this.imagename = snapshot.data().imagename
+                 this.vouchers = snapshot.data().vouchers
             })
         },
         retrieve:function(){
@@ -50,19 +51,14 @@ export default{
             })
         
      },
-        onclick:function(item,index){
+        onclick:function(item){
             if (item.point>this.score){
                 alert("Insufficient points to exchange for voucher")
             }
             else{
-            db.firestore().collection('users').doc(this.id).update({
-                points:this.score-item.point
-            }).then(() => {
-                    this.vouchers.splice(index,1)
-                    this.price=item.price
-                    this.point=item.point
-                    this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,price:this.price,point:this.point}})
-                })
+                this.price=item.price
+                this.point=item.point
+                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item}})
             }
         }  
     },
@@ -97,7 +93,8 @@ export default{
         font-size: 25px;
         text-align: center;
         padding: 2%;
-        margin:2%
+        margin:2%;
+        margin-top:5%
     }
     .title2{
         font-family: Montserrat;
@@ -115,14 +112,13 @@ export default{
         margin-right: 30px;
     }
     li {
-        flex-grow: 1;
+        flex-shrink: 1;
         flex-basis: 300px;
         text-align: center;
         padding: 10px;
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 60vh;
     }
     .pic {
         height: 45%;
@@ -155,6 +151,7 @@ export default{
         float:right
     }
     img {
-        width:40%
+        width:50%;
+        margin-bottom:2%
     }
 </style>

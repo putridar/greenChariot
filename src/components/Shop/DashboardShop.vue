@@ -71,7 +71,8 @@ export default {
                 this.day = day
                 db.firestore().collection('shops').doc(this.id).update({
                     code: this.code,
-                    day: this.day
+                    day: this.day,
+                    redeemed: []
                 }).then(() => {
                     console.log(this.code)
                 })
