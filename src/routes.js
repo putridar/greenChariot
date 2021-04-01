@@ -29,6 +29,7 @@ import AddEditVoucher from './components/Shop/AddEditVoucher.vue'
 import Quiz from './components/User/Quiz.vue'
 import Question from './components/User/Question.vue'
 import Score from './components/User/Score.vue'
+import EditProfile from './components/User/Editprofile.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -60,5 +61,6 @@ export default [
   { path:'/addeditvoucher', component:AddEditVoucher, name:"addeditvoucher", props:true},
   { path:'/quiz', component:Quiz, name:"quiz", props:true},
   { path:'/question', component:Question, name:"question", props:true},
-  { path:'/score', component:Score, name:"score", props:true}
+  { path:'/score', component:Score, name:"score", props:true},
+  { path:'/editprofile', component:EditProfile, name:"editprofile", props:true}
 ]
