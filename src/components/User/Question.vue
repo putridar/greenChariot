@@ -2,14 +2,23 @@
     <div class = "bg">
         <Head v-bind:id="id"></Head>
         <div class = "content">
-            <p class = "title"> Are you ready for the Quiz? </p><br>
-            <button class = "btn" v-on:click="toScore()">Start</button>
+            <p id = "question"> {{this.questions[0].question}}</p><br>
+            <ul>
+                <li v-for='o in questions[0].options' :key='o'>
+                    <label for='q'>
+                        <input type="radio" value="help" id="q" name="optionsss">
+                        {{o}}
+                    </label>
+                </li>
+            </ul>
+            <button class = "btn" v-on:click="this.next()">Next</button>
         </div>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
+import db from "../../firebase.js"
 
 export default {
     name: 'question',
@@ -20,12 +29,42 @@ export default {
         return {
             id: this.$route.query.id,
             score:this.$route.query.score,
+            questions:[],
+            selectedQuestions:[], //ids of selected qns
+            questionIDs:["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20"],
+            counter:0
         }
     },
     methods: {
-        toScore:function() {
+        next: function() {
+            this.counter=this.counter+1
+            document.getElementById("question").innerHTML = this.questions[this.counter].question
+
+        },
+        toScore: function() {
             this.$router.push({name:'score',query:{id:this.id,score:this.score}})
+        },
+        select: function() {
+            while (this.selectedQuestions.length<10) {
+                var randomIndex=Math.floor(Math.random()*20);
+                var chosen=this.questionIDs[randomIndex]
+                if (this.selectedQuestions.includes(chosen)!=true) {
+                    this.selectedQuestions.push(chosen)
+                }
+            }
+        },
+        getQuestion: function() {
+            this.select();
+            for (var i=0;i<this.selectedQuestions.length;i++) {
+                var id=this.selectedQuestions[i]
+                db.firestore().collection('questions').doc(id).get().then(snapshot => {
+                    this.questions.push(snapshot.data())
+                })
+            }
         }
+    },
+    created() {
+        this.getQuestion()
     }
 }
 </script>
@@ -50,28 +89,48 @@ export default {
             opacity: 1
         }
     }
+    label {
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        border: 1px solid black;
+        border-radius:20px;
+        text-align:left;
+        font-family: Montserrat;
+        font-size: 22px;
+        width: 100%;
+        height:100%;
+    }
+    label::selection{
+        background-color: rgb(242, 255, 212);
+    }   
+    li{
+        list-style-type:none;
+    }
     .content {
         background-color: #FFFFFF;
-        margin-top: 11%;
-        margin-left: 55%;
+        margin-top: 1%;
+        margin-left: 10%;
         margin-right: 10%;
-        width: 35%;
+        margin-top:5%;
+        height: 60%;
+        width: 80%;
         justify-content: center;
         align-items: center;
         text-align: center;
         border-radius: 8px;
-        padding: 10px;
-        animation: zoomIn 1s
+        padding: 10px
     }
-    .title {
+    #question {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
         font-size: 30px;
         margin: 10px;
-        padding:10px
+        padding:10px;
+        float:left
     }
-    input {
+    #q {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;
@@ -80,22 +139,9 @@ export default {
         margin-right:8%;
         font-size: 20px;
         border-radius: 8px;
-        border: 1px solid #E5E5E5;
-        height: 10%;
+        border: 10px solid black;
         display: flex;
         align-items: center;
-    }
-    label {
-        font-family: Montserrat;
-        font-size: 22px;
-        display: flex;
-        align-items: center;
-        margin: 1%;
-        margin-left:8%;
-        margin-right:8%;
-        width: 80%;
-        padding: 8px;
-
     }
     .btn {
         background: #2D8F8A;
