@@ -13,7 +13,7 @@
                     Test your understanding by doing this quiz!<br>
                     +5 Points/correct answer
                 </p>
-                <button class = "btn">Start</button>
+                <button class = "btn" v-on:click='toQuiz()'>Start</button>
             </li>
             <li>
                 <div class = "pic">
@@ -63,6 +63,9 @@ export default {
                     this.$router.push({ name: 'socialmedia', query: {id: this.id}})
                 }
             })
+        },
+        toQuiz: function() {
+            this.$router.push({name:'quiz',query:{id:this.id}})
         }
     }
 }
