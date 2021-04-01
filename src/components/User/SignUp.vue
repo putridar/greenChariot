@@ -53,7 +53,8 @@ export default {
                         name: this.name,
                         email: this.email,
                         username: this.username,
-                        points: 0
+                        points: 0,
+                        currvoucher:[]
                     })
                     .then((docRef) => {
                         this.id = docRef.id

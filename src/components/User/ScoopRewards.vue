@@ -2,7 +2,7 @@
  <div class="background">
     <Head v-bind:id="id"></Head>
     <div class="top">
-        <p class="content">Your points:{{retrieve()}}</p>
+        <p class="content">Your points: {{this.score}}</p>
     </div>
     <div class="rewards">
         <ul>
@@ -10,7 +10,7 @@
             <div class="pic">
                 <img alt = "shoplogo" v-bind:src="imagename">
             </div>
-            <p class="title">{{item.price}} {{name}} Voucher</p>
+            <p class="title">${{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
             <button class="btn" v-on:click="onclick(item,index)"> Redeem </button>
         </li>
@@ -21,7 +21,7 @@
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
- export default{
+export default{
      components:{
         Head
      },
@@ -29,10 +29,12 @@ import db from '../../firebase.js'
         return{
             id:this.$route.query.id,
             name:this.$route.query.name,
-            vouchers:[{price:"$5",point:500},{price:"$10",point:1000},{price:"$15",point:2000}],
-            currentvoucher:[],
+            vouchers:[],
+            price:'',
+            point:'',
             imagename: null,
-            shopId: this.$route.query.shopId
+            shopId: this.$route.query.shopId,
+            score:0
         }
      },
     methods:{
@@ -40,27 +42,28 @@ import db from '../../firebase.js'
             console.log(this.id)
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
                  this.imagename = snapshot.data().imagename
+                 this.vouchers = snapshot.data().vouchers
             })
         },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
-                 return snapshot.data().points      
+                 this.score=snapshot.data().points      
             })
         
      },
-        onclick:function(item,index){
-            if (item.point>this.retrieve()){
+        onclick:function(item){
+            if (item.point>this.score){
                 alert("Insufficient points to exchange for voucher")
             }
             else{
-            db.firestore().collection('users').doc(this.id).update({
-                points:this.retrieve()-item.point,
-                }).then(() => {
-                    this.currentvoucher.push(item)
-                    this.vouchers.splice(index,1)
-                })
+                this.price=item.price
+                this.point=item.point
+                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item}})
             }
         }  
+    },
+    created(){
+        this.retrieve()
     },
     mounted() {
         this.fetchItems()
@@ -90,7 +93,8 @@ import db from '../../firebase.js'
         font-size: 25px;
         text-align: center;
         padding: 2%;
-        margin:2%
+        margin:2%;
+        margin-top:5%
     }
     .title2{
         font-family: Montserrat;
@@ -108,14 +112,13 @@ import db from '../../firebase.js'
         margin-right: 30px;
     }
     li {
-        flex-grow: 1;
+        flex-shrink: 1;
         flex-basis: 300px;
         text-align: center;
         padding: 10px;
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 60vh;
     }
     .pic {
         height: 45%;
@@ -148,6 +151,7 @@ import db from '../../firebase.js'
         float:right
     }
     img {
-        width:40%
+        width:50%;
+        margin-bottom:2%
     }
 </style>
