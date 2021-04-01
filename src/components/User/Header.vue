@@ -12,7 +12,7 @@
                 <li class = "txt"><router-link :to="{ name: 'challenges', query: {id: this.id} }" exact>Quiz & Challenges</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'greenshops', query: {id: this.id} }" exact>Green Shops</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Rewards</router-link></li>
-                <li><router-link :to="{ name: 'signin', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
+                <li><router-link :to="{ name: 'editprofile', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
             </ul>
         </div>
     </div>
