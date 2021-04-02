@@ -9,7 +9,7 @@
                 <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'voucherlists', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'shopinfo', query: {id: this.id} }" exact>Edit Information</router-link></li>
-                <li><router-link :to="{ name: 'signin', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
+                <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
             </ul>
         </div>
     </div>
