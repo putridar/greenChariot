@@ -12,17 +12,19 @@
                 <li class = "txt"><router-link :to="{ name: 'challenges', query: {id: this.id} }" exact>Quiz & Challenges</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'greenshops', query: {id: this.id} }" exact>Green Shops</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Rewards</router-link></li>
-                <li><router-link :to="{ name: 'editprofile', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
+                <li><router-link :to="{ name: 'editprofile', query: {id: this.id} }" exact><img alt='profilepic' :src="this.image" /></router-link></li>
             </ul>
         </div>
     </div>
 </template>
 
 <script>
+import db from '../../firebase.js'
 export default {
   name: 'Header',
   data() {
       return {
+          image:'../../assets/user.png'
           
       }
   },
@@ -32,7 +34,17 @@ export default {
       }
   },
   methods: {
+      fetchimage:function(){
+          db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+              if (snapshot.data().image!=''){
+                  this.image=snapshot.data().image
+              }
+          })
+      }
         
+  },
+  created(){
+      this.fetchimage()
   }
 }
 </script>
