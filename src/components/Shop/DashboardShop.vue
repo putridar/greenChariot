@@ -17,8 +17,11 @@
                 </div>
             </div>
             <div class="chart">
-                <p class = "txt2">Customer Insight (greenChariot Users)</p><br>
-                <p class = "txt2">Vouchers Insight</p>
+                <p class = "txt3">Customer Insight (greenChariot Users)</p>
+                <div class = "cust">
+                    <customer-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw"></customer-chart>
+                </div>
+                <p class = "txt3">Vouchers Insight</p>
             </div>
         </div>
     </div>
@@ -27,10 +30,12 @@
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
+import CustomerChart from "../Charts/CustomerChart.vue"
 export default {
     name: 'Header',
     components :{
-        Head
+        Head,
+        CustomerChart
     },
     data() {
         return {
@@ -40,7 +45,8 @@ export default {
             desc: '',
             address: '',
             day: null,
-            code: ''
+            code: '',
+            custlist: {}
         }
     },
     methods: {
@@ -48,20 +54,22 @@ export default {
             db.firestore().collection('shops').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
                 this.image = item.imagename
+                this.desc = item.desc == undefined ? "No description provided" : item.desc
                 this.name = item.name
-                this.desc = item.desc
-                this.address = item.address
+                this.code = item.code == undefined ? "" : item.code
+                this.address = item.address == undefined ? "No address provided" : item.address
                 this.day = item.day == undefined ? null : item.day
+                this.custlist = item.custlist
                 this.randomCode(item.code, item.day)
             })
         },
         edit: function() {
             this.$router.push({ name: 'shopinfo', query: {id: this.id}})
-        }  ,
+        } ,
         randomCode: function(code, currday) {
             var d = new Date();
             var day = d.getDay();
-            if (currday == null || day != currday) {
+            if (currday == null || day != currday || code == undefined) {
                 var result = '';
                 var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 for (let x = 0; x < 8; x++ ) {
@@ -95,17 +103,17 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 120vh;
+        min-height: 160vh;
     }
     .content {
         font-family: Montserrat;
         font-size: 30px;
-        margin-left: 10%;
+        margin-left: 7%;
         margin-right: 3%;
-        width: 38%;
+        width: 42%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 700px;
+        height: 1000px;
         padding: 3px;
         float:left
     }
@@ -114,17 +122,17 @@ export default {
         font-size: 30px;
         margin-top: 3%;
         margin-left: 50%;
-        margin-right: 10%;
-        width: 38%;
+        margin-right: 7%;
+        width: 42%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 700px;
+        height: 1000px;
         padding: 3px;
     }
     .title {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 40px;
         margin-left:90%;
         display: flex;
         width: 30%;
@@ -160,27 +168,39 @@ export default {
         cursor: pointer;
     }
     .pic {
-        margin-top:7%;
-        margin-bottom: 2%;
-        height: 40%;
+        margin-top:15%;
+        margin-bottom:2%;
+        height: 30%;
         width: 50%;
         margin-left: 2%;
     }
     .txt1 {
-        margin-top:4%;
+        margin-top:3px;
         margin-bottom: 2%;
         height: 60%;
         margin-left: 2%;
     }
     .txt {
-        margin-top:2%;
+        margin-top:5px;
         margin-bottom: 2%;
-        font-size: 20px;
+        font-size: 24px;
     }
     .txt2 {
         margin-top:7%;
-        font-size: 22px;
+        font-size: 28px;
         font-weight: bold;
     }
-    
+    .txt3 {
+        margin-top:2%;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .cust {
+        margin-left:-35%;
+        height:400px;
+        width:100%;
+    }
+    .cust1 {
+        width:100%;
+    }
 </style>

@@ -7,8 +7,11 @@
         <img alt="logo" src="../../assets/welcome.png">
         <div class="profile">
             <p class="title">Edit Your Profile!</p>
+            <p class = "txt"> Name </p>
             <input type="text" placeholder="Name" v-model='name' required><br>
+            <p class = "txt"> Username </p>
             <input type="text" placeholder="username" v-model="username" required><br>
+            <p class = "txt"> Email </p>
             <input type="text" placeholder="email" v-model="email" required><br>
             <p class="title2">Upload your profile picture below!</p>
             <input type="file" accept="image/*" @change="previewimage">
@@ -92,13 +95,18 @@ export default{
         font-weight: bold;
         font-size: 35px;
         margin-left: 2%;
-        margin-top:10px
+        margin-top:10px;
+        animation: zoomIn ease 0.7s
+    }
+    @keyframes zoomIn {
+        0% {transform: scale(0.7,0.7); opacity:0}
+        100% {transform: scale(1,1); opacity:1}
     }
     .top {
         margin-right: 100px;
         margin-top: -42%;
         margin-bottom: 2%;
-        margin-left:-7%;
+        margin-left:2%;
         display:flex
     }
     .title {
@@ -110,6 +118,13 @@ export default{
         text-align: center;
         color: #1C746F;
         margin: 15px;
+    }
+    .txt {
+        font-family: Inter;
+        font-size: 24px;
+        color: #1C746F;
+        margin-left: 8%;
+        text-align: left;
     }
     .profile {
         background-color: #FFFFFF;

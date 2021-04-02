@@ -7,8 +7,6 @@
             <p class = "title"> Sign In </p>
             <input type="text" placeholder="Email" v-model="email" class ="inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class ="inputstyle" required><br>
-            <input type="checkbox" id="shop" name="shop" v-model="isShop">
-            <label for="shop" class = "txt">Sign In as a Shop's Owner?</label><br>
             <button class = "create" v-on:click="signin()">Sign In</button>
             <p class ="txt" v-on:click="signup()"> Do not have account yet? Sign Up now!</p>
         </div>
@@ -48,9 +46,9 @@ export default {
         },
         signin: function() {
             var success = true;
-            var currId
-            if (!this.isShop) {
-                currId = this.users.filter(item => item[1].email === this.email);
+            var currId = this.users.filter(item => item[1].email === this.email);
+            var currShop = this.shops.filter(item => item[1].email === this.email);
+            if (currId[0] !== undefined) {
                 db.auth()
                     .signInWithEmailAndPassword(this.email, this.password)
                     .catch(error => {console.log(error)
@@ -58,13 +56,12 @@ export default {
                         success = false;})
                     .then(() => {
                         if (success) {
-                            this.getData(currId);   
+                            this.getData(currId, false);   
                         }
                     })
                     .catch(error => {console.log(error)})
             } else {
-                currId = this.shops.filter(item => item[1].email === this.email);
-                if (currId[0] !== undefined) {
+                if (currShop[0] !== undefined) {
                     db.auth()
                         .signInWithEmailAndPassword(this.email, this.password)
                         .catch(error => {console.log(error)
@@ -72,24 +69,23 @@ export default {
                             success = false;})
                         .then(() => {
                             if (success) {
-                                this.getData(currId);   
+                                this.getData(currShop, true);   
                             }
                         })
                         .catch(error => {console.log(error)})
                 } else {
-                    alert("Please register your shop first by signing in to your account")
+                    alert("Please register first!")
                 }
             }
         },
         signup: function() {
             this.$router.push({ name: 'signup'})
         },
-        getData: function(currId) {
-            if (!this.isShop) {
+        getData: function(currId, isShop) {
+            if (!isShop) {
                 this.username = "";
                 this.email = "";
                 this.password = ""; 
-                //shd be dashboard
                 this.$router.push({ name: 'Dashboard', query : {
                     id: currId[0][0]
                 }})
@@ -97,7 +93,6 @@ export default {
                 this.username = "";
                 this.email = "";
                 this.password = ""; 
-                //shd be dashboard
                 this.$router.push({ name: 'dashboardShop', query : {
                     id: currId[0][0]
                 }})

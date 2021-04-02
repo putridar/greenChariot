@@ -82,7 +82,7 @@ export default {
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        min-height: 63vh;
+        min-height: 60vh;
     }
     .title {
         font-family: Montserrat;
