@@ -4,12 +4,14 @@
         <img alt="greenChariot" src="../../assets/shop.png">
         <div class = "content">
             <p class = "title"> Register Your Shop! </p>
+            <p class = "txt2"> 
+                Warning! By registering as a shop, your current data (points, vouchers, etc) will be deleted.
+                If you do not want this, please sign out and register as a shop!
+            </p>
             <p class = "title2"> Tell us more about your shop! </p>
             <input type="text" placeholder="Shop Name" v-model="name" required><br>
             <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
             <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
-            <p class = "title2"> Please create/put your shop's unique code to keep track of your customer </p>
-            <input type="text" placeholder="Unique Code" v-model="code" required><br>
             <p class = "title2"> Enter your account password </p>
             <input type="password" placeholder="Password" v-model="password" required><br>
             <button class = "create" v-on:click="create()">Register</button>
@@ -32,7 +34,6 @@ export default {
             username :"",
             email: "",
             password: "",
-            code:"",
             id: this.$route.query.id,
             shops: [],
             address: "",
@@ -80,7 +81,6 @@ export default {
                                         email: email,
                                         imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png",
                                         address: this.address,
-                                        code: this.code,
                                         desc: this.desc,
                                         vouchers: [],
                                         redeemed: [],
@@ -94,8 +94,10 @@ export default {
                                             6:[]
                                         }
                                     }).then((docRef) => {
-                                        var id = docRef.id
-                                        this.navigate(id) 
+                                        db.firestore().collection('users').doc(this.id).delete().then(() => {
+                                            var id = docRef.id
+                                            this.navigate(id) 
+                                        })
                                     }) 
                                 }
                             })
@@ -231,5 +233,12 @@ export default {
         font-size: 20px;
         margin: 10px;
         cursor: pointer;
+    }
+    .txt2 {
+        font-family: Inter;
+        font-size: 16px;
+        color: #eb7754;
+        padding: 8px;
+        margin-bottom:3%
     }
 </style>

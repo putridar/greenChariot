@@ -54,9 +54,10 @@ export default {
             db.firestore().collection('shops').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
                 this.image = item.imagename
+                this.desc = item.desc == undefined ? "No description provided" : item.desc
                 this.name = item.name
-                this.desc = item.desc
-                this.address = item.address
+                this.code = item.code == undefined ? "" : item.code
+                this.address = item.address == undefined ? "No address provided" : item.address
                 this.day = item.day == undefined ? null : item.day
                 this.custlist = item.custlist
                 this.randomCode(item.code, item.day)
@@ -68,7 +69,7 @@ export default {
         randomCode: function(code, currday) {
             var d = new Date();
             var day = d.getDay();
-            if (currday == null || day != currday) {
+            if (currday == null || day != currday || code == undefined) {
                 var result = '';
                 var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 for (let x = 0; x < 8; x++ ) {
