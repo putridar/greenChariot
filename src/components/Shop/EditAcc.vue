@@ -4,7 +4,6 @@
         <img alt="logo" src="../../assets/welcome.png">
         <div class="profile">
             <p class="title">Edit Your Profile!</p>
-            <p class = "txt2"> Warning! This will also change your user account </p>
             <p class = "txt"> Email </p>
             <input type="text" placeholder="email" v-model="email" required><br>
             <p class = "txt"> New Password (leave it blank if you do not want to change password) </p>
@@ -42,23 +41,29 @@ export default{
                 this.oldemail=snapshot.data().email
                 this.email=snapshot.data().email
             })
-            db.firestore().collection('users').get().then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    var user = [doc.id, doc.data()]
-                    this.users.push(user)
-                });
-            }).catch(error => {console.log(error)
-                alert(error)})
         },
         confirm:function(){
-            if (this.oldemail == this.email) {
+            const user = db.auth().currentUser;
+            var success = true;
+            if (this.oldemail == this.email && this.password != null && this.password == this.confirmpass) {
+                user.updatePassword(this.password)
+                        .catch(error => {
+                            console.log(error)
+                            alert(error)
+                            success = false
+                        })
+                        .then(() => {
+                            if (success) {
+                                console.log("Password updated!");
+                                alert("Password has been changed. Please login again.")
+                                this.$router.push({name:'signin'})
+                            }
+                        })
+            } else if (this.oldemail == this.emai){
                 alert("Your email is the same as the previous one")
             } else if (this.email == "" || this.email == null) {
                 alert("Your email is empty")
             } else {
-                var currId = this.users.filter(item => item[1].email === this.oldemail);
-                const user = db.auth().currentUser;
-                var success = true;
                 if (this.password != null && this.password == this.confirmpass) {
                      user.updateEmail(this.email)
                     .catch(error => {
@@ -76,17 +81,14 @@ export default{
                                     email: this.email
                                 })
                                 .then(() => {
-                                    db.firestore().collection('users').doc(currId[0][0]).update({
-                                        email: this.email
-                                    })
-                                    .then(() => alert("Email and password has been changed. Please login again."))
-                                    .catch(error => {console.log(error)
-                                        alert(error)})
-                                    .then(() => {this.$router.push({name:'signin'})})
+                                    alert("Email and password has been changed. Please login again.")
+                                    this.$router.push({name:'signin'})
                                 })
-                            })   
+                                .catch(error => {console.log(error)
+                                    alert(error)}) 
+                            })  
                         } else {
-                                this.$router.push({name:'signin'})
+                            this.$router.push({name:'signin'})
                         }
                     })
                     
@@ -104,19 +106,11 @@ export default{
                                 console.log("Email updated!");
                                 db.firestore().collection('shops').doc(this.id).update({email: this.email})
                                 .then(() => {
-                                    db.firestore().collection('users').doc(currId[0][0]).update({
-                                        email: this.email
-                                    })
-                                    .then(() => {
-                                        db.firestore().collection('users').doc(currId[0][0]).update({
-                                            email: this.email
-                                        })
-                                        .then(() => alert("Email has been changed. Please login again."))
-                                        .catch(error => {console.log(error)
-                                            alert(error)})
-                                        .then(() => {this.$router.push({name:'signin'})})
-                                    })
+                                    alert("Email has been changed. Please login again.")
+                                    this.$router.push({name:'signin'})
                                 })
+                                .catch(error => {console.log(error)
+                                    alert(error)}) 
                             } else {
                                 this.$router.push({name:'signin'})
                             }
@@ -186,13 +180,6 @@ export default{
         color: #1C746F;
         margin-left: 8%;
         text-align: left;
-    }
-    .txt2 {
-        font-family: Inter;
-        font-size: 16px;
-        color: #eb7754;
-        padding: 8px;
-        margin-bottom:3%
     }
     .profile {
         background-color: #FFFFFF;
