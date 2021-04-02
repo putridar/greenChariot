@@ -10,9 +10,12 @@
             <input type="text" placeholder="Name" v-model='name' required><br>
             <input type="text" placeholder="username" v-model="username" required><br>
             <input type="text" placeholder="email" v-model="email" required><br>
+            <p class="title2">Upload your profile picture below!</p>
+            <input type="file" accept="image/*" @change="previewimage">
+            <p class="title2">Preview Here:</p>
+            <template v-if= "this.image!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
             <p><button class="btn" v-on:click="confirm()">Confirm</button>
             <button class="btn" v-on:click="signout()">Sign out</button></p>
-              
         </div>
     </div>
 </template>
@@ -30,7 +33,9 @@ export default{
             points:0,
             name:'',
             username:'',
-            email:''
+            email:'',
+            image:'',
+            preview:''
         }
     },
     methods:{
@@ -49,7 +54,8 @@ export default{
             db.firestore().collection('users').doc(this.id).update({
                 name:this.name,
                 username:this.username,
-                email:this.email
+                email:this.email,
+                image:this.image
             }).then(() => {
                 alert("Profile updated successfully!")
             })
@@ -58,11 +64,17 @@ export default{
         signout:function(){
             alert('You have successfully signed out!')
             this.$router.push({name:'signin',query:{id:this.id}})
+        },
+        previewimage:function(event){
+            this.preview= URL.createObjectURL(event.target.files[0]);
+            this.image=URL.createObjectURL(event.target.files[0]);
         }
     },
+       
     created(){
         this.retrieve()
     }
+    
 }
 </script>
 
@@ -105,7 +117,7 @@ export default{
         margin-left: 55%;
         margin-right: 10%;
         height: 60%;
-        width: 30%;
+        width: 35%;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -145,10 +157,29 @@ export default{
     }
     img {
         float: left;
-        width: 35%;
+        width: 40%;
         justify-content: center;
-        margin-left: 75px
+        margin-left: 60px
     }
+    .title2 {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 58px;
+        text-align: center;
+        color: #1C746F;
+        margin: 15px;
+    }
+    .imgfluid{
+        justify-content:center;
+        margin-left:30%;
+        height:150px
+    
+    }
+
+    
+
 
 
 </style>
