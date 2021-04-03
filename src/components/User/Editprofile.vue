@@ -70,8 +70,12 @@ export default{
         },
         previewimage:function(event){
             this.preview= URL.createObjectURL(event.target.files[0]);
-            this.image=URL.createObjectURL(event.target.files[0]);
-        }
+            const reader= new FileReader()
+            reader.onload = event => {
+                this.image=event.target.result
+            }
+            reader.readAsDataURL(event.target.files[0])
+        },
     },
        
     created(){
