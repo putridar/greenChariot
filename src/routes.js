@@ -31,6 +31,7 @@ import Question from './components/User/Question.vue'
 import Score from './components/User/Score.vue'
 import EditProfile from './components/User/Editprofile.vue'
 import EditAcc from './components/Shop/EditAcc.vue'
+import RewardPage from './components/User/Rewardpage.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -64,5 +65,6 @@ export default [
   { path:'/question', component:Question, name:"question", props:true},
   { path:'/score', component:Score, name:"score", props:true},
   { path:'/editprofile', component:EditProfile, name:"editprofile", props:true},
-  { path:'/editacc', component:EditAcc, name:"editacc", props:true}
+  { path:'/editacc', component:EditAcc, name:"editacc", props:true},
+  { path:'/rewardpage', component:RewardPage, name:"rewardpage", props:true}
 ]

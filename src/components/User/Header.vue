@@ -11,8 +11,8 @@
                 <li class = "txt"><router-link :to="{ name: 'information', query: {id: this.id} }" exact>Information</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'challenges', query: {id: this.id} }" exact>Quiz & Challenges</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'greenshops', query: {id: this.id} }" exact>Green Shops</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'signin', query: {id: this.id} }" exact>Rewards</router-link></li>
-                <li><router-link :to="{ name: 'editprofile', query: {id: this.id} }" exact><img alt='profilepic' :src="this.image" /></router-link></li>
+                <li class = "txt"><router-link :to="{ name: 'rewardpage', query: {id: this.id} }" exact>Rewards</router-link></li>
+                <li><router-link :to="{ name: 'editprofile', query: {id: this.id} }" exact><div v-if="this.image==''"><img src='../../assets/user.png'></div><div v-else><img :src="this.image"/></div></router-link></li>
             </ul>
         </div>
     </div>
@@ -24,7 +24,7 @@ export default {
   name: 'Header',
   data() {
       return {
-          image:''
+          image:null
           
       }
   },
@@ -38,14 +38,14 @@ export default {
           var temp=''
           db.firestore().collection('users').doc(this.id).get().then(snapshot => {
               temp=snapshot.data().image
-            if (temp!=''){
-                this.image=temp
-            }else{
-                this.image='../../assets/user.png'
-            }
+              if (temp==''){
+                  this.image=''
+              }else{
+                  this.image=temp
+              }
 
               
-              }
+          }
           )
       }
         
