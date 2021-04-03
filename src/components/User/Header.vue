@@ -24,7 +24,7 @@ export default {
   name: 'Header',
   data() {
       return {
-          image:'../../assets/user.png'
+          image:''
           
       }
   },
@@ -35,11 +35,18 @@ export default {
   },
   methods: {
       fetchimage:function(){
+          var temp=''
           db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-              if (snapshot.data().image!=''){
-                  this.image=snapshot.data().image
+              temp=snapshot.data().image
+            if (temp!=''){
+                this.image=temp
+            }else{
+                this.image='../../assets/user.png'
+            }
+
+              
               }
-          })
+          )
       }
         
   },
