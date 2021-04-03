@@ -31,7 +31,7 @@ export default{
     data(){
         return{
             id:this.$route.query.id,
-            imagename:null,
+            imagename:'',
             name:this.$route.query.name,
             currentvoucher:{},
             voucher:this.$route.query.voucher,
@@ -48,9 +48,14 @@ export default{
             })
         },
         fetchvoucher:function(){
-            this.currentvoucher.price=this.voucher.price
-            this.currentvoucher.point=this.voucher.point
-            this.currentvoucher.name=this.name
+            var temp=''
+            db.firestore().collection('shops').doc(this.shopId).get().then(snapshot => {
+                temp=snapshot.data().imagename
+                this.currentvoucher.imagename=temp
+                this.currentvoucher.price=this.voucher.price
+                this.currentvoucher.point=this.voucher.point
+                this.currentvoucher.name=this.name
+            })
         },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {

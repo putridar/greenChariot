@@ -15,6 +15,7 @@
             <input type="text" placeholder="email" v-model="email" required><br>
             <p class="title2">Upload your profile picture below!</p>
             <input type="file" accept="image/*" @change="previewimage">
+            <button class="btn2" v-on:click="removepic()">Remove picture</button>
             <p class="title2">Preview Here:</p>
             <template v-if= "this.image!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
             <p><button class="btn" v-on:click="confirm()">Confirm</button>
@@ -61,6 +62,7 @@ export default{
                 image:this.image
             }).then(() => {
                 alert("Profile updated successfully!")
+                this.$router.push({name:'Dashboard',query:{id:this.id}})
             })
         }
     },
@@ -76,6 +78,14 @@ export default{
             }
             reader.readAsDataURL(event.target.files[0])
         },
+        removepic:function(){
+            db.firestore().collection('users').doc(this.id).update({
+                image:''
+            }).then(() => {
+                alert('Profile picture successfully removed!')
+                location.reload()
+            })
+        }
     },
        
     created(){
@@ -194,6 +204,23 @@ export default{
         justify-content:center;
         margin-left:30%;
         height:150px
+    
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 55%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        margin:7px
     
     }
 
