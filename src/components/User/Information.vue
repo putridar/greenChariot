@@ -39,7 +39,8 @@ export default {
     data() {
         return {
             articles: [],
-            topics: []
+            topics: [],
+            id: this.$route.query.id,
         }
     },
     methods: {
