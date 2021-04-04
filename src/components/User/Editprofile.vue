@@ -21,7 +21,7 @@
             <input type="file" accept="image/*" @change="previewimage">
             <button class="btn2" v-on:click="removepic()">Remove picture</button>
             <p class="title2">Preview Here:</p>
-            <template v-if= "this.image!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
+            <template v-if= "this.preview!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
             <p><button class="btn" v-on:click="confirm();updated();">Confirm</button>
             <button class="btn" v-on:click="signout()">Sign out</button></p>
         </div>
@@ -57,6 +57,7 @@ export default{
                 this.username=snapshot.data().username
                 this.email=snapshot.data().email
                 this.oldemail=snapshot.data().email
+                this.image=snapshot.data().image
             })
         },
         confirm:function(){
@@ -73,6 +74,7 @@ export default{
                 image:this.image
             }).then(() => {
                 alert("Profile updated successfully!")
+                this.$router.push({name:'Dashboard',query:{id:this.id}})
             })
         }
     },
@@ -95,7 +97,7 @@ export default{
                 image:''
             }).then(() => {
                 alert('Profile picture successfully removed!')
-                location.reload()
+                this.$router.push({name:'Dashboard',query:{id:this.id}})
             })
         },
         updated:function(){
