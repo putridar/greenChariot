@@ -29,7 +29,8 @@ export default{
             vouchers: [],
             code: '',
             shops: [],
-            shopId: ''
+            shopId: '',
+            custlist: {}
         }
     },
     methods:{
@@ -50,15 +51,17 @@ export default{
                             this.storecode = item.code
                             this.imagename = item.imagename
                             this.day = item.day == undefined ? null : item.day
+                            this.custlist = item.custlist == undefined ? {} : item.custlist
                         })
                     }
                 });
             })
             this.fetchPoints();
         },
-        updateRedeemed: function(id, redeemed) {
+        updateRedeemed: function(id, redeemed, lst) {
             db.firestore().collection('shops').doc(id).update({
                 redeemed: redeemed,
+                custlist: lst
             })
             db.firestore().collection('users').doc(this.id).update({
                 points: this.oldpoints + 500,
@@ -66,9 +69,6 @@ export default{
         },
         direct:function(){
             var d = new Date();
-            if (d.getDay() != this.day || this.day == null) {
-                this.redeemed = []
-            }
             if (this.code.length == 0){
                 alert("You need to input a code!")
             } else if (this.code !== this.storecode){
@@ -77,7 +77,12 @@ export default{
                 alert("You have already redeemed this code!")
             } else {
                 this.redeemed.push(this.id)
-                this.updateRedeemed(this.shopId, this.redeemed);
+                if (d.getDay() in this.custlist) {
+                    this.custlist[d.getDay()].push(this.id);     
+                } else {
+                    this.custlist[d.getDay()] = [this.id];
+                }
+                this.updateRedeemed(this.shopId, this.redeemed, this.custlist);
                 this.$router.push({name:'congratpage',query:{id:this.id,name:this.name,oldpoints:this.oldpoints,shopId: this.shopId}})
             }
         }   

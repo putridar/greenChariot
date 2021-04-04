@@ -5,10 +5,12 @@
         <img alt="greenChariot" src="../../assets/welcome.png">
         <div class = "content">
             <p class = "title"> Sign Up </p>
-            <input type="text" placeholder="Name" v-model="name" required><br>
-            <input type="text" placeholder="Username" v-model="username" required><br>
-            <input type="email" placeholder="Email" v-model="email" required><br>
-            <input type="password" placeholder="Password" v-model="password" required><br>
+            <input type="text" placeholder="Name" v-model="name" class = "inputstyle" required><br>
+            <input type="text" placeholder="Username" v-model="username" class = "inputstyle" required><br>
+            <input type="email" placeholder="Email" v-model="email" class = "inputstyle" required><br>
+            <input type="password" placeholder="Password" v-model="password" class = "inputstyle" required><br>
+            <input type="checkbox" id="shop" name="shop" v-model="isShop">
+            <label for="shop" class = "txt">Register as a Shop's Owner?</label><br>
             <button class = "create" v-on:click="create()">Create Account</button>
             <p class = "txt" v-on:click="signin()">Already have an account? Sign In now!</p>
         </div>
@@ -26,7 +28,8 @@ export default {
             username :"",
             email: "",
             password: "",
-            id: ""
+            id: "",
+            isShop: false
         }
     },
     methods: {
@@ -35,7 +38,6 @@ export default {
                 alert("Please fill in the required input");
             } else {
                 this.signup();
-                this.navigate();
             }
         },
         signup: function() {
@@ -48,13 +50,14 @@ export default {
                 alert(error)})
             .then(() => {
                 db.auth().currentUser.updateProfile({displayName: this.name})
-                if (success){
+                if (success && !this.isShop){
                     db.firestore().collection('users').add({
                         name: this.name,
                         email: this.email,
                         username: this.username,
                         points: 0,
-                        currvoucher:[]
+                        currvoucher:[],
+                        image:''
                     })
                     .then((docRef) => {
                         this.id = docRef.id
@@ -63,6 +66,41 @@ export default {
                         this.email = ""
                         this.password = "" 
                         alert("Sign up successful!")
+                    })
+                    .then(() => {
+                        this.navigate(this.id)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        alert(error)
+                    })
+                } else if (success) {
+                    db.firestore().collection('shops').add({
+                        name: this.name,
+                        email: this.email,
+                        imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png",
+                        vouchers: [],
+                        redeemed: [],
+                        custlist: {
+                            0:[],
+                            1:[],
+                            2:[],
+                            3:[],
+                            4:[],
+                            5:[],
+                            6:[]
+                        }
+                    })
+                    .then((docRef) => {
+                        this.id = docRef.id
+                        this.name = ""
+                        this.username = ""
+                        this.email = ""
+                        this.password = "" 
+                        alert("Sign up successful!")
+                    })
+                    .then(() => {
+                        this.navigateShop(this.id)
                     })
                     .catch(error => {
                         console.log(error)
@@ -77,9 +115,14 @@ export default {
         signin: function() {
             this.$router.push({ name: 'signin'})
         },
-        navigate: function() {
-            this.$router.push({ name: 'survey', params : {
-                id: this.id,
+        navigate: function(id) {
+            this.$router.push({ name: 'survey', query : {
+                id: id,
+            }})
+        },
+        navigateShop: function(id) {
+            this.$router.push({ name: 'dashboardShop', query : {
+                id: id,
             }})
         }
     }
@@ -152,7 +195,7 @@ export default {
         color: #1C746F;
         margin: 15px;
     }
-    input {
+    .inputstyle {
         font-family: Montserrat;
         padding: 8px;
         width: 80%;

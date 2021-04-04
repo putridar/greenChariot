@@ -37,7 +37,8 @@ export default {
     data() {
         return {
             articles: [],
-            topics: ["sustainability", "nature", "innovation", "climatechange"]
+            topics: ["sustainability", "nature", "innovation", "climatechange"],
+            id: this.$route.query.id,
         }
     },
     methods: {
