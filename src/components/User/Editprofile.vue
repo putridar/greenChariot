@@ -62,8 +62,10 @@ export default{
         confirm:function(){
             if (this.name=='' || this.username=='' || this.email==''){
                 alert('You need to fill in all the inputs!')
+            }else if (this.password!= this.confirmpass && this.confirmpass!=null){
+                return
             }else{
-            db.firestore().collection('users').doc(this.id).update({
+                db.firestore().collection('users').doc(this.id).update({
                 name:this.name,
                 username:this.username,
                 image:this.image
@@ -106,9 +108,9 @@ export default{
                       alert("Password has been changed! Please login again.")
                       this.$router.push({name:'signin',query:{id:this.id}})
                 }})
-            }else if (this.confirmpass!=null && this.password!=this.confirmpass){
+            }else if (this.confirmpass!=null && this.password!=null && this.password!=this.confirmpass){
                 alert("Your password confirmation is incorrect!")
-            }else if (this.oldemail!=this.email && this.confirmpass==null){
+            }else if (this.oldemail!=this.email && this.confirmpass==null && this.password==null){
                 user.updateEmail(this.email).catch(error => {
                     alert(error)
                     success=false
@@ -122,7 +124,7 @@ export default{
                         })
                     }
                 })
-            } else if (this.oldemail!=this.email && this.confirmpass!=null){
+            } else if (this.oldemail!=this.email && this.password!=null && this.confirmpass!=null){
                 user.updateEmail(this.email).catch(error => {
                     alert(error)
                     success=false
