@@ -2,7 +2,7 @@
     <div class="background">
         <Head v-bind:id="id"></Head>
         <div class="top">
-            <p class="content">Your points: {{this.points}}</p>
+            <p class="content2">Your vouchers:</p>
         </div>
         <div class="rewards">
             <ul>
@@ -63,6 +63,7 @@ export default{
         display: flex;
         margin-right: 100px;
         margin-top: -40%;
+        margin-bottom:2%
     }
     .rewards {
         margin-top: 10px;
@@ -125,11 +126,18 @@ export default{
         font-weight: bold;
         font-size: 35px;
         margin-left: 2%;
-        margin-top:10px;
-        animation: zoomIn ease 0.7s
+        margin-top:2%
     }
     img {
         width:50%;
         margin-bottom:2%
+    }
+    .content2{
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 45px;
+        margin-left: 5%;
+        margin-top:10px;
+        text-align:left
     }
 </style>
