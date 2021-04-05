@@ -6,16 +6,16 @@
     </div>
     <div class="rewards">
         <div v-if="this.vouchers.length == 0">
-            <p class ="title"> This shop currently has no vouchers </p>
+            <p class ="title"> There are currently no vouchers </p>
         </div> 
         <ul>
         <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">
-                <img alt = "shoplogo" v-bind:src="imagename">
+                <img alt = "shoplogo" v-bind:src="item.image">
             </div>
-            <p class="title">${{item.price}} {{name}} Voucher</p>
+            <p class="title">{{item.name}} ${{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item)"> Redeem </button>
+            <button class="btn" v-on:click="onclick(item.id,item.name,item)"> Redeem </button>
         </li>
     </ul>
     </div>
@@ -48,11 +48,23 @@ export default{
             })
         },
         fetchItems: function() {
-            console.log(this.id)
-            db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
-                 this.imagename = snapshot.data().imagename
-                 this.vouchers = snapshot.data().vouchers
-            })
+            db.firestore().collection('shops').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var name = doc.data().name
+                    var item = doc.data().vouchers
+                    var pic = doc.data().imagename
+                    if (item !== undefined) {
+                        item.forEach(v => this.vouchers.push({
+                            price: v.price,
+                            point: v.point,
+                            image: pic,
+                            name: name,
+                            id: doc.id              
+                        }))
+                    }
+                });
+            }).catch(error => {console.log(error)
+                alert(error)})
         },
         retrieve:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot=>{
@@ -60,9 +72,9 @@ export default{
             })
         
      },
-        onclick:function(item){
+        onclick:function(id, name, item){
             for (var x of this.currvoucher){
-                if (item.price==x.price && item.point==x.point && this.name==x.name){
+                if (item.price==x.price && item.point==x.point && item.name==x.name){
                     alert("You already have this voucher in your possession!")
                     return
                 }
@@ -72,7 +84,7 @@ export default{
             }else{
                 this.price=item.price
                 this.point=item.point
-                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item}})
+                this.$router.push({name:"rewardpage",query:{id:this.id,shopId:id,name:name,voucher:item}})
             }
         }  
     },
@@ -109,7 +121,7 @@ export default{
         text-align: center;
         padding: 2%;
         margin:2%;
-        margin-top:5%
+        margin-top:7%
     }
     .title2{
         font-family: Montserrat;

@@ -32,6 +32,7 @@ import Score from './components/User/Score.vue'
 import EditProfile from './components/User/Editprofile.vue'
 import EditAcc from './components/Shop/EditAcc.vue'
 import RewardPage from './components/User/Rewardpage.vue'
+import CombinedVoucher from './components/User/CombinedVoucher.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -66,5 +67,6 @@ export default [
   { path:'/score', component:Score, name:"score", props:true},
   { path:'/editprofile', component:EditProfile, name:"editprofile", props:true},
   { path:'/editacc', component:EditAcc, name:"editacc", props:true},
-  { path:'/rewardpage', component:RewardPage, name:"rewardpage", props:true}
+  { path:'/rewardpage', component:RewardPage, name:"rewardpage", props:true},
+  { path:'/combinedvoucher', component:CombinedVoucher, name:"combinedvoucher", props:true}
 ]

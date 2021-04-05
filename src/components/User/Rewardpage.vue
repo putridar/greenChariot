@@ -3,6 +3,7 @@
         <Head v-bind:id="id"></Head>
         <div class="top">
             <p class="content2">Your vouchers:</p>
+            <button class = "btn2" v-on:click="exchange()"> Exchange Vouchers </button>
         </div>
         <div class="rewards">
             <ul>
@@ -40,6 +41,9 @@ export default{
                 this.currvoucher=snapshot.data().currvoucher
             })
         },
+        exchange: function() {
+            this.$router.push({name:'combinedvoucher',query:{id:this.id}})
+        }
     },
     created(){
         this.retrievepoints()
@@ -106,6 +110,22 @@ export default{
         margin-bottom: 2%;
     }
     .btn {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 80%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
+    }
+    .btn2 {
         background: #2D8F8A;
         border-radius: 8px;
         font-family: Montserrat;
