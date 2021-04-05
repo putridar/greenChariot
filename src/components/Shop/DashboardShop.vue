@@ -21,9 +21,9 @@
                 <div class = "cust">
                     <customer-chart v-bind:id="id" style="position: relative; height:30vh; width:10vw"></customer-chart>
                 </div>
-                <p class = "txt3">Vouchers Insight</p>
+                <p class = "txt3">Vouchers Insight</p><br>
                 <div class = "cust">
-                    <voucher-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw"></voucher-chart>
+                    <voucher-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw;"></voucher-chart>
                 </div>
             </div>
         </div>

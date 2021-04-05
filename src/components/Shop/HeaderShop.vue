@@ -77,7 +77,7 @@ export default {
     }
     li {
         flex-grow: 1;
-        flex-basis: 70px;
+        flex-basis: 80px;
         text-align: center;
         margin: 3px;
     }

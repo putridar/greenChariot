@@ -37,7 +37,8 @@ export default{
             voucher:this.$route.query.voucher,
             shopId:this.$route.query.shopId,
             score:0,
-            currvoucher:[]
+            currvoucher:[],
+            exchanged: []
         }
     },
     methods:{
@@ -50,11 +51,12 @@ export default{
         fetchvoucher:function(){
             var temp=''
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot => {
-                temp=snapshot.data().imagename
-                this.currentvoucher.imagename=temp
+                temp=snapshot.data()
+                this.currentvoucher.imagename=temp.imagename
                 this.currentvoucher.price=this.voucher.price
                 this.currentvoucher.point=this.voucher.point
                 this.currentvoucher.name=this.name
+                this.exchange = temp.exchanged == undefined ? [] : temp.exchanged
             })
         },
         retrieve:function(){
@@ -70,8 +72,13 @@ export default{
                 currvoucher:this.currvoucher,
                 points: this.score - this.currentvoucher.point
             }).then(() => {
-                alert("You have successfully exchange your points")
-                this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                this.exchanged.push(this.id)
+                db.firestore().collection('shops').doc(this.shopId).update({
+                    exchanged: this.exchanged
+                }).then(() => {
+                    alert("You have successfully exchange your points")
+                    this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                })
             })
         },
         backwards:function(){
