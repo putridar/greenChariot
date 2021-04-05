@@ -34,7 +34,7 @@
                 <p>
                     Buy more sustainable products to help saving the planet!
                 </p>
-                <button class = "btn">Shop now!</button>
+                <button class = "btn" v-on:click="toShops()">Shop now!</button>
             </li>
         </ul>
     </div>
@@ -66,6 +66,9 @@ export default {
         },
         toQuiz: function() {
             this.$router.push({name:'quiz',query:{id:this.id}})
+        },
+        toShops: function() {
+            this.$router.push({name:'greenshops',query:{id:this.id}})
         }
     }
 }

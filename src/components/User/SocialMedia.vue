@@ -5,12 +5,18 @@
         <div class = "content">
             <p class = "title"> Connect Your Social Media </p><br>
             <label for = "ig">Instagram</label>
-            <input type="text" placeholder="Username (without @)" id ="ig" v-model="ig"><br>
+            <input type="text" placeholder="Username (without @)" id ="ig" v-model.lazy="ig"><br>
             <label for = "fb">Facebook</label>
-            <input type="text" placeholder="Profile name" id="fb" v-model="fb"><br>
+            <input type="text" placeholder="Profile name" id="fb" v-model.lazy="fb"><br>
             <label for = "twitter">Twitter</label>
-            <input type="text" placeholder="Username (without @)" id="twitter" v-model="twitter"><br>
-            <button class = "btn" v-on:click="link()">Connect</button>
+            <input type="text" placeholder="Username (without @)" id="twitter" v-model.lazy="twitter"><br>
+            <div v-if="!this.exist">
+                <button class = "btn" v-on:click="link()">Connect</button>
+            </div>
+            <div v-else>
+                <button class = "btn" v-on:click="link()">Connect</button>
+                <button class = "btn" v-on:click="cancel()">Cancel</button>
+            </div>
         </div>
     </div>
 </template>
@@ -28,7 +34,8 @@ export default {
             ig: "",
             fb: "",
             twitter: "",
-            id: this.$route.query.id
+            id: this.$route.query.id,
+            exist: false
         }
     },
     methods: {
@@ -39,6 +46,7 @@ export default {
                     this.ig = item.ig
                     this.fb = item.fb
                     this.twitter = item.twitter
+                    this.exist = true
                 }
             }).catch(error => {console.log(error)
                 alert(error)})
@@ -58,7 +66,10 @@ export default {
                     this.$router.push({ name: 'socialmediachallenge', query: {id: this.id}})
                 })
             }
-        }    
+        },
+        cancel: function() {
+            this.$router.push({ name: 'socialmediachallenge', query: {id: this.id}})
+        }   
     },
     created() {
       this.fetchItems()  

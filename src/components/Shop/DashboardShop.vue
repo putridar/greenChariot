@@ -19,9 +19,12 @@
             <div class="chart">
                 <p class = "txt3">Customer Insight (greenChariot Users)</p>
                 <div class = "cust">
-                    <customer-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw"></customer-chart>
+                    <customer-chart v-bind:id="id" style="position: relative; height:30vh; width:10vw"></customer-chart>
                 </div>
                 <p class = "txt3">Vouchers Insight</p>
+                <div class = "cust">
+                    <voucher-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw"></voucher-chart>
+                </div>
             </div>
         </div>
     </div>
@@ -31,11 +34,13 @@
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
 import CustomerChart from "../Charts/CustomerChart.vue"
+import VoucherChart from "../Charts/VoucherChart.vue"
 export default {
     name: 'Header',
     components :{
         Head,
-        CustomerChart
+        CustomerChart,
+        VoucherChart
     },
     data() {
         return {
@@ -46,7 +51,8 @@ export default {
             address: '',
             day: null,
             code: '',
-            custlist: {}
+            custlist: {},
+            redeemed: []
         }
     },
     methods: {

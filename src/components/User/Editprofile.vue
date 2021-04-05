@@ -166,14 +166,13 @@ export default{
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 200vh;
     }
     .content{
         font-family: Montserrat;
         font-weight: bold;
         font-size: 35px;
         margin-left: 2%;
-        margin-top:10px;
         animation: zoomIn ease 0.7s
     }
     @keyframes zoomIn {
@@ -182,7 +181,7 @@ export default{
     }
     .top {
         margin-right: 100px;
-        margin-top: -42%;
+        margin-top: -90%;
         margin-bottom: 2%;
         margin-left:2%;
         display:flex
@@ -206,10 +205,10 @@ export default{
     }
     .profile {
         background-color: #FFFFFF;
-        margin-top: 2%;
+        margin-top: -5%;
         margin-left: 55%;
         margin-right: 10%;
-        height: 60%;
+        height: 50%;
         width: 35%;
         justify-content: center;
         align-items: center;

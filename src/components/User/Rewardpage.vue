@@ -115,7 +115,7 @@ export default{
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 70%;
+        width: 30%;
         height: 50px;
         text-align: center;
         cursor: pointer;
@@ -135,7 +135,7 @@ export default{
     .content2{
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 45px;
+        font-size: 36px;
         margin-left: 5%;
         margin-top:10px;
         text-align:left

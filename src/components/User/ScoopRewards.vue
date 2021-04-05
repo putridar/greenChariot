@@ -5,6 +5,9 @@
         <p class="content">Your points: {{this.score}}</p>
     </div>
     <div class="rewards">
+        <div v-if="this.vouchers.length == 0">
+            <p class ="title"> This shop currently has no vouchers </p>
+        </div> 
         <ul>
         <li v-for="(item,index) in vouchers" :key="index">
             <div class="pic">

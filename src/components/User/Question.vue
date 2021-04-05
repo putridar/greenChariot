@@ -76,7 +76,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 120vh;
     }
     @keyframes zoomIn {
         from {

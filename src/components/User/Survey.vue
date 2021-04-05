@@ -80,7 +80,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 130vh;
     }
     img {
         float: left;
@@ -88,10 +88,22 @@ export default {
         justify-content: center;
         margin-left: -40%;
         margin-top: 5%;
+        animation: zoomIn 1s
+    }
+    @keyframes zoomIn {
+        from {
+            transform: translate3d(0,30px,0);
+            opacity: 0
+        }
+
+        to {
+            transform: translate3d(0,0,0);
+            opacity: 1
+        }
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 7%;
+        margin-top: 5%;
         margin-left: 45%;
         margin-right: 10%;
         height: 60%;
@@ -100,7 +112,8 @@ export default {
         align-items: center;
         text-align: center;
         border-radius: 8px;
-        padding: 10px
+        padding: 10px;
+        animation: zoomIn 1s
     }
     .Consumption1{
         width: 90%;
