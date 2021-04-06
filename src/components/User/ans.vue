@@ -5,21 +5,19 @@
             <p id = "question"> {{this.selectedQuestions[0].question}}</p><br>
             <br>
             <ul>
-                <li v-for='(o, index) in selectedQuestions[0].options' :key='o'>
+                <li v-for='(o, index) in this.selectedQuestions[0].options' :key='o'>
                     <div id='help'>
-                        <button class='mcq' type='button' v-on:click='selected($event)' v-bind:id='index'>
+                        <button class='mcq' type='button' v-bind:id='index'>
                             {{index+1}}. {{o}}
                         </button>
                     </div>
                 </li>
             </ul>
-            <button class = "btn" type='button' v-on:click="next()">Check</button>
-            {{this.correct}}
-            {{this.chose}}
-            {{this.answer}}
-            {{this.score}}
-            {{this.selectedQuestions.length}}
+            <button class = "btn" type='button' v-on:click="next()">Next</button>
         </div>
+        {{this.score}}
+        {{this.correct}}
+        {{this.selectedQuestions.length}}
     </div>
 </template>
 
@@ -27,42 +25,33 @@
 import Head from './Header.vue'
 
 export default {
-    name: 'question',
+    name: 'ans',
     components :{
         Head
     },
     data() {
         return {
             id: this.$route.query.id,
-            chose:100, //index of answer selected
-            answer:100, //index of answer
+            chose:this.$route.query.chose, //index of answer selected
+            answer:this.$route.query.answer, //index of answer
             selectedQuestions:this.$route.query.selectedQuestions,
             score:this.$route.query.score,
-            correct:false,
+            correct:this.$route.query.correct,
         }
     },
     methods: {
-        selected: function(event) {
-            this.chose = event.target.getAttribute("id");
-            this.answer = this.selectedQuestions[0].correct;
-            if (this.chose==this.answer) {
-                this.correct=true;
-            } else {
-                this.correct=false;
-            }
+        toScore: function() {
+            this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
         next: function() {
-            this.counter+=1
-            if (this.chose==100) {
-                alert("You have not selected an option!")
-            } else if (this.correct==true) {
-                this.score+=5
-                this.$router.push({name:'ans',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions,chose:this.chose,answer:this.answer,correct:this.correct}})
+            this.selectedQuestions.shift();
+            if (this.selectedQuestions.length==0) {
+                this.toScore()
             } else {
-                this.$router.push({name:'ans',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions,chose:this.chose,answer:this.answer,correct:this.correct}})
+                this.$router.push({name:'question',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions}})
             }
         },
-    },
+    }
 }
 </script>
 
@@ -85,12 +74,6 @@ export default {
             transform: translate3d(0,0,0);
             opacity: 1
         }
-    }
-    .mcq:hover {
-        background-color:rgb(255, 255, 179);
-    }
-    .mcq:focus {
-        background-color:rgb(255, 255, 179);
     }
     .mcq{
         font-family: Montserrat;

@@ -34,6 +34,7 @@ import EditAcc from './components/Shop/EditAcc.vue'
 import RewardPage from './components/User/Rewardpage.vue'
 import CombinedVoucher from './components/User/CombinedVoucher.vue'
 import SpendVoucher from './components/User/SpendVoucher.vue'
+import ans from './components/User/ans.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -70,6 +71,6 @@ export default [
   { path:'/editacc', component:EditAcc, name:"editacc", props:true},
   { path:'/rewardpage', component:RewardPage, name:"rewardpage", props:true},
   { path:'/combinedvoucher', component:CombinedVoucher, name:"combinedvoucher", props:true},
-  { path:'/spendvoucher', component:SpendVoucher, name:"spendvoucher", props:true}
-
+  { path:'/spendvoucher', component:SpendVoucher, name:"spendvoucher", props:true},
+  { path:'/ans', component:ans, name:"ans", props:true},
 ]
