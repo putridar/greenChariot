@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class="piechart" >
             <div class="col">
                 <PieChart class="piechart"></PieChart>
@@ -57,6 +57,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 110vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content {
         background-color: #FFFFFF;

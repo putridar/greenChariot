@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class="top">
             <p class="content2">Your vouchers:</p>
             <button class = "btn2" v-on:click="exchange()"> Exchange Vouchers </button>
@@ -61,6 +61,11 @@ export default{
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .top {
         justify-content: space-between;

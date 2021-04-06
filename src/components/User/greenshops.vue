@@ -1,6 +1,6 @@
 <template>
  <div class="bg">
-    <Head v-bind:id="id"></Head>
+    <Head v-bind:id="id" class="head"></Head>
     <div class = "top">
         <p class="content">Our Green Shop Partners:</p>
         <button class = "btn" v-on:click="register()"> Want to be our partner? Register now! </button>
@@ -65,6 +65,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     ul {
         display: flex;

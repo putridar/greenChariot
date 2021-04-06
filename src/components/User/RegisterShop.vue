@@ -1,6 +1,6 @@
 <template>
   <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <img alt="greenChariot" src="../../assets/shop.png">
         <div class = "content">
             <p class = "title"> Register Your Shop! </p>
@@ -133,6 +133,11 @@ export default {
         width: 100%;
         min-height: 155vh;
     }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
+    }
     .greenlogo {
         font-family: Inter;
         font-weight: bold;
@@ -160,6 +165,7 @@ export default {
         width: 40%;
         justify-content: center;
         margin-left: -30%;
+        margin-top: 5%
     }
     .content {
         background-color: #FFFFFF;

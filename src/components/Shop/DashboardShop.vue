@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div>
             <div class="content">
                 <div class="pic">
@@ -19,11 +19,11 @@
             <div class="chart">
                 <p class = "txt3">Customer Insight (greenChariot Users)</p>
                 <div class = "cust">
-                    <customer-chart v-bind:id="id" style="position: relative; height:30vh; width:10vw"></customer-chart>
+                    <customer-chart v-bind:id="id" style="height:30vh; width:10vw"></customer-chart>
                 </div>
                 <p class = "txt3">Vouchers Insight</p><br>
                 <div class = "cust">
-                    <voucher-chart v-bind:id="id" style="position: relative; height:30vh; width:20vw;"></voucher-chart>
+                    <voucher-chart v-bind:id="id" style="height:30vh; width:20vw;"></voucher-chart>
                 </div>
             </div>
         </div>
@@ -110,6 +110,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 160vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content {
         font-family: Montserrat;

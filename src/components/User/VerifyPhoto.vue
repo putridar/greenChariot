@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <label for = "imageLoader" class="ins">Screenshots (Make sure that your caption is visible)</label>
         <input type="file" id ="imageLoader" @change="updateCanvasImage"><br>
         <p class = "ins"> If the page is unresponsive, please wait, do not refresh!</p>
@@ -294,6 +294,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 200vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .image {
         float: left;

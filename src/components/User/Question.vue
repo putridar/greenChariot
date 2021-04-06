@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class = "content">
             <p id = "question"> {{this.questions[0].question}}</p><br>
             <ul>
@@ -88,6 +88,11 @@ export default {
             transform: translate3d(0,0,0);
             opacity: 1
         }
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     label {
         margin-bottom: 12px;

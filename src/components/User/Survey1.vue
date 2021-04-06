@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <img alt="greenChariot" src="../../assets/survey.png">
         <div class = "content">
             <p class = "title">Food Intake Proportion</p>
@@ -103,6 +103,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 110vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     img {
         float: left;

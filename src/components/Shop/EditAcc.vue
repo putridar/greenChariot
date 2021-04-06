@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <img alt="logo" src="../../assets/welcome.png" class="image">
         <div class="profile">
             <p class="title">Edit Your Profile!</p>
@@ -124,7 +124,7 @@ export default{
             .signOut()
             .then(() => {
                 alert('You have successfully signed out!')
-                this.$router.push({name:'signin',query:{id:this.id}})
+                this.$router.push({name:'signin'})
             })
             .catch(error => console.log(error))
             
@@ -144,6 +144,11 @@ export default{
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content{
         font-family: Montserrat;

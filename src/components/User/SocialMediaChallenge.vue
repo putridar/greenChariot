@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class = "top">
             <h1 class = "content"> Challenges: </h1>
             <button class = "edit" v-on:click="edit()"> Edit Social Media Account </button>
@@ -119,6 +119,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content {
         font-family: Montserrat;

@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class="content">
             <div class="pic">
                 <div class="hg">
@@ -78,6 +78,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 120vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content {
         font-family: Montserrat;

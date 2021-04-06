@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <img class = "image" alt="socialmedia" src="../../assets/socialmedia.png">
         <div class = "content">
             <p class = "title"> Connect Your Social Media </p><br>
@@ -85,6 +85,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .image {
         float: left;

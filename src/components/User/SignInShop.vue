@@ -1,6 +1,6 @@
 <template>
   <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <img alt="greenChariot" src="../../assets/shop.png">
         <div class = "content">
             <p class = "title"> Sign In to Your Shop! </p>
@@ -88,6 +88,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .greenlogo {
         font-family: Inter;

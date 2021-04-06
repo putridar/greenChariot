@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class = "item">
             <div class="rewards">
                 <img alt="successful" src="../../assets/successful.png">
@@ -45,6 +45,11 @@ export default{
         margin: 0px;
         width: 100%;
         min-height: 100vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     img {
         float: left;

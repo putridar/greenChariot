@@ -63,7 +63,8 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        height:100px
+        height:100px;
+        box-shadow: 0 5px 8px 0 #77c5fc;
     }
     .logo {
         float:left

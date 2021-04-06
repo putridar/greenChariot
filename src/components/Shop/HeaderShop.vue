@@ -9,7 +9,7 @@
                 <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'voucherlists', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'shopinfo', query: {id: this.id} }" exact>Edit Information</router-link></li>
-                <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><img src="../../assets/user.png"/></router-link></li>
+                <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><img src="../../assets/user.png" class="user"/></router-link></li>
             </ul>
         </div>
     </div>
@@ -41,6 +41,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
+        box-shadow: 0 5px 8px 0 #77c5fc;
     }
     .logo {
         float:left
@@ -97,7 +98,7 @@ export default {
         font-size: 16px;
         justify-content: center;
     }
-    img {
+    .user {
         width: 30%;
         margin-top: 30px
     }

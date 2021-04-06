@@ -1,6 +1,6 @@
 <template>
     <div class = "bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <p class = "txt2"> Topic Filters:</p>
         <div class="filters">
             <input type="checkbox" id="Sustainability" class = "filterbutton" value="sustainability" v-model="topics" v-on:change="update()">
@@ -89,6 +89,11 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 400vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .checklabel {
         background: #FFFFFF;

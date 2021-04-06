@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <Head v-bind:id="id"></Head>
+        <Head v-bind:id="id" class="head"></Head>
         <div class="top">
             <p class="content">Your points: {{this.points}}</p>
         </div>
@@ -167,6 +167,11 @@ export default{
         margin: 0px;
         width: 100%;
         min-height: 200vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
     }
     .content{
         font-family: Montserrat;
