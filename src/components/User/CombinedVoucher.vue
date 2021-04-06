@@ -3,6 +3,7 @@
     <Head v-bind:id="id" class="head"></Head>
     <div class="top">
         <p class="content">Your points: {{this.score}}</p>
+        <button class = "btn2" v-on:click="reward()"> Your Rewards </button>
     </div>
     <div class="rewards">
         <div v-if="this.vouchers.length == 0">
@@ -15,7 +16,7 @@
             </div>
             <p class="title">{{item.name}} ${{item.price}} {{name}} Voucher</p>
             <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item.id,item.name,item)"> Redeem </button>
+            <button class="btn" v-on:click="onclick(item.id,item.name,item.image,item)"> Redeem </button>
         </li>
     </ul>
     </div>
@@ -72,7 +73,7 @@ export default{
             })
         
      },
-        onclick:function(id, name, item){
+        onclick:function(id, name, image,item){
             for (var x of this.currvoucher){
                 if (item.price==x.price && item.point==x.point && item.name==x.name){
                     alert("You already have this voucher in your possession!")
@@ -84,9 +85,15 @@ export default{
             }else{
                 this.price=item.price
                 this.point=item.point
-                this.$router.push({name:"rewardpage",query:{id:this.id,shopId:id,name:name,voucher:item}})
+                item.imagename=image
+                this.currvoucher.push(item)
+                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:id,name:name,voucher:item,combined:true}})
+                
             }
-        }  
+        },
+        reward: function() {
+            this.$router.push({name:"rewardpage",query:{id:this.id}})
+        }
     },
     created(){
         this.retrieve(),
@@ -181,6 +188,22 @@ export default{
     }
     .text{
         float:right
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 30%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
     }
     img {
         width:50%;

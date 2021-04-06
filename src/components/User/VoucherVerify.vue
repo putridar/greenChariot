@@ -38,7 +38,8 @@ export default{
             shopId:this.$route.query.shopId,
             score:0,
             currvoucher:[],
-            exchanged: []
+            exchanged: [],
+            combined: this.$route.query.combined
         }
     },
     methods:{
@@ -77,12 +78,20 @@ export default{
                     exchanged: this.exchanged
                 }).then(() => {
                     alert("You have successfully exchange your points")
-                    this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                    if (this.combined) {
+                        this.$router.push({name:'combinedvoucher',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                    } else {
+                        this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                    }
                 })
             })
         },
         backwards:function(){
-            this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name,shopId:this.shopId}})
+            if (this.combined) {
+                this.$router.push({name:'combinedvoucher',query:{id:this.id,name:this.name, shopId:this.shopId}})
+            } else {
+                this.$router.push({name:'scooprewards',query:{id:this.id,name:this.name, shopId:this.shopId}})
+            }
         }
             
         
