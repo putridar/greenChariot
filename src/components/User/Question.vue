@@ -14,11 +14,6 @@
                 </li>
             </ul>
             <button class = "btn" type='button' v-on:click="next()">Check</button>
-            {{this.correct}}
-            {{this.chose}}
-            {{this.answer}}
-            {{this.score}}
-            {{this.selectedQuestions.length}}
         </div>
     </div>
 </template>

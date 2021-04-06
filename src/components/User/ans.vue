@@ -15,9 +15,6 @@
             </ul>
             <button class = "btn" type='button' v-on:click="next()">Next</button>
         </div>
-        {{this.score}}
-        {{this.correct}}
-        {{this.selectedQuestions.length}}
     </div>
 </template>
 
@@ -51,6 +48,12 @@ export default {
                 this.$router.push({name:'question',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions}})
             }
         },
+        color:function() {
+            document.getElementById(this.chose).style.background='red'
+        }
+    },
+    created() {
+        this.color()
     }
 }
 </script>
@@ -86,7 +89,7 @@ export default {
         font-size:25px;
         width:100%;
         cursor: pointer;
-    }
+    } 
     .head {
         position: sticky;
         top: 0;
