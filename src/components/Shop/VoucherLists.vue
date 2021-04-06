@@ -1,29 +1,34 @@
 <template>
- <div class="bg">
-    <Head v-bind:id="id" class="head"></Head>
-    <div class = "top">
-        <p class="content">Your Vouchers:</p>
-        <button class="btn2" v-on:click="add()">Add Voucher</button>
-    </div>
-    <div class = "shops">
-        <ul>
-            <li v-for="(item,index) in vouchers" :key="index">
-                <h1 class="title">${{item.price}} Vouchers</h1><br>
-                <p class ="txt">{{item.point}} Points</p><br>
-                <button class="btn" v-on:click="deleteVoucher(item.id)">Delete</button>
-                <button class="btn" v-on:click="modify(item.id)">Modify</button>
-            </li>
-        </ul>
-    </div>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "top">
+                <p class="content">Your Vouchers:</p>
+                <button class="btn2" v-on:click="add()">Add Voucher</button>
+            </div>
+            <div class = "shops">
+                <ul>
+                    <li v-for="(item,index) in vouchers" :key="index">
+                        <h1 class="title">${{item.price}} Vouchers</h1><br>
+                        <p class ="txt">{{item.point}} Points</p><br>
+                        <button class="btn" v-on:click="deleteVoucher(item.id)">Delete</button>
+                        <button class="btn" v-on:click="modify(item.id)">Modify</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
 </template>
 <script>
 import Head from './HeaderShop.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default {
     name: 'Greenshops',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

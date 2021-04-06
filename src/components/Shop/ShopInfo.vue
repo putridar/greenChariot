@@ -1,36 +1,41 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="content">
-            <div class="pic">
-                <div class="hg">
-                    <img alt="scoop" v-bind:src="this.image">
-                    <p class = "title">{{this.name}}</p>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="content">
+                <div class="pic">
+                    <div class="hg">
+                        <img alt="scoop" v-bind:src="this.image">
+                        <p class = "title">{{this.name}}</p>
+                    </div>
+                    <button class="btn" v-on:click="editimage()">Edit Image</button>
                 </div>
-                <button class="btn" v-on:click="editimage()">Edit Image</button>
-            </div>
-            <div class = "txt">
-                <div class="hg1">
-                    <p class="title">Description</p>
-                    <p class="item">{{this.desc}}</p><br>
-                    <p class="title">Address</p>
-                    <p class="item">{{this.address}}</p><br>
-                    <p class="title">Shop's Unique Code</p>
-                    <p class="item">{{this.code}}</p><br>
+                <div class = "txt">
+                    <div class="hg1">
+                        <p class="title">Description</p>
+                        <p class="item">{{this.desc}}</p><br>
+                        <p class="title">Address</p>
+                        <p class="item">{{this.address}}</p><br>
+                        <p class="title">Shop's Unique Code</p>
+                        <p class="item">{{this.code}}</p><br>
+                    </div>
+                    <button class="btn" v-on:click="edit()">Edit Info</button>
                 </div>
-                <button class="btn" v-on:click="edit()">Edit Info</button>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
-    name: 'Challenges',
+    name: 'Info',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

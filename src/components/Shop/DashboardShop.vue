@@ -1,32 +1,35 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div>
-            <div class="content">
-                <div class="pic">
-                    <img v-bind:src="this.image" alt="shop" class="image">
-                    <div class = "title">{{this.name}}</div>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div>
+                <div class="content">
+                    <div class="pic">
+                        <img v-bind:src="this.image" alt="shop" class="image">
+                        <div class = "title">{{this.name}}</div>
+                    </div>
+                    <div class="txt1">
+                        <p class = "txt"> {{this.desc}}</p>
+                        <p class = "txt2">Address</p>
+                        <p class = "txt"> {{this.address}}</p>
+                        <p class = "txt2">Today's Code</p>
+                        <p class = "txt"> {{this.code}}</p>
+                        <button class="btn" v-on:click="edit()"> Edit Info</button>
+                    </div>
                 </div>
-                <div class="txt1">
-                    <p class = "txt"> {{this.desc}}</p>
-                    <p class = "txt2">Address</p>
-                    <p class = "txt"> {{this.address}}</p>
-                    <p class = "txt2">Today's Code</p>
-                    <p class = "txt"> {{this.code}}</p>
-                    <button class="btn" v-on:click="edit()"> Edit Info</button>
-                </div>
-            </div>
-            <div class="chart">
-                <p class = "txt3">Customer Insight (greenChariot Users)</p>
-                <div class = "cust">
-                    <customer-chart v-bind:id="id" style="height:30vh; width:10vw"></customer-chart>
-                </div>
-                <p class = "txt3">Vouchers Insight</p><br>
-                <div class = "cust">
-                    <voucher-chart v-bind:id="id" style="height:30vh; width:20vw;"></voucher-chart>
+                <div class="chart">
+                    <p class = "txt3">Customer Insight (greenChariot Users)</p>
+                    <div class = "cust">
+                        <customer-chart v-bind:id="id" style="height:30vh; width:10vw"></customer-chart>
+                    </div>
+                    <p class = "txt3">Vouchers Insight</p><br>
+                    <div class = "cust">
+                        <voucher-chart v-bind:id="id" style="height:30vh; width:20vw;"></voucher-chart>
+                    </div>
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -35,12 +38,14 @@ import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
 import CustomerChart from "../Charts/CustomerChart.vue"
 import VoucherChart from "../Charts/VoucherChart.vue"
+import Footer from '../Footer.vue'
 export default {
     name: 'Header',
     components :{
         Head,
         CustomerChart,
-        VoucherChart
+        VoucherChart,
+        Footer
     },
     data() {
         return {

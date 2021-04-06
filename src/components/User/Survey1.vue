@@ -1,29 +1,33 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img alt="greenChariot" src="../../assets/survey.png">
-        <div class = "content">
-            <p class = "title">Food Intake Proportion</p>
-            <div class="slider" v-for="option, index in Sliders" :key="index">
-                <p class="txt1">{{name[index]}} %</p>
-                <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
-                <input class="ranger" type="range" :id="'slider'+index" :min=0 :max=100 v-model.number="Sliders[index]"  @input="changeSlider(index)" step="0.01">
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img alt="greenChariot" src="../../assets/survey.png">
+            <div class = "content">
+                <p class = "title">Food Intake Proportion</p>
+                <div class="slider" v-for="option, index in Sliders" :key="index">
+                    <p class="txt1">{{name[index]}} %</p>
+                    <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
+                    <input class="ranger" type="range" :id="'slider'+index" :min=0 :max=100 v-model.number="Sliders[index]"  @input="changeSlider(index)" step="0.01">
+                </div>
+                <button class = "next" v-on:click="SurveySubmit2()">Next</button>
+                <p class = "txt"> Page 2 / 4 </p>
+                <p class = "txt"> Accurate data helps us predict better :) </p>
             </div>
-            <button class = "next" v-on:click="SurveySubmit2()">Next</button>
-            <p class = "txt"> Page 2 / 4 </p>
-            <p class = "txt"> Accurate data helps us predict better :) </p>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
-
+import Footer from '../Footer.vue'
 export default {
     name: 'Header',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -158,13 +162,12 @@ export default {
         height: 25px;
         background: #e4e2e2;
         outline: none;
-        opacity: 0.7;
         -webkit-transition: .2s;
         transition: opacity .2s;
         border-radius: 12px;
     }
     .ranger:hover {
-        opacity: 1;
+        opacity: 1.2;
     }
     .ranger::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -186,11 +189,6 @@ export default {
         border: 1px solid #E5E5E5;
         height: 10%;
         display: inline-block;
-    }
-    ::placeholder {
-        color: rgb(0, 0, 0);
-        opacity: 0.45;
-        font-size: 14px;
     }
     .next {
         background: #2D8F8A;

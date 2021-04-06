@@ -1,22 +1,27 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="content">
-            <div class="pic">
-                <img alt="scoop" v-bind:src="this.imagename">
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="content">
+                <div class="pic">
+                    <img alt="scoop" v-bind:src="this.imagename">
+                </div>
+                <p class="title">Insert this code stated to get points!</p><br>
+                <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
+                <button class="btn" v-on:click="direct()">OK</button>
             </div>
-            <p class="title">Insert this code stated to get points!</p><br>
-            <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
-            <button class="btn" v-on:click="direct()">OK</button>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{

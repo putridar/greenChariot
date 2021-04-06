@@ -1,30 +1,35 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="content">
-            <div class = "txt">
-                <label for="name" class="title">Name</label><br>
-                <input type="text" id="name" placeholder="Name" v-model="name" class ="inputstyle" required><br>
-                <label for="desc" class="title">Description</label><br>
-                <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
-                <label for="address" class="title">Address</label><br>
-                <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
-                <label for="code" class="title">Shop's Unique Code</label><br>
-                <input type="text" id="code" placeholder="Code" v-model="code" class ="inputstyle"><br>
-                <button class="btn" v-on:click="save()">Save</button>
-                <button class="btn" v-on:click="cancel()">Cancel</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="content">
+                <div class = "txt">
+                    <label for="name" class="title">Name</label><br>
+                    <input type="text" id="name" placeholder="Name" v-model="name" class ="inputstyle" required><br>
+                    <label for="desc" class="title">Description</label><br>
+                    <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
+                    <label for="address" class="title">Address</label><br>
+                    <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
+                    <label for="code" class="title">Shop's Unique Code</label><br>
+                    <input type="text" id="code" placeholder="Code" v-model="code" class ="inputstyle"><br>
+                    <button class="btn" v-on:click="save()">Save</button>
+                    <button class="btn" v-on:click="cancel()">Cancel</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'Challenges',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
