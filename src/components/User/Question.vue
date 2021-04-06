@@ -3,15 +3,17 @@
         <Head v-bind:id="id" class="head"></Head>
         <div class = "content">
             <p id = "question"> {{this.questions[0].question}}</p><br>
+            <br>
             <ul>
-                <li v-for='o in questions[0].options' :key='o'>
-                    <label for='q'>
-                        <input type="radio" value="help" id="q" name="optionsss">
-                        {{o}}
-                    </label>
+                <li v-for='(o, index) in questions[0].options' :key='o'>
+                    <div id='help'>
+                        <button class='mcq' type='button' v-on:click='selected($event)' v-bind:id='index'>
+                            {{index+1}}. {{o}}
+                        </button>
+                    </div>
                 </li>
             </ul>
-            <button class = "btn" v-on:click="this.next()">Next</button>
+            <button class = "btn" type='button' v-on:click="next()">Next</button>
         </div>
     </div>
 </template>
@@ -28,17 +30,23 @@ export default {
     data() {
         return {
             id: this.$route.query.id,
-            score:this.$route.query.score,
-            questions:[],
+            score:0,
+            questions:[], //selected questions
             selectedQuestions:[], //ids of selected qns
             questionIDs:["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20"],
-            counter:0
+            counter:0,
+            chose:10, //index of answer selected
+            answer:100, //index of answer
         }
     },
     methods: {
+        selected: function(event) {
+            this.chose = event.target.getAttribute("id");
+            this.answer = this.questions[this.counter].correct;
+        },
         next: function() {
             this.counter=this.counter+1
-            document.getElementById("question").innerHTML = this.questions[this.counter].question
+            document.getElementById('question').innerHTML = this.questions[this.counter].question
 
         },
         toScore: function() {
@@ -89,28 +97,34 @@ export default {
             opacity: 1
         }
     }
+    .mcq:hover {
+        background-color:rgb(255, 255, 179);
+    }
+    .mcq:focus {
+        background-color:rgb(255, 255, 179);
+    }
+    .mcq{
+        font-family: Montserrat;
+        font-style: normal;
+        background-color: #FFFFFF;
+        padding:15px;
+        border-radius:15px;
+        border-width:1px;
+        display:flex;
+        font-size:25px;
+        width:100%;
+        cursor: pointer;
+    }
     .head {
         position: sticky;
         top: 0;
         position: -webkit-sticky;
-    }
-    label {
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 22px;
-        border: 1px solid black;
-        border-radius:20px;
-        text-align:left;
-        font-family: Montserrat;
-        font-size: 22px;
-        width: 100%;
-        height:100%;
-    }
-    label::selection{
-        background-color: rgb(242, 255, 212);
-    }   
+    }  
     li{
         list-style-type:none;
+        padding:5px;
+        margin-left: 40px;
+        margin-right:40px;
     }
     .content {
         background-color: #FFFFFF;
