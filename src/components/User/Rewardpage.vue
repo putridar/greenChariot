@@ -13,7 +13,7 @@
                   </div>
                   <p class="title">${{item.price}} {{item.name}} Voucher</p>
                   <p class="title2">{{item.point}} points</p><br>
-                  <button class="btn">Spend this voucher!</button>
+                  <button class="btn" v-on:click="spend(item,index)">Spend this voucher!</button>
               </li>
             </ul>
         </div>
@@ -43,6 +43,9 @@ export default{
         },
         exchange: function() {
             this.$router.push({name:'combinedvoucher',query:{id:this.id}})
+        },
+        spend:function(item,index){
+            this.$router.push({name:'spendvoucher',query:{id:this.id,item:item,index:index}})
         }
     },
     created(){
