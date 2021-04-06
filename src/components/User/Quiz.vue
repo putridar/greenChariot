@@ -1,21 +1,26 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img class = "image" alt="socialmedia" src="../../assets/quiz.png">
-        <div class = "content">
-            <p class = "title"> Are you ready for the Quiz? </p><br>
-            <button class = "btn" v-on:click="toQuestion()">Start</button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img class = "image" alt="socialmedia" src="../../assets/quiz.png">
+            <div class = "content">
+                <p class = "title"> Are you ready for the Quiz? </p><br>
+                <button class = "btn" v-on:click="toQuestion()">Start</button>
+            </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'quiz',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

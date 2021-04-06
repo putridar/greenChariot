@@ -1,32 +1,37 @@
 <template>
-  <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img alt="greenChariot" src="../../assets/shop.png">
-        <div class = "content">
-            <p class = "title"> Register Your Shop! </p>
-            <p class = "txt2"> 
-                Warning! By registering as a shop, your current data (points, vouchers, etc) will be deleted.
-                If you do not want this, please sign out and register as a shop!
-            </p>
-            <p class = "title2"> Tell us more about your shop! </p>
-            <input type="text" placeholder="Shop Name" v-model="name" required><br>
-            <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
-            <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
-            <p class = "title2"> Enter your account password </p>
-            <input type="password" placeholder="Password" v-model="password" required><br>
-            <button class = "create" v-on:click="create()">Register</button>
-            <p class="txt" v-on:click="signIn()"> Already own a shop account? Sign In now!</p>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img alt="greenChariot" src="../../assets/shop.png">
+            <div class = "content">
+                <p class = "title"> Register Your Shop! </p>
+                <p class = "txt2"> 
+                    Warning! By registering as a shop, your current data (points, vouchers, etc) will be deleted.
+                    If you do not want this, please sign out and register as a shop!
+                </p>
+                <p class = "title2"> Tell us more about your shop! </p>
+                <input type="text" placeholder="Shop Name" v-model="name" required><br>
+                <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
+                <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
+                <p class = "title2"> Enter your account password </p>
+                <input type="password" placeholder="Password" v-model="password" required><br>
+                <button class = "create" v-on:click="create()">Register</button>
+                <p class="txt" v-on:click="signIn()"> Already own a shop account? Sign In now!</p>
+            </div>
         </div>
-  </div>
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
 import db from "../../firebase.js"
 import Head from './Header.vue'
+import Footer from '../Footer.vue'
 export default {
     name: 'Register',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -131,7 +136,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 155vh;
+        min-height: 150vh;
     }
     .head {
         position: sticky;

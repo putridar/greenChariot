@@ -1,61 +1,66 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "top">
-            <h1 class = "content"> Challenges: </h1>
-            <button class = "edit" v-on:click="edit()"> Edit Social Media Account </button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "top">
+                <h1 class = "content"> Challenges: </h1>
+                <button class = "edit" v-on:click="edit()"> Edit Social Media Account </button>
+            </div>
+            <ul>
+                <li>
+                    <img alt= "plant" v-bind:src="plantUrl">
+                    <h1 class = "title">Plant one/more trees</h1>
+                    <p>
+                        Tell us your story in the caption!<br>
+                        Please use these hashtags:<br>
+                        #planttrees #greenchariot #reducecarbon
+                    </p>
+                    <button class = "btn" v-on:click="navigate(1)">Go</button>
+                </li>
+                <li>
+                    <img alt= "recycle" v-bind:src="recycleUrl">
+                    <h1 class = "title">Recycle!</h1>
+                    <p>
+                        Tell us your story in the caption!<br>
+                        Please use these hashtags:<br>
+                        #recycle #greenchariot #reducecarbon
+                    </p>
+                    <button class = "btn" v-on:click="navigate(2)">Go</button>
+                </li>
+                <li>
+                    <img alt= "transport" v-bind:src="transportUrl">
+                    <h1 class = "title">Use Public Transport to Your Office/School</h1>
+                    <p>
+                        Tell us your story in the caption!<br>
+                        Please use these hashtags:<br>
+                        #publictransport #greenchariot #reducecarbon
+                    </p>
+                    <button class = "btn" v-on:click="navigate(3)">Go</button>
+                </li>
+                <li>
+                    <img alt= "eat organic foods" v-bind:src="eatUrl">
+                    <h1 class = "title">Eat Organic Foods</h1>
+                    <p>
+                        Tell us your story in the caption!<br>
+                        Please use these hashtags:<br>
+                        #organic #greenchariot #reducecarbon
+                    </p>
+                    <button class = "btn" v-on:click="navigate(4)">Go</button>
+                </li>
+            </ul>
         </div>
-        <ul>
-            <li>
-                <img alt= "plant" v-bind:src="plantUrl">
-                <h1 class = "title">Plant one/more trees</h1>
-                <p>
-                    Tell us your story in the caption!<br>
-                    Please use these hashtags:<br>
-                    #planttrees #greenchariot #reducecarbon
-                </p>
-                <button class = "btn" v-on:click="navigate(1)">Go</button>
-            </li>
-            <li>
-                <img alt= "recycle" v-bind:src="recycleUrl">
-                <h1 class = "title">Recycle!</h1>
-                <p>
-                    Tell us your story in the caption!<br>
-                    Please use these hashtags:<br>
-                    #recycle #greenchariot #reducecarbon
-                </p>
-                <button class = "btn" v-on:click="navigate(2)">Go</button>
-            </li>
-            <li>
-                <img alt= "transport" v-bind:src="transportUrl">
-                <h1 class = "title">Use Public Transport to Your Office/School</h1>
-                <p>
-                    Tell us your story in the caption!<br>
-                    Please use these hashtags:<br>
-                    #publictransport #greenchariot #reducecarbon
-                </p>
-                <button class = "btn" v-on:click="navigate(3)">Go</button>
-            </li>
-            <li>
-                <img alt= "eat organic foods" v-bind:src="eatUrl">
-                <h1 class = "title">Eat Organic Foods</h1>
-                <p>
-                    Tell us your story in the caption!<br>
-                    Please use these hashtags:<br>
-                    #organic #greenchariot #reducecarbon
-                </p>
-                <button class = "btn" v-on:click="navigate(4)">Go</button>
-            </li>
-        </ul>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
+import Footer from '../Footer.vue'
 export default {
     name: 'SocialMediaChallenge',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -129,8 +134,8 @@ export default {
         font-family: Montserrat;
         font-weight: bold;
         font-size: 30px;
-        margin-top: 17px;
-        margin-left: -40%;
+        margin:30px;
+        margin-left: 3%
     }
     .title {
         font-family: Montserrat;
@@ -179,6 +184,8 @@ export default {
         margin: 10px;
         border-radius: 18px;
         background-color: #FFFFFF;
+        margin-bottom: 30px;
+        margin-top:0px
     }
     img {
         float:left;

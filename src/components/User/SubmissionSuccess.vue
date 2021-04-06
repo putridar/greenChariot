@@ -1,27 +1,31 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img class = "image" alt="socialmedia" src="../../assets/successful.png">
-        <div class = "content">
-            <p class = "zoom">
-                Horray!
-            </p>
-            <p class = "item"> 
-                Your have successfuly submitted our social media challenge!<br><br>
-                Your points: {{points}}<br>
-            </p>
-            <button class = "btn" v-on:click ="back()">Back</button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img class = "image" alt="socialmedia" src="../../assets/successful.png">
+            <div class = "content">
+                <p class = "zoom">
+                    Horray!
+                </p>
+                <p class = "item"> 
+                    Your have successfuly submitted our social media challenge!<br><br>
+                    Your points: {{points}}<br>
+                </p>
+                <button class = "btn" v-on:click ="back()">Back</button>
+            </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default {
     name: 'Submission',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

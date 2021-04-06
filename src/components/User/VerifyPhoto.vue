@@ -1,38 +1,42 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <label for = "imageLoader" class="ins">Screenshots (Make sure that your caption is visible)</label>
-        <input type="file" id ="imageLoader" @change="updateCanvasImage"><br>
-        <p class = "ins"> If the page is unresponsive, please wait, do not refresh!</p>
-        <!--<label for = "image" class = "ins">Upload Photo (the one that you post)</label>
-        <input type="file" id = "image" @change="imageClassifier" />-->
-        <div class ="left">
-            <canvas id="imageCanvas" ref="imageCanvas"></canvas><br>
-            <!--<p class="ins">Original Photo:</p>
-            <img v-show="uploadedImage" class="preview" :src="uploadedImage"/>-->
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <label for = "imageLoader" class="ins">Screenshots (Make sure that your caption is visible)</label>
+            <input type="file" id ="imageLoader" @change="updateCanvasImage"><br>
+            <p class = "ins"> If the page is unresponsive, please wait, do not refresh!</p>
+            <!--<label for = "image" class = "ins">Upload Photo (the one that you post)</label>
+            <input type="file" id = "image" @change="imageClassifier" />-->
+            <div class ="left">
+                <canvas id="imageCanvas" ref="imageCanvas"></canvas><br>
+                <!--<p class="ins">Original Photo:</p>
+                <img v-show="uploadedImage" class="preview" :src="uploadedImage"/>-->
+            </div>
+            <div class = "content">
+                <p class= "title"> {{status}} </p>
+                <p class= "title"> Caption: </p>
+                <p class= "txt">{{result}}</p>
+                <p class= "title" v-show="this.label.length!==0"> Label: </p>
+                <p class= "txt" v-show="this.label.length!==0">{{label}}</p>
+                <!--<p class= "title"> Class: </p>
+                <p class= "txt">{{classify}}</p>-->
+                <button class = "btn" v-on:click="check()">Check</button>
+                <button class = "btn" v-on:click="cancel()">Cancel</button>
+            </div>
         </div>
-        <div class = "content">
-            <p class= "title"> {{status}} </p>
-            <p class= "title"> Caption: </p>
-            <p class= "txt">{{result}}</p>
-            <p class= "title" v-show="this.label.length!==0"> Label: </p>
-            <p class= "txt" v-show="this.label.length!==0">{{label}}</p>
-            <!--<p class= "title"> Class: </p>
-            <p class= "txt">{{classify}}</p>-->
-            <button class = "btn" v-on:click="check()">Check</button>
-            <button class = "btn" v-on:click="cancel()">Cancel</button>
-        </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
-
+import Footer from '../Footer.vue'
 export default {
     name: 'Submission',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

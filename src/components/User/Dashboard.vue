@@ -1,14 +1,17 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="piechart" >
-            <div class="col">
-                <PieChart class="piechart"></PieChart>
-            </div>
-            <div class="col" >
-                <p class="txt">Highest emission is Food </p>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="piechart" >
+                <div class="col">
+                    <PieChart class="piechart"></PieChart>
+                </div>
+                <div class="col" >
+                    <p class="txt">Highest emission is Food </p>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -16,12 +19,12 @@
 import Head from './Header.vue'
 import db from "../../firebase.js"
 import PieChart from '../Charts/PieChart.vue'
-
+import Footer from '../Footer.vue'
 
 export default {
     name: 'Header',
     components :{
-        Head, PieChart
+        Head, PieChart, Footer
     },
     data() {
         return {

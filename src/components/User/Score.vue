@@ -13,15 +13,17 @@
                 <button class="btn" v-on:click="direct()">Try again?</button>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default{
     components: {
-        Head
+        Head,
+        Footer
     },
     data(){
         return{

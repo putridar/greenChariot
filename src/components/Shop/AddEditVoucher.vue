@@ -1,26 +1,31 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="content">
-            <div class = "txt">
-                <label for="price" class="title">Price Value</label><br>
-                <input type="number" id="price" placeholder="Price" v-model.number="price" class ="inputstyle" required><br>
-                <label for="points" class="title">Points Needed</label><br>
-                <input id="points" placeholder="Points" v-model.number="points" name="points" class ="inputstyle" required><br>
-                <button class="btn" v-on:click="save()">Save</button>
-                <button class="btn" v-on:click="cancel()">Cancel</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="content">
+                <div class = "txt">
+                    <label for="price" class="title">Price Value</label><br>
+                    <input type="number" id="price" placeholder="Price" v-model.number="price" class ="inputstyle" required><br>
+                    <label for="points" class="title">Points Needed</label><br>
+                    <input id="points" placeholder="Points" v-model.number="points" name="points" class ="inputstyle" required><br>
+                    <button class="btn" v-on:click="save()">Save</button>
+                    <button class="btn" v-on:click="cancel()">Cancel</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'Challenges',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

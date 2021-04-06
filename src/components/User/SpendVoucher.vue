@@ -1,32 +1,37 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id"></Head>
-        <div class="top">
-            <p class="content">Your points: {{this.points}}</p>
-        </div>
-        <div class="rewards">
-            <div class="outside">
-                <div class="inside">
-                    <div class="pic">
-                        <img alt="shoplogo" v-bind:src="item.imagename">
-                        <p class="title">${{item.price}} {{item.name}} Voucher</p><br>
-                        <p class="title2">{{item.point}} points</p>
-                        <p class="title3">Are you sure you want to spend this voucher?</p>
-                        <button class="btn" v-on:click="proceed()">Yes</button>
-                        <button class="btn" v-on:click="backwards()">No</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id"></Head>
+            <div class="top">
+                <p class="content">Your points: {{this.points}}</p>
+            </div>
+            <div class="rewards">
+                <div class="outside">
+                    <div class="inside">
+                        <div class="pic">
+                            <img alt="shoplogo" v-bind:src="item.imagename">
+                            <p class="title">${{item.price}} {{item.name}} Voucher</p><br>
+                            <p class="title2">{{item.point}} points</p>
+                            <p class="title3">Are you sure you want to spend this voucher?</p>
+                            <button class="btn" v-on:click="proceed()">Yes</button>
+                            <button class="btn" v-on:click="backwards()">No</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{

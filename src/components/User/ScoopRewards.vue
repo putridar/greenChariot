@@ -1,33 +1,38 @@
 <template>
- <div class="bg">
-    <Head v-bind:id="id" class="head"></Head>
-    <div class="top">
-        <p class="content">Your points: {{this.score}}</p>
-        <button class = "btn2" v-on:click="reward()"> Your Rewards </button>
-    </div>
-    <div class="rewards">
-        <div v-if="this.vouchers.length == 0">
-            <p class ="title"> This shop currently has no vouchers </p>
-        </div> 
-        <ul>
-        <li v-for="(item,index) in vouchers" :key="index">
-            <div class="pic">
-                <img alt = "shoplogo" v-bind:src="imagename">
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="top">
+                <p class="content">Your points: {{this.score}}</p>
+                <button class = "btn2" v-on:click="reward()"> Your Rewards </button>
             </div>
-            <p class="title">${{item.price}} {{name}} Voucher</p>
-            <p class="title2">{{item.point}} points </p>
-            <button class="btn" v-on:click="onclick(item)"> Redeem </button>
-        </li>
-    </ul>
+            <div class="rewards">
+                <div v-if="this.vouchers.length == 0">
+                    <p class ="title"> This shop currently has no vouchers </p>
+                </div> 
+                <ul>
+                <li v-for="(item,index) in vouchers" :key="index">
+                    <div class="pic">
+                        <img alt = "shoplogo" v-bind:src="imagename">
+                    </div>
+                    <p class="title">${{item.price}} {{name}} Voucher</p>
+                    <p class="title2">{{item.point}} points </p>
+                    <button class="btn" v-on:click="onclick(item)"> Redeem </button>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <Footer></Footer>
     </div>
-</div>
 </template>
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
      components:{
-        Head
+        Head,
+        Footer
      },
     data(){
         return{
@@ -143,6 +148,7 @@ export default{
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
+        margin-bottom: 30px;
     }
     .pic {
         height: 45%;

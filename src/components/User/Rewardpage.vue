@@ -1,31 +1,36 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="top">
-            <p class="content2">Your vouchers:</p>
-            <button class = "btn2" v-on:click="exchange()"> Exchange Vouchers </button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="top">
+                <p class="content2">Your vouchers:</p>
+                <button class = "btn2" v-on:click="exchange()"> Exchange Vouchers </button>
+            </div>
+            <div class="rewards">
+                <ul>
+                <li v-for="(item,index) in currvoucher" :key=index>
+                    <div class="pic">
+                    <img alt="shoplogo" v-bind:src="item.imagename">
+                    </div>
+                    <p class="title">${{item.price}} {{item.name}} Voucher</p>
+                    <p class="title2">{{item.point}} points</p><br>
+                    <button class="btn" v-on:click="spend(item,index)">Spend this voucher!</button>
+                </li>
+                </ul>
+            </div>
         </div>
-        <div class="rewards">
-            <ul>
-              <li v-for="(item,index) in currvoucher" :key=index>
-                  <div class="pic">
-                  <img alt="shoplogo" v-bind:src="item.imagename">
-                  </div>
-                  <p class="title">${{item.price}} {{item.name}} Voucher</p>
-                  <p class="title2">{{item.point}} points</p><br>
-                  <button class="btn" v-on:click="spend(item,index)">Spend this voucher!</button>
-              </li>
-            </ul>
-        </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{
@@ -100,8 +105,8 @@ export default{
         flex-wrap: wrap;
         list-style-type: none;
         padding: 0;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 5%;
+        margin-right: 5%;
     }
     li {
         flex-shrink: 1;
@@ -111,6 +116,7 @@ export default{
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
+        margin-bottom: 30px;
     }
     .pic {
         height: 45%;

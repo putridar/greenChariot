@@ -15,16 +15,18 @@
             </ul>
             <button class = "btn" type='button' v-on:click="next()">Check</button>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default {
     name: 'question',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

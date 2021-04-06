@@ -1,28 +1,33 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img alt="logo" src="../../assets/welcome.png" class="image">
-        <div class="profile">
-            <p class="title">Edit Your Profile!</p>
-            <p class = "txt"> Email </p>
-            <input type="text" placeholder="email" v-model="email" required><br>
-            <p class = "txt"> New Password (leave it blank if you do not want to change password) </p>
-            <input type="password" placeholder="Password" v-model="password"><br>
-            <p class = "txt"> Confirm Password </p>
-            <input type="password" placeholder="Confirm Password" v-model="confirmpass"><br>
-            <p><button class="btn" v-on:click="confirm()">Confirm</button>
-            <button class="btn" v-on:click="signout()">Sign out</button></p>
-              
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img alt="logo" src="../../assets/welcome.png" class="image">
+            <div class="profile">
+                <p class="title">Edit Your Profile!</p>
+                <p class = "txt"> Email </p>
+                <input type="text" placeholder="email" v-model="email" required><br>
+                <p class = "txt"> New Password (leave it blank if you do not want to change password) </p>
+                <input type="password" placeholder="Password" v-model="password"><br>
+                <p class = "txt"> Confirm Password </p>
+                <input type="password" placeholder="Confirm Password" v-model="confirmpass"><br>
+                <p><button class="btn" v-on:click="confirm()">Confirm</button>
+                <button class="btn" v-on:click="signout()">Sign out</button></p>
+                
+            </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './HeaderShop.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{
