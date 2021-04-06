@@ -45,8 +45,8 @@ export default{
             oldemail:'',
             image:'',
             preview:'',
-            password:null,
-            confirmpass:null
+            password:'',
+            confirmpass:''
         }
     },
     methods:{
@@ -63,9 +63,9 @@ export default{
         confirm:function(){
             if (this.name=='' || this.username=='' || this.email==''){
                 alert('You need to fill in all the inputs!')
-            }else if (this.password!= this.confirmpass && this.confirmpass!=null){
+            }else if (this.password!= this.confirmpass && this.confirmpass!=''){
                 return
-            }else if (this.password!=null && this.confirmpass==null){
+            }else if (this.password!='' && this.confirmpass==''){
                 return
             }else{
                 db.firestore().collection('users').doc(this.id).update({
@@ -103,7 +103,7 @@ export default{
         updated:function(){
             const user=db.auth().currentUser
             var success=true
-            if (this.oldemail==this.email && this.password!=null && this.password==this.confirmpass){
+            if (this.oldemail==this.email && this.password!='' && this.password==this.confirmpass){
                 user.updatePassword(this.password).catch(error => {
                     console.log(error)
                     alert(error)
@@ -112,11 +112,11 @@ export default{
                       alert("Password has been changed! Please login again.")
                       this.$router.push({name:'signin',query:{id:this.id}})
                 }})
-            }else if (this.confirmpass!=null && this.password!=this.confirmpass){
+            }else if (this.confirmpass!='' && this.password!=this.confirmpass){
                 alert("Your password confirmation is incorrect!")
-            }else if (this.password!=null && this.confirmpass==null){
+            }else if (this.password!='' && this.confirmpass==''){
                 alert("Please enter your password confirmation!")
-            }else if (this.oldemail!=this.email && this.confirmpass==null && this.password==null){
+            }else if (this.oldemail!=this.email && this.confirmpass=='' && this.password==''){
                 user.updateEmail(this.email).catch(error => {
                     alert(error)
                     success=false
@@ -130,7 +130,7 @@ export default{
                         })
                     }
                 })
-            } else if (this.oldemail!=this.email && this.password!=null && this.confirmpass!=null){
+            } else if (this.oldemail!=this.email && this.password!='' && this.confirmpass!=''){
                 user.updateEmail(this.email).catch(error => {
                     alert(error)
                     success=false
