@@ -1,25 +1,30 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="content">
-            <div class ="pic">
-                <img alt="scoop" v-bind:src="this.image"><br>
-                <label for="image" class="title">Change Image (Max file size: 1MB)</label><br>
-                <input type="file" class ="inputfile" id = "image" @change="createImage"/>
-                <button class="btn" v-on:click="save()">Save</button>
-                <button class="btn" v-on:click="cancel()">Cancel</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="content">
+                <div class ="pic">
+                    <img alt="scoop" v-bind:src="this.image"><br>
+                    <label for="image" class="title">Change Image (Max file size: 1MB)</label><br>
+                    <input type="file" class ="inputfile" id = "image" @change="createImage"/>
+                    <button class="btn" v-on:click="save()">Save</button>
+                    <button class="btn" v-on:click="cancel()">Cancel</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'Challenges',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

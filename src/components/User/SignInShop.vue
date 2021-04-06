@@ -1,23 +1,28 @@
 <template>
-  <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img alt="greenChariot" src="../../assets/shop.png">
-        <div class = "content">
-            <p class = "title"> Sign In to Your Shop! </p>
-            <input type="text" placeholder="Email" v-model="email" required><br>
-            <input type="password" placeholder="Password" v-model="password" required><br>
-            <button class = "create" v-on:click="create()">Sign In</button>
+    <div>
+        <div class = "bg">
+                <Head v-bind:id="id" class="head"></Head>
+                <img alt="greenChariot" src="../../assets/shop.png">
+                <div class = "content">
+                    <p class = "title"> Sign In to Your Shop! </p>
+                    <input type="text" placeholder="Email" v-model="email" required><br>
+                    <input type="password" placeholder="Password" v-model="password" required><br>
+                    <button class = "create" v-on:click="create()">Sign In</button>
+                </div>
         </div>
-  </div>
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
 import db from "../../firebase.js"
 import Head from './Header.vue'
+import Footer from '../Footer.vue'
 export default {
     name: 'SignInShop',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -121,11 +126,11 @@ export default {
         width: 40%;
         justify-content: center;
         margin-left: -30%;
-        margin-top: 5%
+        margin-top: 2%
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 2%;
+        margin-top: 7%;
         margin-left: 55%;
         margin-right: 10%;
         height: 60%;
@@ -135,7 +140,7 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
-        animation: zoomIn ease 0.7s
+        animation: zoomIn 0.7s
     }
     @keyframes zoomIn {
         0% {transform: scale(0.7,0.7); opacity:0}

@@ -1,29 +1,33 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "content">
-            <p id = "question"> {{this.questions[0].question}}</p><br>
-            <ul>
-                <li v-for='o in questions[0].options' :key='o'>
-                    <label for='q'>
-                        <input type="radio" value="help" id="q" name="optionsss">
-                        {{o}}
-                    </label>
-                </li>
-            </ul>
-            <button class = "btn" v-on:click="this.next()">Next</button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "content">
+                <p id = "question"> {{this.questions[0].question}}</p><br>
+                <ul>
+                    <li v-for='o in questions[0].options' :key='o'>
+                        <label for='q'>
+                            <input type="radio" value="help" id="q" name="optionsss">
+                            {{o}}
+                        </label>
+                    </li>
+                </ul>
+                <button class = "btn" v-on:click="this.next()">Next</button>
+            </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
-
+import Footer from '../Footer.vue'
 export default {
     name: 'question',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

@@ -1,30 +1,34 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "center">
-            <img class = "image" alt="socialmedia" v-bind:src="this.pic">
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "center">
+                <img class = "image" alt="socialmedia" v-bind:src="this.pic">
+            </div>
+            <div class = "content">
+                <p class = "title"> Put Your Post's Screenshots! </p>
+                <p class = "item"> {{this.item}} </p><br>
+                <label for="choose">Social Media Platform:</label>
+                <select name="choose" id="choose" v-model="platform">
+                    <option value="ig">Instagram</option>
+                    <option value="fb">Facebook</option>
+                    <option value="twitter">Twitter</option>
+                </select>
+                <button class = "btn" v-on:click="submit()">Next</button>
+            </div>
         </div>
-        <div class = "content">
-            <p class = "title"> Put Your Post's Screenshots! </p>
-            <p class = "item"> {{this.item}} </p><br>
-            <label for="choose">Social Media Platform:</label>
-            <select name="choose" id="choose" v-model="platform">
-                <option value="ig">Instagram</option>
-                <option value="fb">Facebook</option>
-                <option value="twitter">Twitter</option>
-            </select>
-            <button class = "btn" v-on:click="submit()">Next</button>
-        </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default {
     name: 'Submission',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

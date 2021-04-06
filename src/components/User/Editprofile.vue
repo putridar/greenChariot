@@ -1,39 +1,44 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="top">
-            <p class="content">Your points: {{this.points}}</p>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="top">
+                <p class="content">Your points: {{this.points}}</p>
+            </div>
+            <img alt="logo" src="../../assets/welcome.png">
+            <div class="profile">
+                <p class="title">Edit Your Profile!</p>
+                <p class = "txt"> Name </p>
+                <input type="text" placeholder="Name" v-model='name' required><br>
+                <p class = "txt"> Username </p>
+                <input type="text" placeholder="username" v-model="username" required><br>
+                <p class = "txt"> Email </p>
+                <input type="text" placeholder="email" v-model="email" required><br>
+                <p class = "txt"> New Password (leave it blank if you do not want to change password) </p>
+                <input type="password" placeholder="Password" v-model="password"><br>
+                <p class = "txt"> Confirm Password </p>
+                <input type="password" placeholder="Confirm Password" v-model="confirmpass"><br>
+                <p class="title2">Upload your profile picture below!</p>
+                <input type="file" accept="image/*" @change="previewimage">
+                <button class="btn2" v-on:click="removepic()">Remove picture</button>
+                <p class="title2">Preview Here:</p>
+                <template v-if= "this.preview!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
+                <p><button class="btn" v-on:click="confirm();updated();">Confirm</button>
+                <button class="btn" v-on:click="signout()">Sign out</button></p>
+            </div>
         </div>
-        <img alt="logo" src="../../assets/welcome.png">
-        <div class="profile">
-            <p class="title">Edit Your Profile!</p>
-            <p class = "txt"> Name </p>
-            <input type="text" placeholder="Name" v-model='name' required><br>
-            <p class = "txt"> Username </p>
-            <input type="text" placeholder="username" v-model="username" required><br>
-            <p class = "txt"> Email </p>
-            <input type="text" placeholder="email" v-model="email" required><br>
-            <p class = "txt"> New Password (leave it blank if you do not want to change password) </p>
-            <input type="password" placeholder="Password" v-model="password"><br>
-            <p class = "txt"> Confirm Password </p>
-            <input type="password" placeholder="Confirm Password" v-model="confirmpass"><br>
-            <p class="title2">Upload your profile picture below!</p>
-            <input type="file" accept="image/*" @change="previewimage">
-            <button class="btn2" v-on:click="removepic()">Remove picture</button>
-            <p class="title2">Preview Here:</p>
-            <template v-if= "this.preview!=''"><img alt="profilepic" :src="this.preview" class='imgfluid'><br></template>
-            <p><button class="btn" v-on:click="confirm();updated();">Confirm</button>
-            <button class="btn" v-on:click="signout()">Sign out</button></p>
-        </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{
@@ -166,7 +171,7 @@ export default{
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 200vh;
+        min-height: 180vh;
     }
     .head {
         position: sticky;

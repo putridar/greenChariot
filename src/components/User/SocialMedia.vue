@@ -1,33 +1,38 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img class = "image" alt="socialmedia" src="../../assets/socialmedia.png">
-        <div class = "content">
-            <p class = "title"> Connect Your Social Media </p><br>
-            <label for = "ig">Instagram</label>
-            <input type="text" placeholder="Username (without @)" id ="ig" v-model.lazy="ig"><br>
-            <label for = "fb">Facebook</label>
-            <input type="text" placeholder="Profile name" id="fb" v-model.lazy="fb"><br>
-            <label for = "twitter">Twitter</label>
-            <input type="text" placeholder="Username (without @)" id="twitter" v-model.lazy="twitter"><br>
-            <div v-if="!this.exist">
-                <button class = "btn" v-on:click="link()">Connect</button>
-            </div>
-            <div v-else>
-                <button class = "btn" v-on:click="link()">Connect</button>
-                <button class = "btn" v-on:click="cancel()">Cancel</button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img class = "image" alt="socialmedia" src="../../assets/socialmedia.png">
+            <div class = "content">
+                <p class = "title"> Connect Your Social Media </p><br>
+                <label for = "ig">Instagram</label>
+                <input type="text" placeholder="Username (without @)" id ="ig" v-model.lazy="ig"><br>
+                <label for = "fb">Facebook</label>
+                <input type="text" placeholder="Profile name" id="fb" v-model.lazy="fb"><br>
+                <label for = "twitter">Twitter</label>
+                <input type="text" placeholder="Username (without @)" id="twitter" v-model.lazy="twitter"><br>
+                <div v-if="!this.exist">
+                    <button class = "btn" v-on:click="link()">Connect</button>
+                </div>
+                <div v-else>
+                    <button class = "btn" v-on:click="link()">Connect</button>
+                    <button class = "btn" v-on:click="cancel()">Cancel</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'SocialMedia',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

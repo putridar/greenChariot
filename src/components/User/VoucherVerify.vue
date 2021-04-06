@@ -1,32 +1,37 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class="top">
-            <p class="content">Your points: {{this.score}}</p>
-        </div>
-        <div class="rewards">
-            <div class="outside">
-                <div class="inside">
-                    <div class="pic">
-                        <img alt="shoplogo" v-bind:src="imagename">
-                        <p class="title">${{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
-                        <p class="title2">{{this.currentvoucher.point}} points</p>
-                        <p class="title3">Are you sure you want to exchange this?</p>
-                        <button class="btn" v-on:click="proceed()">Yes</button>
-                        <button class="btn" v-on:click="backwards()">No</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class="top">
+                <p class="content">Your points: {{this.score}}</p>
+            </div>
+            <div class="rewards">
+                <div class="outside">
+                    <div class="inside">
+                        <div class="pic">
+                            <img alt="shoplogo" v-bind:src="imagename">
+                            <p class="title">${{this.currentvoucher.price}} {{this.currentvoucher.name}} Voucher</p><br>
+                            <p class="title2">{{this.currentvoucher.point}} points</p>
+                            <p class="title3">Are you sure you want to exchange this?</p>
+                            <button class="btn" v-on:click="proceed()">Yes</button>
+                            <button class="btn" v-on:click="backwards()">No</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default{
     components:{
-        Head
+        Head,
+        Footer
     },
     data(){
         return{

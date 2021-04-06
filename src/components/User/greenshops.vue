@@ -1,4 +1,5 @@
 <template>
+<div>
  <div class="bg">
     <Head v-bind:id="id" class="head"></Head>
     <div class = "top">
@@ -16,15 +17,20 @@
             </li>
         </ul>
     </div>
+        
+    </div>
+    <Footer></Footer>
     </div>
 </template>
 <script>
 import Head from './Header.vue'
 import db from '../../firebase.js'
+import Footer from '../Footer.vue'
 export default {
     name: 'Greenshops',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -64,7 +70,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 130vh;
     }
     .head {
         position: sticky;
@@ -77,7 +83,7 @@ export default {
         list-style-type: none;
         padding: 0;
         justify-content: center;
-        align-items: center;
+        
     }
     li {
         flex-shrink: 1;
@@ -88,6 +94,7 @@ export default {
         border-radius: 20px;
         background-color: #FFFFFF;
         min-height: 60vh;
+        margin-bottom: 30px;
     }
     .title {
         font-family: Montserrat;
@@ -143,8 +150,6 @@ export default {
     }
     .shops {
         margin-top: 10px;
-        align-items: center;
-        display: flex;
     }
 </style>
 

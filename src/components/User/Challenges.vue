@@ -1,52 +1,57 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <p class = "content"> Challenges: </p>
-        <ul>
-            <li>
-                <div class = "pic">
-                    <img alt= "quiz" src="../../assets/quiz.png">
-                </div>
-                <h1 class = "title">Quiz</h1><br>
-                <p>
-                    Confident about your knowledge in carbon footprint?<br>
-                    Test your understanding by doing this quiz!<br>
-                    +5 Points/correct answer
-                </p>
-                <button class = "btn" v-on:click='toQuiz()'>Start</button>
-            </li>
-            <li>
-                <div class = "pic">
-                    <img alt= "social media" src="../../assets/socialmedia.png">
-                </div>
-                <h1 class = "title">Social Media Challenge</h1><br>
-                <p>
-                    Prove that you have contributed to reduce the carbon emissions!<br>
-                    +10 Points/post
-                </p>
-                <button class = "btn" v-on:click="isLinked()">See Challenges</button>
-            </li>
-            <li>
-                <div class = "pic">
-                    <img class = "pic2" alt= "shop" src="../../assets/shop.png">
-                </div>
-                <h1 class = "title">Shop at Our Green Shops!</h1><br>
-                <p>
-                    Buy more sustainable products to help saving the planet!
-                </p>
-                <button class = "btn" v-on:click="toShops()">Shop now!</button>
-            </li>
-        </ul>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <p class = "content"> Challenges: </p>
+            <ul>
+                <li>
+                    <div class = "pic">
+                        <img alt= "quiz" src="../../assets/quiz.png">
+                    </div>
+                    <h1 class = "title">Quiz</h1><br>
+                    <p>
+                        Confident about your knowledge in carbon footprint?<br>
+                        Test your understanding by doing this quiz!<br>
+                        +5 Points/correct answer
+                    </p>
+                    <button class = "btn" v-on:click='toQuiz()'>Start</button>
+                </li>
+                <li>
+                    <div class = "pic">
+                        <img alt= "social media" src="../../assets/socialmedia.png">
+                    </div>
+                    <h1 class = "title">Social Media Challenge</h1><br>
+                    <p>
+                        Prove that you have contributed to reduce the carbon emissions!<br>
+                        +10 Points/post
+                    </p>
+                    <button class = "btn" v-on:click="isLinked()">See Challenges</button>
+                </li>
+                <li>
+                    <div class = "pic">
+                        <img class = "pic2" alt= "shop" src="../../assets/shop.png">
+                    </div>
+                    <h1 class = "title">Shop at Our Green Shops!</h1><br>
+                    <p>
+                        Buy more sustainable products to help saving the planet!
+                    </p>
+                    <button class = "btn" v-on:click="toShops()">Shop now!</button>
+                </li>
+            </ul>
+        </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'Challenges',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -122,6 +127,7 @@ export default {
         border-radius: 20px;
         background-color: #FFFFFF;
         min-height: 80vh;
+        margin-bottom: 30px;
     }
     img {
         width: 70%;

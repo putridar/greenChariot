@@ -1,27 +1,31 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "item">
-            <div class="rewards">
-                <img alt="successful" src="../../assets/successful.png">
-            </div>
-            <div class="content">
-                <p class="zoom">Hooray!</p>
-                <p class="title2">You get 500 points!</p>
-                <p class="txt">Your new points: {{this.newpoints}}</p>
-                <p class="txt">Your old points: {{this.oldpoints}}</p>
-                <button class="btn" v-on:click="direct()">Rewards</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "item">
+                <div class="rewards">
+                    <img alt="successful" src="../../assets/successful.png">
+                </div>
+                <div class="content">
+                    <p class="zoom">Hooray!</p>
+                    <p class="title2">You get 500 points!</p>
+                    <p class="txt">Your new points: {{this.newpoints}}</p>
+                    <p class="txt">Your old points: {{this.oldpoints}}</p>
+                    <button class="btn" v-on:click="direct()">Rewards</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default{
     components: {
-        Head
+        Head,
+        Footer
     },
     data(){
         return{

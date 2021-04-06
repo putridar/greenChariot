@@ -1,41 +1,46 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <img alt="greenChariot" src="../../assets/survey.png">
-        <div class = "content">
-            <p class = "title">Monthly Consumption survey</p>
-            <div class ="Consumption1">
-                <p class = "txt2">Utilities Expenditure ($)</p>
-                <p class = "txt1">Electricity</p>
-                <input type="number" placeholder="Prorated Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
-                <p class = "txt1">Water</p>
-                <input type="number" placeholder="Prorated Household Water bill " min=0 id="water" v-model="water" required><br>
-                <p class = "txt1">Gas</p>
-                <input type="number" placeholder="Prorated Household Gas bill " min=0 id="gas" v-model="gas" required><br>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <img alt="greenChariot" src="../../assets/survey.png">
+            <div class = "content">
+                <p class = "title">Monthly Consumption survey</p>
+                <div class ="Consumption1">
+                    <p class = "txt2">Utilities Expenditure ($)</p>
+                    <p class = "txt1">Electricity</p>
+                    <input type="number" placeholder="Prorated Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
+                    <p class = "txt1">Water</p>
+                    <input type="number" placeholder="Prorated Household Water bill " min=0 id="water" v-model="water" required><br>
+                    <p class = "txt1">Gas</p>
+                    <input type="number" placeholder="Prorated Household Gas bill " min=0 id="gas" v-model="gas" required><br>
+                </div>
+                <div class ="Consumption1">
+                    <p class = "txt2">Transport Duration (Hours)</p>
+                    <p class = "txt1"> MRT Public Transport</p>
+                    <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
+                    <p class = "txt1"> Bus Public Transport</p>
+                    <input type="number" placeholder="Approx Duration Bus" min=0 id="bus" v-model="bus" required><br>
+                    <p class = "txt1">Drive or Ride Car</p>
+                    <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 id="car" v-model="car" required><br>
+                </div>
+                <button class = "create" v-on:click="SurveySubmit1()">Next</button>
+                <p class = "txt"> Page 1 / 4 </p>
+                <p class = "txt"> Accurate data helps us predict better :) </p>
             </div>
-            <div class ="Consumption1">
-                <p class = "txt2">Transport Duration (Hours)</p>
-                <p class = "txt1"> MRT Public Transport</p>
-                <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
-                <p class = "txt1"> Bus Public Transport</p>
-                <input type="number" placeholder="Approx Duration Bus" min=0 id="bus" v-model="bus" required><br>
-                <p class = "txt1">Drive or Ride Car</p>
-                <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 id="car" v-model="car" required><br>
-            </div>
-            <button class = "create" v-on:click="SurveySubmit1()">Next</button>
-            <p class = "txt"> Page 1 / 4 </p>
-            <p class = "txt"> Accurate data helps us predict better :) </p>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
 import db from "../../firebase.js"
+import Footer from '../Footer.vue'
 export default {
     name: 'Header',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {
@@ -118,7 +123,8 @@ export default {
         text-align: center;
         border-radius: 8px;
         padding: 10px;
-        animation: zoomIn 1s
+        animation: zoomIn 1s;
+        margin-bottom: 50px;
     }
     .Consumption1{
         width: 90%;
@@ -159,11 +165,6 @@ export default {
         border-radius: 8px;
         border: 1px solid #E5E5E5;
         height: 10%
-    }
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: rgb(0, 0, 0);
-        opacity: 0.45;
-        font-size: 14px;
     }
     .create {
         background: #2D8F8A;
