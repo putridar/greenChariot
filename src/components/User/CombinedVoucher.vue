@@ -3,6 +3,7 @@
     <Head v-bind:id="id" class="head"></Head>
     <div class="top">
         <p class="content">Your points: {{this.score}}</p>
+        <button class = "btn2" v-on:click="reward()"> Your Rewards </button>
     </div>
     <div class="rewards">
         <div v-if="this.vouchers.length == 0">
@@ -86,13 +87,13 @@ export default{
                 this.point=item.point
                 item.imagename=image
                 this.currvoucher.push(item)
-                db.firestore().collection('users').doc(this.id).update({
-                    currvoucher:this.currvoucher,
-                    points:this.score-item.point
-                }).then(() => {this.$router.push({name:"rewardpage",query:{id:this.id,shopId:id,name:name,voucher:item}})})
+                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:id,name:name,voucher:item,combined:true}})
                 
             }
-        }  
+        },
+        reward: function() {
+            this.$router.push({name:"rewardpage",query:{id:this.id}})
+        }
     },
     created(){
         this.retrieve(),
@@ -187,6 +188,22 @@ export default{
     }
     .text{
         float:right
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 30%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
     }
     img {
         width:50%;

@@ -3,6 +3,7 @@
     <Head v-bind:id="id" class="head"></Head>
     <div class="top">
         <p class="content">Your points: {{this.score}}</p>
+        <button class = "btn2" v-on:click="reward()"> Your Rewards </button>
     </div>
     <div class="rewards">
         <div v-if="this.vouchers.length == 0">
@@ -72,9 +73,12 @@ export default{
             }else{
                 this.price=item.price
                 this.point=item.point
-                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item}})
+                this.$router.push({name:"voucherverify",query:{id:this.id,shopId:this.shopId,name:this.name,voucher:item,combined:false}})
             }
-        }  
+        },
+        reward: function() {
+            this.$router.push({name:"rewardpage",query:{id:this.id}})
+        }
     },
     created(){
         this.retrieve(),
@@ -144,6 +148,22 @@ export default{
         height: 45%;
         margin-top:5%;
         margin-bottom: 2%;
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 30%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
     }
     .btn {
         background: #2D8F8A;
