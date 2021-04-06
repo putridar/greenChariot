@@ -1,5 +1,5 @@
 <template>
- <div class="background">
+ <div class="bg">
     <Head v-bind:id="id"></Head>
     <div class = "top">
         <p class="content">Your Vouchers:</p>
@@ -77,7 +77,7 @@ export default {
 </script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    .background {
+    .bg {
         background-color: #9AD5FF;
         padding: 0px;
         margin: 0px;
@@ -164,7 +164,7 @@ export default {
         justify-content: space-between;
         display: flex;
         margin-right: 100px;
-        margin-top: -40%;
+        margin-top: 2%;
         margin-bottom: 2%
     }
     .content {

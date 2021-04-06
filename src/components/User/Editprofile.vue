@@ -1,5 +1,5 @@
 <template>
-    <div class="background">
+    <div class="bg">
         <Head v-bind:id="id"></Head>
         <div class="top">
             <p class="content">Your points: {{this.points}}</p>
@@ -161,7 +161,7 @@ export default{
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    .background {
+    .bg {
         background-color: #9AD5FF;
         padding: 0px;
         margin: 0px;
@@ -181,7 +181,7 @@ export default{
     }
     .top {
         margin-right: 100px;
-        margin-top: -90%;
+        margin-top:2%;
         margin-bottom: 2%;
         margin-left:2%;
         display:flex
@@ -205,7 +205,6 @@ export default{
     }
     .profile {
         background-color: #FFFFFF;
-        margin-top: -5%;
         margin-left: 55%;
         margin-right: 10%;
         height: 50%;
@@ -251,7 +250,7 @@ export default{
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: 60px
+        margin-left: 30px
     }
     .title2 {
         font-family: Inter;

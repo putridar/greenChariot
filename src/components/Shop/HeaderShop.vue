@@ -77,18 +77,25 @@ export default {
     }
     li {
         flex-grow: 1;
-        flex-basis: 80px;
+        flex-basis: 70px;
         text-align: center;
         margin: 3px;
     }
+    .txt:hover {
+        background-color: #FFFFFF
+    }
     .txt {
-        margin-top: 50px
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height:95px
     }
     a {
         color: #1C746F;
         text-decoration: none;
         font-family: Montserrat;
         font-size: 16px;
+        justify-content: center;
     }
     img {
         width: 30%;

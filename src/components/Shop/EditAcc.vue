@@ -1,7 +1,7 @@
 <template>
-    <div class="background">
+    <div class="bg">
         <Head v-bind:id="id"></Head>
-        <img alt="logo" src="../../assets/welcome.png">
+        <img alt="logo" src="../../assets/welcome.png" class="image">
         <div class="profile">
             <p class="title">Edit Your Profile!</p>
             <p class = "txt"> Email </p>
@@ -138,7 +138,7 @@ export default{
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    .background {
+    .bg {
         background-color: #9AD5FF;
         padding: 0px;
         margin: 0px;
@@ -159,7 +159,7 @@ export default{
     }
     .top {
         margin-right: 100px;
-        margin-top: -42%;
+        margin-top: 2%;
         margin-bottom: 2%;
         margin-left:2%;
         display:flex
@@ -183,7 +183,7 @@ export default{
     }
     .profile {
         background-color: #FFFFFF;
-        margin-top: -40%;
+        margin-top: 2%;
         margin-left: 55%;
         margin-right: 10%;
         height: 60%;
@@ -225,12 +225,12 @@ export default{
     .picture{
         height:10%
     }
-    img {
+    .image {
         float: left;
-        width: 35%;
+        width: 40%;
         justify-content: center;
-        margin-left: 75px;
-        margin-top: -40%;
+        margin-left:-30.2%;
+        margin-top:0.1%
     }
 
 

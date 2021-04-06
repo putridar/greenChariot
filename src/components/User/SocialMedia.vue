@@ -107,7 +107,7 @@ export default {
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 20px;
+        margin-top: 2%;
         margin-left: 55%;
         margin-right: 10%;
         min-height: 70vh;

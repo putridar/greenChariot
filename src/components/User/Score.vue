@@ -1,5 +1,5 @@
 <template>
-    <div class="background">
+    <div class="bg">
         <Head v-bind:id="id"></Head>
         <div class = "item">
             <div class="rewards">
@@ -39,7 +39,7 @@ export default{
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    .background {
+    .bg {
         background-color: #9AD5FF;
         padding: 0px;
         margin: 0px;
@@ -123,6 +123,6 @@ export default{
         cursor: pointer;
     }
     .item {
-        margin-top: -42%
+        margin-top: 2%
     }
 </style>

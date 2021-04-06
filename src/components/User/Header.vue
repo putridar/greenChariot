@@ -63,6 +63,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
+        height:100px
     }
     .logo {
         float:left
@@ -103,14 +104,21 @@ export default {
         text-align: center;
         margin: 3px;
     }
+    .txt:hover {
+        background-color: #FFFFFF
+    }
     .txt {
-        margin-top: 50px
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height:95px
     }
     a {
         color: #1C746F;
         text-decoration: none;
         font-family: Montserrat;
         font-size: 16px;
+        justify-content: center;
     }
     img {
         width: 30%;

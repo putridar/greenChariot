@@ -115,11 +115,12 @@ export default {
         float: left;
         width: 40%;
         justify-content: center;
-        margin-left: -30%
+        margin-left: -30%;
+        margin-top: 5%
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 5%;
+        margin-top: 2%;
         margin-left: 55%;
         margin-right: 10%;
         height: 60%;

@@ -1,5 +1,5 @@
 <template>
-    <div class="background">
+    <div class="bg">
         <Head v-bind:id="id"></Head>
         <div class="content">
             <div class="pic">
@@ -95,7 +95,7 @@ export default{
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    .background {
+    .bg {
         background-color: #9AD5FF;
         padding: 0px;
         margin: 0px;
@@ -104,7 +104,7 @@ export default{
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: -48%;
+        margin-top: 2%;
         margin-left: 33%;
         margin-right: 10%;
         height: 60%;

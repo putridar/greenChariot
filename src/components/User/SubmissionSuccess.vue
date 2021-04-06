@@ -62,7 +62,7 @@ export default {
     }
     .content {
         margin-top: 7%;
-        margin-left: 55%;
+        margin-left: 52%;
         margin-right: 10%;
         min-height: 70vh;
         width: 40%;

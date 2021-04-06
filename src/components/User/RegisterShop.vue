@@ -160,11 +160,10 @@ export default {
         width: 40%;
         justify-content: center;
         margin-left: -30%;
-        margin-top: 7%
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 5%;
+        margin-top: 2%;
         margin-left: 50%;
         margin-right: 10%;
         height: 60%;

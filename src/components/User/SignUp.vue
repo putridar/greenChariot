@@ -142,7 +142,7 @@ export default {
     .greenlogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 60px;
+        font-size: 64px;
         line-height: 103px;
         color: #1C746F;
         text-align: left;
@@ -153,7 +153,7 @@ export default {
     .whitelogo {
         font-family: Inter;
         font-weight: bold;
-        font-size: 60px;
+        font-size: 64px;
         line-height: 103px;
         color: #FFFFFF;
         text-align: left;

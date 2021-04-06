@@ -103,7 +103,7 @@ export default {
     }
     img {
         width:70%;
-        margin-bottom:15%;
+        margin-bottom:10%;
         margin-top:3%;
         margin-left: 5%;
     }
