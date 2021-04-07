@@ -1,30 +1,34 @@
 <template>
-    <div class = "bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "content">
-            <p id = "question"> {{this.selectedQuestions[0].question}}</p><br>
-            <br>
-            <ul>
-                <li v-for='(o, index) in this.selectedQuestions[0].options' :key='o'>
-                    <div id='help'>
-                        <button class='mcq' type='button' v-bind:id='index'>
-                            {{index+1}}. {{o}}
-                        </button>
-                    </div>
-                </li>
-            </ul>
-            <button class = "btn" type='button' v-on:click="next()">Next</button>
+    <div>
+        <div class = "bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "content">
+                <p id = "question"> {{this.selectedQuestions[0].question}}</p><br>
+                <br>
+                <ul>
+                    <li v-for='(o, index) in this.selectedQuestions[0].options' :key='o'>
+                        <div id='help'>
+                            <button class='mcq' type='button' v-bind:id='index'>
+                                {{index+1}}. {{o}}
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <button class = "btn" type='button' v-on:click="next()">Next</button>
+            </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Head from './Header.vue'
-
+import Footer from '../Footer.vue'
 export default {
     name: 'ans',
     components :{
-        Head
+        Head,
+        Footer
     },
     data() {
         return {

@@ -9,6 +9,7 @@
                 <input class="ins" type="number" placeholder="Estimated per month" min=0 id="numofitem" v-model="numofitem" required><br>
                 <p class = "txt1">Predominant Category of Purchases (Optional)</p>
                 <br>
+                <div class = "ck">
                 <input type="checkbox" id="Fashion" value="Fashion" v-model="ecommerce">
                 <label for="Fashion">Fashion</label>
                 <input type="checkbox" id="Gadgets" value="Gadgets" v-model="ecommerce">
@@ -17,6 +18,7 @@
                 <label for="Groceries">Groceries</label>
                 <input type="checkbox" id="Food_Delivery" value="Food Delivery" v-model="ecommerce">
                 <label for="Food_Delivery">Food Delivery</label>
+                </div>
                 <button class = "next" v-on:click="SurveySubmit2()">Next</button>
                 <p class = "txt"> Page 3 / 4 </p>
                 <p class = "txt"> Accurate data helps us predict better :) </p>
@@ -140,30 +142,39 @@ export default {
         border-radius: 3px;
         display: inline-block;
         cursor: pointer;
-
+        height:20px;
+        width: 12px
     }
     input[type="checkbox"]:active, input[type="checkbox"]:checked:active {
         box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+        height:20px;
     }
     input[type="checkbox"]:checked {
         background-color:#2D8F8A;
         border: 1px solid #ffffff;
         box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
         color: #99a1a7;
+        height:20px;
     }
     input[type="checkbox"]:checked:after {
         content: '\2714';
-        font-size: 14px;
-        position: absolute;
-        top: 0px;
-        left: 3px;
+        font-size: 11px;
         color: #ffffff;
+        position:relative;
+        margin-top:-2px;
+        margin-left:-5px;
+        display: flex;
+        top:-5px;
+    }
+    .ck {
+        height:30px;
     }
     label{
         font-family: Montserrat;
         margin: 3%;
         color: #1C746F;
         font-weight: 600;
+        height:30px;
     }
     .next {
         background: #2D8F8A;

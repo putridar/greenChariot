@@ -1,16 +1,18 @@
 <template>
-    <div class="bg">
-        <Head v-bind:id="id" class="head"></Head>
-        <div class = "item">
-            <div class="rewards">
-                <img alt="successful" src="../../assets/successful.png">
-            </div>
-            <div class="content">
-                <p class="zoom">Great job!</p>
-                <br>
-                <p class="title2">You got {{this.score}}/50</p>
-                <br>
-                <button class="btn" v-on:click="direct()">Try again?</button>
+    <div>
+        <div class="bg">
+            <Head v-bind:id="id" class="head"></Head>
+            <div class = "item">
+                <div class="rewards">
+                    <img alt="successful" src="../../assets/successful.png">
+                </div>
+                <div class="content">
+                    <p class="zoom">Great job!</p>
+                    <br>
+                    <p class="title2">You got {{this.score}}/50</p>
+                    <br>
+                    <button class="btn" v-on:click="direct()">Try again?</button>
+                </div>
             </div>
         </div>
         <Footer></Footer>

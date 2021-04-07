@@ -31,9 +31,6 @@ export default {
   methods: {
         
   },
-  created(){
-      this.fetchimage()
-  }
 }
 </script>
 
