@@ -43,14 +43,37 @@ export default{
         retrievepoints:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                 this.points=snapshot.data().points
-                this.currvoucher=snapshot.data().currvoucher
+                this.searchPictureandId(snapshot.data().currvoucher)
             })
+        },
+        searchPictureandId: function(item) {
+            var shop = []
+            db.firestore().collection('shops').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var user = [doc.id, doc.data()]
+                    shop.push(user)
+                })
+            }).then(()=>this.update(item,shop))
+        },
+        update : function(item,shop) {
+            for (let x = 0; x < item.length; x++) {
+                var curr = shop.filter(s=> item[x].shopId === s[0]);
+                var cur = curr[0][1]
+                var curritem = {
+                    imagename: cur.imagename,
+                    name: cur.name,
+                    point: item[x].point,
+                    price: item[x].price,
+                    shopId: item[x].shopId
+                }
+                this.currvoucher.push(curritem)
+            }
         },
         exchange: function() {
             this.$router.push({name:'combinedvoucher',query:{id:this.id}})
         },
         spend:function(item,index){
-            this.$router.push({name:'spendvoucher',query:{id:this.id,item:item,index:index}})
+            this.$router.push({name:'spendvoucher',query:{id:this.id,item:item,index:index, shopId:item.shopId}})
         }
     },
     created(){
@@ -91,7 +114,7 @@ export default{
         text-align: center;
         padding: 2%;
         margin:2%;
-        margin-top:5%
+        margin-top:3%
     }
     .title2{
         font-family: Montserrat;
@@ -117,6 +140,7 @@ export default{
         border-radius: 20px;
         background-color: #FFFFFF;
         margin-bottom: 30px;
+        height: 350px
     }
     .pic {
         height: 45%;
