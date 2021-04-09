@@ -68,7 +68,7 @@ export default{
      },
         onclick:function(item){
             for (var x of this.currvoucher){
-                if (item.price==x.price && item.point==x.point && this.name==x.name){
+                if (item.price==x.price && item.point==x.point && this.shopId==x.shopId){
                     alert("You already have this voucher in your possession!")
                     return
                 }
