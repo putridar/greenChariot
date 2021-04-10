@@ -29,29 +29,41 @@ export default {
             selectedQuestionsIDs:[], //ids of selected qns
             questionIDs:["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20"],
             score:0,
+            qns:[],
+            counter: 0
         }
     },
     methods: {
         toQuestion:function() {
-            this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions,score:this.score}})
+            this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions}})
         },
         getQuestion: function() {
-            this.select();
-            for (var i=0;i<this.selectedQuestionsIDs.length;i++) {
-                var id=this.selectedQuestionsIDs[i]
-                db.firestore().collection('questions').doc(id).get().then(snapshot => {
-                    this.selectedQuestions.push(snapshot.data())
-                })
+            db.firestore().collection('questions').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    var qn = [doc.id, doc.data()]
+                    this.qns.push(qn)
+                });
+            }).then(()=> {
+                this.select();
+            })
+        },
+        putqns: function(select) {
+            for (var i=0;i<select.length;i++) {
+                var id=select[i]
+                var curr = this.qns.filter(i => i[0] == id)
+                this.selectedQuestions.push(curr[0][1])
             }
         },
         select: function() {
-            while (this.selectedQuestionsIDs.length<10) {
+            var select = []
+            while (select.length<10) {
                 var randomIndex=Math.floor(Math.random()*20);
                 var chosen=this.questionIDs[randomIndex]
-                if (this.selectedQuestionsIDs.includes(chosen)!=true) {
-                    this.selectedQuestionsIDs.push(chosen)
+                if (select.includes(chosen)!=true) {
+                    select.push(chosen)
                 }
             }
+            this.putqns(select)
         },       
     },
     created() {

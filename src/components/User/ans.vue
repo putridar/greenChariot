@@ -6,10 +6,31 @@
                 <p id = "question"> {{this.selectedQuestions[0].question}}</p><br>
                 <br>
                 <ul>
-                    <li v-for='(o, index) in this.selectedQuestions[0].options' :key='o'>
+                    <li>
                         <div id='help'>
-                            <button class='mcq' type='button' v-bind:id='index'>
-                                {{index+1}}. {{o}}
+                            <button class='mcq' type='button' id=0 v-on:click='color(0)'>
+                                1. {{this.selectedQuestions[0].options[0]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div id='help'>
+                            <button class='mcq' type='button' id=1 v-on:click='color(1)'>
+                                2. {{this.selectedQuestions[0].options[1]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li v-if='this.selectedQuestions[0].options.length>=3'>
+                        <div id='help'>
+                            <button class='mcq' type='button' id=2 v-on:click='color(2)'>
+                                3. {{this.selectedQuestions[0].options[2]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li v-if='this.selectedQuestions[0].options.length>=4' v-on:click='color(3)'>
+                        <div id='help'>
+                            <button class='mcq' type='button' id=3>
+                                4. {{this.selectedQuestions[0].options[3]}}
                             </button>
                         </div>
                     </li>
@@ -38,6 +59,7 @@ export default {
             selectedQuestions:this.$route.query.selectedQuestions,
             score:this.$route.query.score,
             correct:this.$route.query.correct,
+            ans: false
         }
     },
     methods: {
@@ -52,8 +74,17 @@ export default {
                 this.$router.push({name:'question',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions}})
             }
         },
-        color:function() {
-            document.getElementById(this.chose).style.background='red'
+        color: function(ans) {
+            if (this.answer != this.chose && !this.ans) {
+                document.getElementById(ans).style.background = "red";
+                document.getElementById(this.answer).style.background = "green";
+                this.ans = true
+            } else if (!this.ans) {
+                document.getElementById(this.answer).style.background = "green";
+            }
+        },
+        turnGreen: function() {
+            document.getElementById(this.answer).style.color = "green";
         }
     },
     created() {
@@ -93,7 +124,7 @@ export default {
         font-size:25px;
         width:100%;
         cursor: pointer;
-    } 
+    }
     .head {
         position: sticky;
         top: 0;
