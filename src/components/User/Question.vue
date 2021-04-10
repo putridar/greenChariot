@@ -64,15 +64,6 @@ export default {
         }
     },
     methods: {
-        selected: function(event) {
-            this.chose = event.target.getAttribute("id");
-            this.answer = this.selectedQuestions[this.counter].correct;
-            if (this.chose==this.answer) {
-                this.correct=true;
-            } else {
-                this.correct=false;
-            }
-        },
         toScore: function() {
             this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
@@ -81,10 +72,10 @@ export default {
             this.ans=false
             console.log(this.selectedQuestions)
             document.getElementById(this.chose).style.background = "white";
-            document.getElementById(this.selectedQuestions[this.counter].correct).style.background = "white";
+            document.getElementById(this.answer).style.background = "white";
             if (this.chose==100) {
                 alert("You have not selected an option!")
-            } else if (this.chose == this.selectedQuestions[this.counter].correct) {
+            } else if (this.chose == this.answer) {
                 console.log(this.score)
                 this.score += 5
             }
@@ -96,12 +87,14 @@ export default {
         },
         color: function(ans) {
             this.chose = ans;
+            this.answer = this.selectedQuestions[this.counter].correct;
             if (this.answer != this.chose && !this.ans) {
                 document.getElementById(ans).style.background = "red";
-                document.getElementById(this.selectedQuestions[this.counter].correct).style.background = "green";
+                document.getElementById(this.answer).style.background = "green";
                 this.ans = true
             } else if (!this.ans) {
-                document.getElementById(this.selectedQuestions[this.counter].correct).style.background = "green";
+                document.getElementById(this.answer).style.background = "green";
+                this.ans = true
             }
         },
     },
