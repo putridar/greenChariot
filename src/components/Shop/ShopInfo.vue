@@ -150,8 +150,7 @@ export default {
         height:120%;
     }
     .hg1 {
-        height: 100%;
+        height: 120%;
         align-items: center;
-        margin-top:15%
     }
 </style>

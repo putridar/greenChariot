@@ -63,7 +63,11 @@ export default{
                 this.currentvoucher.point=this.voucher.point
                 this.currentvoucher.name=this.name
                 this.currentvoucher.shopId = this.shopId
+<<<<<<< HEAD
                 this.exchange = temp.exchanged == undefined ? [] : temp.exchanged
+=======
+                this.exchanged = temp.exchanged == undefined ? [] : temp.exchanged
+>>>>>>> 26bcc6315c17aca64d1439af146a7afb4d99f77c
             })
         },
         retrieve:function(){
