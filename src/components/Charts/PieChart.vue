@@ -15,4 +15,7 @@ export default {
 </script>
 
 <style>
+.chart{
+  display: inline-flex;
+}
 </style>
