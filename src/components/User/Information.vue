@@ -5,13 +5,13 @@
             <p class = "txt2"> Topic Filters:</p>
             <div class="filters">
                 <input type="checkbox" id="Sustainability" class = "filterbutton" value="sustainability" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Sustainability">#Sustainability</label>
+                <label class="checklabel" for="Sustainability">#Sustainability X</label>
                 <input type="checkbox" id="ClimateChange" class = "filterbutton" value="climatechange" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="ClimateChange">#ClimateChange</label>
+                <label class="checklabel" for="ClimateChange">#ClimateChange X</label>
                 <input type="checkbox" id="Innovation" class = "filterbutton" value="innovation" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Innovation">#Innovation</label>
+                <label class="checklabel" for="Innovation">#Innovation  X</label>
                 <input type="checkbox" id="Nature" class = "filterbutton" value="nature" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Nature">#Nature</label>
+                <label class="checklabel" for="Nature">#Nature  X</label>
             </div>
             <div class = "content" v-for="art in this.articles" :key="art.id">
                 <div class="image">
@@ -52,8 +52,6 @@ export default {
         },
         getArts : function(){
             db.firestore().collection('info').get().then((snapshot)=>{
-                console.log(snapshot.docs)
-                console.log(this.topics)
                 let od={}
                 snapshot.docs.forEach(doc=>{
                     od=doc.data()
@@ -93,7 +91,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 350vh;
+        min-height: auto;
     }
     .head {
         position: sticky;

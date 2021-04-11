@@ -2,13 +2,20 @@
     <div>
         <div class = "bg">
             <Head v-bind:id="id" class="head"></Head>
-            <div class="piechart" >
-                <div class="col">
-                    <PieChart class="piechart"></PieChart>
+            <div class="content">
+                <div class="pie">
+                    <PieChart></PieChart>
                 </div>
-                <div class="col" >
-                    <p class="txt">Highest emission is Food </p>
-                </div>
+                <img alt="greenChariot" src="../../assets/shop.png">
+            </div>
+            <div class="content1">
+                <p>hi</p>
+            </div>
+            <div class="content2">
+                <p>hi</p>
+            </div>
+            <div class="content3">
+                <p>hi</p>
             </div>
         </div>
         <Footer></Footer>
@@ -17,7 +24,6 @@
 
 <script>
 import Head from './Header.vue'
-import db from "../../firebase.js"
 import PieChart from '../Charts/PieChart.vue'
 import Footer from '../Footer.vue'
 
@@ -29,23 +35,11 @@ export default {
     data() {
         return {
             id: this.$route.query.id,
-            ecommerce: [],
-            amount:""
         }
     },
     methods: {
         print: function() {
             console.log(this.name);
-        },
-        SurveySubmit2 : function() {
-            db.firestore().collection('users').doc(this.id).update({
-                Survey2: {
-                    ecommerce: this.ecommerce
-                }
-            }).then(() => {
-                alert("Submitted 2/4 successfuly");
-                this.$router.push({ name: 'survey2', query: {id: this.id}})
-            })
         }
     }
 }
@@ -59,60 +53,73 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 110vh;
+        min-height: 120vh;
+        font-family: Montserrat;
     }
     .head {
         position: sticky;
         top: 0;
         position: -webkit-sticky;
     }
+    img {
+        width: 30%;
+        justify-content: center;
+        margin-left: 30%;
+        margin-top: 2%;
+        flex: 10%;        
+    }.pie{
+        background-color: none;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 25%;
+        align-items: center;
+        border-radius: 8px;
+        padding: 10px;
+        flex: 30%;
+    }
     .content {
         background-color: #FFFFFF;
-        margin-top: 7%;
-        margin-left: 45%;
-        margin-right: 10%;
-        height: 60%;
-        width: 50%;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        border-radius: 8px;
-        padding: 10px
-    }
-    .title {
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 1000;
-        font-size: 30px;
-        line-height: 58px;
-        text-align: center;
-        color: #1C746F;
-        margin: 0px;
-    }
-    .txt {
-        font-family: Montserrat;
-        color: #1C746F;
-        text-align: center;
-        font-size: 16px;
-        margin: 5px;
-    }
-    .piechart {
-        background-color: #FFFFFF;
-        display: flex;
         margin-top: 2%;
         margin-left: 2%;
         margin-right: 2%;
-        height: 100%;
-        width: 45%;
-        align-items: center;
+        height: auto;
+        width: 95%;
         border-radius: 8px;
-        padding: 10px
-    }
-    .col {
-        flex: 50%;
         padding: 10px;
-        height: auto; 
-        align-items: center;
+        display: flex;
     }
-
+    .content1 {
+        background-color: #FFFFFF;
+        margin-top: 1%;
+        margin-left: 2%;
+        margin-right: 0%;
+        height: 270px;
+        width: 40%;
+        border-radius: 8px;
+        padding: 10px;
+        display: inline-flex;
+    }
+    .content2 {
+        background-color: #FFFFFF;
+        margin-top: 1%;
+        margin-left: 1%;
+        margin-right: 0%;
+        height: 270px;
+        width: 30%;
+        border-radius: 8px;
+        padding: 10px;
+        display: inline-flex;
+    }
+    .content3 {
+        background-color: #FFFFFF;
+        margin-top: 1%;
+        margin-left: 1%;
+        margin-right: 0%;
+        height: 270px;
+        width: 20.4%;
+        border-radius: 8px;
+        padding: 10px;
+        display: inline-flex;
+    }
+    
 </style>
