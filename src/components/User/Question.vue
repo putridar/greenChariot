@@ -3,18 +3,39 @@
         <div class = "bg">
             <Head v-bind:id="id" class="head"></Head>
             <div class = "content">
-                <p id = "question"> {{this.selectedQuestions[0].question}}</p><br>
+                <p id = "question"> {{this.selectedQuestions[this.counter].question}}</p><br>
                 <br>
                 <ul>
-                    <li v-for='(o, index) in selectedQuestions[0].options' :key='o'>
+                    <li>
                         <div id='help'>
-                            <button class='mcq' type='button' v-on:click='selected($event)' v-bind:id='index'>
-                                {{index+1}}. {{o}}
+                            <button class='mcq' type='button' id=0 v-on:click='color(0)'>
+                                1. {{this.selectedQuestions[this.counter].options[0]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        <div id='help'>
+                            <button class='mcq' type='button' id=1 v-on:click='color(1)'>
+                                2. {{this.selectedQuestions[this.counter].options[1]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li v-if='this.selectedQuestions[this.counter].options.length>=3'>
+                        <div id='help'>
+                            <button class='mcq' type='button' id=2 v-on:click='color(2)'>
+                                3. {{this.selectedQuestions[this.counter].options[2]}}
+                            </button>
+                        </div>
+                    </li>
+                    <li v-if='this.selectedQuestions[this.counter].options.length>=4' >
+                        <div id='help'>
+                            <button class='mcq' type='button' id=3 v-on:click='color(3)'>
+                                4. {{this.selectedQuestions[this.counter].options[3]}}
                             </button>
                         </div>
                     </li>
                 </ul>
-                <button class = "btn" type='button' v-on:click="next()">Check</button>
+                <button class = "btn" type='button' v-on:click="next()">Next</button>
             </div>
         </div>
         <Footer></Footer>
@@ -36,29 +57,44 @@ export default {
             chose:100, //index of answer selected
             answer:100, //index of answer
             selectedQuestions:this.$route.query.selectedQuestions,
-            score:this.$route.query.score,
+            score:0,
             correct:false,
+            ans: false,
+            counter: 0
         }
     },
     methods: {
-        selected: function(event) {
-            this.chose = event.target.getAttribute("id");
-            this.answer = this.selectedQuestions[0].correct;
-            if (this.chose==this.answer) {
-                this.correct=true;
-            } else {
-                this.correct=false;
-            }
+        toScore: function() {
+            this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
         next: function() {
-            this.counter+=1
+            
+            this.ans=false
+            console.log(this.selectedQuestions)
+            document.getElementById(this.chose).style.background = "white";
+            document.getElementById(this.answer).style.background = "white";
             if (this.chose==100) {
                 alert("You have not selected an option!")
-            } else if (this.correct==true) {
-                this.score+=5
-                this.$router.push({name:'ans',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions,chose:this.chose,answer:this.answer,correct:this.correct}})
-            } else {
-                this.$router.push({name:'ans',query:{id:this.id,score:this.score,selectedQuestions:this.selectedQuestions,chose:this.chose,answer:this.answer,correct:this.correct}})
+            } else if (this.chose == this.answer) {
+                console.log(this.score)
+                this.score += 5
+            }
+            this.counter+=1
+            console.log(this.counter)
+            if (this.counter==10) {
+                this.toScore()
+            }
+        },
+        color: function(ans) {
+            this.chose = ans;
+            this.answer = this.selectedQuestions[this.counter].correct;
+            if (this.answer != this.chose && !this.ans) {
+                document.getElementById(ans).style.background = "red";
+                document.getElementById(this.answer).style.background = "green";
+                this.ans = true
+            } else if (!this.ans) {
+                document.getElementById(this.answer).style.background = "green";
+                this.ans = true
             }
         },
     },
