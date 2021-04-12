@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Chart from "./PieChart.js";
+import Chart from "./Comparison.js";
 
 export default {
   components: {
@@ -16,7 +16,6 @@ export default {
 
 <style>
 .chart{
-  width:100%;
-  height: 100%;
+  width: 100%;
 }
 </style>
