@@ -11,6 +11,7 @@
                 <input type="password" placeholder="Password" v-model="password"><br>
                 <p class = "txt"> Confirm Password </p>
                 <input type="password" placeholder="Confirm Password" v-model="confirmpass"><br>
+                <button class="btn2" v-on:click="edit()">Edit shop Information</button><br>
                 <p><button class="btn" v-on:click="confirm()">Confirm</button>
                 <button class="btn" v-on:click="signout()">Sign out</button></p>
                 
@@ -41,6 +42,9 @@ export default{
         }
     },
     methods:{
+        edit:function() {
+            this.$router.push({ name: 'shopinfo', query: {id: this.id} })
+        },
         retrieve:function(){
             db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
                 this.oldemail=snapshot.data().email
@@ -226,6 +230,23 @@ export default{
         text-align: center;
         color: #FFFFFF;
         width: 37%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        margin:7px
+    
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 70%;
         height: 50px;
         text-align: center;
         cursor: pointer;
