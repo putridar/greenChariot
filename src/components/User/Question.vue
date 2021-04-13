@@ -6,37 +6,42 @@
             <div class = "content">
                 <p id = "question"> Q{{this.number}}: {{this.selectedQuestions[this.counter].question}}</p><br>
                 <br>
+                counter:{{counter}}
+                ans:{{this.ans}}
+                chose:{{chose}}
+                answer:{{answer}}
                 <ul>
                     <li>
                         <div id='help'>
-                            <button class='mcq' type='button' id=0 v-on:click='color(0)'>
+                            <button class='mcq' type='button' id=0 v-on:click='selection(0)'>
                                 1. {{this.selectedQuestions[this.counter].options[0]}}
                             </button>
                         </div>
                     </li>
                     <li>
                         <div id='help'>
-                            <button class='mcq' type='button' id=1 v-on:click='color(1)'>
+                            <button class='mcq' type='button' id=1 v-on:click='selection(1)'>
                                 2. {{this.selectedQuestions[this.counter].options[1]}}
                             </button>
                         </div>
                     </li>
                     <li v-if='this.selectedQuestions[this.counter].options.length>=3'>
                         <div id='help'>
-                            <button class='mcq' type='button' id=2 v-on:click='color(2)'>
+                            <button class='mcq' type='button' id=2 v-on:click='selection(2)'>
                                 3. {{this.selectedQuestions[this.counter].options[2]}}
                             </button>
                         </div>
                     </li>
                     <li v-if='this.selectedQuestions[this.counter].options.length>=4' >
                         <div id='help'>
-                            <button class='mcq' type='button' id=3 v-on:click='color(3)'>
+                            <button class='mcq' type='button' id=3 v-on:click='selection(3)'>
                                 4. {{this.selectedQuestions[this.counter].options[3]}}
                             </button>
                         </div>
                     </li>
                 </ul>
                 <button class = "btn" type='button' v-on:click="validate();next();">Next</button>
+                <button class = "btn" type='button' v-on:click="validate();color();">Check Your Answer!</button>
                 <h1 class="title2">Your current progress: {{this.correctnumber}} questions answered correctly</h1>
             </div>
         </div>
@@ -65,7 +70,6 @@ export default {
             counter: 0,
             number:this.$route.query.number,
             correctnumber:this.$route.query.correctnumber,
-            nooption:false
         }
     },
     methods: {
@@ -73,17 +77,13 @@ export default {
             this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
         next: function() {
-            if (this.nooption==true) {
-                 this.nooption=false
-                 return
-            }
             this.ans=false
             console.log(this.selectedQuestions)
-            document.getElementById(this.chose).style.background = "white";
-            document.getElementById(this.answer).style.background = "white";
+            document.getElementById(this.chose).style="mcq";
+            document.getElementById(this.answer).style="mcq";
              if (this.chose==this.answer){
                 console.log(this.score)
-                this.score += 5
+                this.score+=5
                 this.number+=1
                 this.correctnumber+=1
             }else{
@@ -96,11 +96,13 @@ export default {
                 this.toScore()
             }
         },
-        color: function(ans) {
+        selection: function(ans) {
             this.chose = ans;
             this.answer = this.selectedQuestions[this.counter].correct;
-            if (this.answer != this.chose && !this.ans) {
-                document.getElementById(ans).style.background = "red";
+        },
+        color: function() {
+            if (this.answer != this.chose) {
+                document.getElementById(this.chose).style.background = "red";
                 document.getElementById(this.answer).style.background = "green";
                 this.ans = true
             } else if (!this.ans) {
@@ -111,9 +113,8 @@ export default {
         validate:function(){
             if (this.chose==100){
                 alert('You need to input an option!')
-                this.nooption=true
             }
-        }
+        },
     },
 }
 </script>
