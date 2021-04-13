@@ -22,6 +22,7 @@
 <script>
 import Head from './Header.vue'
 import Footer from '../Footer.vue'
+import db from '../../firebase.js'
 export default{
     components: {
         Head,
@@ -31,13 +32,31 @@ export default{
         return{
             id:this.$route.query.id,
             score:this.$route.query.score,
+            currentpoints:0
         }
     },
     methods:{
         direct:function(){
             this.$router.push({name:'quiz',query:{id:this.id}})
+        },
+        //addscore:function(){
+            //db.firestore().collection('users').doc(this.id).update({
+                //points:this.currentpoints+this.score
+            //})
+        //},
+        getscore:function(){
+            var temp=0 
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+               temp=snapshot.data().points
+            }).then(() => {db.firestore().collection('users').doc(this.id).update({
+                points:temp+this.score
+            })})
         }
+            
     },
+    created(){
+        this.getscore()
+    }
 }
 </script>
 

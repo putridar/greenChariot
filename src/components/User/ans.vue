@@ -187,4 +187,14 @@ export default {
         margin: 20px;
         cursor: pointer;
     }
+    .title2 {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 58px;
+        text-align: center;
+        color: #1C746F;
+        height:150px
+    }
 </style>

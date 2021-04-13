@@ -2,8 +2,9 @@
     <div>
         <div class = "bg">
             <Head v-bind:id="id" class="head"></Head>
+            <Header id="score">Current score: {{this.score}}</Header><br>
             <div class = "content">
-                <p id = "question"> {{this.selectedQuestions[this.counter].question}}</p><br>
+                <p id = "question"> Q{{this.number}}: {{this.selectedQuestions[this.counter].question}}</p><br>
                 <br>
                 <ul>
                     <li>
@@ -35,7 +36,8 @@
                         </div>
                     </li>
                 </ul>
-                <button class = "btn" type='button' v-on:click="next()">Next</button>
+                <button class = "btn" type='button' v-on:click="validate();next();">Next</button>
+                <h1 class="title2">Your current progress: {{this.correctnumber}} questions answered correctly</h1>
             </div>
         </div>
         <Footer></Footer>
@@ -60,7 +62,10 @@ export default {
             score:0,
             correct:false,
             ans: false,
-            counter: 0
+            counter: 0,
+            number:this.$route.query.number,
+            correctnumber:this.$route.query.correctnumber,
+            nooption:false
         }
     },
     methods: {
@@ -73,13 +78,19 @@ export default {
             console.log(this.selectedQuestions)
             document.getElementById(this.chose).style.background = "white";
             document.getElementById(this.answer).style.background = "white";
-            if (this.chose==100) {
-                alert("You have not selected an option!")
-            } else if (this.chose == this.answer) {
+             if (this.nooption==true) {
+                 this.nooption=false
+                 return
+            }else if (this.chose==this.answer){
                 console.log(this.score)
                 this.score += 5
+                this.number+=1
+                this.correctnumber+=1
+            }else{
+                this.number+=1
             }
             this.counter+=1
+            this.chose=100
             console.log(this.counter)
             if (this.counter==10) {
                 this.toScore()
@@ -97,6 +108,12 @@ export default {
                 this.ans = true
             }
         },
+        validate:function(){
+            if (this.chose==100){
+                alert('You need to input an option!')
+                this.nooption=true
+            }
+        }
     },
 }
 </script>
@@ -200,5 +217,24 @@ export default {
         height: 50px;
         margin: 20px;
         cursor: pointer;
+    }
+    .title2 {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 58px;
+        text-align: center;
+        color: #1C746F;
+        margin: 15px;
+    }
+    #score {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        margin: 8px;
+        padding:10px;
+        float:left
     }
 </style>
