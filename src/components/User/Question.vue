@@ -73,15 +73,15 @@ export default {
             this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
         next: function() {
-            
+            if (this.nooption==true) {
+                 this.nooption=false
+                 return
+            }
             this.ans=false
             console.log(this.selectedQuestions)
             document.getElementById(this.chose).style.background = "white";
             document.getElementById(this.answer).style.background = "white";
-             if (this.nooption==true) {
-                 this.nooption=false
-                 return
-            }else if (this.chose==this.answer){
+             if (this.chose==this.answer){
                 console.log(this.score)
                 this.score += 5
                 this.number+=1
