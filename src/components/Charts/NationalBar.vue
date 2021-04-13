@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Chart from "./PieChart.js";
+import Chart from "./NationalBar.js";
 
 export default {
   components: {
@@ -15,8 +15,4 @@ export default {
 </script>
 
 <style>
-.chart{
-  width:100%;
-  height: 100%;
-}
 </style>

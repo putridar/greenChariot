@@ -7,12 +7,14 @@
                 <p class = "title">Monthly Consumption survey</p>
                 <div class ="Consumption1">
                     <p class = "txt2">Utilities Expenditure ($)</p>
+                    <p class = "txt1">Household population:</p>
+                    <input type="number" placeholder="Number of people in your house " min=0 id="householdpop" v-model="householdpop" required><br>
                     <p class = "txt1">Electricity</p>
-                    <input type="number" placeholder="Prorated Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
+                    <input type="number" placeholder="Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
                     <p class = "txt1">Water</p>
-                    <input type="number" placeholder="Prorated Household Water bill " min=0 id="water" v-model="water" required><br>
+                    <input type="number" placeholder="Household Water bill " min=0 id="water" v-model="water" required><br>
                     <p class = "txt1">Gas</p>
-                    <input type="number" placeholder="Prorated Household Gas bill " min=0 id="gas" v-model="gas" required><br>
+                    <input type="number" placeholder="Household Gas bill " min=0 id="gas" v-model="gas" required><br>
                 </div>
                 <div class ="Consumption1">
                     <p class = "txt2">Transport Duration (Hours)</p>
@@ -50,8 +52,8 @@ export default {
             gas:"",
             mrt:"",
             bus:"",
-            car:""
-
+            car:"", 
+            householdpop:""
         }
     },
     methods: {
@@ -61,6 +63,7 @@ export default {
         SurveySubmit1 : function() {
             db.firestore().collection('users').doc(this.id).update({
                 Survey: {
+                    house:this.householdpop,
                     electricity: this.electricity,
                     water: this.water,
                     gas: this.gas,
@@ -85,7 +88,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 130vh;
+        min-height: 170vh;
     }
     .head {
         position: sticky;
@@ -140,25 +143,9 @@ export default {
         color: #1C746F;
         margin: 0px;
     }
-    .signup {
-        background: #2D8F8A;
-        border-radius: 8px;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 36px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #FFFFFF;
-        float: left;
-        height: 70px;
-        padding: 15px;
-        border: #2D8F8A;
-    }
     input {
         font-family: Montserrat;
-        padding: 5px;
+        padding: 1%;
         width: 90%;
         margin: 1%;
         font-size: 16px;
@@ -208,6 +195,16 @@ export default {
         margin-bottom: 2%;
         margin-left: 4%;
         font-weight: bold;
+    }
+    .txt3 {
+        float: right;
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 1%;
+        margin-left: 4%;
     }
     
 </style>
