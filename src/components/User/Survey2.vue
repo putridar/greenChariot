@@ -6,7 +6,7 @@
             <div class = "content">
                 <p class = "title">Monthly Ecommerce Behaviour</p>
                 <p class = "txt1">Number of items Bought</p>
-                <input class="ins" type="number" placeholder="Estimated per month" min=0 id="numofitem" v-model="numofitem" required><br>
+                <input class="ins" type="number" placeholder="Estimated per month" min=0 value="numofitem" id="numofitem" v-model="numofitem" required><br>
                 <p class = "txt1">Predominant Category of Purchases (Optional)</p>
                 <br>
                 <div class = "ck">
@@ -14,13 +14,13 @@
                 <label for="Fashion">Fashion</label>
                 <input type="checkbox" id="Gadgets" value="Gadgets" v-model="ecommerce">
                 <label for="Gadgets">Gadgets</label>
-                <input type="checkbox" id="Groceries" value="Groceries" v-model="ecommerce">
-                <label for="Groceries">Groceries</label>
+                <input type="checkbox" id="Gym" value="Gym" v-model="ecommerce">
+                <label for="Gym">Gym/Health</label>
                 <input type="checkbox" id="Food_Delivery" value="Food Delivery" v-model="ecommerce">
                 <label for="Food_Delivery">Food Delivery</label>
                 </div>
                 <button class = "next" v-on:click="SurveySubmit2()">Next</button>
-                <p class = "txt"> Page 3 / 4 </p>
+                <p class = "txt"> Page 3 / 3 </p>
                 <p class = "txt"> Accurate data helps us predict better :) </p>
             </div>
         </div>
@@ -56,10 +56,20 @@ export default {
                     amount: this.numofitem
                 }
             }).then(() => {
-                alert("Submitted 3/4 successfuly");
+                alert("Submitted 3/3 successfuly");
                 this.$router.push({ name: 'Dashboard', query: {id: this.id}})
             })
-        }
+        },
+        fetchConsumption: function(){
+            db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
+                var item = snapshot.data()
+                this.numofitem=item.Survey2["amount"],
+                this.ecommerce=item.Survey2["ecommerce"]
+            })
+        }     
+    },
+    mounted() {
+        this.fetchConsumption()
     }
 }
 </script>
@@ -192,6 +202,10 @@ export default {
         margin: 3%;
         margin-top: 5%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .next:hover {
+        background: #2d8f4e;
     }
     .txt {
         font-family: Montserrat;

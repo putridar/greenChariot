@@ -196,6 +196,10 @@ export default {
         height: 60px;
         margin: 3%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .create:hover {
+        background: #2d8f4e;
     }
     .txt {
         font-family: Montserrat;

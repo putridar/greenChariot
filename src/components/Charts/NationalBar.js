@@ -13,7 +13,7 @@ export default {
                 datasets: [{
                     label: "Quantity",
                     backgroundColor: ["#1c4073","#00a5cf","#3CB371"],
-                    data: [0, 8000, 3000]
+                    data: [0, 8416, 3000]
                   }]
             },
             options: {
@@ -38,7 +38,7 @@ export default {
         fetchItem: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                this.datacollection.datasets[0].data[0] = parseFloat(item.total)*10
+                this.datacollection.datasets[0].data[0] = parseFloat(item.Emissions["total"])
             }).then(()=>this.renderChart(this.datacollection, this.options))
         }
     },

@@ -11,7 +11,7 @@
                     <input class="ranger" type="range" :id="'slider'+index" :min=0 :max=100 v-model.number="Sliders[index]"  @input="changeSlider(index)" step="0.01">
                 </div>
                 <button class = "next" v-on:click="SurveySubmit2()">Next</button>
-                <p class = "txt"> Page 2 / 4 </p>
+                <p class = "txt"> Page 2 / 3 </p>
                 <p class = "txt"> Accurate data helps us predict better :) </p>
             </div>
         </div>
@@ -49,7 +49,7 @@ export default {
                     beef: this.Sliders[2]
                 }
             }).then(() => {
-                alert("Submitted 2/4 successfuly");
+                alert("Submitted 2/3 successfuly");
                 this.$router.push({ name: 'survey2', query: {id: this.id}})
             })
         },
@@ -205,6 +205,10 @@ export default {
         height: 60px;
         margin: 3%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .next:hover {
+        background: #2d8f4e;
     }
     .txt {
         font-family: Montserrat;

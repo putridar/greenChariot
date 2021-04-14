@@ -6,9 +6,9 @@
                 <div class="pie">
                     <PieChart></PieChart>
                 </div>
-                <div class="pie">
-                    <img alt="greenChariot" src="../../assets/Tree.jpg">
-                    <h1 class="txt"> {{Math.round(totalcarb/1.9, 2)}} Rain Trees</h1>
+                <div class="pie1">
+                    <img class="tree" alt="greenChariotTree" src="../../assets/Tree.jpg">
+                    <h1 class="txt"> {{Math.round(totalcarb/19, 2)}} Fully grown Rain Trees</h1>
                     <h1 class="txt"> Required to absorb your emissions </h1>
                 </div>
                 <div class="pie">
@@ -20,11 +20,10 @@
                     <Comparison></Comparison>
                 </div>
                 <div class="content2">
-                    <p>hi</p>
+                    <Recommendation></Recommendation>
                 </div>
                 <div class="content3">
-                    <h1 class="txt1" >Hi there {{name}}! </h1>
-                    <h1 class="txt1" >Points: {{points}} </h1>
+                    <Dashboardprofile></Dashboardprofile>
                 </div>
             </div>
         </div>
@@ -39,18 +38,23 @@ import db from "../../firebase.js"
 import PieChart from '../Charts/PieChart.vue'
 import Nationalbar from '../Charts/NationalBar.vue'
 import Comparison from '../Charts/Comparison.vue'
-
+import Recommendation from './Recommendation.vue'
+import Dashboardprofile from './Dashboardprofile.vue'
 
 export default {
     name: 'Header',
     components :{
-        Head, PieChart, Footer, Nationalbar, Comparison
+        Head, 
+        PieChart, 
+        Footer, 
+        Nationalbar, 
+        Comparison,
+        Recommendation, 
+        Dashboardprofile
     },
     data() {
         return {
             id: this.$route.query.id,
-            name:"",
-            points:0,
             totalcarb:0
         }
     },
@@ -58,18 +62,15 @@ export default {
         print: function() {
             console.log(this.name);
         },
-        fetchName: function(){
+        fetchTotal: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                const nam = item.name;
-                this.name = nam.charAt(0).toUpperCase() + nam.slice(1);
-                this.points = item.points;
-                this.totalcarb = item.total;
+                this.totalcarb = item.Emissions["total"];
             })
         }
     },
     mounted() {
-        this.fetchName()
+        this.fetchTotal()
     }
 }
 </script>
@@ -96,17 +97,7 @@ export default {
         margin-right:0%;
         margin-top: 2%;
         margin-bottom: 2%;        
-    }.pie{
-        background-color: none;
-        margin-left: 2%;
-        margin-right: 2%;
-        width: 24%;
-        align-items: center;
-        border-radius: 8px;
-        padding: 0px;
-        flex: 33%;
-    }
-    .content {
+    }.content {
         background-color: #FFFFFF;
         margin-top: 2%;
         margin-left: 2%;
@@ -116,6 +107,41 @@ export default {
         border-radius: 8px;
         padding: 10px;
         display: flex;
+    }.pie{
+        background-color:none;
+        margin-left: 2%;
+        margin-right: 2%;
+        align-items: center;
+        border-radius: 8px;
+        padding: 0px;
+        width: 28%;
+    }.pie1{
+        background-color: none;
+        margin-left: 2%;
+        margin-right: 2%;
+        align-items: center;
+        border-radius: 8px;
+        padding: 0px;
+        width: 31%;
+    }
+    .tree{
+        animation: floating 5s ease-in-out infinite;
+
+    }
+    @keyframes floating {
+        0% {	
+            transform: translatey(0px);
+        }
+        50% {
+            transform: translatey(8px);
+        }
+        100% {
+            transform: translatey(0px);
+        }
+    }
+    .hi{
+        display: flex;
+        flex-direction: row;
     }
     .content1 {
         background-color: #FFFFFF;
@@ -125,8 +151,7 @@ export default {
         height: auto;
         width: 40%;
         border-radius: 8px;
-        padding: 10px;
-        display: inline-flex;
+        padding: 10px;        
     }
     .content2 {
         background-color: #FFFFFF;
@@ -134,35 +159,35 @@ export default {
         margin-left: 1%;
         margin-right: 0%;
         height: auto;
-        width: 30%;
         border-radius: 8px;
         padding: 10px;
-        display: inline-flex;
+        flex: 1;
     }
     .content3 {
         background-color: #FFFFFF;
         margin-top: 1%;
         margin-left: 1%;
-        margin-right: 0%;
+        margin-right: 2%;
         height: auto;
-        width: 20%;
         border-radius: 8px;
         padding: 10px;
-        display: inline-flex;
+        flex: 1;
     }
     .txt {
         color: #1C746F;
         font-size: 16px;
         margin-left: 4%;
+        margin-top: 1%;
+        margin-bottom:0% ;
         display: block ;
         text-align: center;
     }
     .txt1 {
         color: #1C746F;
-        font-size: 16px;
+        font-size: 24px;
         margin-left: 2%;
         display: block ;
-        text-align: center;
+        text-align: left;
         display: block;
     }
     

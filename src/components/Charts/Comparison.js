@@ -3,8 +3,7 @@ import db from "../../firebase.js"
 
 
 export default {
-    extends: Bar,
-    
+    extends: Bar,    
     data: function () {
         return {
             id: this.$route.query.id,
@@ -18,7 +17,7 @@ export default {
                   {
                     label: "Singapore",
                     backgroundColor: ["#00a5cf","#00a5cf","#00a5cf", "#00a5cf"],
-                    data: [100, 100, 100, 100]
+                    data: [1828, 1760, 3945, 883]
                   }]
             },
             options: {
@@ -35,7 +34,7 @@ export default {
                     }]
                 },
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
             }
         }
     },
@@ -43,10 +42,10 @@ export default {
         fetchItem: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                this.datacollection.datasets[0].data[3] = parseFloat(item.Survey2["amount"])
-                this.datacollection.datasets[0].data[0] = (parseFloat(item.Survey["bus"])+parseFloat(item.Survey["car"])+parseFloat(item.Survey["mrt"]))*4
-                this.datacollection.datasets[0].data[1] = parseFloat(item.Survey["electricity"]) + parseFloat(item.Survey["water"]) + parseFloat(item.Survey["gas"])
-                this.datacollection.datasets[0].data[2] = parseFloat(item.Survey1["chick"]) + parseFloat(item.Survey1["beef"]) + parseFloat(item.Survey1["veg"])
+                this.datacollection.datasets[0].data[0] = item.Emissions["transport"]
+                this.datacollection.datasets[0].data[1] = item.Emissions["utility"]
+                this.datacollection.datasets[0].data[2] = item.Emissions["food"]
+                this.datacollection.datasets[0].data[3] = item.Emissions["ecommerce"]
             }).then(()=>this.renderChart(this.datacollection, this.options))
         }
     },
