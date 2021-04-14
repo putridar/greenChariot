@@ -5,13 +5,13 @@
             <p class = "txt2"> Topic Filters:</p>
             <div class="filters">
                 <input type="checkbox" id="Sustainability" class = "filterbutton" value="sustainability" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Sustainability">#Sustainability X</label>
+                <label class="checklabel" for="Sustainability">#Sustainability </label>
                 <input type="checkbox" id="ClimateChange" class = "filterbutton" value="climatechange" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="ClimateChange">#ClimateChange X</label>
+                <label class="checklabel" for="ClimateChange">#ClimateChange</label>
                 <input type="checkbox" id="Innovation" class = "filterbutton" value="innovation" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Innovation">#Innovation  X</label>
+                <label class="checklabel" for="Innovation">#Innovation </label>
                 <input type="checkbox" id="Nature" class = "filterbutton" value="nature" v-model="topics" v-on:change="update()">
-                <label class="checklabel" for="Nature">#Nature  X</label>
+                <label class="checklabel" for="Nature">#Nature  </label>
             </div>
             <div class = "content" v-for="art in this.articles" :key="art.id">
                 <div class="image">
@@ -112,6 +112,7 @@ export default {
         height: 2%;
         margin: 2%;
         cursor: pointer;
+        transition-duration: 0.4s;
     }
     .filters{
         display: flex;
@@ -130,6 +131,7 @@ export default {
         width: 8%;
         height: 2%;
         cursor: pointer;
+        
     }
     .filterbutton:checked + label{
         background:#2D8F8A;

@@ -6,27 +6,27 @@
             <div class = "content">
                 <p class = "title">Monthly Consumption survey</p>
                 <div class ="Consumption1">
-                    <p class = "txt2">Utilities Expenditure ($)</p>
+                    <p class = "txt2">Monthly Utilities Expenditure</p>
                     <p class = "txt1">Household population:</p>
-                    <input type="number" placeholder="Number of people in your house " min=0 id="householdpop" v-model="householdpop" required><br>
-                    <p class = "txt1">Electricity</p>
+                    <input type="number" placeholder="Number of people in your house " value="householdpop" id="householdpop" v-model="householdpop" required><br>
+                    <p class = "txt1">Electricity ($)</p>
                     <input type="number" placeholder="Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
-                    <p class = "txt1">Water</p>
+                    <p class = "txt1">Water ($)</p>
                     <input type="number" placeholder="Household Water bill " min=0 id="water" v-model="water" required><br>
-                    <p class = "txt1">Gas</p>
+                    <p class = "txt1">Gas ($)</p>
                     <input type="number" placeholder="Household Gas bill " min=0 id="gas" v-model="gas" required><br>
                 </div>
                 <div class ="Consumption1">
-                    <p class = "txt2">Transport Duration (Hours)</p>
-                    <p class = "txt1"> MRT Public Transport</p>
+                    <p class = "txt2">Weekly Transport Duration</p>
+                    <p class = "txt1"> MRT Public Transport (Hours)</p>
                     <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
-                    <p class = "txt1"> Bus Public Transport</p>
+                    <p class = "txt1"> Bus Public Transport (Hours)</p>
                     <input type="number" placeholder="Approx Duration Bus" min=0 id="bus" v-model="bus" required><br>
-                    <p class = "txt1">Drive or Ride Car</p>
+                    <p class = "txt1">Drive or Ride Car (Hours)</p>
                     <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 id="car" v-model="car" required><br>
                 </div>
                 <button class = "create" v-on:click="SurveySubmit1()">Next</button>
-                <p class = "txt"> Page 1 / 4 </p>
+                <p class = "txt"> Page 1 / 3 </p>
                 <p class = "txt"> Accurate data helps us predict better :) </p>
             </div>
         </div>
@@ -72,10 +72,25 @@ export default {
                     car: this.car
                 }
             }).then(() => {
-                alert("Submitted 1/4 successfully");
+                alert("Submitted 1/3 successfully");
                 this.$router.push({ name: 'survey1', query: {id: this.id}})
             })
+        },
+        fetchConsumption: function(){
+            db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
+                var item = snapshot.data()
+                this.electricity=item.Survey["electricity"],
+                this.water=item.Survey["water"],
+                this.gas=item.Survey["gas"],
+                this.mrt=item.Survey["mrt"],
+                this.bus=item.Survey["bus"],
+                this.car=item.Survey["car"],
+                this.householdpop=item.Survey["house"]
+            })
         }     
+    },
+    mounted() {
+        this.fetchConsumption()
     }
 }
 </script>
@@ -168,6 +183,10 @@ export default {
         height: 60px;
         margin: 3%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .create:hover {
+        background: #2d8f4e;
     }
     .txt {
         font-family: Montserrat;
