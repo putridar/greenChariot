@@ -58,7 +58,7 @@ export default {
             plant: ['potted plant', 'vase', 'person', 'flower', 'plant', 'tree'],
             recycle: ['person','trash', 'bottle', 'book', 'paper','umbrella', 'cell phone','laptop','keyboard','tablet','cup','stop sign','toilet','wine glass','vase','oven','scissors','bed','bowl','knife','spoon','fork','plate','refrigerator'],
             transport: ['bus','train','person','chair'],
-            eat: ['person','bowl','banana','carrot','apple','cup','broccoli','orange','bottle','pizza','sandwich','knife','beef','cow','chicken','pork','cake','suitcase','spoon','egg']
+            eat: ['person','bowl','banana','carrot','apple','cup','broccoli','orange','bottle','pizza','sandwich','knife','beef','cow','chicken','pork','cake','suitcase','spoon','egg','hot dog']
         }
     },
     methods: {

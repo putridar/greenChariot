@@ -86,6 +86,7 @@ export default {
         
     }
     li {
+        justify-content:center;
         flex-shrink: 1;
         flex-basis: 20%;
         text-align: center;
@@ -150,6 +151,16 @@ export default {
     }
     .shops {
         margin-top: 10px;
+    }
+    .title2 {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 58px;
+        text-align: center;
+        color: #1C746F;
+        height:150px
     }
 </style>
 

@@ -50,7 +50,8 @@ export default{
     methods:{
         fetchvoucher:function(){
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-                this.currvoucher=snapshot.data().currvoucher
+                var item = snapshot.data()
+                this.currvoucher= item.currvoucher == undefined ? [] : item.currvoucher
             })
         },
         fetchItems: function() {

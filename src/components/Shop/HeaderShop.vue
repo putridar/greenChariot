@@ -8,19 +8,19 @@
             <ul>
                 <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'voucherlists', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'shopinfo', query: {id: this.id} }" exact>Edit Information</router-link></li>
-                <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><img src="../../assets/user.png" class="user"/></router-link></li>
+                <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><div v-if="this.image==''"><img src='../../assets/user.png' class="user"></div><div v-else><img :src="this.image" class="user"/></div></router-link></li>
             </ul>
         </div>
     </div>
 </template>
 
 <script>
+import db from '../../firebase.js'
 export default {
   name: 'Header',
   data() {
       return {
-          
+          image:null
       }
   },
   props: {
@@ -29,7 +29,25 @@ export default {
       }
   },
   methods: {
+      fetchimage:function(){
+          var temp=''
+          db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
+              temp=snapshot.data().imagename
+              console.log(temp)
+              if (temp=='' || temp == undefined){
+                  this.image=''
+              }else{
+                  this.image=temp
+              }
+
+              
+          }
+          )
+      }
         
+  },
+  created(){
+      this.fetchimage()
   }
 }
 </script>
@@ -78,7 +96,7 @@ export default {
     }
     li {
         flex-grow: 1;
-        flex-basis: 70px;
+        flex-basis: 60px;
         text-align: center;
         margin: 3px;
     }
@@ -100,6 +118,6 @@ export default {
     }
     .user {
         width: 30%;
-        margin-top: 30px
+        margin-top: 20px
     }
 </style>

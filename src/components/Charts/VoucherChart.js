@@ -18,7 +18,7 @@ export default {
             options: {
                 legend: { display: true },
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 pieceLabel: {
                     render: 'percentage',
                     precision: 1

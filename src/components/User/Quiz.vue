@@ -30,12 +30,14 @@ export default {
             questionIDs:["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20"],
             score:0,
             qns:[],
-            counter: 0
+            counter: 0,
+            number:1,
+            correctnumber:0
         }
     },
     methods: {
         toQuestion:function() {
-            this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions}})
+            this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions,number:this.number,correctnumber:this.correctnumber}})
         },
         getQuestion: function() {
             db.firestore().collection('questions').get().then(snapshot => {

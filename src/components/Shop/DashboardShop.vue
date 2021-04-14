@@ -186,12 +186,12 @@ export default {
     .pic {
         margin-top:15%;
         margin-bottom:2%;
-        height: 30%;
+        height: 35%;
         width: 50%;
         margin-left: 2%;
     }
     .txt1 {
-        margin-top:3px;
+        margin-top:10px;
         margin-bottom: 2%;
         height: 60%;
         margin-left: 2%;
