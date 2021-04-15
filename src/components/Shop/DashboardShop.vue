@@ -9,11 +9,11 @@
                         <div class = "title">{{this.name}}</div>
                     </div>
                     <div class="txt1">
-                        <p class = "txt"> {{this.desc}}</p>
+                        <p class = "txt4"> {{this.desc}}</p>
                         <p class = "txt2">Address</p>
-                        <p class = "txt"> {{this.address}}</p>
+                        <p class = "txt4"> {{this.address}}</p>
                         <p class = "txt2">Today's Code</p>
-                        <p class = "txt"> {{this.code}}</p>
+                        <p class = "txt4"> {{this.code}}</p>
                         <button class="btn" v-on:click="edit()"> Edit Info</button>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ export default {
         height: 60%;
         margin-left: 2%;
     }
-    .txt {
+    .txt4 {
         margin-top:5px;
         margin-bottom: 2%;
         font-size: 24px;

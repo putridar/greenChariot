@@ -6,8 +6,8 @@
         </div>
         <div class = "navi">
             <ul>
-                <li class = "txt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
-                <li class = "txt"><router-link :to="{ name: 'voucherlists', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
+                <li class = "txtt"><router-link :to="{ name: 'dashboardShop', query: {id: this.id} }" exact>Dashboard</router-link></li>
+                <li class = "txtt"><router-link :to="{ name: 'voucherlists', query: {id: this.id} }" exact>Voucher Lists</router-link></li>
                 <li><router-link :to="{ name: 'editacc', query: {id: this.id} }" exact><div v-if="this.image==''"><img src='../../assets/user.png' class="user"></div><div v-else><img :src="this.image" class="user"/></div></router-link></li>
             </ul>
         </div>
@@ -100,10 +100,10 @@ export default {
         text-align: center;
         margin: 3px;
     }
-    .txt:hover {
+    .txtt:hover {
         background-color: #FFFFFF
     }
-    .txt {
+    .txtt {
         justify-content: center;
         align-items: center;
         display: flex;
