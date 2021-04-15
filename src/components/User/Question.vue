@@ -36,8 +36,8 @@
                         </div>
                     </li>
                 </ul>
-                <button class = "btn" type='button' v-on:click="validate();next();">Next</button>
-                <button class = "btn" type='button' v-on:click="validate();color();">Check Your Answer!</button>
+                <button class = "btn" type='button' v-if="this.show==false" v-on:click="validate();color();">Check Your Answer!</button>
+                <button class = "btn" type='button' v-if="this.show==true" v-on:click="validate();next();">Next</button>
                 <h1 class="title2">Your current progress: {{this.correctnumber}} questions answered correctly</h1>
             </div>
         </div>
@@ -57,7 +57,8 @@ export default {
     data() {
         return {
             id: this.$route.query.id,
-            chose:100, //index of answer selected
+            chose:100, //index of answer selected temporarily
+            chosen:100,//index of answer selected permanently
             answer:100, //index of answer
             selectedQuestions:this.$route.query.selectedQuestions,
             score:0,
@@ -67,6 +68,7 @@ export default {
             number:this.$route.query.number,
             correctnumber:this.$route.query.correctnumber,
             nooption:false,
+            show:false, //boolean to show next button and hide check answer button if true
         }
     },
     methods: {
@@ -80,9 +82,9 @@ export default {
             }
             this.ans=false
             console.log(this.selectedQuestions)
-            document.getElementById(this.chose).style="mcq";
+            document.getElementById(this.chosen).style="mcq";
             document.getElementById(this.answer).style="mcq";
-             if (this.chose==this.answer){
+             if (this.chosen==this.answer){
                 console.log(this.score)
                 this.score+=5
                 this.number+=1
@@ -91,7 +93,9 @@ export default {
                 this.number+=1
             }
             this.counter+=1
+            this.chosen=100
             this.chose=100
+            this.show=false;
             console.log(this.counter)
             if (this.counter==5) {
                 this.toScore()
@@ -102,14 +106,16 @@ export default {
             this.answer = this.selectedQuestions[this.counter].correct;
         },
         color: function() {
-            if (this.answer != this.chose) {
-                document.getElementById(this.chose).style.background = "red";
+            this.chosen=this.chose
+            if (this.answer != this.chosen) {
+                document.getElementById(this.chosen).style.background = "red";
                 document.getElementById(this.answer).style.background = "green";
                 this.ans = true
             } else if (!this.ans) {
                 document.getElementById(this.answer).style.background = "green";
                 this.ans = true
             }
+            this.show=true;
         },
         validate:function(){
             if (this.chose==100){
