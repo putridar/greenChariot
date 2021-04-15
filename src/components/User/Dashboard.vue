@@ -66,11 +66,18 @@ export default {
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
                 this.totalcarb = item.Emissions["total"];
-            })
+            }).then()
         }
     },
     mounted() {
         this.fetchTotal()
+        if (localStorage.getItem('reloaded')) {
+            localStorage.removeItem('reloaded');
+        } else {
+            // Set a flag so that we know not to reload the page twice.
+            localStorage.setItem('reloaded', '1');
+            location.reload();
+        }
     }
 }
 </script>
@@ -123,21 +130,6 @@ export default {
         border-radius: 8px;
         padding: 0px;
         width: 31%;
-    }
-    .tree{
-        animation: floating 5s ease-in-out infinite;
-
-    }
-    @keyframes floating {
-        0% {	
-            transform: translatey(0px);
-        }
-        50% {
-            transform: translatey(8px);
-        }
-        100% {
-            transform: translatey(0px);
-        }
     }
     .hi{
         display: flex;

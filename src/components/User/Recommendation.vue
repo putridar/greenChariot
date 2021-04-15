@@ -1,29 +1,30 @@
 <template>
   <div class="chart">
+    <h2 class="title"> Recommendations</h2>
     <div :class='Transport<1828? "Positive": "Negative"'>
         <div>
-            <p class="obs">Transport:</p>
+            <p class="obs">Transport: </p>
             <p class="obs" id="transportObs"></p> 
             <p class="rec" id="transportRec"></p> 
         </div>
     </div>
     <div :class='Utility<1760? "Positive": "Negative"'>
         <div>
-            <p class="obs">Utility:</p>
+            <p class="obs">Utility: </p>
             <p class="obs" id="utilityObs"></p> 
             <p class="rec" id="utilityRec"></p>  
         </div>
     </div>
     <div :class='Food<3945? "Positive": "Negative"'>
         <div>
-            <p class="obs">Food:</p>
+            <p class="obs">Food: </p>
             <p class="obs" id="foodObs"></p> 
             <p class="rec" id="foodRec"></p>  
         </div>
     </div>
     <div :class='Ecommerce<883?"Positive": "Negative"'>
         <div>
-            <p class="obs">Ecommerce:</p>
+            <p class="obs">Ecommerce: </p>
             <p class="obs" id="ecommerceObs"></p> 
             <p class="rec" id="ecommerceRec"></p> 
         </div>
@@ -115,15 +116,18 @@ export default {
 .char{
     display:flex;
     flex-direction: column;
-    
+}
+.title{
+    margin-top: 3%;
+    margin-left:5%;
 }
 .Positive{
     background-color: #abe0a4;
-    margin-top: 1%;
+    margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
     width: auto;
-    font-size: 1vw;
+    font-size:1vw;
     border-radius: 8px;
     padding: 10px;
     flex-direction: column;
@@ -134,23 +138,24 @@ export default {
     margin-top: 1%;
     margin-left: 5%;
     margin-right: 5%;
-    font-size: 1vw;
     width: auto;
     height: auto;
+    font-size:1vw;
     border-radius: 8px;
     padding: 10px;
     flex-direction: column;
     flex:1
 }
 .obs{
-    margin-left:2%;
+    margin-left:0%;
+    font: 1%;
     margin-right: auto;
     font-style: normal;
     font-weight: bold;
     display: inline;
 }
 .rec{
-    margin:2%;
+    margin:1%;
     font-style: bold;
     font-weight: normal;
 }
