@@ -9,7 +9,7 @@
                 <div class="content">
                     <p class="zoom">Great job!</p>
                     <br>
-                    <p class="title2">You got {{this.score}}/50</p>
+                    <p class="title2">You got {{this.score}}/25</p>
                     <br>
                     <button class="btn" v-on:click="direct()">Try again?</button>
                 </div>

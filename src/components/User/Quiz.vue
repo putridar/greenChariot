@@ -58,7 +58,7 @@ export default {
         },
         select: function() {
             var select = []
-            while (select.length<10) {
+            while (select.length<5) {
                 var randomIndex=Math.floor(Math.random()*20);
                 var chosen=this.questionIDs[randomIndex]
                 if (select.includes(chosen)!=true) {
