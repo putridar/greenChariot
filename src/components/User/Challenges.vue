@@ -12,7 +12,7 @@
                     <p>
                         Confident about your knowledge in carbon footprint?<br>
                         Test your understanding by doing this quiz!<br>
-                        There are 10 questions to complete, and you get +5 Points/correct answer!
+                        There are 5 questions to complete, and you get +5 Points/correct answer!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>

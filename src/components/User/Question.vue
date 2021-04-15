@@ -6,10 +6,6 @@
             <div class = "content">
                 <p id = "question"> Q{{this.number}}: {{this.selectedQuestions[this.counter].question}}</p><br>
                 <br>
-                counter:{{counter}}
-                ans:{{this.ans}}
-                chose:{{chose}}
-                answer:{{answer}}
                 <ul>
                     <li>
                         <div id='help'>
@@ -70,6 +66,7 @@ export default {
             counter: 0,
             number:this.$route.query.number,
             correctnumber:this.$route.query.correctnumber,
+            nooption:false,
         }
     },
     methods: {
@@ -77,6 +74,10 @@ export default {
             this.$router.push({name:'score',query:{id:this.id,score:this.score}})
         },
         next: function() {
+            if (this.nooption==true) {
+                this.nooption=false
+                return
+            }
             this.ans=false
             console.log(this.selectedQuestions)
             document.getElementById(this.chose).style="mcq";
@@ -92,7 +93,7 @@ export default {
             this.counter+=1
             this.chose=100
             console.log(this.counter)
-            if (this.counter==10) {
+            if (this.counter==5) {
                 this.toScore()
             }
         },
@@ -113,6 +114,7 @@ export default {
         validate:function(){
             if (this.chose==100){
                 alert('You need to input an option!')
+                this.nooption=true;
             }
         },
     },
