@@ -74,7 +74,6 @@ export default {
         if (localStorage.getItem('reloaded')) {
             localStorage.removeItem('reloaded');
         } else {
-            // Set a flag so that we know not to reload the page twice.
             localStorage.setItem('reloaded', '1');
             location.reload();
         }
