@@ -23,6 +23,7 @@
 import Head from './Header.vue'
 import Footer from '../Footer.vue'
 import db from '../../firebase.js'
+
 export default{
     components: {
         Head,
@@ -44,17 +45,11 @@ export default{
                 //points:this.currentpoints+this.score
             //})
         //},
-        getscore:function(){
-            var temp=0 
+        getscore:function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-               temp=parseInt(snapshot.data().points)
-               temp+= parseInt(this.score)
-               this.currentpoints=temp
-            }).then(() => {db.firestore().collection('users').doc(this.id).update({
-                points:temp
-            })})
+               this.currentpoints=parseInt(snapshot.data().points)
+            })
         }
-            
     },
     created(){
         this.getscore()

@@ -2,10 +2,11 @@
     <div>
         <div class = "bg">
             <Head v-bind:id="id" class="head"></Head>
-            <Header id="score">Current score: {{this.score}}</Header><br>
+            <Header id="score">Current score: {{this.score}}</Header>
             <div class = "content">
                 <p id = "question"> Q{{this.number}}: {{this.selectedQuestions[this.counter].question}}</p><br>
                 <br>
+                {{this.currentpoints}}
                 <ul>
                     <li>
                         <div id='help'>
@@ -48,6 +49,8 @@
 <script>
 import Head from './Header.vue'
 import Footer from '../Footer.vue'
+import db from '../../firebase.js'
+
 export default {
     name: 'question',
     components :{
@@ -98,8 +101,18 @@ export default {
             this.show=false;
             console.log(this.counter)
             if (this.counter==5) {
+                this.getscore()
                 this.toScore()
             }
+        },
+        getscore:function(){
+            var temp=0 
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+               temp=parseInt(snapshot.data().points)
+               temp+= parseInt(this.score)
+            }).then(() => {db.firestore().collection('users').doc(this.id).update({
+                points:temp
+            })})
         },
         selection: function(ans) {
             this.chose = ans;
@@ -178,10 +191,9 @@ export default {
     }
     .content {
         background-color: #FFFFFF;
-        margin-top: 1%;
+        margin-top: 15px;
         margin-left: 10%;
         margin-right: 10%;
-        margin-top:5%;
         height: 60%;
         width: 80%;
         justify-content: center;
@@ -243,7 +255,7 @@ export default {
         font-weight: bold;
         font-size: 40px;
         margin: 8px;
-        padding:10px;
-        float:left
+        padding-left:600px;
+        padding-top:10px;
     }
 </style>
