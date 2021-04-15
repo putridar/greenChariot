@@ -2,7 +2,7 @@
   <div class="chart">
     <h1 class="txt1" >Hi there {{name}}! </h1>
     <h1 class="txt1" >Points: {{points}} </h1>
-    <h3 class="txt">Find out How you can help</h3>
+    <h3 class="txt">Find out how you can help</h3>
     <button class="dbButton" v-on:click="GreenShop()">Support Green Shops</button>
     <button class="dbButton" v-on:click="Challenges()">Earn Points</button>
     <button class="dbButton" v-on:click="Surveytime()">Recalibrate DashBoard Survey</button>

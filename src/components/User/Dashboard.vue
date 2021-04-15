@@ -100,7 +100,7 @@ export default {
         top: 0;
         position: -webkit-sticky;
     }
-    img {
+    .tree {
         width: 100%;
         margin-left: 0%;
         margin-right:0%;

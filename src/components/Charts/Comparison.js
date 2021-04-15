@@ -10,14 +10,14 @@ export default {
             datacollection: {
                 labels: ["Transportation","Utilities","Food", "Ecommerce"],
                 datasets: [{
-                    label: "You",
-                    backgroundColor: ["#1c4073","#1c4073","#1c4073", "#1c4073"],
-                    data: [0, 0, 0, 0]
-                  }, 
-                  {
                     label: "Singapore",
                     backgroundColor: ["#00a5cf","#00a5cf","#00a5cf", "#00a5cf"],
                     data: [1828, 1760, 3945, 883]
+                  },
+                  {
+                    label: "You",
+                    backgroundColor: ["#1c4073","#1c4073","#1c4073", "#1c4073"],
+                    data: [0, 0, 0, 0]
                   }]
             },
             options: {
@@ -42,10 +42,10 @@ export default {
         fetchItem: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                this.datacollection.datasets[0].data[0] = item.Emissions["transport"]
-                this.datacollection.datasets[0].data[1] = item.Emissions["utility"]
-                this.datacollection.datasets[0].data[2] = item.Emissions["food"]
-                this.datacollection.datasets[0].data[3] = item.Emissions["ecommerce"]
+                this.datacollection.datasets[1].data[0] = item.Emissions["transport"]
+                this.datacollection.datasets[1].data[1] = item.Emissions["utility"]
+                this.datacollection.datasets[1].data[2] = item.Emissions["food"]
+                this.datacollection.datasets[1].data[3] = item.Emissions["ecommerce"]
             }).then(()=>this.renderChart(this.datacollection, this.options))
         }
     },

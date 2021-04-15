@@ -122,7 +122,7 @@ export default {
     margin-left:5%;
 }
 .Positive{
-    background-color: #abe0a4;
+    background-color: #51c2d5;
     margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
@@ -134,7 +134,7 @@ export default {
     flex:1
 }
 .Negative{
-    background-color: #e0a4a4;
+    background-color: #f05945;
     margin-top: 1%;
     margin-left: 5%;
     margin-right: 5%;

@@ -33,7 +33,6 @@ export default {
           var temp=''
           db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
               temp=snapshot.data().imagename
-              console.log(temp)
               if (temp=='' || temp == undefined){
                   this.image=''
               }else{
