@@ -66,17 +66,20 @@ export default {
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
                 this.totalcarb = item.Emissions["total"];
-            }).then()
+            }).then(()=> this.refreshonce())
+        },
+        refreshonce: function(){
+            if (localStorage.getItem('reloaded')) {
+                localStorage.removeItem('reloaded');
+            } else {
+                localStorage.setItem('reloaded', '1');
+                location.reload();
+            }
         }
     },
     mounted() {
         this.fetchTotal()
-        if (localStorage.getItem('reloaded')) {
-            localStorage.removeItem('reloaded');
-        } else {
-            localStorage.setItem('reloaded', '1');
-            location.reload();
-        }
+        
     }
 }
 </script>

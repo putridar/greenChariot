@@ -78,10 +78,11 @@ export default {
 }
 .txt2{
     color: #1C746F;
-    font-size: 16px;
+    font-size: 14px;
     margin-left: 2%;
-    margin-top: 8%;
-    display: block ;
+    margin-top: 6%;
+    margin-bottom: 3%;
+    display: block;
     text-align: center;
     font-style: italic;
     display: block;
