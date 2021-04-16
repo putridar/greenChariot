@@ -89,9 +89,10 @@ export default{
         this.retrieve(),
         this.fetchvoucher()
     },
-    mounted() {
+    mounted(){
         this.fetchItems()
     }
+    
 }
 </script>
 <style scoped>

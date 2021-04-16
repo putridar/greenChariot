@@ -39,7 +39,8 @@ export default {
             id: this.$route.query.id,
             imagename:'',
             code:'',
-            shops: []
+            shops: [],
+            shopId:''
         }
     },
     methods: {
@@ -58,7 +59,7 @@ export default {
             this.imagename = image
             this.$router.push({name:'scoopcode',query:{id:this.id,name:name}})
                 
-        },
+        }
     },
     mounted() {
         this.fetchItems()
@@ -184,7 +185,7 @@ export default {
     }
     .txt {
         font-family: Inter;
-        font-size: 17px;
+        font-size: 15px;
         color: #1C746F;
         margin-left: 8%;
         text-align: left;
