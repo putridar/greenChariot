@@ -10,9 +10,9 @@
             <input type="email" placeholder="Email" v-model="email" class = "inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class = "inputstyle" required><br>
             <input type="checkbox" id="shop" name="shop" v-model="isShop">
-            <label for="shop" class = "txt">Register as a Shop's Owner?</label><br>
+            <label for="shop" class = "txt">Register as a shop's owner?</label><br>
             <button class = "create" v-on:click="create()">Create Account</button>
-            <p class = "txt" v-on:click="signin()">Already have an account? Sign In now!</p>
+            <p class = "txt" v-on:click="signin()">Already have an account? Sign in now!</p>
         </div>
   </div>
 </template>

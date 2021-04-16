@@ -6,7 +6,8 @@
                 <div class="pic">
                     <img alt="scoop" v-bind:src="this.imagename">
                 </div>
-                <p class="title">Insert this code stated to get points!</p><br>
+                <p class="title">Insert code stated to get points!</p><br>
+                <p class="title2">{{this.storecode}}</p><br><br>
                 <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
                 <button class="btn" v-on:click="direct()">OK</button>
             </div>
@@ -35,7 +36,7 @@ export default{
             code: '',
             shops: [],
             shopId: '',
-            custlist: {}
+            custlist: {},
         }
     },
     methods:{
@@ -167,5 +168,11 @@ export default{
     }
     img {
         width:50%
+    }
+    .title2{
+        font-family: Inter;
+        font-size: 50px;
+        color: #1C746F;
+        text-align: center;
     }
 </style>

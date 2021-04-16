@@ -10,9 +10,9 @@
                     </div>
                     <h1 class = "title">Quiz</h1><br>
                     <p>
-                        Confident about your knowledge in carbon footprint?<br>
-                        Test your understanding by doing this quiz available once a week!<br>
-                        There are 5 questions to complete, and you get +5 Points/correct answer!
+                        Confident in your carbon footprint knowledge?<br>
+                        Test your understanding in our short quiz available once a week!<br>
+                        There are 5 questions to complete, and you get +5 Points for each correct answer!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>
@@ -22,7 +22,7 @@
                     </div>
                     <h1 class = "title">Social Media Challenge</h1><br>
                     <p>
-                        Prove that you have contributed to reduce the carbon emissions!<br>
+                        Show off your efforts in reducing your carbon footprint!<br>
                         +10 Points/post
                     </p>
                     <button class = "btn" v-on:click="isLinked()">See Challenges</button>
@@ -31,9 +31,9 @@
                     <div class = "pic">
                         <img class = "pic2" alt= "shop" src="../../assets/shop.png">
                     </div>
-                    <h1 class = "title">Shop at Our Green Shops!</h1><br>
+                    <h1 class = "title">Shop at our Green Shops!</h1><br>
                     <p>
-                        Buy more sustainable products to help saving the planet!
+                        Buy more sustainable products to help save the planet!
                     </p>
                     <button class = "btn" v-on:click="toShops()">Shop now!</button>
                 </li>

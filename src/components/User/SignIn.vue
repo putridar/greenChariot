@@ -8,7 +8,7 @@
             <input type="text" placeholder="Email" v-model="email" class ="inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class ="inputstyle" required><br>
             <button class = "create" v-on:click="signin()">Sign In</button>
-            <p class ="txt" v-on:click="signup()"> Do not have account yet? Sign Up now!</p>
+            <p class ="txt" v-on:click="signup()"> Do not have an account yet? Sign up now!</p>
         </div>
   </div>
 </template>
