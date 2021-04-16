@@ -110,7 +110,7 @@ export default {
         text-align: center;
         width: 50%;
         height: 2%;
-        margin: 2%;
+        margin: 1%;
         cursor: pointer;
         transition-duration: 0.4s;
     }
@@ -194,10 +194,10 @@ export default {
         font-family: Montserrat;
         color: #1C746F;
         text-align: left;
-        font-size: 16px;
+        font-size: 30px;
         margin: 1%;
         font-weight: bold;
-        margin-left: 3%;
+        margin-left: 6%;
         margin-top: 3%;
     }
     .txt3{

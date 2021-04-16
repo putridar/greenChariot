@@ -205,7 +205,7 @@ export default {
         transition-duration: 0.4s;
     }
     .next:hover {
-        background: #2d8f4e;
+        background: #1C746F;
     }
     .txt {
         font-family: Montserrat;

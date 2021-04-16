@@ -11,8 +11,8 @@
                     <h1 class = "title">Quiz</h1><br>
                     <p>
                         Confident about your knowledge in carbon footprint?<br>
-                        Test your understanding by doing this quiz!<br>
-                        +5 Points/correct answer
+                        Test your understanding by doing this quiz available once a week!<br>
+                        There are 5 questions to complete, and you get +5 Points/correct answer!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>
