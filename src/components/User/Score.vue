@@ -7,9 +7,9 @@
                     <img alt="successful" src="../../assets/successful.png">
                 </div>
                 <div class="content">
-                    <p class="zoom">Great job!</p>
+                    <p class="zoom">{{this.score}}/25 <br> Great job!</p>
                     <br>
-                    <p class="title2">You got {{this.score}}/25</p>
+                    <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.currentpoints}} points!</p>
                     <br>
                     <button class="btn" v-on:click="direct()">Try again?</button>
                 </div>
@@ -23,6 +23,7 @@
 import Head from './Header.vue'
 import Footer from '../Footer.vue'
 import db from '../../firebase.js'
+
 export default{
     components: {
         Head,
@@ -44,15 +45,11 @@ export default{
                 //points:this.currentpoints+this.score
             //})
         //},
-        getscore:function(){
-            var temp=0 
+        getscore:function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
-               temp=snapshot.data().points
-            }).then(() => {db.firestore().collection('users').doc(this.id).update({
-                points:temp+this.score
-            })})
+               this.currentpoints=parseInt(snapshot.data().points)
+            })
         }
-            
     },
     created(){
         this.getscore()
@@ -128,7 +125,7 @@ export default{
     .title2 {
         font-family: Montserrat;
         font-weight: bold;
-        font-size: 48px;
+        font-size: 40px;
     }
     .txt {
         font-family: Montserrat;
