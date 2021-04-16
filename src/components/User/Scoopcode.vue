@@ -6,12 +6,8 @@
                 <div class="pic">
                     <img alt="scoop" v-bind:src="this.imagename">
                 </div>
-<<<<<<< HEAD
                 <p class="title">Insert code stated to get points!</p><br>
-=======
-                <p class="title">Insert this code stated below to get points!</p><br>
                 <p class="title2">{{this.storecode}}</p><br><br>
->>>>>>> 84269207eff1c11837e1fd862a01c7d437a0cba9
                 <input type="text" id="codes" placeholder="Code" v-model="code" required><br>
                 <button class="btn" v-on:click="direct()">OK</button>
             </div>
