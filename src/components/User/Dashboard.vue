@@ -66,11 +66,20 @@ export default {
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
                 this.totalcarb = item.Emissions["total"];
-            })
+            }).then(()=> this.refreshonce())
+        },
+        refreshonce: function(){
+            if (localStorage.getItem('reloaded')) {
+                localStorage.removeItem('reloaded');
+            } else {
+                localStorage.setItem('reloaded', '1');
+                location.reload();
+            }
         }
     },
     mounted() {
         this.fetchTotal()
+        
     }
 }
 </script>
@@ -91,7 +100,7 @@ export default {
         top: 0;
         position: -webkit-sticky;
     }
-    img {
+    .tree {
         width: 100%;
         margin-left: 0%;
         margin-right:0%;
@@ -123,21 +132,6 @@ export default {
         border-radius: 8px;
         padding: 0px;
         width: 31%;
-    }
-    .tree{
-        animation: floating 5s ease-in-out infinite;
-
-    }
-    @keyframes floating {
-        0% {	
-            transform: translatey(0px);
-        }
-        50% {
-            transform: translatey(8px);
-        }
-        100% {
-            transform: translatey(0px);
-        }
     }
     .hi{
         display: flex;

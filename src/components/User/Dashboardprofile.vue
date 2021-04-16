@@ -6,6 +6,8 @@
     <button class="dbButton" v-on:click="GreenShop()">Support Green Shops</button>
     <button class="dbButton" v-on:click="Challenges()">Earn Points</button>
     <button class="dbButton" v-on:click="Surveytime()">Recalibrate DashBoard Survey</button>
+    <p class="txt2">~ Be part of the Solution, Not part of the pollution~</p>
+    
   </div>
 </template>
 
@@ -68,9 +70,21 @@ export default {
 .txt1 {
     color: #1C746F;
     font-size: 24px;
+    margin-top: 3%;
     margin-left: 2%;
     display: block ;
     text-align: left;
+    display: block;
+}
+.txt2{
+    color: #1C746F;
+    font-size: 14px;
+    margin-left: 2%;
+    margin-top: 6%;
+    margin-bottom: 3%;
+    display: block;
+    text-align: center;
+    font-style: italic;
     display: block;
 }
 .dbButton{
@@ -91,6 +105,6 @@ export default {
     transition-duration: 0.4s;
 }
 .dbButton:hover{
-    background: #2d8f4e;
+    background:#1C746F;
 }
 </style>

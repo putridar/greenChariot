@@ -4,7 +4,7 @@
     <Head v-bind:id="id" class="head"></Head>
     <div class = "top">
         <p class="content">Our Green Shop Partners:</p>
-        <button class = "btn" v-on:click="register()"> Want to be our partner? Register now! </button>
+        <button class = "btn2" v-on:click="register()"> Want to be our partner? Register now! </button>
     </div>
     <div class = "shops">
         <ul>
@@ -13,7 +13,9 @@
                     <img alt="logo" v-bind:src="item.imagename">
                 </div>
                 <h1 class="title">{{item.name}}</h1><br>
-                <button class="btn" v-on:click="isclick(item.imagename, item.name)">Shop</button>
+                <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: Shop have not provided any description!</div>
+                <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: Shop have not provided any address yet!</div>
+                <p class="txt2"><button class="btn" v-on:click="isclick(item.imagename, item.name)">Voucher Redemption</button></p>
             </li>
         </ul>
     </div>
@@ -37,7 +39,8 @@ export default {
             id: this.$route.query.id,
             imagename:'',
             code:'',
-            shops: []
+            shops: [],
+            shopId:''
         }
     },
     methods: {
@@ -56,7 +59,7 @@ export default {
             this.imagename = image
             this.$router.push({name:'scoopcode',query:{id:this.id,name:name}})
                 
-        },
+        }
     },
     mounted() {
         this.fetchItems()
@@ -86,6 +89,8 @@ export default {
         
     }
     li {
+        display:flex;
+        flex-direction:column;
         justify-content:center;
         flex-shrink: 1;
         flex-basis: 20%;
@@ -111,11 +116,11 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 15px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 37%;
+        width: 100%;
         height: 50px;
         text-align: center;
         cursor: pointer;
@@ -161,6 +166,34 @@ export default {
         text-align: center;
         color: #1C746F;
         height:150px
+    }
+    .btn2 {
+        background: #2D8F8A;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 45%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    
+    }
+    .txt {
+        font-family: Inter;
+        font-size: 15px;
+        color: #1C746F;
+        margin-left: 8%;
+        text-align: left;
+    }
+    .txt2{
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-end;
     }
 </style>
 

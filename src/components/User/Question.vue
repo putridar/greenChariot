@@ -119,6 +119,10 @@ export default {
             this.answer = this.selectedQuestions[this.counter].correct;
         },
         color: function() {
+            if (this.nooption==true){
+                this.nooption=false
+                return
+            }
             this.chosen=this.chose
             if (this.answer != this.chosen) {
                 document.getElementById(this.chosen).style.background = "red";

@@ -5,9 +5,11 @@
             <div class="content">
                 <div class = "txt">
                     <label for="price" class="title">Price Value</label><br>
-                    <input type="number" id="price" placeholder="Price" v-model.number="price" class ="inputstyle" required><br>
+                    <input type="number" id="price" placeholder="Price" v-model.number="price" min="0" class ="inputstyle" required><br>
                     <label for="points" class="title">Points Needed</label><br>
-                    <input id="points" placeholder="Points" v-model.number="points" name="points" class ="inputstyle" required><br>
+                    <input type="number" id="points" placeholder="Points" v-model.number="points" name="points" min="0" class ="inputstyle" required><br>
+                    <label for="numcoupon" class="title">Coupon Limit</label><br>
+                    <input type="number" id="numcoupon" placeholder="Number of Coupons alloted" v-model.number="numcoupon" name="numcoupon" min="0" class ="inputstyle" required><br>
                     <button class="btn" v-on:click="save()">Save</button>
                     <button class="btn" v-on:click="cancel()">Cancel</button>
                 </div>
@@ -34,7 +36,9 @@ export default {
             price: null,
             points: null,
             vouchers: [],
-            idx: -1
+            idx: -1, 
+            numcoupon:null,
+            coupons:[]
         }
     },
     methods: {
@@ -64,9 +68,15 @@ export default {
             } else {
                 this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points})
             }
+            for(var i=0; i<this.numcoupon;i++){
+                this.coupons.push(i)
+            }
+            console.log(this.coupons)
             db.firestore().collection('shops').doc(this.id).update({
-                vouchers: this.vouchers
+                vouchers: this.vouchers,
+                coupons: this.coupons
             }).then(() => {
+                this.downloadCSV({ filename: "CouponCodes.csv" })
                 alert("Updated successfuly");
                 this.$router.push({ name: 'voucherlists', query: {id: this.id}})
             })
@@ -74,6 +84,45 @@ export default {
         cancel: function() {
             this.$router.push({ name: 'voucherlists', query: {id: this.id}})
         },
+        downloadCSV: function(args) {  
+            var data, filename, link;
+            var csv = this.convertArrayOfObjectsToCSV({
+                data: [{"coupons": this.coupons}]
+            });
+            if (csv == null) return;
+            filename = args.filename || 'export.csv';
+            if (!csv.match(/^data:text\/csv/i)) {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+            }
+            data = encodeURI(csv);
+            link = document.createElement('a');
+            link.setAttribute('href', data);
+            link.setAttribute('download', filename);
+            link.click();
+        },
+        convertArrayOfObjectsToCSV: function(args) {  
+            var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+            data = args.data || null;
+            if (data == null || !data.length) {
+                return null;
+            }
+            columnDelimiter = args.columnDelimiter || ',';
+            lineDelimiter = args.lineDelimiter || '\n';
+            keys = Object.keys(data[0]);
+            result = '';
+            result += keys.join(columnDelimiter);
+            result += lineDelimiter;
+            data.forEach(function(item) {
+                ctr = 0;
+                keys.forEach(function(key) {
+                    if (ctr > 0) result += columnDelimiter;
+                    result += item[key];
+                    ctr++;
+                });
+                result += lineDelimiter;
+            });
+            return result;
+        }
     },
     created() {
         this.fetchItems()
@@ -88,7 +137,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 110vh;
     }
     .head {
         position: sticky;

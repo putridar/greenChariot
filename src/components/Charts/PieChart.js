@@ -45,7 +45,6 @@ export default {
                 var item = snapshot.data()
                 let household = parseFloat(item.Survey["house"])
                 let commerce = item.Survey2["ecommerce"]
-                console.log(commerce)
                 var i;
                 for (i =0; i<commerce.length;i++){
                     this.commcoef += this.commcoefs[commerce[i]] 
@@ -72,7 +71,6 @@ export default {
                 this.total = this.datacollection.datasets[0].data.reduce(function(a, b){return a + b}, 0)
             }).then(()=>{
                 this.textCenter(this.total)
-                console.log(this.total)
                 this.renderChart(this.datacollection, this.options)
                 this.loadTotal(this.total, this.datacollection.datasets[0].data[0], this.datacollection.datasets[0].data[1], this.datacollection.datasets[0].data[2], this.datacollection.datasets[0].data[3])
             })
