@@ -8,7 +8,7 @@
                 </div>
                 <div class="pie1">
                     <img class="tree" alt="greenChariotTree" src="../../assets/Tree.jpg">
-                    <h1 class="txt"> {{Math.round(totalcarb/19, 2)}} Fully grown Rain Trees</h1>
+                    <h1 class="txt"> {{Math.round(totalcarb/19, 2)}} Fully grown rain trees</h1>
                     <h1 class="txt"> Required to absorb your emissions </h1>
                 </div>
                 <div class="pie">
