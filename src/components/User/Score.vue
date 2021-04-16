@@ -9,7 +9,7 @@
                 <div class="content">
                     <p class="zoom">{{this.score}}/25 <br> Great job!</p>
                     <br>
-                    <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.currentpoints}} points!</p>
+                    <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.totalpoint}} points!</p>
                     <br>
                     <button class="btn" v-on:click="direct()">Try again?</button>
                 </div>
@@ -33,7 +33,8 @@ export default{
         return{
             id:this.$route.query.id,
             score:this.$route.query.score,
-            currentpoints:0
+            currentpoints:0,
+            totalpoint:0
         }
     },
     methods:{
@@ -48,6 +49,7 @@ export default{
         getscore:function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                this.currentpoints=parseInt(snapshot.data().points)
+               this.totalpoint=this.score+this.currentpoints
             })
         }
     },
