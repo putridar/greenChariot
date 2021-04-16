@@ -47,6 +47,7 @@ export default {
                 var item = snapshot.data()
                 this.vouchers = item.vouchers
                 this.getVoucher();
+                this.name = item.name
             })
         },
         getVoucher: function() {
@@ -62,19 +63,19 @@ export default {
             }
         },
         save: function() {
-            if (this.voucher == -1) {
-                var length = this.vouchers.length
-                this.vouchers.push({id:length, price: this.price, point: this.points})
-            } else {
-                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points})
-            }
             for(var i=0; i<this.numcoupon;i++){
                 let r = Math.random().toString(36).substring(2);
                 this.coupons.push(r)
             }
+            if (this.voucher == -1) {
+                var length = this.vouchers.length
+                this.vouchers.push({id:length, price: this.price, point: this.points, coupons:this.coupons})
+            } else {
+                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points, coupons:this.coupons})
+            }
+            
             db.firestore().collection('shops').doc(this.id).update({
                 vouchers: this.vouchers,
-                coupons: this.coupons
             }).then(() => {
                 this.downloadCSV({ filename: this.price+"_"+this.points+"_CouponCodes.csv" })
                 alert("Updated successfuly");
@@ -84,7 +85,7 @@ export default {
         cancel: function() {
             this.$router.push({ name: 'voucherlists', query: {id: this.id}})
         },
-        downloadCSV: function(args) {  
+        downloadCSV: function(args){  
             var data, filename, link;
             var csv = this.convertArray_CSV({
                 data: [{"coupons": this.coupons}]
