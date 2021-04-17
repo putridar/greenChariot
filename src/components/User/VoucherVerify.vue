@@ -73,7 +73,6 @@ export default{
                 for (var i =0; i<this.vouchs.length; i++){
                     if (this.vouchs[i].id==this.currentvoucher.code){
                         this.coupons = this.vouchs[i].coupons
-                        this.used = this.vouchs[i].used
                         this.redeem = this.vouchs[i].redeem
                         if (this.coupons.length>0){
                             var couponcode = this.coupons.pop()
@@ -104,7 +103,7 @@ export default{
                 points: this.score - this.currentvoucher.point
             }).then(() => {
                 this.exchanged.push(this.id)
-                this.vouchs.splice(this.voucherindex,1,{id:this.voucherid, price: this.currentvoucher.price, point: this.currentvoucher.point, coupons:this.coupons, redeem: this.redeem, used: this.used})
+                this.vouchs.splice(this.voucherindex,1,{id:this.voucherid, price: this.currentvoucher.price, point: this.currentvoucher.point, coupons:this.coupons, redeem: this.redeem})
                 db.firestore().collection('shops').doc(this.shopId).update({
                     exchanged: this.exchanged,
                     vouchers: this.vouchs

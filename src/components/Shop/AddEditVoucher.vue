@@ -39,7 +39,6 @@ export default {
             idx: -1, 
             numcoupon:null,
             coupons:[],
-            used:[],
             redeem:[]
         }
     },
@@ -61,7 +60,6 @@ export default {
                         this.price = curr.price;
                         this.points = curr.point;
                         this.idx = x;
-                        this.used = curr.used;
                         this.redeem = curr.redeem;
                     }
                 }
@@ -74,9 +72,9 @@ export default {
             }
             if (this.voucher == -1) {
                 var pass = Math.random().toString(36).substring(8);
-                this.vouchers.push({id:pass, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem, used: this.used })
+                this.vouchers.push({id:pass, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem })
             } else {
-                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem, used: this.used})
+                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem})
             }
             
             db.firestore().collection('shops').doc(this.id).update({
