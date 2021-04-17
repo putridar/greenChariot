@@ -7,8 +7,9 @@
                 <p class = "title">Monthly Consumption survey</p>
                 <div class ="Consumption1">
                     <p class = "txt2">Monthly Utilities Expenditure</p>
+                    <p class="txt4">Did you know that the production of electricity and heat generates the second largest share of greenhouse gas emissions? Find out how you are doing in terms of monthly utilities on electricity, water and gas!</p>
                     <p class = "txt1">Household population:</p>
-                    <input type="number" placeholder="Number of people in your house " value="householdpop" id="householdpop" v-model="householdpop" required><br>
+                    <input type="number" placeholder="Number of people in your house " min=1 value="householdpop" id="householdpop" v-model="householdpop" required><br>
                     <p class = "txt1">Electricity ($)</p>
                     <input type="number" placeholder="Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
                     <p class = "txt1">Water ($)</p>
@@ -18,6 +19,7 @@
                 </div>
                 <div class ="Consumption1">
                     <p class = "txt2">Weekly Transport Duration</p>
+                    <p class="txt4"> Did you know that taking public transport, such as the MRT helps to reduce carbon emission significantly, as compared to taking private transport? Find out how you are doing in terms of transportation!</p><br>
                     <p class = "txt1"> MRT Public Transport (Hours)</p>
                     <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
                     <p class = "txt1"> Bus Public Transport (Hours)</p>
@@ -62,6 +64,10 @@ export default {
             console.log(this.name);
         },
         SurveySubmit1 : function() {
+            if (this.householdpop=='' || this.electricity=='' || this.water=='' || this.mrt=='' || this.bus=='' || this.car==''){
+               alert("You need to fill in all the inputs!")
+               return
+            }
             if (this.electricity>=1000 || this.water>=1000 || this.gas>=1000){
                 alert("Your monthly utilities expenditure is too high! Have you made an error in one of your inputs?")
                 this.result=false
@@ -118,7 +124,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 170vh;
+        min-height: 200vh;
     }
     .head {
         position: sticky;
@@ -240,5 +246,26 @@ export default {
         margin-top: 1%;
         margin-left: 4%;
     }
+    .txt4 {
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 19px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
+    }
+    .txt5 {
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 22px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
+    }
+
     
 </style>

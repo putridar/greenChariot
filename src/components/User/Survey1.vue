@@ -5,6 +5,7 @@
             <img alt="greenChariot" src="../../assets/survey.png">
             <div class = "content">
                 <p class = "title">Food Intake Proportion</p>
+                <p class="txt4">Do you know that food intake accounts for approximately 10-30% of a household's carbon footprint? Meat products typically have larger carbon footprints per calorie than grain or vegetable products. Find out how you are doing in terms of food consumption!</p>
                 <div class="slider" v-for="option, index in Sliders" :key="index">
                     <p class="txt1">{{name[index]}} %</p>
                     <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
@@ -228,6 +229,16 @@ export default {
         margin-right: 20%;
         width: 43%;
         display: inline-block;
+    }
+    .txt4 {
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 19px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
     }
     
 </style>
