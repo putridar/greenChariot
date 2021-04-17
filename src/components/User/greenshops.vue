@@ -5,6 +5,7 @@
     <div class = "top">
         <p class="content">Our Green Shop Partners:</p>
         <button class = "btn2" v-on:click="register()"> Want to be our partner? Register now! </button>
+        <button class="btn2" v-on:click="direct()">Voucher Redemption</button>
     </div>
     <div class = "shops">
         <ul>
@@ -13,9 +14,9 @@
                     <img alt="logo" v-bind:src="item.imagename">
                 </div>
                 <h1 class="title">{{item.name}}</h1><br>
-                <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: Shop have not provided any description!</div>
-                <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: Shop have not provided any address yet!</div>
-                <p class="txt2"><button class="btn" v-on:click="isclick(item.imagename, item.name)">Voucher Redemption</button></p>
+                <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
+                <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
+                <p class="txt2"><button class="btn">Go to website</button></p>
             </li>
         </ul>
     </div>
@@ -59,6 +60,9 @@ export default {
             this.imagename = image
             this.$router.push({name:'scoopcode',query:{id:this.id,name:name}})
                 
+        },
+        direct:function(){
+            this.$router.push({name:'combinedvoucher',query:{id:this.id}})
         }
     },
     mounted() {
@@ -173,12 +177,12 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 20px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 45%;
-        height: 50px;
+        width: 22%;
+        height: 70px;
         text-align: center;
         cursor: pointer;
     
@@ -195,6 +199,7 @@ export default {
         display: flex;
         align-items: flex-end;
     }
+    
 </style>
 
 
