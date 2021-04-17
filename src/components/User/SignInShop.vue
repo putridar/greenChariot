@@ -4,7 +4,7 @@
                 <Head v-bind:id="id" class="head"></Head>
                 <img alt="greenChariot" src="../../assets/shop.png">
                 <div class = "content">
-                    <p class = "title"> Sign In to Your Shop! </p>
+                    <p class = "title"> Sign in to your shop! </p>
                     <input type="text" placeholder="Email" v-model="email" required><br>
                     <input type="password" placeholder="Password" v-model="password" required><br>
                     <button class = "create" v-on:click="create()">Sign In</button>
