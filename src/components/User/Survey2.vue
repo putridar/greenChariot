@@ -50,6 +50,10 @@ export default {
             console.log(this.name);
         },
         SurveySubmit2 : function() {
+            if (this.numofitem>=1000){
+                alert("Your number of items purchased is too high! Have you made an error in your input?")
+                return
+            }
             db.firestore().collection('users').doc(this.id).update({
                 Survey2: {
                     ecommerce: this.ecommerce,

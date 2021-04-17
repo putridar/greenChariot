@@ -7,7 +7,8 @@
                     <img alt="successful" src="../../assets/successful.png">
                 </div>
                 <div class="content">
-                    <p class="zoom">{{this.score}}/25 <br> Great job!</p>
+                    <p class="zoom" v-if="this.score>=15">{{this.score}}/25 <br> Great job!</p>
+                    <p class="zoom" v-else>{{this.score}}/25 <br> You can do better!</p>
                     <br>
                     <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.totalpoint}} points!</p>
                     <br>
@@ -34,7 +35,7 @@ export default{
             id:this.$route.query.id,
             score:this.$route.query.score,
             currentpoints:0,
-            totalpoint:0
+            totalpoint:0,
         }
     },
     methods:{
@@ -102,7 +103,7 @@ export default{
         font-size: 64px;
         margin: 10px;
         margin-bottom: 0px;
-        margin-top: 150px;
+        margin-top: 80px;
         animation: large ease 1s
     }
     @keyframes large {

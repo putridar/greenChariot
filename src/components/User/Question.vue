@@ -89,9 +89,9 @@ export default {
             document.getElementById(this.answer).style="mcq";
              if (this.chosen==this.answer){
                 console.log(this.score)
-                this.score+=5
+                //this.score+=5
                 this.number+=1
-                this.correctnumber+=1
+                //this.correctnumber+=1
             }else{
                 this.number+=1
             }
@@ -107,11 +107,15 @@ export default {
         },
         getscore:function(){
             var temp=0 
+            var d = new Date()
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                temp=parseInt(snapshot.data().points)
                temp+= parseInt(this.score)
             }).then(() => {db.firestore().collection('users').doc(this.id).update({
-                points:temp
+                points:temp,
+                date: d.getDate(),
+                quizday: d.getDay(),
+                month: d.getMonth()
             })})
         },
         selection: function(ans) {
@@ -132,7 +136,11 @@ export default {
                 document.getElementById(this.answer).style.background = "green";
                 this.ans = true
             }
-            this.show=true;
+            this.show=true
+            if (this.answer==this.chosen){
+                this.score+=5
+                this.correctnumber+=1
+            }
         },
         validate:function(){
             if (this.chose==100){
