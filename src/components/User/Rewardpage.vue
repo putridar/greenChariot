@@ -114,7 +114,7 @@ export default{
         text-align: center;
         padding: 2%;
         margin:2%;
-        margin-top:3%
+        margin-top:0%
     }
     .title2{
         font-family: Montserrat;
@@ -145,10 +145,11 @@ export default{
     .pic {
         height: 45%;
         margin-top:5%;
-        margin-bottom: 2%;
+        margin-bottom: 0%;
     }
     .btn {
         background: #2D8F8A;
+        border: none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -161,10 +162,14 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .btn2 {
         background: #2D8F8A;
+        border: none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
