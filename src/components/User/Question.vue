@@ -107,11 +107,15 @@ export default {
         },
         getscore:function(){
             var temp=0 
+            var d = new Date()
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                temp=parseInt(snapshot.data().points)
                temp+= parseInt(this.score)
             }).then(() => {db.firestore().collection('users').doc(this.id).update({
-                points:temp
+                points:temp,
+                date: d.getDate(),
+                quizday: d.getDay(),
+                month: d.getMonth()
             })})
         },
         selection: function(ans) {
