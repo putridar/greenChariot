@@ -2,7 +2,7 @@
     <div>
         <div class="bg">
             <Head v-bind:id="id" class="head"></Head>
-            <div class="content">
+            <div class="content1">
                 <div class="pic">
                     <div class="hg">
                         <img alt="scoop" v-bind:src="this.image">
@@ -10,14 +10,14 @@
                     </div>
                     <button class="btn" v-on:click="editimage()">Edit Image</button>
                 </div>
-                <div class = "txt">
+                <div class = "txt1">
                     <div class="hg1">
-                        <p class="title">Description</p>
-                        <p class="item">{{this.desc}}</p><br>
-                        <p class="title">Address</p>
-                        <p class="item">{{this.address}}</p><br>
-                        <p class="title">Shop's Unique Code</p>
-                        <p class="item">{{this.code}}</p><br>
+                        <p class="title1">Description</p>
+                        <p class="item1">{{this.desc}}</p><br>
+                        <p class="title1">Address</p>
+                        <p class="item1">{{this.address}}</p><br>
+                        <p class="title1">Shop's Unique Code</p>
+                        <p class="item1">{{this.code}}</p><br>
                     </div>
                     <button class="btn" v-on:click="edit()">Edit Info</button>
                 </div>
@@ -89,7 +89,7 @@ export default {
         top: 0;
         position: -webkit-sticky;
     }
-    .content {
+    .content1 {
         font-family: Montserrat;
         font-size: 30px;
         margin-top: 5%;
@@ -101,17 +101,19 @@ export default {
         height: 600px;
         padding: 3px
     }
-    .title {
+    .title1 {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
         font-size: 28px;
+        color:black
     }
-    .item {
+    .item1 {
         font-family: Montserrat;
         font-size: 22px;
         text-align: left;
-        width: 90%
+        width: 90%;
+        color:black
     }
     img {
         width: 70%;
@@ -140,7 +142,7 @@ export default {
         height: 60%;
         width: 40%
     }
-    .txt {
+    .txt1 {
         margin-top:7%;
         margin-bottom: 2%;
         height: 60%;
