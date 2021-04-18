@@ -10,8 +10,7 @@
                     </div>
                     <h1 class = "title">Quiz</h1><br>
                     <p>
-                        Confident in your carbon footprint knowledge?<br>
-                        Test your understanding in our short quiz available once a week!<br>
+                        Test your carbon footprint knowledge once a week!<br><br>
                         There are 5 questions to complete, and you get +5 Points for each correct answer!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
