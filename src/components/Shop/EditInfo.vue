@@ -10,9 +10,11 @@
                     <textarea id="desc" placeholder="Description" v-model="desc" name="desc" rows="4" cols="50"></textarea><br>
                     <label for="address" class="title">Address</label><br>
                     <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
+                    <label for="website" class="title">URL of your shop website(Leave it blank if you dont have a website)</label><br>
+                    <input type="website" class="inputstyle" placeholder="Link to Shop's Website"><br>
                     <label for="code" class="title">Shop's Unique Code</label><br>
                     <input type="text" id="code" placeholder="Code" v-model="code" class ="inputstyle"><br>
-                    <button class="btn" v-on:click="save()">Save</button>
+                    <button class="btn" v-on:click="validate();save();">Save</button>
                     <button class="btn" v-on:click="cancel()">Cancel</button>
                 </div>
             </div>
@@ -41,7 +43,9 @@ export default {
             desc: '',
             name: '',
             code: '',
-            address:''
+            address:'',
+            website:'',
+            correcturl:true
         }
     },
     methods: {
@@ -52,14 +56,20 @@ export default {
                 this.name = item.name
                 this.code = item.code == undefined ? "" : item.code
                 this.address = item.address == undefined ? "" : item.address
+                this.website= item.website
             })
         },
         save: function() {
+            if (this.correcturl==false){
+                this.correcturl=true
+                return
+            }
             db.firestore().collection('shops').doc(this.id).update({
                 desc: this.desc,
                 name: this.name,
                 code: this.code,
                 address: this.address,
+                website: this.website
             }).then(() => {
                 alert("Updated successfuly");
                 this.$router.push({ name: 'shopinfo', query: {id: this.id}})
@@ -68,6 +78,23 @@ export default {
         cancel: function() {
             this.$router.push({ name: 'shopinfo', query: {id: this.id}})
         },
+        validate:function(){
+            if (this.website==''){
+                return
+            }
+            var pattern = new RegExp('^(https?:\\/\\/)?'+ 
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+             '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+             '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
+            '(\\#[-a-z\\d_]*)?$','i'); 
+             if(pattern.test(this.website)==false){
+                 alert("Wrong url")
+                 this.correcturl=false
+             }
+        }
+        
+        
     },
     created() {
         this.fetchItems()
@@ -82,7 +109,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 140vh;
+        min-height: 180vh;
     }
     .head {
         position: sticky;
@@ -98,7 +125,7 @@ export default {
         width: 60%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 800px;
+        height: 870px;
         padding: 3px;
     }
     .title {
