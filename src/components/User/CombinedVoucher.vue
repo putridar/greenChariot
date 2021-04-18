@@ -64,6 +64,7 @@ export default{
                         item.forEach(v => this.vouchers.push({
                             price: v.price,
                             point: v.point,
+                            couponID: v.id,
                             image: pic,
                             name: name,
                             id: doc.id              
@@ -82,7 +83,7 @@ export default{
         onclick:function(id, name, image,item){
             console.log(this.currvoucher)
             for (var x of this.currvoucher){
-                if (item.price==x.price && item.point==x.point && item.shopId==x.shopId){
+                if (item.couponID==x.id && item.point==x.point && item.shopId==x.shopId){
                     alert("You already have this voucher in your possession!")
                     return
                 }
@@ -132,7 +133,7 @@ export default{
         margin-top: 2%;
     }
     .rewards {
-        margin-top: 10px;
+        margin-top: 1%;
     }
     .title{
         font-family: Montserrat;
@@ -140,7 +141,7 @@ export default{
         text-align: center;
         padding: 2%;
         margin:2%;
-        margin-top:7%
+        margin-top:4%
     }
     .title2{
         font-family: Montserrat;
@@ -168,12 +169,13 @@ export default{
         margin-bottom: 30px
     }
     .pic {
-        height: 45%;
+        height: 30%;
         margin-top:5%;
-        margin-bottom: 2%;
+        margin-bottom: 0%;
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -186,7 +188,10 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .content {
         font-family: Montserrat;
@@ -211,7 +216,10 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn2:hover {
+        background:#1C746F;
     }
     img {
         width:50%;

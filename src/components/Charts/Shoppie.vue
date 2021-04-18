@@ -1,20 +1,15 @@
 <template>
   <div class="chart">
-    <Chart v-bind:id="id"></Chart>
+    <Chart></Chart>
   </div>
 </template>
 
 <script>
-import Chart from "./VoucherChart.js";
+import Chart from "./Shoppie.js";
 
 export default {
   components: {
     Chart
-  },
-  props: {
-      id: {
-          type: String
-      }
   }
 };
 </script>

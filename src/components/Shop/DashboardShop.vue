@@ -2,30 +2,21 @@
     <div>
         <div class = "bg">
             <Head v-bind:id="id" class="head"></Head>
-            <div>
-                <div class="content">
-                    <div class="pic">
-                        <img v-bind:src="this.image" alt="shop" class="image">
-                        <div class = "title">{{this.name}}</div>
-                    </div>
-                    <div class="txt1">
-                        <p class = "txt4"> {{this.desc}}</p>
-                        <p class = "txt2">Address</p>
-                        <p class = "txt4"> {{this.address}}</p>
-                        <p class = "txt2">Today's Code</p>
-                        <p class = "txt4"> {{this.code}}</p>
-                        <button class="btn" v-on:click="edit()"> Edit Info</button>
-                    </div>
+            <div class="content">
+                <div class="divider">
+                    <img v-bind:src="this.image" alt="shop" class="image">
+                    <h1 class="companyname"> {{name}}</h1>
                 </div>
-                <div class="chart">
-                    <p class = "txt3">Customer Insight (greenChariot Users)</p>
-                    <div class = "cust">
-                        <customer-chart v-bind:id="id" style="height:30vh; width:10vw"></customer-chart>
-                    </div>
-                    <p class = "txt3">Vouchers Insight</p><br>
-                    <div class = "cust">
-                        <voucher-chart v-bind:id="id" style="height:30vh; width:20vw;"></voucher-chart>
-                    </div>
+                <div class="details">
+                    <p class="company"> Company Description:</p>
+                    <p class="companyname"> {{desc}} </p>
+                    <br>
+                    <p class="company"> Address:</p>
+                    <p class="companyname"> {{address}} </p>
+                    <button class="edit"> Edit Info</button>
+                </div>
+                <div class="pie">
+                    <Shoppie></Shoppie>
                 </div>
             </div>
         </div>
@@ -36,16 +27,14 @@
 <script>
 import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
-import CustomerChart from "../Charts/CustomerChart.vue"
-import VoucherChart from "../Charts/VoucherChart.vue"
 import Footer from '../Footer.vue'
+import Shoppie from '../Charts/Shoppie.vue'
 export default {
     name: 'Header',
     components :{
         Head,
-        CustomerChart,
-        VoucherChart,
-        Footer
+        Footer, 
+        Shoppie
     },
     data() {
         return {
@@ -70,35 +59,11 @@ export default {
                 this.code = item.code == undefined ? "" : item.code
                 this.address = item.address == undefined ? "No address provided" : item.address
                 this.day = item.day == undefined ? null : item.day
-                this.custlist = item.custlist
-                this.randomCode(item.code, item.day)
             })
         },
         edit: function() {
             this.$router.push({ name: 'shopinfo', query: {id: this.id}})
-        } ,
-        randomCode: function(code, currday) {
-            var d = new Date();
-            var day = d.getDay();
-            if (currday == null || day != currday || code == undefined) {
-                var result = '';
-                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                for (let x = 0; x < 8; x++ ) {
-                    result += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                this.code = result
-                this.day = day
-                db.firestore().collection('shops').doc(this.id).update({
-                    code: this.code,
-                    day: this.day,
-                    redeemed: []
-                }).then(() => {
-                    console.log(this.code)
-                })
-            } else {
-                this.code = code
-            }
-        }
+        } 
     },
     created() {
         this.fetchItems();
@@ -115,6 +80,8 @@ export default {
         margin: 0px;
         width: 100%;
         min-height: 160vh;
+        font-family: Montserrat;
+
     }
     .head {
         position: sticky;
@@ -122,101 +89,66 @@ export default {
         position: -webkit-sticky;
     }
     .content {
-        font-family: Montserrat;
-        font-size: 30px;
-        margin-left: 7%;
-        margin-right: 3%;
-        width: 42%;
-        background: #FFFFFF;
-        border-radius: 20px;
-        height: 1000px;
-        padding: 3px;
-        float:left
-    }
-    .chart {
-        font-family: Montserrat;
-        font-size: 30px;
-        margin-top: 3%;
-        margin-left: 50%;
-        margin-right: 7%;
-        width: 42%;
-        background: #FFFFFF;
-        border-radius: 20px;
-        height: 1000px;
-        padding: 3px;
-    }
-    .title {
-        font-family: Montserrat;
-        font-weight: bold;
-        font-size: 40px;
-        margin-left:90%;
+        background-color: #FFFFFF;
+        margin-top: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+        height: auto;
+        width: auto;
+        border-radius: 8px;
+        padding: 3%;
         display: flex;
-        width: 30%;
-        align-items: center;
+    }
+    .divider{
+        flex-direction: row;
+        flex:1;
         text-align: center;
-        height: 70%
     }
-    .item {
-        font-family: Montserrat;
-        font-size: 22px;
+    .details{
+        flex-direction: row;
+        flex:1;
         text-align: left;
-        width: 90%
     }
-    .image {
-        width: 70%;
-        float: left;
+    .companyname{
+        margin-top: 4%;
+        margin-bottom: 3%;
+        font-style: normal;
     }
-    .btn {
+    .company{
+        margin-top: 5%;
+        font-weight: bolder;
+        font-size: 28px;
+    }
+    .edit{
         background: #2D8F8A;
         border-radius: 8px;
+        border: #2D8F8A;
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 20px;
-        align-items: center;
-        color: #FFFFFF;
-        width: 40%;
-        height: 50px;
+        font-size: auto;
+        line-height: 40px;
         text-align: center;
-        margin-left: 25%;
-        margin-right: 25%;
-        margin-top:4%;
+        color: #FFFFFF;
+        width: 90%;
+        height: 60px;
+        margin: 2%;
+        margin-top: 10%;
         cursor: pointer;
+        transition-duration: 0.4s;
     }
-    .pic {
-        margin-top:15%;
-        margin-bottom:2%;
-        height: 35%;
-        width: 50%;
+    .edit:hover{
+        background:#1C746F;
+    }
+    .pie{
+        background-color:none;
         margin-left: 2%;
-    }
-    .txt1 {
-        margin-top:10px;
-        margin-bottom: 2%;
-        height: 60%;
-        margin-left: 2%;
-    }
-    .txt4 {
-        margin-top:5px;
-        margin-bottom: 2%;
-        font-size: 24px;
-    }
-    .txt2 {
-        margin-top:7%;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    .txt3 {
-        margin-top:2%;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .cust {
-        margin-left:-35%;
-        height:400px;
-        width:100%;
-    }
-    .cust1 {
-        width:100%;
+        margin-right: 2%;
+        align-items: center;
+        border-radius: 8px;
+        padding: 0px;
+        width: 28%;
+        flex-direction: row;
+        flex:1;
     }
 </style>

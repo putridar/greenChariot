@@ -45,6 +45,7 @@ export default{
     },
     methods:{
         retrieveitems:function(){
+            console.log(this.item)
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                this.points=snapshot.data().points
                this.currvoucher=snapshot.data().currvoucher
@@ -52,6 +53,7 @@ export default{
             db.firestore().collection('shops').doc(this.item.shopId).get().then(snapshot => {
                var item = snapshot.data()
                this.used = item.used == undefined ? [] : item.used
+               
             })
         },
         backwards:function(){
