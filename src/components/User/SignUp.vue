@@ -9,9 +9,10 @@
             <input type="text" placeholder="Username" v-model="username" class = "inputstyle" required><br>
             <input type="email" placeholder="Email" v-model="email" class = "inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class = "inputstyle" required><br>
+            <div v-if="isShop==true"><input type="website" class="inputstyle" v-model="website" placeholder="Shop Website Link"></div>
             <input type="checkbox" id="shop" name="shop" v-model="isShop">
             <label for="shop" class = "txt">Register as a shop's owner?</label><br>
-            <button class = "create" v-on:click="create()">Create Account</button>
+            <button class = "create" v-on:click="validate();create();">Create Account</button>
             <p class = "txt" v-on:click="signin()">Already have an account? Sign in now!</p>
         </div>
   </div>
@@ -29,11 +30,17 @@ export default {
             email: "",
             password: "",
             id: "",
-            isShop: false
+            isShop: false,
+            website:'',
+            correcturl:true
         }
     },
     methods: {
         create : function() {
+            if (this.correcturl==false){
+               this.correcturl=true
+               return
+            }
             if (this.name == "" || this.username == "" || this.email == "" || this.password == "") {
                 alert("Please fill in the required input");
             } else {
@@ -81,6 +88,7 @@ export default {
                         imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png",
                         vouchers: [],
                         redeemed: [],
+                        website:this.website,
                         custlist: {
                             0:[],
                             1:[],
@@ -124,7 +132,23 @@ export default {
             this.$router.push({ name: 'dashboardShop', query : {
                 id: id,
             }})
+        },
+        validate:function(){
+            if (this.website==''){
+                return
+            }
+            var pattern = new RegExp('^(https?:\\/\\/)?'+ 
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+             '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+             '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
+            '(\\#[-a-z\\d_]*)?$','i'); 
+             if(pattern.test(this.website)==false){
+                 alert("Wrong url")
+                 this.correcturl=false
+             }
         }
+    
     }
 }
 </script>

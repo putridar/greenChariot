@@ -14,8 +14,8 @@
                     <img alt="logo" v-bind:src="item.imagename">
                 </div>
                 <h1 class="title">{{item.name}}</h1><br>
-                <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
-                <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
+                <div class='txt' v-if="item.desc!=''">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
+                <div class='txt' v-if="item.address!=''">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
                 <p class="txt2"><button class="btn" v-on:click='check(item.website);website(item.website);'>Visit shop website</button></p>
             </li>
         </ul>

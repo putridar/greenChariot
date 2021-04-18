@@ -15,7 +15,9 @@
                 <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
                 <p class = "title2"> Enter your account password </p>
                 <input type="password" placeholder="Password" v-model="password" required><br>
-                <button class = "create" v-on:click="create()">Register</button>
+                <p class="title2">Enter the URL of your shop website(Leave it blank if you dont have a shop website)</p>
+                <input type="website" placeholder="Link to Shop's Website" v-model="website"><br>
+                <button class = "create" v-on:click="validate();create();">Register</button>
                 <p class="txt" v-on:click="signIn()"> Already own a shop account? Sign in now!</p>
             </div>
         </div>
@@ -43,7 +45,8 @@ export default {
             shops: [],
             address: "",
             desc: "",
-            website:''
+            website:'',
+            correcturl:true
         }
     },
     methods: {
@@ -57,7 +60,11 @@ export default {
                 alert(error)})
         },
         create : function() {
-            if (this.name == "" || this.password == "") {
+            if (this.correcturl==false){
+                this.correcturl=true
+                return
+            }
+            else if (this.name == "" || this.password == "") {
                 alert("Please fill in the required input");
             } else {
                 this.signup();
@@ -122,7 +129,23 @@ export default {
             this.$router.push({ name: 'signinShop', query : {
                 id: this.id,
             }})
+        },
+        validate:function(){
+            if (this.website==''){
+                return
+            }
+            var pattern = new RegExp('^(https?:\\/\\/)?'+ 
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+             '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+             '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
+            '(\\#[-a-z\\d_]*)?$','i'); 
+             if(pattern.test(this.website)==false){
+                 alert("Please enter a valid URL!")
+                 this.correcturl=false
+             }
         }
+        
     },
     created() {
         this.fetchItems();
