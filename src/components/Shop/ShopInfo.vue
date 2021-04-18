@@ -6,7 +6,7 @@
                 <div class="pic">
                     <div class="hg">
                         <img alt="scoop" v-bind:src="this.image">
-                        <p class = "title">{{this.name}}</p>
+                        <p class = "title1">{{this.name}}</p>
                     </div>
                     <button class="btn" v-on:click="editimage()">Edit Image</button>
                 </div>
@@ -16,8 +16,8 @@
                         <p class="item1">{{this.desc}}</p><br>
                         <p class="title1">Address</p>
                         <p class="item1">{{this.address}}</p><br>
-                        <p class="title1">Shop's Unique Code</p>
-                        <p class="item1">{{this.code}}</p><br>
+                        <p class="title1">URL</p>
+                        <p class="item1">{{this.website}}</p><br>
                     </div>
                     <button class="btn" v-on:click="edit()">Edit Info</button>
                 </div>
@@ -44,7 +44,8 @@ export default {
             desc: '',
             name: '',
             code: '',
-            address: ''
+            address: '',
+            website: ''
         }
     },
     methods: {
@@ -60,6 +61,8 @@ export default {
             this.name = item.name
             this.address = item.address == undefined ? "No Address" : item.address
             this.code = item.code == undefined ? "No code specified" : item.code.slice(0,4) + 'x'.repeat(item.code.length - 4)
+            this.website = item.website == undefined || item.website == "" ? "No website" : item.website
+            console.log(this.website)
             console.log(item.code)
         },
         edit: function(){
@@ -82,7 +85,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 120vh;
+        min-height: 100vh;
     }
     .head {
         position: sticky;
@@ -98,7 +101,7 @@ export default {
         width: 70%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 600px;
+        height: 500px;
         padding: 3px
     }
     .title1 {
@@ -149,10 +152,10 @@ export default {
         margin-left: 40%;
     }
     .hg {
-        height:120%;
+        height:100%;
     }
     .hg1 {
-        height: 120%;
+        height: 100%;
         align-items: center;
     }
 </style>
