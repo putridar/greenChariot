@@ -6,17 +6,22 @@
                 <div class="divider">
                     <img v-bind:src="this.image" alt="shop" class="image">
                     <h1 class="companyname"> {{name}}</h1>
+                
+                    <div class="details">
+                        <p class="company"> Company Description:</p>
+                        <p class="companyname"> {{desc}} </p>
+                        <p class="company"> Address:</p>
+                        <p class="companyname"> {{address}} </p>
+                        <button class="edit" v-on:click="edit()"> Edit Info</button>
+                    </div>
                 </div>
-                <div class="details">
-                    <p class="company"> Company Description:</p>
-                    <p class="companyname"> {{desc}} </p>
-                    <br>
-                    <p class="company"> Address:</p>
-                    <p class="companyname"> {{address}} </p>
-                    <button class="edit"> Edit Info</button>
-                </div>
-                <div class="pie">
-                    <Shoppie></Shoppie>
+                <div class="divider1">
+                    <div class="pie">
+                        <Shoppie></Shoppie>
+                    </div>
+                    <div class="cust">
+                        <customer-chart v-bind:id="id"></customer-chart>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,12 +34,14 @@ import Head from './HeaderShop.vue'
 import db from "../../firebase.js"
 import Footer from '../Footer.vue'
 import Shoppie from '../Charts/Shoppie.vue'
+import CustomerChart from '../Charts/CustomerChart.vue'
 export default {
     name: 'Header',
     components :{
         Head,
         Footer, 
-        Shoppie
+        Shoppie,
+        CustomerChart
     },
     data() {
         return {
@@ -59,11 +66,35 @@ export default {
                 this.code = item.code == undefined ? "" : item.code
                 this.address = item.address == undefined ? "No address provided" : item.address
                 this.day = item.day == undefined ? null : item.day
+                this.custlist = item.custlist
+                this.randomCode(item.code, item.day)
             })
         },
         edit: function() {
             this.$router.push({ name: 'shopinfo', query: {id: this.id}})
-        } 
+        },
+        randomCode: function(code, currday) {
+            var d = new Date();
+            var day = d.getDay();
+            if (currday == null || day != currday || code == undefined) {
+                var result = '';
+                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                for (let x = 0; x < 8; x++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                this.code = result
+                this.day = day
+                db.firestore().collection('shops').doc(this.id).update({
+                    code: this.code,
+                    day: this.day,
+                    redeemed: []
+                }).then(() => {
+                    console.log(this.code)
+                })
+            } else {
+                this.code = code
+            }
+        }
     },
     created() {
         this.fetchItems();
@@ -79,7 +110,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 160vh;
+        min-height: 100vh;
         font-family: Montserrat;
 
     }
@@ -91,18 +122,23 @@ export default {
     .content {
         background-color: #FFFFFF;
         margin-top: 2%;
-        margin-left: 2%;
-        margin-right: 2%;
+        margin-left: 5%;
+        margin-right: 5%;
         height: auto;
         width: auto;
         border-radius: 8px;
-        padding: 3%;
         display: flex;
+        padding-left: 3%;
     }
     .divider{
         flex-direction: row;
-        flex:1;
+        flex:0.35;
         text-align: center;
+    }
+    .divider1{
+        flex:0.65;
+        text-align: center;
+        display: flex;
     }
     .details{
         flex-direction: row;
@@ -110,7 +146,7 @@ export default {
         text-align: left;
     }
     .companyname{
-        margin-top: 4%;
+        margin-top: 3%;
         margin-bottom: 3%;
         font-style: normal;
     }
@@ -133,7 +169,7 @@ export default {
         width: 90%;
         height: 60px;
         margin: 2%;
-        margin-top: 10%;
+        margin-top: 5%;
         cursor: pointer;
         transition-duration: 0.4s;
     }
@@ -142,13 +178,24 @@ export default {
     }
     .pie{
         background-color:none;
+        margin-top:5%;
         margin-left: 2%;
         margin-right: 2%;
         align-items: center;
         border-radius: 8px;
         padding: 0px;
-        width: 28%;
-        flex-direction: row;
-        flex:1;
+        width: 30%;
+        flex-direction: column;
+    }
+    .cust{
+        background-color:none;
+        align-items: center;
+        margin-top:5%;
+        margin-left: 5%;
+        margin-right: 2%;
+        border-radius: 8px;
+        padding: 0px;
+        width: 50%;
+        flex-direction: column;
     }
 </style>
