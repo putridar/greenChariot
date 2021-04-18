@@ -32,12 +32,23 @@ export default {
             qns:[],
             counter: 0,
             number:1,
-            correctnumber:0
+            correctnumber:0,
+            date: null,
+            quizday: null,
+            month: null
         }
     },
     methods: {
         toQuestion:function() {
-            this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions,number:this.number,correctnumber:this.correctnumber}})
+            var d = new Date()
+            var day = d.getDay()
+            var dt = d.getDate()
+            var mon = d.getMonth()
+            if (this.quizday != null && this.date != null && dt-this.date < 7 && day >= this.quizday && this.month == mon) {
+                alert("You have done the quiz this week")
+            } else {
+                this.$router.push({name:'question',query:{id:this.id,selectedQuestions:this.selectedQuestions,number:this.number,correctnumber:this.correctnumber}})
+            }
         },
         getQuestion: function() {
             db.firestore().collection('questions').get().then(snapshot => {
@@ -47,6 +58,12 @@ export default {
                 });
             }).then(()=> {
                 this.select();
+            })
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+                var item = snapshot.data()
+                this.date = item.date == undefined ? null : item.date
+                this.month = item.month == undefined ? null : item.month
+                this.quizday = item.quizday == undefined ? null : item.quizday
             })
         },
         putqns: function(select) {

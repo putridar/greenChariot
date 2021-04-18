@@ -11,6 +11,7 @@
                     <li v-for="(item,index) in vouchers" :key="index">
                         <h1 class="title">${{item.price}} Vouchers</h1><br>
                         <p class ="txt">{{item.point}} Points</p><br>
+                        <p class="txt">{{item.coupons.length}} number left</p>
                         <button class="btn" v-on:click="deleteVoucher(item.id)">Delete</button>
                         <button class="btn" v-on:click="modify(item.id)">Modify</button>
                     </li>
@@ -122,7 +123,7 @@ export default {
     .txt {
         font-family: Montserrat;
         font-size: 24px;
-        margin-top: 10px
+        margin-top: 1%;
     }
     .btn {
         background: #2D8F8A;

@@ -8,22 +8,22 @@
                 <div class ="Consumption1">
                     <p class = "txt2">Monthly Utilities Expenditure</p>
                     <p class = "txt1">Household population:</p>
-                    <input type="number" placeholder="Number of people in your house " value="householdpop" id="householdpop" v-model="householdpop" required><br>
+                    <input type="number" placeholder="Number of people in your house " min=0 max=10 value="householdpop" id="householdpop" v-model="householdpop" required><br>
                     <p class = "txt1">Electricity ($)</p>
-                    <input type="number" placeholder="Household Electricity bill " min=0 id="electricity" v-model="electricity" required><br>
+                    <input type="number" placeholder="Household Electricity bill " min=0 max=1000 id="electricity" v-model="electricity" required><br>
                     <p class = "txt1">Water ($)</p>
-                    <input type="number" placeholder="Household Water bill " min=0 id="water" v-model="water" required><br>
+                    <input type="number" placeholder="Household Water bill " min=0 max=600 id="water" v-model="water" required><br>
                     <p class = "txt1">Gas ($)</p>
-                    <input type="number" placeholder="Household Gas bill " min=0 id="gas" v-model="gas" required><br>
+                    <input type="number" placeholder="Household Gas bill " min=0 max=600 id="gas" v-model="gas" required><br>
                 </div>
                 <div class ="Consumption1">
                     <p class = "txt2">Weekly Transport Duration</p>
                     <p class = "txt1"> MRT Public Transport (Hours)</p>
-                    <input type="number" placeholder="Approx Duration MRT" min=0 id="mrt" v-model="mrt" required><br>
+                    <input type="number" placeholder="Approx Duration MRT" min=0 max=30 id="mrt" v-model="mrt" required><br>
                     <p class = "txt1"> Bus Public Transport (Hours)</p>
-                    <input type="number" placeholder="Approx Duration Bus" min=0 id="bus" v-model="bus" required><br>
+                    <input type="number" placeholder="Approx Duration Bus" min=0 max=30 id="bus" v-model="bus" required><br>
                     <p class = "txt1">Drive or Ride Car (Hours)</p>
-                    <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 id="car" v-model="car" required><br>
+                    <input type="number" placeholder="Approx Duration Private Car, Taxi, Grab, Gojek, etc" min=0 max=30 id="car" v-model="car" required><br>
                 </div>
                 <button class = "create" v-on:click="SurveySubmit1()">Next</button>
                 <p class = "txt"> Page 1 / 3 </p>
@@ -53,7 +53,8 @@ export default {
             mrt:"",
             bus:"",
             car:"", 
-            householdpop:""
+            householdpop:"",
+            result:true
         }
     },
     methods: {
@@ -61,6 +62,20 @@ export default {
             console.log(this.name);
         },
         SurveySubmit1 : function() {
+            if (this.electricity>=1000 || this.water>=1000 || this.gas>=1000){
+                alert("Your monthly utilities expenditure is too high! Have you made an error in one of your inputs?")
+                this.result=false
+            }if (this.householdpop>=15){
+               alert("Your household population appears to be too large! Have you made an error in your input?")
+               this.result=false
+            }if (this.car>=100 || this.bus>=100 || this.mrt>=100){
+                alert("Your weekly transport duration is too high! Have you made an error in one of your inputs?")
+                this.result=false
+            }
+            if (this.result==false){
+                this.result=true
+                return
+            }
             db.firestore().collection('users').doc(this.id).update({
                 Survey: {
                     house:this.householdpop,

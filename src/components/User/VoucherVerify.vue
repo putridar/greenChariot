@@ -44,18 +44,21 @@ export default{
             score:0,
             currvoucher:[],
             exchanged: [],
-            combined: this.$route.query.combined
+            combined: this.$route.query.combined, 
+            vouchs:[],
+            voucherindex:0,
+            coupons:[]
         }
     },
     methods:{
         fetchItems: function() {
-            console.log(this.id)
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot=>{
                  this.imagename = snapshot.data().imagename
             })
         },
         fetchvoucher:function(){
             var temp=''
+            console.log(this.$route.query)
             db.firestore().collection('shops').doc(this.shopId).get().then(snapshot => {
                 temp=snapshot.data()
                 this.currentvoucher.imagename=temp.imagename
@@ -64,6 +67,26 @@ export default{
                 this.currentvoucher.name=this.name
                 this.currentvoucher.shopId = this.shopId
                 this.exchanged = temp.exchanged == undefined ? [] : temp.exchanged
+                this.currentvoucher.code = this.voucher.couponID
+                this.vouchs = temp.vouchers
+                
+                for (var i =0; i<this.vouchs.length; i++){
+                    if (this.vouchs[i].id==this.currentvoucher.code){
+                        this.coupons = this.vouchs[i].coupons
+                        this.redeem = this.vouchs[i].redeem
+                        if (this.coupons.length>0){
+                            var couponcode = this.coupons.pop()
+                            this.redeem.push(couponcode)
+                            this.currentvoucher.coupon = couponcode
+                            this.voucherid = this.vouchs[i].id
+                            this.voucherindex = i
+                        }else{
+                            alert("Sorry the vouchers are currently unavailable! Please check again later")
+                            this.$router.push({name:'combinedvoucher',query:{id:this.id,name:this.name, shopId:this.shopId}})
+                        }
+                    }
+                }
+                
             })
         },
         retrieve:function(){
@@ -80,8 +103,10 @@ export default{
                 points: this.score - this.currentvoucher.point
             }).then(() => {
                 this.exchanged.push(this.id)
+                this.vouchs.splice(this.voucherindex,1,{id:this.voucherid, price: this.currentvoucher.price, point: this.currentvoucher.point, coupons:this.coupons, redeem: this.redeem})
                 db.firestore().collection('shops').doc(this.shopId).update({
-                    exchanged: this.exchanged
+                    exchanged: this.exchanged,
+                    vouchers: this.vouchs
                 }).then(() => {
                     alert("You have successfully exchange your points")
                     if (this.combined) {

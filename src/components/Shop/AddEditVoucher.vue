@@ -38,45 +38,49 @@ export default {
             vouchers: [],
             idx: -1, 
             numcoupon:null,
-            coupons:[]
+            coupons:[],
+            redeem:[]
         }
     },
     methods: {
         fetchItems: function() {
+            console.log(this.$route.query)
             db.firestore().collection('shops').doc(this.id).get().then(snapshot => {
                 var item = snapshot.data()
                 this.vouchers = item.vouchers
                 this.getVoucher();
+                this.name = item.name
             })
         },
         getVoucher: function() {
-            if (this.voucher > -1) {
+            if (this.voucher != -1) {
                 for (let x = 0; x < this.vouchers.length; x++) {
                     var curr = this.vouchers[x];
                     if (this.voucher == curr.id) {
                         this.price = curr.price;
                         this.points = curr.point;
                         this.idx = x;
+                        this.redeem = curr.redeem;
                     }
                 }
             }
         },
         save: function() {
-            if (this.voucher == -1) {
-                var length = this.vouchers.length
-                this.vouchers.push({id:length, price: this.price, point: this.points})
-            } else {
-                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points})
-            }
             for(var i=0; i<this.numcoupon;i++){
-                this.coupons.push(i)
+                let r = Math.random().toString(36).substring(2);
+                this.coupons.push(r)
             }
-            console.log(this.coupons)
+            if (this.voucher == -1) {
+                var pass = Math.random().toString(36).substring(8);
+                this.vouchers.push({id:pass, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem })
+            } else {
+                this.vouchers.splice(this.idx,1,{id:this.voucher, price: this.price, point: this.points, coupons:this.coupons, redeem: this.redeem})
+            }
+            
             db.firestore().collection('shops').doc(this.id).update({
                 vouchers: this.vouchers,
-                coupons: this.coupons
             }).then(() => {
-                this.downloadCSV({ filename: "CouponCodes.csv" })
+                this.downloadCSV({ filename: this.price+"_"+this.points+"_CouponCodes.csv" })
                 alert("Updated successfuly");
                 this.$router.push({ name: 'voucherlists', query: {id: this.id}})
             })
@@ -84,9 +88,9 @@ export default {
         cancel: function() {
             this.$router.push({ name: 'voucherlists', query: {id: this.id}})
         },
-        downloadCSV: function(args) {  
+        downloadCSV: function(args){  
             var data, filename, link;
-            var csv = this.convertArrayOfObjectsToCSV({
+            var csv = this.convertArray_CSV({
                 data: [{"coupons": this.coupons}]
             });
             if (csv == null) return;
@@ -100,14 +104,14 @@ export default {
             link.setAttribute('download', filename);
             link.click();
         },
-        convertArrayOfObjectsToCSV: function(args) {  
+        convertArray_CSV: function(args) {  
             var result, ctr, keys, columnDelimiter, lineDelimiter, data;
             data = args.data || null;
             if (data == null || !data.length) {
                 return null;
             }
-            columnDelimiter = args.columnDelimiter || ',';
-            lineDelimiter = args.lineDelimiter || '\n';
+            columnDelimiter = ',';
+            lineDelimiter =  '\n';
             keys = Object.keys(data[0]);
             result = '';
             result += keys.join(columnDelimiter);
@@ -116,7 +120,9 @@ export default {
                 ctr = 0;
                 keys.forEach(function(key) {
                     if (ctr > 0) result += columnDelimiter;
-                    result += item[key];
+                    for (let j=0; j<item[key].length;j++){
+                        result += lineDelimiter + item[key][j];
+                    }
                     ctr++;
                 });
                 result += lineDelimiter;

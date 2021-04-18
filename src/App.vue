@@ -9,6 +9,7 @@
 export default {
   name: 'App'
 }
+
 </script>
 
 <style>
@@ -17,3 +18,5 @@ export default {
     padding: 0px;
   }
 </style>
+
+
