@@ -5,9 +5,10 @@
             <img alt="greenChariot" src="../../assets/survey.png">
             <div class = "content">
                 <p class = "title">Monthly Consumption survey</p>
+                <p class="txt6">The survey takes only about 3-5 minutes to complete. It is advised that you complete this survey on a monthly basis to keep yourself updated on your carbon emissions!</p><br>
                 <div class ="Consumption1">
                     <p class = "txt2">Monthly Utilities Expenditure</p>
-                    <p class="txt4">Did you know that the production of electricity and heat generates the second largest share of greenhouse gas emissions? Find out how you are doing in terms of monthly utilities on electricity, water and gas!</p>
+                    <p class="txt4">Do you know that the production of electricity and heat generates the second largest share of greenhouse gas emissions? Find out how you are doing in your monthly utilities on electricity, water and gas!</p><br>
                     <p class = "txt1">Household population:</p>
                     <input type="number" placeholder="Number of people in your house " min=1 value="householdpop" id="householdpop" v-model="householdpop" required><br>
                     <p class = "txt1">Electricity ($)</p>
@@ -19,7 +20,7 @@
                 </div>
                 <div class ="Consumption1">
                     <p class = "txt2">Weekly Transport Duration</p>
-                    <p class="txt4"> Did you know that taking public transport, such as the MRT helps to reduce carbon emission significantly, as compared to taking private transport? Find out how you are doing in terms of transportation!</p><br>
+                    <p class="txt4"> Do you know that taking public transport, such as the MRT helps to reduce carbon emission significantly, as compared to taking private transport? Find out how you are doing in your mode of transportation!</p><br>
                     <p class = "txt1"> MRT Public Transport (Hours)</p>
                     <input type="number" placeholder="Approx Duration MRT" min=0 max=30 id="mrt" v-model="mrt" required><br>
                     <p class = "txt1"> Bus Public Transport (Hours)</p>
@@ -64,15 +65,19 @@ export default {
             console.log(this.name);
         },
         SurveySubmit1 : function() {
-            if (this.householdpop=='' || this.electricity=='' || this.water=='' || this.mrt=='' || this.bus=='' || this.car==''){
+            if (this.householdpop=='' || this.electricity=='' || this.water=='' || this.mrt=='' || this.bus=='' || this.car=='' || this.gas==''){
                alert("You need to fill in all the inputs!")
                return
+            }
+            if (this.householdpop<0 || this.electricity<0 || this.water<0 || this.mrt<0 || this.bus<0 || this.car<0 || this.gas<0){
+                alert("1 of your input is negative!")
+                return
             }
             if (this.electricity>=1000 || this.water>=1000 || this.gas>=1000){
                 alert("Your monthly utilities expenditure is too high! Have you made an error in one of your inputs?")
                 this.result=false
             }if (this.householdpop>=15){
-               alert("Your household population appears to be too large! Have you made an error in your input?")
+               alert("Your household population appears to be too large! Have you made an error in your input of household population?")
                this.result=false
             }if (this.car>=100 || this.bus>=100 || this.mrt>=100){
                 alert("Your weekly transport duration is too high! Have you made an error in one of your inputs?")
@@ -124,7 +129,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 200vh;
+        min-height: 240vh;
     }
     .head {
         position: sticky;
@@ -261,6 +266,16 @@ export default {
         color: #1C746F;
         text-align: left;
         font-size: 22px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
+    }
+    .txt6 {
+        font-family: Montserrat;
+        color: #bd2525;
+        text-align: left;
+        font-size: 25px;
         margin-top: 2%;
         margin-bottom: 2%;
         margin-left: 4%;

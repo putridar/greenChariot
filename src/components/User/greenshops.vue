@@ -16,7 +16,7 @@
                 <h1 class="title">{{item.name}}</h1><br>
                 <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
                 <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
-                <p class="txt2"><button class="btn">Go to website</button></p>
+                <p class="txt2"><button class="btn" v-on:click='check(item.website);website(item.website);'>Visit shop website</button></p>
             </li>
         </ul>
     </div>
@@ -41,7 +41,7 @@ export default {
             imagename:'',
             code:'',
             shops: [],
-            shopId:''
+            shopId:'',
         }
     },
     methods: {
@@ -63,7 +63,17 @@ export default {
         },
         direct:function(){
             this.$router.push({name:'combinedvoucher',query:{id:this.id}})
+        },
+        check:function(web){
+            if (web==''){
+                alert("This shop website is not available at the moment!")
+            }
+        },
+        website:function(web){
+            if (web!=''){
+             window.location.href=web
         }
+    }
     },
     mounted() {
         this.fetchItems()
@@ -120,7 +130,7 @@ export default {
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 20px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;

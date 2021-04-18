@@ -5,7 +5,7 @@
             <img alt="greenChariot" src="../../assets/survey.png">
             <div class = "content">
                 <p class = "title">Food Intake Proportion</p>
-                <p class="txt4">Do you know that food intake accounts for approximately 10-30% of a household's carbon footprint? Meat products typically have larger carbon footprints per calorie than grain or vegetable products. Find out how you are doing in terms of food consumption!</p>
+                <p class="txt4">Do you know that food intake accounts for approximately 10-30% of a household's carbon footprint? Meat products typically have larger carbon footprints per calorie than grain or vegetable products. Find out how you are doing in your food consumption!</p>
                 <div class="slider" v-for="option, index in Sliders" :key="index">
                     <p class="txt1">{{name[index]}} %</p>
                     <input class="food" type="number" :value="Math.round(Sliders[index])" @change="changeBox(index, option, $event)">
