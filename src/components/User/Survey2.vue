@@ -5,6 +5,7 @@
             <img alt="greenChariot" src="../../assets/survey.png">
             <div class = "content">
                 <p class = "title">Monthly Ecommerce Behaviour</p>
+                <p class="txt5">Do you know that the packaging, freight and delivery of items are the three main causes of carbon footprint? Find out how you are doing in your ecommerce behaviour!</p><br>
                 <p class = "txt1">Number of items Bought</p>
                 <input class="ins" type="number" placeholder="Estimated per month" min=0 value="numofitem" id="numofitem" v-model="numofitem" required><br>
                 <p class = "txt1">Predominant Category of Purchases (Optional)</p>
@@ -52,6 +53,9 @@ export default {
         SurveySubmit2 : function() {
             if (this.numofitem>=1000){
                 alert("Your number of items purchased is too high! Have you made an error in your input?")
+                return
+            }else if (this.numofitem==''){
+                alert("You need to enter the number of items bought!")
                 return
             }
             db.firestore().collection('users').doc(this.id).update({
@@ -227,5 +231,25 @@ export default {
         margin-top: 2%;
         margin-bottom: 1.5%;
         margin-left: 4%;
+    }
+    .txt4 {
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 19px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
+    }
+    .txt5{
+        font-family: Montserrat;
+        color: #1C746F;
+        text-align: left;
+        font-size: 22px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 4%;
+        font-weight:bold
     }
 </style>

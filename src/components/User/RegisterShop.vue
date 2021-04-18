@@ -42,7 +42,8 @@ export default {
             id: this.$route.query.id,
             shops: [],
             address: "",
-            desc: ""
+            desc: "",
+            website:''
         }
     },
     methods: {
@@ -87,6 +88,7 @@ export default {
                                         imagename: "https://i.pinimg.com/originals/77/e5/0c/77e50c04f9f512a456eb3e135a1c013b.png",
                                         address: this.address,
                                         desc: this.desc,
+                                        website:this.website,
                                         vouchers: [],
                                         redeemed: [],
                                         custlist: {
