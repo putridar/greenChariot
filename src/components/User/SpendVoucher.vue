@@ -40,7 +40,8 @@ export default{
             item:this.$route.query.item,
             index:this.$route.query.index,
             currvoucher:[],
-            used :[]
+            used :[],
+            custlist: {}
         }
     },
     methods:{
@@ -53,21 +54,24 @@ export default{
             db.firestore().collection('shops').doc(this.item.shopId).get().then(snapshot => {
                var item = snapshot.data()
                this.used = item.used == undefined ? [] : item.used
-               
+               this.custlist = item.custlist
             })
         },
         backwards:function(){
             this.$router.push({name:'rewardpage',query:{id:this.id}})
         },
         proceed:function(){
+                var d = new Date()
                 this.currvoucher.splice(this.index,1)
                 this.used.push(this.id)
                 var final=this.currvoucher
+                this.custlist[d.getDay()].push(this.id)
                 db.firestore().collection('users').doc(this.id).update({
                     currvoucher:final
                 }).then(() => {
                     db.firestore().collection('shops').doc(this.item.shopId).update({
-                        used: this.used
+                        used: this.used,
+                        custlist: this.custlist
                     }).then(() => {
                         alert('You have successfully spent your voucher!')
                         this.$router.push({name:'rewardpage',query:{id:this.id}})
