@@ -12,7 +12,7 @@
                     <br>
                     <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.totalpoint}} points!</p>
                     <br>
-                    <button class="btn" v-on:click="direct()">Try again?</button>
+                    <button class="btn" v-on:click="direct()">Back to challenges</button>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ export default{
     },
     methods:{
         direct:function(){
-            this.$router.push({name:'quiz',query:{id:this.id}})
+            this.$router.push({name:'challenges',query:{id:this.id}})
         },
         //addscore:function(){
             //db.firestore().collection('users').doc(this.id).update({
@@ -142,10 +142,9 @@ export default{
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
-        line-height: 24px;
         text-align: center;
         color: #FFFFFF;
-        width: 30%;
+        width: 40%;
         height: 50px;
         margin: 25px;
         cursor: pointer;
