@@ -207,6 +207,7 @@ export default{
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -219,8 +220,11 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-        margin: 2%
-    
+        margin: 2%;
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .title3{
         font-family: Montserrat;
