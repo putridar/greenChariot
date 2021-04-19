@@ -143,6 +143,11 @@ export default {
              if(pattern.test(this.website)==false){
                  alert("Please enter a valid URL!")
                  this.correcturl=false
+             }else{
+                 if (this.website.indexOf('https://')==-1 || (this.website.indexOf('.com')==-1 && this.website.indexOf('.sg')==-1)){
+                     alert('Please enter a valid URL!')
+                     this.correcturl=false
+                 }
              }
         }
         
