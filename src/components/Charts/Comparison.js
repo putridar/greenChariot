@@ -12,7 +12,7 @@ export default {
                 datasets: [{
                     label: "Singapore",
                     backgroundColor: ["#00a5cf","#00a5cf","#00a5cf", "#00a5cf"],
-                    data: [1828, 1760, 3945, 883]
+                    data: [2032, 906, 4029, 192]
                   },
                   {
                     label: "You",

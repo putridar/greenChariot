@@ -126,6 +126,7 @@ export default {
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -138,7 +139,10 @@ export default {
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .pic {
         height: 230px;
@@ -183,11 +187,12 @@ export default {
     }
     .btn2 {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
@@ -195,7 +200,10 @@ export default {
         height: 70px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn2:hover {
+        background:#1C746F;
     }
     .txt {
         font-family: Inter;
