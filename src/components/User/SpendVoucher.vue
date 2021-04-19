@@ -62,6 +62,7 @@ export default{
         },
         proceed:function(){
                 var d = new Date()
+                var curr = this.currvoucher[this.index]
                 this.currvoucher.splice(this.index,1)
                 this.used.push(this.id)
                 var final=this.currvoucher
@@ -73,7 +74,7 @@ export default{
                         used: this.used,
                         custlist: this.custlist
                     }).then(() => {
-                        alert('You have successfully spent your voucher!')
+                        alert('You have successfully spent your voucher! Your voucher code: ' + curr.coupon)
                         this.$router.push({name:'rewardpage',query:{id:this.id}})
                     })
                 })
