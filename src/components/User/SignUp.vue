@@ -10,6 +10,8 @@
             <input type="email" placeholder="Email" v-model="email" class = "inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class = "inputstyle" required><br>
             <div v-if="isShop==true"><input type="website" class="inputstyle" v-model="website" placeholder="Shop Website Link"></div>
+            <div v-if="isShop==true"><textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea></div>
+            <div v-if="isShop==true"><textarea id="desc" placeholder="Description" v-model="desc" name="desc"></textarea></div>
             <input type="checkbox" id="shop" name="shop" v-model="isShop">
             <label for="shop" class = "txt">Register as a shop's owner?</label><br>
             <button class = "create" v-on:click="validate();create();">Create Account</button>
@@ -32,6 +34,8 @@ export default {
             id: "",
             isShop: false,
             website:'',
+            address:'',
+            desc:'',
             correcturl:true
         }
     },
@@ -89,8 +93,8 @@ export default {
                         vouchers: [],
                         redeemed: [],
                         website:this.website,
-                        address:'',
-                        desc:'',
+                        address:this.address,
+                        desc:this.desc,
                         custlist: {
                             0:[],
                             1:[],
@@ -254,5 +258,15 @@ export default {
         font-size: 20px;
         margin: 10px;
         cursor: pointer;
+    }
+    textarea {
+        font-family: Montserrat;
+        padding: 8px;
+        width: 80%;
+        margin: 2%;
+        font-size: 22px;
+        border-radius: 8px;
+        border: 1px solid #E5E5E5;
+        height: 10%
     }
 </style>
