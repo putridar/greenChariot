@@ -35,7 +35,10 @@ export default {
             id: this.$route.query.id,
             selectedAnswer:[],
             name:["Vegetables, Rice, Bread, Wheat","Chicken, Fish, White Meat","Beef, Red Meat"],
-            Sliders :[33,33,33]
+            Sliders :[33,33,33],
+            total: this.$route.query.total,
+            Survey:NaN,
+            Emissions:NaN
         }
     },
     methods: {
@@ -43,17 +46,25 @@ export default {
             console.log(this.name);
         },
         SurveySubmit2 : function() {
+            this.total += Math.round((parseFloat(this.Sliders[1])/100)*250*30 + (parseFloat(this.Sliders[0])/100)*250*1.8 + (parseFloat(this.Sliders[2])/100)*250*46,2)
+            this.Survey["veg"] = this.Sliders[0]
+            this.Survey["chick"] = this.Sliders[1]
+            this.Survey["beef"] = this.Sliders[2]
+            //Aggregate
+            this.Emissions["total"] = this.total
+            this.Emissions["food"] = Math.round((parseFloat(this.Sliders[1])/100)*250*30 + (parseFloat(this.Sliders[0])/100)*250*1.8 + (parseFloat(this.Sliders[2])/100)*250*46,2)
+            //Breakdown
+            this.Emissions["veg"] = Math.round((parseFloat(this.Sliders[0])/100)*250*1.8,2)
+            this.Emissions["chick"] = Math.round((parseFloat(this.Sliders[1])/100)*250*30,2)
+            this.Emissions["beef"] = Math.round((parseFloat(this.Sliders[2])/100)*250*46,2)
             db.firestore().collection('users').doc(this.id).update({
-                Survey1: {
-                    veg: this.Sliders[0],
-                    chick: this.Sliders[1],
-                    beef: this.Sliders[2]
-                }
+                Survey: this.Survey,
+                Emissions:this.Emissions
             }).then(() => {
                 alert("Submitted 2/3 successfuly");
-                this.$router.push({ name: 'survey2', query: {id: this.id}})
+                this.$router.push({ name: 'survey2', query: {id: this.id, total:this.total}})
             })
-        },
+        },   
         changeSlider(slider){
             const sum = this.Sliders.reduce((sum, val) => sum + val, 0);
             const diff = sum - 100;
@@ -94,7 +105,17 @@ export default {
                 this.Sliders[slider] = Math.round(e.target.value);
                 this.changeSlider(slider)
             }
+        },
+        fetchConsumption: function(){
+            db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
+                var item = snapshot.data()
+                this.Survey=item.Survey
+                this.Emissions= item.Emissions
+            })
         }
+    },
+    mounted() {
+        this.fetchConsumption()
     }
 }
 </script>

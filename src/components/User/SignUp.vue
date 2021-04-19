@@ -9,7 +9,7 @@
             <input type="text" placeholder="Username" v-model="username" class = "inputstyle" required><br>
             <input type="email" placeholder="Email" v-model="email" class = "inputstyle" required><br>
             <input type="password" placeholder="Password" v-model="password" class = "inputstyle" required><br>
-            <div v-if="isShop==true"><input type="website" class="inputstyle" v-model="website" placeholder="Shop Website Link"></div>
+            <div v-if="isShop==true"><input type="text" class="inputstyle" v-model="website" placeholder="Shop Website Link"></div>
             <div v-if="isShop==true"><textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea></div>
             <div v-if="isShop==true"><textarea id="desc" placeholder="Description" v-model="desc" name="desc"></textarea></div>
             <input type="checkbox" id="shop" name="shop" v-model="isShop">
@@ -66,7 +66,7 @@ export default {
                         name: this.name,
                         email: this.email,
                         username: this.username,
-                        points: 0,
+                        points: 1000,
                         currvoucher:[],
                         image:''
                     })
@@ -135,7 +135,7 @@ export default {
             }})
         },
         navigateShop: function(id) {
-            this.$router.push({ name: 'dashboardShop', query : {
+            this.$router.push({ name: 'voucherlists', query : {
                 id: id,
             }})
         },
@@ -152,6 +152,11 @@ export default {
              if(pattern.test(this.website)==false){
                  alert("Please input a valid URL!")
                  this.correcturl=false
+             }else{
+                 if (this.website.indexOf('https://')==-1 || (this.website.indexOf('.com')==-1 && this.website.indexOf('.sg')==-1)){
+                     alert('Please input a valid URL!')
+                     this.correcturl=false
+                 }
              }
         }
     

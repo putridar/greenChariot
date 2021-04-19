@@ -85,7 +85,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 140vh;
+        min-height: 170vh;
     }
     .head {
         position: sticky;
@@ -101,7 +101,7 @@ export default {
         width: 60%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 850px;
+        height: auto;
         padding: 3px;
         
     }
