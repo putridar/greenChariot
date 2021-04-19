@@ -2,15 +2,12 @@ import { Doughnut } from 'vue-chartjs'
 import db from "../../firebase.js"
 // import Chart from "chart.js";
 
-
-
 export default {
     extends: Doughnut,
     data: function () {
         return {
             id: this.$route.query.id,
             total:0,
-            commcoefs:{"Fashion":0.1, "Gadgets":0.4, "Gym":1, "Food Delivery":-0.3},
             commcoef:2,
             datacollection: {
                 labels: ["Transport", "Utilities", "Food","Ecommerce", "Car","Bus","Mrt", "Electricity", "Water", "Gas", "White Meat", "Red Meat", "Vegetable", "Ecommerce"],
@@ -53,34 +50,17 @@ export default {
         fetchItems: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                var household = parseFloat(item.Survey["house"])
-                let commerce = item.Survey2["ecommerce"]
-                var i;
-                for (i =0; i<commerce.length;i++){
-                    this.commcoef += this.commcoefs[commerce[i]] 
-                }
-                var car, bus, mrt, electricity, water, gas, chick, beef, veg, amount;
-                car = parseFloat(item.Survey["car"])*0.118*64.1*4*12
-                bus = parseFloat(item.Survey["bus"])*0.073*20*4*12
-                mrt = parseFloat(item.Survey["mrt"])*0.0132*78*4*12
-                electricity = ((parseFloat(item.Survey["electricity"])/household)/0.2413)*0.4085*12
-                water = ((parseFloat(item.Survey["water"])/household)/0.83)*0.279*12
-                gas = ((parseFloat(item.Survey["gas"])/household)/0.1933)*0.4085*12
-                chick = (parseFloat(item.Survey1["chick"])/100)*250*30
-                beef = (parseFloat(item.Survey1["beef"])/100)*250*46
-                veg = (parseFloat(item.Survey1["veg"])/100)*250*1.8
-                amount = (parseFloat(item.Survey2["amount"]))*this.commcoef*12
-                this.total = Math.round(car + bus + mrt + electricity + water + gas + chick + beef + veg + amount,2)
-                this.datacollection.datasets[1].data[4] = Math.round( car/this.total*100, 2)
-                this.datacollection.datasets[1].data[5] = Math.round( bus/this.total*100, 2)
-                this.datacollection.datasets[1].data[6] = Math.round( mrt/this.total*100, 2)
-                this.datacollection.datasets[1].data[7] = Math.round( electricity/this.total*100, 2)
-                this.datacollection.datasets[1].data[8] = Math.round( water/this.total*100, 2)
-                this.datacollection.datasets[1].data[9] = Math.round( gas/this.total*100, 2)
-                this.datacollection.datasets[1].data[10] = Math.round( chick/this.total*100, 2)
-                this.datacollection.datasets[1].data[11] = Math.round( beef/this.total*100, 2)
-                this.datacollection.datasets[1].data[12] = Math.round( veg/this.total*100, 2)
-                this.datacollection.datasets[1].data[13] = Math.round( amount/this.total*100, 2)
+                this.total = item.Emissions["total"]
+                this.datacollection.datasets[1].data[4] = Math.round( item.Emissions["car"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[5] = Math.round( item.Emissions["bus"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[6] = Math.round( item.Emissions["mrt"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[7] = Math.round( item.Emissions["electricity"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[8] = Math.round( item.Emissions["water"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[9] = Math.round( item.Emissions["gas"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[10] = Math.round( item.Emissions["chick"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[11] = Math.round( item.Emissions["beef"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[12] = Math.round( item.Emissions["veg"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[13] = Math.round( item.Emissions["ecommerce"]/this.total*100, 2)
                 // Transport
                 this.datacollection.datasets[0].data[0] = this.datacollection.datasets[1].data[4]+this.datacollection.datasets[1].data[5]+ this.datacollection.datasets[1].data[6]
                 // Utilities
@@ -92,7 +72,6 @@ export default {
             }).then(()=>{
                 this.textCenter(this.total)
                 this.renderChart(this.datacollection, this.options)
-                this.loadTotal(this.total, this.datacollection.datasets[0].data[0], this.datacollection.datasets[0].data[1], this.datacollection.datasets[0].data[2], this.datacollection.datasets[0].data[3])
             })
         },
         textCenter(val) {
@@ -114,17 +93,6 @@ export default {
                     ctx.fillText(text, textX, textY+15);
                     ctx.fillText(text1, textX1, textY+45);
                     ctx.save();
-                }
-            })
-        },
-        loadTotal(val, Transportation, Utilities,Food, Ecommerce ){
-            db.firestore().collection('users').doc(this.id).update({
-                Emissions: {
-                    total: val,
-                    transport: Transportation*val/100,
-                    utility: Utilities*val/100,
-                    food: Food*val/100,
-                    ecommerce: Ecommerce*val/100
                 }
             })
         }

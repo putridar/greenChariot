@@ -238,6 +238,7 @@ export default{
     }
     .btn {
         background: #2D8F8A;
+        border: none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -253,7 +254,7 @@ export default{
         margin:7px;
         transition-duration: 0.4s;
     }
-    .edit:hover{
+    .btn:hover{
         background:#1C746F;
     }
     .picture{
@@ -283,6 +284,7 @@ export default{
     }
     .btn2 {
         background: #2D8F8A;
+        border: none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -299,7 +301,7 @@ export default{
         border:none;
         transition-duration: 0.4s;
     }
-    .edit:hover{
+    .btn2:hover{
         background:#1C746F;
     }
 

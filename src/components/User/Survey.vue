@@ -87,31 +87,45 @@ export default {
                 this.result=true
                 return
             }
+            this.total = Math.round(parseFloat(this.car)*0.118*64.1*4*12 + parseFloat(this.bus)*0.073*20*4*12 + parseFloat(this.mrt)*0.0132*78*4*12 + ((parseFloat(this.gas)/this.householdpop)/0.1933)*0.4085*12 + ((parseFloat(this.electricity)/this.householdpop)/0.2413)*0.4085*12 + ((parseFloat(this.water)/this.householdpop)/0.83)*0.279*12,2)
             db.firestore().collection('users').doc(this.id).update({
                 Survey: {
-                    house:this.householdpop,
-                    electricity: this.electricity,
-                    water: this.water,
-                    gas: this.gas,
-                    mrt: this.mrt,
-                    bus: this.bus,
-                    car: this.car
+                    electricity: parseInt(this.electricity),
+                    water: parseInt(this.water),
+                    gas: parseInt(this.gas),
+                    mrt: parseInt(this.mrt),
+                    bus: parseInt(this.bus),
+                    car: parseInt(this.car),
+                    house: parseInt(this.householdpop)
+                },
+                Emissions:{
+                    //Aggregate
+                    transport: Math.round(parseFloat(this.car)*0.118*64.1*4*12 + parseFloat(this.bus)*0.073*20*4*12 + parseFloat(this.mrt)*0.0132*78*4*12,2),
+                    utility: Math.round(((parseFloat(this.gas)/this.householdpop)/0.1933)*0.4085*12 + ((parseFloat(this.electricity)/this.householdpop)/0.2413)*0.4085*12 + ((parseFloat(this.water)/this.householdpop)/0.83)*0.279*12,2),
+                    total: this.total,
+                    //Breakdown
+                    electricity: Math.round(((parseFloat(this.electricity)/this.householdpop)/0.2413)*0.4085*12,2),
+                    water: Math.round(((parseFloat(this.water)/this.householdpop)/0.83)*0.279*12,2),
+                    gas: Math.round(((parseFloat(this.gas)/this.householdpop)/0.1933)*0.4085*12,2),
+                    mrt: Math.round(parseFloat(this.mrt)*0.0132*78*4*12,2),
+                    bus: Math.round(parseFloat(this.bus)*0.073*20*4*12,2),
+                    car: Math.round(parseFloat(this.car)*0.118*64.1*4*12,2)
                 }
             }).then(() => {
                 alert("Submitted 1/3 successfully");
-                this.$router.push({ name: 'survey1', query: {id: this.id}})
+                this.$router.push({ name: 'survey1', query: {id: this.id, total: this.total}})
             })
         },
         fetchConsumption: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                this.electricity=item.Survey["electricity"],
-                this.water=item.Survey["water"],
-                this.gas=item.Survey["gas"],
-                this.mrt=item.Survey["mrt"],
-                this.bus=item.Survey["bus"],
-                this.car=item.Survey["car"],
-                this.householdpop=item.Survey["house"]
+                this.electricity=parseInt(item.Survey["electricity"]),
+                this.water=parseInt(item.Survey["water"]),
+                this.gas=parseInt(item.Survey["gas"]),
+                this.mrt=parseInt(item.Survey["mrt"]),
+                this.bus=parseInt(item.Survey["bus"]),
+                this.car=parseInt(item.Survey["car"]),
+                this.householdpop=parseInt(item.Survey["house"])
             })
         }     
     },

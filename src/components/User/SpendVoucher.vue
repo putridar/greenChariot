@@ -90,100 +90,104 @@ export default{
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
-        .bg {
-            background-color: #9AD5FF;
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-            min-height: 100vh;
-        }
-        .content{
-            font-family: Montserrat;
-            font-weight: bold;
-            font-size: 35px;
-            margin-left: 2%;
-        }
-        .top {
-            margin-right: 100px;
-            margin-top: 2%;
-            margin-bottom: 2%;
-            margin-left:-7%;
-            display:flex
-        }
-        .rewards {
-            margin-top: 8px;
-        }
-        .title{
-            font-family: Montserrat;
-            font-size: 36px;
-            text-align: center;
-            padding: 2%;
-            margin-top:2%;
-            font-weight:bold
-        }
-        .title2{
-            font-family: Montserrat;
-            font-size: 24px;
-            text-align: center;
-            padding: 1%;
-        }
-        .outside{
-            display: flex;
-            flex-wrap: wrap;
-            list-style-type: none;
-            padding: 0;
-            margin-left: 30px;
-            margin-right: 30px;
-        }
-        .inside{
-            width:50%;
-            text-align: center;
-            padding: 10px;
-            margin-left:25%;
-            margin-right:25%;
-            margin-bottom:2%;
-            border-radius: 20px;
-            background-color: #FFFFFF;
-            min-height: 60vh;
-        }
-        .pic {
-            height: 35%;
-            margin-top:3%;
-            margin-bottom: 2%;
-        }
-        .btn {
-            background: #2D8F8A;
-            border-radius: 8px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 20px;
-            align-items: center;
-            text-align: center;
-            color: #FFFFFF;
-            width: 20%;
-            height: 50px;
-            text-align: center;
-            cursor: pointer;
-            margin: 2%
-        
-        }
-        .title3{
-            font-family: Montserrat;
-            font-size: 24px;
-            text-align: center;
-            padding: 2%;
-            font-weight:bold;
-        }
-        .content {
-            width: 40%;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-radius: 8px;
-            padding: 10px;
-        }
-        img {
-            width:30%
-        }
-    </style>
+    .bg {
+        background-color: #9AD5FF;
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        min-height: 100vh;
+    }
+    .content{
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 35px;
+        margin-left: 2%;
+    }
+    .top {
+        margin-right: 100px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left:-7%;
+        display:flex
+    }
+    .rewards {
+        margin-top: 8px;
+    }
+    .title{
+        font-family: Montserrat;
+        font-size: 36px;
+        text-align: center;
+        padding: 2%;
+        margin-top:2%;
+        font-weight:bold
+    }
+    .title2{
+        font-family: Montserrat;
+        font-size: 24px;
+        text-align: center;
+        padding: 1%;
+    }
+    .outside{
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 0;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .inside{
+        width:50%;
+        text-align: center;
+        padding: 10px;
+        margin-left:25%;
+        margin-right:25%;
+        margin-bottom:2%;
+        border-radius: 20px;
+        background-color: #FFFFFF;
+        min-height: 60vh;
+    }
+    .pic {
+        height: 35%;
+        margin-top:3%;
+        margin-bottom: 2%;
+    }
+    .btn {
+        background: #2D8F8A;
+        border: none;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        width: 20%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        margin: 2%;
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background: #1C746F;
+    }
+    .title3{
+        font-family: Montserrat;
+        font-size: 24px;
+        text-align: center;
+        padding: 2%;
+        font-weight:bold;
+    }
+    .content {
+        width: 40%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    img {
+        width:30%
+    }
+</style>

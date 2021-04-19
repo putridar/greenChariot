@@ -43,7 +43,12 @@ export default {
         return {
             id: this.$route.query.id,
             ecommerce: [],
-            numofitem:""
+            numofitem:0,
+            commcoefs:{"Fashion":0.1, "Gadgets":0.4, "Gym":1, "Food Delivery":-0.3},
+            total:this.$route.query.total,
+            Survey:NaN, 
+            Emissions:NaN,
+            commcoef:0
         }
     },
     methods: {
@@ -58,11 +63,21 @@ export default {
                 alert("You need to enter the number of items bought!")
                 return
             }
+            this.commcoef = 2
+            let commerce = this.ecommerce
+            for (var i =0; i<commerce.length;i++){
+                this.commcoef += this.commcoefs[commerce[i]] 
+            }
+            console.log(this.commcoef)
+            console.log(this.numofitem)
+            this.total += Math.round(parseInt(this.numofitem)*parseFloat(this.commcoef)*12, 2)
+            this.Survey["ecommerce"] = this.ecommerce
+            this.Survey["numofitem"] = parseInt(this.numofitem)
+            this.Emissions["total"] = this.total
+            this.Emissions["ecommerce"] = Math.round(this.numofitem*this.commcoef*12, 2)
             db.firestore().collection('users').doc(this.id).update({
-                Survey2: {
-                    ecommerce: this.ecommerce,
-                    amount: this.numofitem
-                }
+                Survey: this.Survey,
+                Emissions: this.Emissions
             }).then(() => {
                 alert("Submitted 3/3 successfuly");
                 this.$router.push({ name: 'Dashboard', query: {id: this.id}})
@@ -71,8 +86,8 @@ export default {
         fetchConsumption: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                this.numofitem=item.Survey2["amount"],
-                this.ecommerce=item.Survey2["ecommerce"]
+                this.Survey=item.Survey
+                this.Emissions= item.Emissions
             })
         }     
     },
