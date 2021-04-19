@@ -66,7 +66,7 @@ export default {
                         name: this.name,
                         email: this.email,
                         username: this.username,
-                        points: 0,
+                        points: 1000,
                         currvoucher:[],
                         image:''
                     })
