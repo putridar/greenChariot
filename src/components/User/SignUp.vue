@@ -129,7 +129,7 @@ export default {
             }})
         },
         navigateShop: function(id) {
-            this.$router.push({ name: 'dashboardShop', query : {
+            this.$router.push({ name: 'voucherlists', query : {
                 id: id,
             }})
         },
