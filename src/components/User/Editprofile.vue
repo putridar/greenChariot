@@ -250,8 +250,11 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-        margin:7px
-    
+        margin:7px;
+        transition-duration: 0.4s;
+    }
+    .edit:hover{
+        background:#1C746F;
     }
     .picture{
         height:10%
@@ -292,8 +295,12 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-        margin:7px
-    
+        margin:7px;
+        border:none;
+        transition-duration: 0.4s;
+    }
+    .edit:hover{
+        background:#1C746F;
     }
 
     
