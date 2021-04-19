@@ -89,6 +89,8 @@ export default {
                         vouchers: [],
                         redeemed: [],
                         website:this.website,
+                        address:'',
+                        desc:'',
                         custlist: {
                             0:[],
                             1:[],

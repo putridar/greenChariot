@@ -89,7 +89,7 @@ export default {
              '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
             '(\\#[-a-z\\d_]*)?$','i'); 
              if(pattern.test(this.website)==false){
-                 alert("Wrong url")
+                 alert("Please input a valid URL!")
                  this.correcturl=false
              }
         }
