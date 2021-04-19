@@ -196,7 +196,7 @@ export default {
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 22%;
+        width: 25%;
         height: 70px;
         text-align: center;
         cursor: pointer;

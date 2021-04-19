@@ -13,27 +13,46 @@
                 </div>
             </div>
             <div class='fade-in three'> 
-                <button type='button' class='btn' v-on:click='toInfo()'>Begin</button>
+                    <div class='msg'>
+                        Welcome {{this.username}}!<br><br>
+                        We are green chariot, and we hope to assist you in playing your part to reduce your daily carbon footprint emissions.
+                        <br><br>
+                        Now, let's get started! 
+                        <br>
+                        Kindly help us fill in a short survey so that we can generate your personal dashboard.
+                    </div>
+                <button type='button' class='btn' v-on:click='toSurvey()'>Begin</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import db from "../../firebase.js"
 
 export default{
+    name:'tut',
     components: {
     },
     data(){
         return{
             id:this.$route.query.id,
+            username:'',
         }
     },
     methods:{
-        toInfo: function() {
-            this.$router.push({name:'info',query:{id:this.id}})
+        toSurvey: function() {
+            this.$router.push({name:'survey',query:{id:this.id}})
+        },
+        fetchItems: function() {
+            db.firestore().collection('users').doc(this.id).get().then(snapshot => {
+               this.username=snapshot.data().username
+            })            
         }
     },
+    created(){
+        this.fetchItems()
+    }                
 }   
 </script>
 
@@ -74,6 +93,21 @@ export default{
     @-o-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @-ms-keyframes fadeIn { from { opacity:0; } to { opacity:1; } 
 }
+    .msg{
+        font-family: Montserrat;
+        font-size: 25px;
+        color:black;
+        text-align: center;
+        display: inline;
+        margin-right: 0px;  
+        height: 200px;
+        width: 50%;
+        position:fixed;
+        top: 45%;
+        left: 50%;
+        margin-top: -100px;
+        margin-left: -400px;
+    }
     .greenlogo {
         font-family: Inter;
         font-weight: bold;
@@ -106,7 +140,7 @@ export default{
         height: 200px;
         width: 900px;
         position:fixed;
-        top: 50%;
+        top: 15%;
         left: 50%;
         margin-left: -210px;    
     }
@@ -121,7 +155,7 @@ export default{
         height: 200px;
         width: 900px;
         position:fixed;
-        top: 50%;
+        top: 20%;
         left: 50%;
         margin-top: -100px;
         margin-left: -240px;
@@ -140,9 +174,9 @@ export default{
         position:fixed;
         top: 50%;
         left: 50%;
-        margin-top: 100px;
+        margin-top: 125px;
         width:300px; 
-        margin-left:-150px;
+        margin-left:-163px;
         padding:15px;
         border: solid black 1px;
     }

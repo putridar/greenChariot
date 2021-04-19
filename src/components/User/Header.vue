@@ -6,6 +6,7 @@
         </div>
         <div class = "navi">
             <ul>
+                <li class = "txt"><router-link :to="{ name: 'info', query: {id: this.id} }" exact>About Us</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'Dashboard', query: {id: this.id} }" exact>Dashboard</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'survey', query: {id: this.id} }" exact>Survey</router-link></li>
                 <li class = "txt"><router-link :to="{ name: 'information', query: {id: this.id} }" exact>Information</router-link></li>

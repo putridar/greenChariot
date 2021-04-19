@@ -130,7 +130,7 @@ export default {
             this.$router.push({ name: 'signin'})
         },
         navigate: function(id) {
-            this.$router.push({ name: 'survey', query : {
+            this.$router.push({ name: 'tut', query : {
                 id: id,
             }})
         },
