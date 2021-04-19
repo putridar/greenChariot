@@ -11,7 +11,7 @@
                     <label for="address" class="title">Address</label><br>
                     <textarea id="address" placeholder="Address" v-model="address" name="address" rows="4" cols="50"></textarea><br>
                     <label for="website" class="title">URL of your shop website(Leave it blank if you dont have a website)</label><br>
-                    <input type="website" class="inputstyle" placeholder="Link to Shop's Website"><br>
+                    <input type="website" class="inputstyle" placeholder="Link to Shop's Website" v-model="website"><br>
                     <button class="btn" v-on:click="validate();save();">Save</button>
                     <button class="btn" v-on:click="cancel()">Cancel</button>
                 </div>
