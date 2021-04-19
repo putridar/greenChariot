@@ -184,7 +184,10 @@ export default{
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn2:hover {
+        background:#1C746F;
     }
     .content{
         font-family: Montserrat;

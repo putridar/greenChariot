@@ -1,28 +1,28 @@
 <template>
   <div class="chart">
     <h2 class="title"> Recommendations</h2>
-    <div :class='Transport<1828? "Positive": "Negative"'>
+    <div :class='Transport<NT? "Positive": "Negative"'>
         <div>
             <p class="obs">Transport: </p>
             <p class="obs" id="transportObs"></p> 
             <p class="rec" id="transportRec"></p> 
         </div>
     </div>
-    <div :class='Utility<1760? "Positive": "Negative"'>
+    <div :class='Utility<NU? "Positive": "Negative"'>
         <div>
             <p class="obs">Utility: </p>
             <p class="obs" id="utilityObs"></p> 
             <p class="rec" id="utilityRec"></p>  
         </div>
     </div>
-    <div :class='Food<3945? "Positive": "Negative"'>
+    <div :class='Food<NF? "Positive": "Negative"'>
         <div>
             <p class="obs">Food: </p>
             <p class="obs" id="foodObs"></p> 
             <p class="rec" id="foodRec"></p>  
         </div>
     </div>
-    <div :class='Ecommerce<883?"Positive": "Negative"'>
+    <div :class='Ecommerce<NE?"Positive": "Negative"'>
         <div>
             <p class="obs">Ecommerce: </p>
             <p class="obs" id="ecommerceObs"></p> 
@@ -43,7 +43,11 @@ export default {
             Transport:0,
             Utility:0,
             Food:0,
-            Ecommerce:0
+            Ecommerce:0,
+            NT:2032, 
+            NU:906,
+            NF:4029, 
+            NE: 192
 
         }
     },methods: {
@@ -60,22 +64,22 @@ export default {
             }).then(()=> this.recommend())
         },
         recommend: function(){
-            if (this.Transport<1828){
+            if (this.Transport<this.NT){
                 document.getElementById("transportObs").innerHTML = "Great! You can do more"
             }else{
                 document.getElementById("transportObs").innerHTML = "Keep Working on it!"   
             }
-            if (this.Utility<1760){
+            if (this.Utility<this.NU){
                 document.getElementById("utilityObs").innerHTML = "Great! You can do more"
             }else{
                 document.getElementById("utilityObs").innerHTML = "Keep Working on it!"
             }
-            if (this.Food<3945){
+            if (this.Food<this.NF){
                 document.getElementById("foodObs").innerHTML = "Great! You can do more"
             }else{
                 document.getElementById("foodObs").innerHTML = "Keep Working on it!"   
             }
-            if (this.Ecommerce<883){
+            if (this.Ecommerce<this.NE){
                 document.getElementById("ecommerceObs").innerHTML = "Great! You can do more"
             }else{
                 document.getElementById("ecommerceObs").innerHTML = "Keep Working on it!"

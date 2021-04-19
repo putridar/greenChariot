@@ -20,7 +20,6 @@ export default {
                     data: [0, 0, 0, 0]
                 }, 
                 {
-                    
                     label: "Big group",
                     backgroundColor: ["#004e64", "#00a5cf","#7ae582", "#25a18e","#175e72", "#22506e", "#44799a", "#64BC6A","#6FD076" , "#84F98D","#24B1D5", "#6DCBE3","#48BEDC","#25a18e"],
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -35,30 +34,53 @@ export default {
                 maintainAspectRatio: false,
                 legend: {display: false},
                 cutoutPercentage: 60,
-                
-              }
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.labels[tooltipItem.index];
+                            var tooltipData = allData[tooltipItem.index];
+                            return tooltipLabel + ": " + tooltipData + "%";
+                        }
+                    }
+                }
+            }
         }
     },
     methods:{
         fetchItems: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                let household = parseFloat(item.Survey["house"])
+                var household = parseFloat(item.Survey["house"])
                 let commerce = item.Survey2["ecommerce"]
                 var i;
                 for (i =0; i<commerce.length;i++){
                     this.commcoef += this.commcoefs[commerce[i]] 
                 }
-                this.datacollection.datasets[1].data[4] = Math.round(parseFloat(item.Survey["car"])*0.118*64.1*4*12, 2) //1  363
-                this.datacollection.datasets[1].data[5] = Math.round(parseFloat(item.Survey["bus"])*0.073*20*4*12, 2)  //2 70.08
-                this.datacollection.datasets[1].data[6] = Math.round(parseFloat(item.Survey["mrt"])*0.0132*78*4*12,2) //4 49.4
-                this.datacollection.datasets[1].data[7] = Math.round(((parseFloat(item.Survey["electricity"])/household)/0.2413)*0.4085*12,2)//100
-                this.datacollection.datasets[1].data[8] = Math.round(((parseFloat(item.Survey["water"])/household)/0.83)*0.279*12, 2) //60
-                this.datacollection.datasets[1].data[9] = Math.round(((parseFloat(item.Survey["gas"])/household)/0.1933)*0.4085*12, 2) //10
-                this.datacollection.datasets[1].data[10] = Math.round((parseFloat(item.Survey1["chick"])/100)*250*30, 2) //30 2700
-                this.datacollection.datasets[1].data[11] = Math.round((parseFloat(item.Survey1["beef"])/100)*250*46, 2) //10 1380
-                this.datacollection.datasets[1].data[12] = Math.round((parseFloat(item.Survey1["veg"])/100)*250*1.8, 2) //60 324
-                this.datacollection.datasets[1].data[13] = Math.round((parseFloat(item.Survey2["amount"]))*this.commcoef*12, 2) //7 240
+                var car, bus, mrt, electricity, water, gas, chick, beef, veg, amount;
+                car = parseFloat(item.Survey["car"])*0.118*64.1*4*12
+                bus = parseFloat(item.Survey["bus"])*0.073*20*4*12
+                mrt = parseFloat(item.Survey["mrt"])*0.0132*78*4*12
+                electricity = ((parseFloat(item.Survey["electricity"])/household)/0.2413)*0.4085*12
+                water = ((parseFloat(item.Survey["water"])/household)/0.83)*0.279*12
+                gas = ((parseFloat(item.Survey["gas"])/household)/0.1933)*0.4085*12
+                chick = (parseFloat(item.Survey1["chick"])/100)*250*30
+                beef = (parseFloat(item.Survey1["beef"])/100)*250*46
+                veg = (parseFloat(item.Survey1["veg"])/100)*250*1.8
+                amount = (parseFloat(item.Survey2["amount"]))*this.commcoef*12
+                this.total = Math.round(car + bus + mrt + electricity + water + gas + chick + beef + veg + amount,2)
+                this.datacollection.datasets[1].data[4] = Math.round( car/this.total*100, 2)
+                this.datacollection.datasets[1].data[5] = Math.round( bus/this.total*100, 2)
+                this.datacollection.datasets[1].data[6] = Math.round( mrt/this.total*100, 2)
+                this.datacollection.datasets[1].data[7] = Math.round( electricity/this.total*100, 2)
+                this.datacollection.datasets[1].data[8] = Math.round( water/this.total*100, 2)
+                this.datacollection.datasets[1].data[9] = Math.round( gas/this.total*100, 2)
+                this.datacollection.datasets[1].data[10] = Math.round( chick/this.total*100, 2)
+                this.datacollection.datasets[1].data[11] = Math.round( beef/this.total*100, 2)
+                this.datacollection.datasets[1].data[12] = Math.round( veg/this.total*100, 2)
+                this.datacollection.datasets[1].data[13] = Math.round( amount/this.total*100, 2)
                 // Transport
                 this.datacollection.datasets[0].data[0] = this.datacollection.datasets[1].data[4]+this.datacollection.datasets[1].data[5]+ this.datacollection.datasets[1].data[6]
                 // Utilities
@@ -67,8 +89,6 @@ export default {
                 this.datacollection.datasets[0].data[2] = this.datacollection.datasets[1].data[10]+this.datacollection.datasets[1].data[11]+ this.datacollection.datasets[1].data[12]
                 // Ecommerce
                 this.datacollection.datasets[0].data[3] = this.datacollection.datasets[1].data[13]
-                //Total
-                this.total = this.datacollection.datasets[0].data.reduce(function(a, b){return a + b}, 0)
             }).then(()=>{
                 this.textCenter(this.total)
                 this.renderChart(this.datacollection, this.options)
@@ -101,10 +121,10 @@ export default {
             db.firestore().collection('users').doc(this.id).update({
                 Emissions: {
                     total: val,
-                    transport: Transportation,
-                    utility: Utilities,
-                    food: Food,
-                    ecommerce: Ecommerce 
+                    transport: Transportation*val/100,
+                    utility: Utilities*val/100,
+                    food: Food*val/100,
+                    ecommerce: Ecommerce*val/100
                 }
             })
         }
