@@ -14,8 +14,8 @@
                     <img alt="logo" v-bind:src="item.imagename">
                 </div>
                 <h1 class="title">{{item.name}}</h1><br>
-                <div class='txt' v-if="'desc' in item">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
-                <div class='txt' v-if="'address' in item">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
+                <div class='txt' v-if="item.desc!=''">Shop Description: {{item.desc}}</div><div class='txt' v-else>Shop Description: This shop have not provided any description!</div>
+                <div class='txt' v-if="item.address!=''">Shop Address: {{item.address}}</div><div class='txt' v-else>Shop Address: This shop have not provided any address yet!</div>
                 <p class="txt2"><button class="btn" v-on:click='check(item.website);website(item.website);'>Visit shop website</button></p>
             </li>
         </ul>
@@ -126,6 +126,7 @@ export default {
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -138,7 +139,10 @@ export default {
         height: 50px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .pic {
         height: 230px;
@@ -183,11 +187,12 @@ export default {
     }
     .btn2 {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
         align-items: center;
         text-align: center;
         color: #FFFFFF;
@@ -195,7 +200,10 @@ export default {
         height: 70px;
         text-align: center;
         cursor: pointer;
-    
+        transition-duration: 0.4s;
+    }
+    .btn2:hover {
+        background:#1C746F;
     }
     .txt {
         font-family: Inter;

@@ -36,6 +36,7 @@ import CombinedVoucher from './components/User/CombinedVoucher.vue'
 import SpendVoucher from './components/User/SpendVoucher.vue'
 import ans from './components/User/ans.vue'
 import tut from './components/User/tut.vue'
+import info from './components/User/info.vue'
 
 export default [
   { path: '/', component: WelcomePage },
@@ -74,5 +75,6 @@ export default [
   { path:'/combinedvoucher', component:CombinedVoucher, name:"combinedvoucher", props:true},
   { path:'/spendvoucher', component:SpendVoucher, name:"spendvoucher", props:true},
   { path:'/ans', component:ans, name:"ans", props:true},
-  { path:'/tut', component:tut, name:"tut", props:true}
+  { path:'/tut', component:tut, name:"tut", props:true},
+  { path:'/info', component:info, name:"info", props:true}
 ]

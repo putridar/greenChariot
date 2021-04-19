@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class='fade-in three'> 
-                <button type='button' class='btn'>Begin</button>
+                <button type='button' class='btn' v-on:click='toInfo()'>Begin</button>
             </div>
         </div>
     </div>
@@ -30,6 +30,9 @@ export default{
         }
     },
     methods:{
+        toInfo: function() {
+            this.$router.push({name:'info',query:{id:this.id}})
+        }
     },
 }   
 </script>

@@ -10,8 +10,10 @@
                     </div>
                     <h1 class = "title">Quiz</h1><br>
                     <p>
-                        Test your carbon footprint knowledge once a week!<br><br>
-                        There are 5 questions to complete, and you get +5 Points for each correct answer!
+                        Confident in your Eco knowledge?<br>
+                        Test your understanding in our short quiz <br>
+                        +5 Points for each correct answer!<br>
+                        Available once a week!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>
@@ -141,6 +143,7 @@ export default {
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -154,6 +157,10 @@ export default {
         text-align: center;
         margin: 2%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
     .pic {
         height: 45%;

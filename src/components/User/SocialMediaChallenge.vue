@@ -153,6 +153,7 @@ export default {
     }
     .edit {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-weight: bold;
@@ -167,6 +168,10 @@ export default {
         margin-top: 2%;
         margin-bottom: 10px;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .edit:hover {
+        background:#1C746F;
     }
     ul {
         display: flex;
@@ -199,6 +204,7 @@ export default {
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -213,5 +219,9 @@ export default {
         text-align: center;
         margin: 20px;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .btn:hover {
+        background:#1C746F;
     }
 </style>
