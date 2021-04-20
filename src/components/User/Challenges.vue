@@ -12,7 +12,8 @@
                     <p>
                         Confident in your Eco knowledge?<br>
                         Test your understanding in our short quiz <br>
-                        +5 Points for each correct answer!
+                        +5 Points for each correct answer!<br>
+                        Available only once a week.
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>
@@ -25,7 +26,6 @@
                         Show off your efforts in reducing your carbon footprint!<br>
                         Post a picture of you completing any of the challenges on social media, and you will get
                         <br>+10 Points/post!
-                        <br> Available only once a week.
                     </p>
                     <button class = "btn" v-on:click="isLinked()">See Challenges</button>
                 </li>
