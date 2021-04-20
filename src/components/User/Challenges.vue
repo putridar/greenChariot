@@ -12,8 +12,7 @@
                     <p>
                         Confident in your Eco knowledge?<br>
                         Test your understanding in our short quiz <br>
-                        +5 Points for each correct answer!<br>
-                        Available once a week!
+                        +5 Points for each correct answer!
                     </p>
                     <button class = "btn" v-on:click='toQuiz()'>Start</button>
                 </li>
