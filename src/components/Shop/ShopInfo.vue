@@ -85,7 +85,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 130vh;
     }
     .head {
         position: sticky;
@@ -101,7 +101,7 @@ export default {
         width: 70%;
         background: #FFFFFF;
         border-radius: 20px;
-        height: 500px;
+        height: 650px;
         padding: 3px
     }
     .title1 {
@@ -119,7 +119,7 @@ export default {
         color:black
     }
     img {
-        width: 70%;
+        width: 60%;
     }
     .btn {
         background: #2D8F8A;

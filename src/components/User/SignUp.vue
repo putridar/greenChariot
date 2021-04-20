@@ -103,7 +103,8 @@ export default {
                             4:[],
                             5:[],
                             6:[]
-                        }
+                        },
+                        used: []
                     })
                     .then((docRef) => {
                         this.id = docRef.id
@@ -130,12 +131,12 @@ export default {
             this.$router.push({ name: 'signin'})
         },
         navigate: function(id) {
-            this.$router.push({ name: 'survey', query : {
+            this.$router.push({ name: 'tut', query : {
                 id: id,
             }})
         },
         navigateShop: function(id) {
-            this.$router.push({ name: 'dashboardShop', query : {
+            this.$router.push({ name: 'voucherlists', query : {
                 id: id,
             }})
         },

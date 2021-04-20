@@ -2,15 +2,12 @@ import { Doughnut } from 'vue-chartjs'
 import db from "../../firebase.js"
 // import Chart from "chart.js";
 
-
-
 export default {
     extends: Doughnut,
     data: function () {
         return {
             id: this.$route.query.id,
             total:0,
-            commcoefs:{"Fashion":0.1, "Gadgets":0.4, "Gym":1, "Food Delivery":-0.3},
             commcoef:2,
             datacollection: {
                 labels: ["Transport", "Utilities", "Food","Ecommerce", "Car","Bus","Mrt", "Electricity", "Water", "Gas", "White Meat", "Red Meat", "Vegetable", "Ecommerce"],
@@ -20,7 +17,6 @@ export default {
                     data: [0, 0, 0, 0]
                 }, 
                 {
-                    
                     label: "Big group",
                     backgroundColor: ["#004e64", "#00a5cf","#7ae582", "#25a18e","#175e72", "#22506e", "#44799a", "#64BC6A","#6FD076" , "#84F98D","#24B1D5", "#6DCBE3","#48BEDC","#25a18e"],
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -35,30 +31,36 @@ export default {
                 maintainAspectRatio: false,
                 legend: {display: false},
                 cutoutPercentage: 60,
-                
-              }
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.labels[tooltipItem.index];
+                            var tooltipData = allData[tooltipItem.index];
+                            return tooltipLabel + ": " + tooltipData + "%";
+                        }
+                    }
+                }
+            }
         }
     },
     methods:{
         fetchItems: function(){
             db.firestore().collection('users').doc(this.id).get().then((snapshot) => {
                 var item = snapshot.data()
-                let household = parseFloat(item.Survey["house"])
-                let commerce = item.Survey2["ecommerce"]
-                var i;
-                for (i =0; i<commerce.length;i++){
-                    this.commcoef += this.commcoefs[commerce[i]] 
-                }
-                this.datacollection.datasets[1].data[4] = Math.round(parseFloat(item.Survey["car"])*0.118*64.1*4*12, 2) //1  363
-                this.datacollection.datasets[1].data[5] = Math.round(parseFloat(item.Survey["bus"])*0.073*20*4*12, 2)  //2 70.08
-                this.datacollection.datasets[1].data[6] = Math.round(parseFloat(item.Survey["mrt"])*0.0132*78*4*12,2) //4 49.4
-                this.datacollection.datasets[1].data[7] = Math.round(((parseFloat(item.Survey["electricity"])/household)/0.2413)*0.4085*12,2)//100
-                this.datacollection.datasets[1].data[8] = Math.round(((parseFloat(item.Survey["water"])/household)/0.83)*0.279*12, 2) //60
-                this.datacollection.datasets[1].data[9] = Math.round(((parseFloat(item.Survey["gas"])/household)/0.1933)*0.4085*12, 2) //10
-                this.datacollection.datasets[1].data[10] = Math.round((parseFloat(item.Survey1["chick"])/100)*250*30, 2) //30 2700
-                this.datacollection.datasets[1].data[11] = Math.round((parseFloat(item.Survey1["beef"])/100)*250*46, 2) //10 1380
-                this.datacollection.datasets[1].data[12] = Math.round((parseFloat(item.Survey1["veg"])/100)*250*1.8, 2) //60 324
-                this.datacollection.datasets[1].data[13] = Math.round((parseFloat(item.Survey2["amount"]))*this.commcoef*12, 2) //7 240
+                this.total = item.Emissions["total"]
+                this.datacollection.datasets[1].data[4] = Math.round( item.Emissions["car"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[5] = Math.round( item.Emissions["bus"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[6] = Math.round( item.Emissions["mrt"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[7] = Math.round( item.Emissions["electricity"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[8] = Math.round( item.Emissions["water"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[9] = Math.round( item.Emissions["gas"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[10] = Math.round( item.Emissions["chick"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[11] = Math.round( item.Emissions["beef"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[12] = Math.round( item.Emissions["veg"]/this.total*100, 2)
+                this.datacollection.datasets[1].data[13] = Math.round( item.Emissions["ecommerce"]/this.total*100, 2)
                 // Transport
                 this.datacollection.datasets[0].data[0] = this.datacollection.datasets[1].data[4]+this.datacollection.datasets[1].data[5]+ this.datacollection.datasets[1].data[6]
                 // Utilities
@@ -67,12 +69,9 @@ export default {
                 this.datacollection.datasets[0].data[2] = this.datacollection.datasets[1].data[10]+this.datacollection.datasets[1].data[11]+ this.datacollection.datasets[1].data[12]
                 // Ecommerce
                 this.datacollection.datasets[0].data[3] = this.datacollection.datasets[1].data[13]
-                //Total
-                this.total = this.datacollection.datasets[0].data.reduce(function(a, b){return a + b}, 0)
             }).then(()=>{
                 this.textCenter(this.total)
                 this.renderChart(this.datacollection, this.options)
-                this.loadTotal(this.total, this.datacollection.datasets[0].data[0], this.datacollection.datasets[0].data[1], this.datacollection.datasets[0].data[2], this.datacollection.datasets[0].data[3])
             })
         },
         textCenter(val) {
@@ -94,17 +93,6 @@ export default {
                     ctx.fillText(text, textX, textY+15);
                     ctx.fillText(text1, textX1, textY+45);
                     ctx.save();
-                }
-            })
-        },
-        loadTotal(val, Transportation, Utilities,Food, Ecommerce ){
-            db.firestore().collection('users').doc(this.id).update({
-                Emissions: {
-                    total: val,
-                    transport: Transportation,
-                    utility: Utilities,
-                    food: Food,
-                    ecommerce: Ecommerce 
                 }
             })
         }

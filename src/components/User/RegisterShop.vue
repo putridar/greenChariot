@@ -106,7 +106,8 @@ export default {
                                             4:[],
                                             5:[],
                                             6:[]
-                                        }
+                                        },
+                                        used:[]
                                     }).then((docRef) => {
                                         db.firestore().collection('users').doc(this.id).delete().then(() => {
                                             var id = docRef.id
