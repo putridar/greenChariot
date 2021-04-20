@@ -88,7 +88,7 @@ export default {
     @import url('https://fonts.googleapis.com/css?family=Inter');
     .bg {
         background-color: #9AD5FF;
-        padding: 0px;
+        padding-bottom: 30px;
         margin: 0px;
         width: 100%;
         min-height: auto;

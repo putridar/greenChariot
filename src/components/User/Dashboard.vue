@@ -84,7 +84,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 120vh;
+        min-height: 145vh;
         font-family: Montserrat;
     }
     .head {

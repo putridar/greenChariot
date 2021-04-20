@@ -26,13 +26,29 @@
                     </div>
                     <br>
                     <div class='start'>
-                        Green rewards
+                        Green points
                     </div>    
                     <div class='explanation'> 
                         We want to reward you for playing your part in saving the environment!
                         Users can earn points by participating in the weekly social media challenges and quizzes.
-                        Gather enough points, and you can cash your points in for exclusive vouchers to save money when shopping at our partner green shops!
-                    </div>              
+                        Gather enough points, and you can cash your points in for limited exclusive vouchers to save money when shopping at our partner green shops!
+                        New users will all start off with 1000 points.
+                    </div>  
+                    <br>
+                    <div class='start'>
+                        Redeeming and spending vouchers
+                    </div> 
+                    <div class='explanation'> 
+                        Alright, so how do you get your vouchers after racking up sufficient points?
+                        The "voucher redemption" button under the green shops tab or the "exchange vouchers" button under the rewards tab
+                        will lead you to the voucher exchange page! Choose which voucher you want to exchange with your points, and voila! You have got your vouchers!
+                        <br><br>
+                        Next, you might be asking, how can I spend my vouchers at the respective stores? 
+                        Clicking on the "Your Rewards" button after getting your vouchers, or simply going to the rewards tab will display all your hard-earned vouchers!
+                        Click on whichever voucher you would like to spend, and a code will appear in a pop up. Remember to take down the code, as once you are shown the code, it won't be reappearing.
+                        Use the codes when shopping at our partner shops to get your discounts. 
+                        Happy shopping!
+                    </div>                                    
                 </div>
             </div>
         </div>
@@ -77,7 +93,7 @@ export default{
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 150vh;
+        min-height: 160vh;
     }
     .head {
         position: sticky;
