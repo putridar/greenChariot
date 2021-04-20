@@ -67,7 +67,7 @@ export default{
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
     @import url('https://fonts.googleapis.com/css?family=Inter');
     .start{
-        font-size:30px;
+        font-size:26px;
         font-weight:bold;
         font-family: Inter;
         color:#1C746F;
@@ -85,18 +85,17 @@ export default{
         position: -webkit-sticky;
     }
     .explanation{
-        font-size:25px;
+        font-size:22px;
     }
     .words{
         background-color: white;
-        height: 538px;
-        width: 900px;
+        height: auto;
+        width: auto;
         left: 50%;
-        padding:20px;
+        padding:2%;
         width:88%;
         border-radius:20px;
-        font-size:25px;
-        margin-left:77px;
+        margin-left:5%;
     }
     .greenlogo {
         font-family: Inter;
@@ -122,7 +121,7 @@ export default{
         height: 125px;
         width: 900px;
         left: 50%;
-        margin-left:77px;
+        margin-left:5%;
     }    
     .content{
         font-family: Montserrat;
@@ -130,6 +129,13 @@ export default{
         font-size: 50px;
         margin: 10px;
         padding:10px;
+    }
+    .bg{
+        background-color: #77c5fc;
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        min-height: 150vh;
     }
 
 </style>
