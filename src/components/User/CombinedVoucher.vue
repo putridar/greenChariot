@@ -15,9 +15,9 @@
                     <div class="pic">
                         <img alt = "shoplogo" v-bind:src="item.image">
                     </div>
-                    <p class="title">{{item.name}} ${{item.price}} {{name}} Voucher</p>
-                    <p class="title2">{{item.point}} points </p>
-                    <button class="btn" v-on:click="onclick(item.id,item.name,item.image,item)"> Redeem </button>
+                    <div class="title">{{item.name}} ${{item.price}} {{name}} Voucher</div>
+                    <div class="title2">{{item.point}} points </div>
+                    <p class="txt2"><button class="btn" v-on:click="onclick(item.id,item.name,item.image,item)"> Redeem </button></p>
                 </li>
             </ul>
             </div>
@@ -157,16 +157,21 @@ export default{
         padding: 0;
         margin-left: 5%;
         margin-right: 5%;
+        justify-content:center
     }
     li {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
         flex-shrink: 1;
-        flex-basis: 300px;
+        flex-basis: 20%;
         text-align: center;
-        padding: 10px;
+        padding: 45px;
         margin: 10px;
         border-radius: 20px;
         background-color: #FFFFFF;
-        margin-bottom: 30px
+        min-height: 40vh;
+        margin-bottom: 30px;
     }
     .pic {
         height: 30%;
@@ -184,7 +189,7 @@ export default{
         align-items: center;
         text-align: center;
         color: #FFFFFF;
-        width: 37%;
+        width: 100%;
         height: 50px;
         text-align: center;
         cursor: pointer;
@@ -205,6 +210,7 @@ export default{
     .btn2 {
         background: #2D8F8A;
         border-radius: 8px;
+        border:none;
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
@@ -224,5 +230,17 @@ export default{
     img {
         width:50%;
         margin-bottom:2%
+    }
+    .txt2{
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-end;
+    }
+    .txt {
+        font-family: Inter;
+        font-size: 30px;
+        color: #1C746F;
+        margin-left: 8%;
+        text-align: center;
     }
 </style>

@@ -145,6 +145,15 @@ export default {
                  alert("Please enter a valid URL!")
                  this.correcturl=false
              }else{
+                 var checker= new XMLHttpRequest()
+                 checker.open('get',this.website,true)
+                 if (checker.readystate===4){
+                    if ((checker.status!= 200) && (checker.status!= 0)) {
+                        alert('Please enter a valid URL!')
+                        this.correcturl=false
+                 }
+                }
+                 
                  if (this.website.indexOf('https://')==-1 || (this.website.indexOf('.com')==-1 && this.website.indexOf('.sg')==-1)){
                      alert('Please enter a valid URL!')
                      this.correcturl=false
