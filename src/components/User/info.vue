@@ -72,6 +72,18 @@ export default{
         font-family: Inter;
         color:#1C746F;
     }
+    .bg {
+        background-color: #9AD5FF;
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        min-height: 130vh;
+    }
+    .head {
+        position: sticky;
+        top: 0;
+        position: -webkit-sticky;
+    }
     .explanation{
         font-size:22px;
     }

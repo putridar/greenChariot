@@ -110,7 +110,7 @@ export default {
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 120vh;
         font-family: Montserrat;
 
     }
@@ -146,14 +146,14 @@ export default {
         text-align: left;
     }
     .companyname{
-        margin-top: 3%;
+        margin-top: 2%;
         margin-bottom: 3%;
         font-style: normal;
     }
     .company{
         margin-top: 5%;
         font-weight: bolder;
-        font-size: 28px;
+        font-size: 24px;
     }
     .edit{
         background: #2D8F8A;
@@ -197,5 +197,8 @@ export default {
         padding: 0px;
         width: 50%;
         flex-direction: column;
+    }
+    .image {
+        width:60%
     }
 </style>

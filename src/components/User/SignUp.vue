@@ -103,7 +103,8 @@ export default {
                             4:[],
                             5:[],
                             6:[]
-                        }
+                        },
+                        used: []
                     })
                     .then((docRef) => {
                         this.id = docRef.id
