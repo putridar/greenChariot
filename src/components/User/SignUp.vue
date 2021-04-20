@@ -152,16 +152,17 @@ export default {
              if(pattern.test(this.website)==false){
                  alert("Please input a valid URL!")
                  this.correcturl=false
-             }else{
-                 if (this.website.indexOf('https://')==-1 || (this.website.indexOf('.com')==-1 && this.website.indexOf('.sg')==-1)){
-                     alert('Please input a valid URL!')
-                     this.correcturl=false
-                 }
              }
-        }
+            
+            if (this.website.indexOf('https://')==-1 || (this.website.indexOf('.com')==-1 && this.website.indexOf('.sg')==-1)){
+                alert('Please input a valid URL!')
+                this.correcturl=false
+                 }
+             },
+            
+        },
     
     }
-}
 </script>
 
 <style scoped>
