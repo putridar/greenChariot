@@ -185,6 +185,7 @@ export default {
     }
     .btn {
         background: #2D8F8A;
+        border:none;
         border-radius: 8px;
         font-family: Montserrat;
         font-style: normal;
@@ -200,6 +201,10 @@ export default {
         margin-right: 15%;
         margin-top: 2%;
         cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .next:hover {
+        background: #1C746F;
     }
     .pic {
         height: 80%;
