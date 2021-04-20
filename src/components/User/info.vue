@@ -77,7 +77,7 @@ export default{
         padding: 0px;
         margin: 0px;
         width: 100%;
-        min-height: 130vh;
+        min-height: 150vh;
     }
     .head {
         position: sticky;
@@ -129,13 +129,6 @@ export default{
         font-size: 50px;
         margin: 10px;
         padding:10px;
-    }
-    .bg{
-        background-color: #77c5fc;
-        padding: 0px;
-        margin: 0px;
-        width: 100%;
-        min-height: 150vh;
     }
 
 </style>
