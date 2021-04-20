@@ -10,7 +10,7 @@
                     <p class="zoom" v-if="this.score>=15">{{this.score}}/25 <br> Great job!</p>
                     <p class="zoom" v-else>{{this.score}}/25 <br> You can do better!</p>
                     <br>
-                    <p class="title2">You have earned {{this.score}} points. <br><br>You now have {{this.totalpoint}} points!</p>
+                    <p class="title2">You have earned {{this.score}} points.</p>
                     <br>
                     <button class="btn" v-on:click="direct()">Back to challenges</button>
                 </div>
@@ -35,7 +35,6 @@ export default{
             id:this.$route.query.id,
             score:this.$route.query.score,
             currentpoints:0,
-            totalpoint:0,
         }
     },
     methods:{
@@ -50,7 +49,6 @@ export default{
         getscore:function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                this.currentpoints=parseInt(snapshot.data().points)
-               this.totalpoint=parseInt(this.score)+parseInt(this.currentpoints)
             })
         }
     },
