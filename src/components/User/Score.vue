@@ -50,7 +50,7 @@ export default{
         getscore:function() {
             db.firestore().collection('users').doc(this.id).get().then(snapshot => {
                this.currentpoints=parseInt(snapshot.data().points)
-               this.totalpoint=this.score+this.currentpoints
+               this.totalpoint=parseInt(this.score)+parseInt(this.currentpoints)
             })
         }
     },

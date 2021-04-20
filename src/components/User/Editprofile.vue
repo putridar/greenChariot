@@ -168,10 +168,10 @@ export default{
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
     .bg {
         background-color: #9AD5FF;
-        padding: 0px;
+        padding-bottom: 25px;
         margin: 0px;
         width: 100%;
-        min-height: 180vh;
+        min-height: auto;
     }
     .head {
         position: sticky;
